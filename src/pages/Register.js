@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Container,
@@ -8,26 +8,33 @@ import {
     Box,
     Grid,
     Paper,
-    Alert
+    Alert,
+    FormControlLabel,
+    Checkbox
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import apiService from '../services/apiService';
+import LanguageContext from '../contexts/LanguageContext';
 
 const Register = () => {
     const [formData, setFormData] = useState({
         username: '',
         email: '',
         password: '',
-        confirmPassword: ''
+        confirmPassword: '',
+        acceptTerms: false
     });
     const [errors, setErrors] = useState({});
     const [alertMessage, setAlertMessage] = useState('');
     const navigate = useNavigate();
+    const theme = useTheme();
+    const { language } = useContext(LanguageContext);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, checked } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: value
+            [name]: name === 'acceptTerms' ? checked : value
         }));
     };
 
@@ -49,6 +56,9 @@ const Register = () => {
         if (formData.password !== formData.confirmPassword) {
             newErrors.confirmPassword = 'Passwords do not match';
         }
+        if (!formData.acceptTerms) {
+            newErrors.acceptTerms = 'You must accept the terms and conditions';
+        }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -68,11 +78,44 @@ const Register = () => {
         }
     };
 
+    const getTranslation = (key) => {
+        const translations = {
+            en: {
+                register: 'Register',
+                username: 'Username',
+                email: 'Email Address',
+                password: 'Password',
+                confirmPassword: 'Confirm Password',
+                acceptTerms: 'I accept the terms and conditions',
+                submit: 'Register',
+                alreadyHaveAccount: 'Already have an account? Sign in'
+            },
+            ru: {
+                register: 'Регистрация',
+                username: 'Имя пользователя',
+                email: 'Адрес электронной почты',
+                password: 'Пароль',
+                confirmPassword: 'Подтвердите пароль',
+                acceptTerms: 'Я принимаю условия использования',
+                submit: 'Зарегистрироваться',
+                alreadyHaveAccount: 'Уже есть аккаунт? Войти'
+            }
+        };
+        return translations[language][key] || translations['en'][key];
+    };
+
     return (
         <Container component="main" maxWidth="xs">
-            <Paper elevation={3} sx={{ mt: 8, p: 4 }}>
+            <Paper
+                elevation={3}
+                sx={{
+                    mt: 8,
+                    p: 4,
+                    backgroundColor: theme.palette.background.paper
+                }}
+            >
                 <Typography component="h1" variant="h5" align="center">
-                    Register
+                    {getTranslation('register')}
                 </Typography>
                 {alertMessage && (
                     <Alert
@@ -88,7 +131,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Username"
+                                label={getTranslation('username')}
                                 name="username"
                                 value={formData.username}
                                 onChange={handleChange}
@@ -99,7 +142,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Email Address"
+                                label={getTranslation('email')}
                                 name="email"
                                 type="email"
                                 value={formData.email}
@@ -111,7 +154,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Password"
+                                label={getTranslation('password')}
                                 name="password"
                                 type="password"
                                 value={formData.password}
@@ -123,7 +166,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Confirm Password"
+                                label={getTranslation('confirmPassword')}
                                 name="confirmPassword"
                                 type="password"
                                 value={formData.confirmPassword}
@@ -132,6 +175,24 @@ const Register = () => {
                                 helperText={errors.confirmPassword}
                             />
                         </Grid>
+                        <Grid item xs={12}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name="acceptTerms"
+                                        checked={formData.acceptTerms}
+                                        onChange={handleChange}
+                                        color="primary"
+                                    />
+                                }
+                                label={getTranslation('acceptTerms')}
+                            />
+                            {errors.acceptTerms && (
+                                <Typography color="error" variant="caption">
+                                    {errors.acceptTerms}
+                                </Typography>
+                            )}
+                        </Grid>
                     </Grid>
                     <Button
                         type="submit"
@@ -139,12 +200,12 @@ const Register = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Register
+                        {getTranslation('submit')}
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link to="/login" variant="body2">
-                                Already have an account? Sign in
+                                {getTranslation('alreadyHaveAccount')}
                             </Link>
                         </Grid>
                     </Grid>

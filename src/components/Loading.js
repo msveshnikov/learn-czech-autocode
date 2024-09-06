@@ -12,7 +12,7 @@ const Loading = () => {
         >
             <CircularProgress size={60} thickness={4} />
             <Typography variant="h6" sx={{ mt: 2 }}>
-                Loading...
+                {'loading'}
             </Typography>
         </Box>
     );

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useState, useEffect, useMemo } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Route,
@@ -19,16 +19,10 @@ import PrivateRoute from './components/PrivateRoute';
 import Onboarding from './components/Onboarding';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Trading = lazy(() => import('./pages/Trading'));
-const Positions = lazy(() => import('./pages/Positions'));
-const History = lazy(() => import('./pages/History'));
+const Lesson = lazy(() => import('./pages/Lesson'));
 const Account = lazy(() => import('./pages/Account'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
-const RiskManagement = lazy(() => import('./pages/RiskManagement'));
-const MarketNews = lazy(() => import('./pages/MarketNews'));
-const EconomicCalendar = lazy(() => import('./pages/EconomicCalendar'));
-const Realtime = lazy(() => import('./pages/Realtime'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
 
@@ -36,7 +30,7 @@ const queryClient = new QueryClient();
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
-    const [language, setLanguage] = useState('en');
+    const [language, setLanguage] = useState('ru');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(false);
 
@@ -66,10 +60,7 @@ function App() {
         localStorage.setItem('language', newLanguage);
     };
 
-    const theme = useMemo(
-        () => createCustomTheme(darkMode ? 'dark' : 'light'),
-        [darkMode]
-    );
+    const theme = createCustomTheme(darkMode ? 'dark' : 'light');
 
     const handleOnboardingComplete = () => {
         setShowOnboarding(false);
@@ -85,10 +76,10 @@ function App() {
                         <Router>
                             <div className="App">
                                 <Helmet>
-                                    <title>FX Trading Platform</title>
+                                    <title>Учим чешский с русского</title>
                                     <meta
                                         name="description"
-                                        content="Modern FX Trading Platform"
+                                        content="Изучайте чешский язык с русского с нашим интерактивным приложением"
                                     />
                                 </Helmet>
                                 <Header
@@ -140,38 +131,14 @@ function App() {
                                             }
                                         />
                                         <Route
-                                            path="/trading"
+                                            path="/lesson"
                                             element={
                                                 <PrivateRoute
                                                     isAuthenticated={
                                                         isAuthenticated
                                                     }
                                                 >
-                                                    <Trading />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/positions"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <Positions />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/history"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <History />
+                                                    <Lesson />
                                                 </PrivateRoute>
                                             }
                                         />
@@ -184,54 +151,6 @@ function App() {
                                                     }
                                                 >
                                                     <Account />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/risk-management"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <RiskManagement />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/market-news"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <MarketNews />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/economic-calendar"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <EconomicCalendar />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/realtime"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <Realtime />
                                                 </PrivateRoute>
                                             }
                                         />

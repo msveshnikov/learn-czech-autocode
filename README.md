@@ -37,3 +37,7 @@ This project aims to create a language learning application similar to Duolingo,
 -   Integration with language exchange platforms
 -   Customizable learning paths based on user goals
 -   AI-powered chatbot for conversational practice
+
+# TODO
+
+-   ES6 imports, split models to seperate files

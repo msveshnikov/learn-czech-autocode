@@ -21,6 +21,7 @@ import { Helmet } from 'react-helmet';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Account = () => {
     const [user, setUser] = useState({
@@ -34,6 +35,7 @@ const Account = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    const { language } = useLanguage();
 
     const {
         data: userData,
@@ -45,7 +47,7 @@ const Account = () => {
         onSuccess: () => {
             queryClient.invalidateQueries('userAccount');
             setIsEditing(false);
-            setSuccessMessage('Account updated successfully');
+            setSuccessMessage('Аккаунт успешно обновлен');
         }
     });
 
@@ -70,16 +72,16 @@ const Account = () => {
 
     const onboardingSteps = [
         {
-            label: 'Account Details',
-            tooltip: 'Review and update your account information'
+            label: 'Детали аккаунта',
+            tooltip: 'Просмотр и обновление информации об аккаунте'
         },
         {
-            label: 'Verify Email',
-            tooltip: 'Confirm your email address'
+            label: 'Подтвердить email',
+            tooltip: 'Подтвердите ваш email адрес'
         },
         {
-            label: 'Set Preferences',
-            tooltip: 'Customize your trading experience'
+            label: 'Настройки',
+            tooltip: 'Настройте ваш опыт обучения'
         }
     ];
 
@@ -92,9 +94,8 @@ const Account = () => {
     };
 
     const handleConfirmDemoAccount = () => {
-        // Implement demo account creation logic here
         setOpenDialog(false);
-        setSuccessMessage('Demo account created successfully');
+        setSuccessMessage('Демо-аккаунт успешно создан');
     };
 
     if (isLoading) {
@@ -113,14 +114,14 @@ const Account = () => {
     return (
         <Box sx={{ my: 4, flexGrow: 1, padding: 3 }}>
             <Helmet>
-                <title>Account - FX Trading Platform</title>
+                <title>Аккаунт - Изучение чешского языка</title>
                 <meta
                     name="description"
-                    content="Manage your FX trading account"
+                    content="Управление аккаунтом для изучения чешского языка"
                 />
             </Helmet>
             <Typography variant="h4" gutterBottom>
-                Account Details
+                {language === 'ru' ? 'Детали аккаунта' : 'Account Details'}
             </Typography>
             {error && (
                 <Alert severity="error" sx={{ mb: 2 }}>
@@ -149,7 +150,11 @@ const Account = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
-                                label="Username"
+                                label={
+                                    language === 'ru'
+                                        ? 'Имя пользователя'
+                                        : 'Username'
+                                }
                                 name="username"
                                 value={user.username}
                                 onChange={handleInputChange}
@@ -169,7 +174,8 @@ const Account = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h6">
-                                Account Balance: ${user?.balance?.toFixed(2)}
+                                {language === 'ru' ? 'Баланс: ' : 'Balance: '}
+                                {user?.balance?.toFixed(2)} XP
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -182,13 +188,17 @@ const Account = () => {
                                         sx={{ marginRight: 2 }}
                                         disabled={updateUserMutation.isLoading}
                                     >
-                                        Save Changes
+                                        {language === 'ru'
+                                            ? 'Сохранить изменения'
+                                            : 'Save Changes'}
                                     </Button>
                                     <Button
                                         variant="outlined"
                                         onClick={() => setIsEditing(false)}
                                     >
-                                        Cancel
+                                        {language === 'ru'
+                                            ? 'Отмена'
+                                            : 'Cancel'}
                                     </Button>
                                 </>
                             ) : (
@@ -196,7 +206,9 @@ const Account = () => {
                                     variant="contained"
                                     onClick={() => setIsEditing(true)}
                                 >
-                                    Edit Profile
+                                    {language === 'ru'
+                                        ? 'Редактировать профиль'
+                                        : 'Edit Profile'}
                                 </Button>
                             )}
                         </Grid>
@@ -205,53 +217,65 @@ const Account = () => {
             </Paper>
             <Paper elevation={3} sx={{ padding: 3, mt: 3 }}>
                 <Typography variant="h6" gutterBottom>
-                    Demo Account
+                    {language === 'ru' ? 'Демо-аккаунт' : 'Demo Account'}
                 </Typography>
                 <Button
                     variant="contained"
                     color="secondary"
                     onClick={handleCreateDemoAccount}
                 >
-                    Create Demo Account
+                    {language === 'ru'
+                        ? 'Создать демо-аккаунт'
+                        : 'Create Demo Account'}
                 </Button>
             </Paper>
             <Paper elevation={3} sx={{ padding: 3, mt: 3 }}>
                 <Typography variant="h6" gutterBottom>
-                    Quick Links
+                    {language === 'ru' ? 'Быстрые ссылки' : 'Quick Links'}
                 </Typography>
                 <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => navigate('/trading')}
+                    onClick={() => navigate('/dashboard')}
                     sx={{ mr: 2 }}
                 >
-                    Go to Trading
+                    {language === 'ru'
+                        ? 'Перейти к панели управления'
+                        : 'Go to Dashboard'}
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
-                    onClick={() => navigate('/positions')}
+                    onClick={() => navigate('/lessons')}
                 >
-                    View Positions
+                    {language === 'ru' ? 'Просмотреть уроки' : 'View Lessons'}
                 </Button>
             </Paper>
             <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle>Create Demo Account</DialogTitle>
+                <DialogTitle>
+                    {language === 'ru'
+                        ? 'Создать демо-аккаунт'
+                        : 'Create Demo Account'}
+                </DialogTitle>
                 <DialogContent>
                     <Typography>
-                        Are you sure you want to create a demo account? This
-                        will allow you to practice trading without using real
-                        money.
+                        {language === 'ru'
+                            ? 'Вы уверены, что хотите создать демо-аккаунт? Это позволит вам попробовать все функции без риска.'
+                            : 'Are you sure you want to create a demo account? This will allow you to try all features without any risk.'}
                     </Typography>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseDialog}>Cancel</Button>
+                    <Button onClick={handleCloseDialog}>
+                        {language === 'ru' ? 'Отмена' : 'Cancel'}
+                    </Button>
                     <Button
                         onClick={handleConfirmDemoAccount}
                         variant="contained"
                         color="primary"
                     >
-                        Create Demo Account
+                        {language === 'ru'
+                            ? 'Создать демо-аккаунт'
+                            : 'Create Demo Account'}
                     </Button>
                 </DialogActions>
             </Dialog>

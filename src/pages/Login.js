@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     TextField,
@@ -7,17 +7,22 @@ import {
     Box,
     Container,
     Paper,
-    Alert
+    Alert,
+    FormControlLabel,
+    Checkbox
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import apiService from '../services/apiService';
+import LanguageContext from '../contexts/LanguageContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [rememberMe, setRememberMe] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const theme = useTheme();
+    const { language } = useContext(LanguageContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -26,11 +31,39 @@ const Login = () => {
         try {
             const response = await apiService.login({ email, password });
             localStorage.setItem('token', response.token);
+            if (rememberMe) {
+                localStorage.setItem('rememberMe', 'true');
+            } else {
+                localStorage.removeItem('rememberMe');
+            }
             navigate('/dashboard');
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
         }
     };
+
+    const translations = {
+        ru: {
+            title: 'Вход',
+            email: 'Электронная почта',
+            password: 'Пароль',
+            rememberMe: 'Запомнить меня',
+            login: 'Войти',
+            noAccount: 'Нет аккаунта? Зарегистрируйтесь',
+            loginFailed: 'Ошибка входа. Пожалуйста, попробуйте снова.'
+        },
+        en: {
+            title: 'Log in',
+            email: 'Email Address',
+            password: 'Password',
+            rememberMe: 'Remember me',
+            login: 'Sign In',
+            noAccount: "Don't have an account? Sign Up",
+            loginFailed: 'Login failed. Please try again.'
+        }
+    };
+
+    const t = translations[language] || translations.en;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -48,7 +81,7 @@ const Login = () => {
                     align="center"
                     color="textPrimary"
                 >
-                    Log in
+                    {t.title}
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     <TextField
@@ -56,7 +89,7 @@ const Login = () => {
                         required
                         fullWidth
                         id="email"
-                        label="Email Address"
+                        label={t.email}
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -69,7 +102,7 @@ const Login = () => {
                         required
                         fullWidth
                         name="password"
-                        label="Password"
+                        label={t.password}
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -77,9 +110,22 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         color="primary"
                     />
+                    <FormControlLabel
+                        control={
+                            <Checkbox
+                                value="remember"
+                                color="primary"
+                                checked={rememberMe}
+                                onChange={(e) =>
+                                    setRememberMe(e.target.checked)
+                                }
+                            />
+                        }
+                        label={t.rememberMe}
+                    />
                     {error && (
                         <Alert severity="error" sx={{ mt: 2 }}>
-                            {error}
+                            {t.loginFailed}
                         </Alert>
                     )}
                     <Button
@@ -89,7 +135,7 @@ const Login = () => {
                         sx={{ mt: 3, mb: 2 }}
                         color="primary"
                     >
-                        Sign In
+                        {t.login}
                     </Button>
                     <Box sx={{ textAlign: 'center' }}>
                         <Link
@@ -100,7 +146,7 @@ const Login = () => {
                             }}
                         >
                             <Typography variant="body2">
-                                Don&apos;t have an account? Sign Up
+                                {t.noAccount}
                             </Typography>
                         </Link>
                     </Box>

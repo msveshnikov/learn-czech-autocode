@@ -7,23 +7,31 @@ import {
     StepLabel,
     Button,
     Typography,
-    Tooltip
+    Tooltip,
+    TextField,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+    FormControl,
+    FormLabel
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 const steps = [
-    'Welcome',
-    'Account Setup',
-    'Platform Overview',
-    'Trading Basics',
-    'Risk Management'
+    'Добро пожаловать',
+    'Настройка аккаунта',
+    'Обзор платформы',
+    'Основы чешского языка',
+    'Цели обучения'
 ];
 
 const tooltips = {
-    Welcome: 'Welcome to our FX Trading Platform!',
-    'Account Setup': 'Set up your account preferences and funding options.',
-    'Platform Overview': 'Explore the main features of our trading platform.',
-    'Trading Basics': 'Learn the fundamentals of forex trading.',
-    'Risk Management': 'Understand how to manage your trading risks.'
+    'Добро пожаловать':
+        'Добро пожаловать в наше приложение для изучения чешского языка!',
+    'Настройка аккаунта': 'Настройте свой профиль и предпочтения обучения.',
+    'Обзор платформы': 'Ознакомьтесь с основными функциями нашей платформы.',
+    'Основы чешского языка': 'Узнайте базовые концепции чешского языка.',
+    'Цели обучения': 'Установите свои цели обучения и выберите темп.'
 };
 
 const OnboardingTooltip = ({ children, title }) => (
@@ -34,6 +42,9 @@ const OnboardingTooltip = ({ children, title }) => (
 
 const Onboarding = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [username, setUsername] = useState('');
+    const [learningGoal, setLearningGoal] = useState('');
+    const navigate = useNavigate();
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -43,72 +54,104 @@ const Onboarding = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleReset = () => {
-        setActiveStep(0);
+    const handleFinish = () => {
+        // TODO: Save user preferences and navigate to dashboard
+        navigate('/dashboard');
     };
 
-    const handleDemoAccount = () => {
-        // TODO: Implement demo account creation logic
-        console.log('Creating demo account...');
+    const renderStepContent = (step) => {
+        switch (step) {
+            case 0:
+                return (
+                    <Typography>
+                        Добро пожаловать в приложение для изучения чешского
+                        языка с русского!
+                    </Typography>
+                );
+            case 1:
+                return (
+                    <TextField
+                        fullWidth
+                        label="Имя пользователя"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        margin="normal"
+                    />
+                );
+            case 2:
+                return (
+                    <Typography>
+                        Наша платформа предлагает интерактивные уроки,
+                        упражнения и отслеживание прогресса.
+                    </Typography>
+                );
+            case 3:
+                return (
+                    <Typography>
+                        Чешский язык - западнославянский язык. Вы обнаружите
+                        много схожестей с русским!
+                    </Typography>
+                );
+            case 4:
+                return (
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">
+                            Выберите цель обучения:
+                        </FormLabel>
+                        <RadioGroup
+                            value={learningGoal}
+                            onChange={(e) => setLearningGoal(e.target.value)}
+                        >
+                            <FormControlLabel
+                                value="basic"
+                                control={<Radio />}
+                                label="Базовое общение"
+                            />
+                            <FormControlLabel
+                                value="intermediate"
+                                control={<Radio />}
+                                label="Средний уровень"
+                            />
+                            <FormControlLabel
+                                value="advanced"
+                                control={<Radio />}
+                                label="Продвинутый уровень"
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                );
+            default:
+                return null;
+        }
     };
 
     return (
         <Box sx={{ width: '100%', p: 3 }}>
             <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
-                    const stepProps = {};
-                    const labelProps = {};
-                    return (
-                        <Step key={label} {...stepProps}>
-                            <OnboardingTooltip title={tooltips[label]}>
-                                <StepLabel {...labelProps}>{label}</StepLabel>
-                            </OnboardingTooltip>
-                        </Step>
-                    );
-                })}
+                {steps.map((label, index) => (
+                    <Step key={label}>
+                        <OnboardingTooltip title={tooltips[label]}>
+                            <StepLabel>{label}</StepLabel>
+                        </OnboardingTooltip>
+                    </Step>
+                ))}
             </Stepper>
-            {activeStep === steps.length ? (
-                <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re ready to start
-                        trading!
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
-                    </Box>
-                </React.Fragment>
-            ) : (
-                <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
-                        Step {activeStep + 1}
-                    </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Button
-                            color="inherit"
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{ mr: 1 }}
-                        >
-                            Back
-                        </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleNext}>
-                            {activeStep === steps.length - 1
-                                ? 'Finish'
-                                : 'Next'}
-                        </Button>
-                    </Box>
-                </React.Fragment>
-            )}
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 2, mb: 1 }}>{renderStepContent(activeStep)}</Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
                 <Button
-                    variant="outlined"
-                    onClick={handleDemoAccount}
-                    sx={{ mr: 2 }}
+                    color="inherit"
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    sx={{ mr: 1 }}
                 >
-                    Try Demo Account
+                    Назад
                 </Button>
+                <Box sx={{ flex: '1 1 auto' }} />
+                {activeStep === steps.length - 1 ? (
+                    <Button onClick={handleFinish}>Завершить</Button>
+                ) : (
+                    <Button onClick={handleNext}>Далее</Button>
+                )}
             </Box>
         </Box>
     );

@@ -13,7 +13,8 @@
         "react-helmet": "^6.1.0",
         "react-query": "^3.39.3",
         "react-router-dom": "^6.26.1",
-        "react-scripts": "5.0.1"
+        "react-scripts": "5.0.1",
+        "react-apexcharts": "^1.4.1"
     },
     "scripts": {
         "start": "react-scripts start",

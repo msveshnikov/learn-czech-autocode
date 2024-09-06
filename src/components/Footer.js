@@ -1,8 +1,44 @@
 import React from 'react';
 import { Box, Typography, Link, Container, Grid } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Footer = () => {
+    const { language } = useLanguage();
+
+    const translations = {
+        en: {
+            about: 'About Us',
+            description:
+                'Learn Czech from Russian with our interactive language learning platform.',
+            quickLinks: 'Quick Links',
+            dashboard: 'Dashboard',
+            lessons: 'Lessons',
+            practice: 'Practice',
+            progress: 'Progress',
+            legal: 'Legal',
+            terms: 'Terms of Service',
+            privacy: 'Privacy Policy',
+            rights: 'All rights reserved.'
+        },
+        ru: {
+            about: 'О нас',
+            description:
+                'Изучайте чешский с русского с помощью нашей интерактивной платформы для изучения языков.',
+            quickLinks: 'Быстрые ссылки',
+            dashboard: 'Панель управления',
+            lessons: 'Уроки',
+            practice: 'Практика',
+            progress: 'Прогресс',
+            legal: 'Юридическая информация',
+            terms: 'Условия использования',
+            privacy: 'Политика конфиденциальности',
+            rights: 'Все права защищены.'
+        }
+    };
+
+    const t = translations[language];
+
     return (
         <Box
             component="footer"
@@ -24,12 +60,10 @@ const Footer = () => {
                             color="text.primary"
                             gutterBottom
                         >
-                            About Us
+                            {t.about}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            FX Trading Platform provides a seamless foreign
-                            exchange trading experience with real-time quotes
-                            and advanced tools.
+                            {t.description}
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -38,38 +72,38 @@ const Footer = () => {
                             color="text.primary"
                             gutterBottom
                         >
-                            Quick Links
+                            {t.quickLinks}
                         </Typography>
                         <Link
                             component={RouterLink}
                             to="/dashboard"
                             color="inherit"
                         >
-                            Dashboard
+                            {t.dashboard}
                         </Link>
                         <br />
                         <Link
                             component={RouterLink}
-                            to="/trading"
+                            to="/lessons"
                             color="inherit"
                         >
-                            Trading
+                            {t.lessons}
                         </Link>
                         <br />
                         <Link
                             component={RouterLink}
-                            to="/positions"
+                            to="/practice"
                             color="inherit"
                         >
-                            Positions
+                            {t.practice}
                         </Link>
                         <br />
                         <Link
                             component={RouterLink}
-                            to="/history"
+                            to="/progress"
                             color="inherit"
                         >
-                            History
+                            {t.progress}
                         </Link>
                     </Grid>
                     <Grid item xs={12} sm={4}>
@@ -78,14 +112,14 @@ const Footer = () => {
                             color="text.primary"
                             gutterBottom
                         >
-                            Legal
+                            {t.legal}
                         </Typography>
                         <Link
                             component={RouterLink}
                             to="/terms"
                             color="inherit"
                         >
-                            Terms of Service
+                            {t.terms}
                         </Link>
                         <br />
                         <Link
@@ -93,7 +127,7 @@ const Footer = () => {
                             to="/privacy"
                             color="inherit"
                         >
-                            Privacy Policy
+                            {t.privacy}
                         </Link>
                     </Grid>
                 </Grid>
@@ -106,9 +140,10 @@ const Footer = () => {
                         {'© '}
                         {new Date().getFullYear()}{' '}
                         <Link color="inherit" href="https://autocode.work/">
-                            FX Trading Platform
+                            Czech from Russian
                         </Link>
-                        {'. All rights reserved.'}
+                        {'. '}
+                        {t.rights}
                     </Typography>
                 </Box>
             </Container>

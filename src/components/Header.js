@@ -31,14 +31,12 @@ const Header = ({ toggleTheme }) => {
     };
 
     const menuItems = [
-        { label: 'Dashboard', path: '/dashboard' },
-        { label: 'Trading', path: '/trading' },
-        { label: 'Positions', path: '/positions' },
-        { label: 'History', path: '/history' },
-        { label: 'Risk Management', path: '/risk-management' },
-        { label: 'Market News', path: '/market-news' },
-        { label: 'Economic Calendar', path: '/economic-calendar' },
-        { label: 'Realtime', path: '/realtime' }
+        { label: 'Главная', path: '/dashboard' },
+        { label: 'Уроки', path: '/lessons' },
+        { label: 'Упражнения', path: '/exercises' },
+        { label: 'Прогресс', path: '/progress' },
+        { label: 'Достижения', path: '/achievements' },
+        { label: 'Рейтинг', path: '/leaderboard' }
     ];
 
     return (
@@ -57,7 +55,7 @@ const Header = ({ toggleTheme }) => {
                     </IconButton>
                 )}
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    FX Trading Platform
+                    Чешский с нуля
                 </Typography>
                 {!isMobile && (
                     <Box sx={{ display: 'flex' }}>
@@ -87,10 +85,10 @@ const Header = ({ toggleTheme }) => {
                 </IconButton>
 
                 <Button color="inherit" component={RouterLink} to="/account">
-                    Account
+                    Аккаунт
                 </Button>
                 <Button color="inherit" component={RouterLink} to="/login">
-                    Login
+                    Войти
                 </Button>
             </Toolbar>
             <Menu

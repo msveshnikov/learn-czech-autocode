@@ -12,7 +12,8 @@ import {
     TextField,
     Button,
     Box,
-    Grid
+    Grid,
+    Alert
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { format } from 'date-fns';
@@ -21,41 +22,42 @@ import { Helmet } from 'react-helmet';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
 import { useTheme } from '@mui/material/styles';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const History = () => {
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const theme = useTheme();
+    const { language } = useLanguage();
 
-    const fetchTradeHistory = async () => {
+    const fetchLessonHistory = async () => {
         const token = localStorage.getItem('token');
-        return apiService.getTradeHistory(token, startDate, endDate);
+        return apiService.getLessonHistory(token, startDate, endDate);
     };
 
     const {
-        data: trades,
+        data: lessons,
         isLoading,
         isError,
         error,
         refetch
-    } = useQuery(['tradeHistory', startDate, endDate], fetchTradeHistory, {
+    } = useQuery(['lessonHistory', startDate, endDate], fetchLessonHistory, {
         enabled: false
     });
 
     useEffect(() => {
         refetch();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleFilter = () => {
         refetch();
     };
 
-    const sortedTrades = useMemo(() => {
-        return trades
-            ? [...trades].sort((a, b) => new Date(b.date) - new Date(a.date))
+    const sortedLessons = useMemo(() => {
+        return lessons
+            ? [...lessons].sort((a, b) => new Date(b.date) - new Date(a.date))
             : [];
-    }, [trades]);
+    }, [lessons]);
 
     if (isLoading) {
         return <Loading />;
@@ -69,7 +71,7 @@ const History = () => {
                 alignItems="center"
                 minHeight="100vh"
             >
-                <Typography color="error">{error.message}</Typography>
+                <Alert severity="error">{error.message}</Alert>
             </Box>
         );
     }
@@ -77,35 +79,41 @@ const History = () => {
     return (
         <>
             <Helmet>
-                <title>Trade History - FX Trading Platform</title>
+                <title>
+                    {language === 'ru' ? 'История уроков' : 'Lesson History'} -
+                    Czech from Russian
+                </title>
             </Helmet>
             <Container maxWidth="lg">
-                <Typography
-                    sx={{ my: 4 }}
-                    variant="h4"
-                    component="h1"
-                    gutterBottom
-                >
-                    Trade History
+                <Typography sx={{ my: 4 }} variant="h4" component="h1">
+                    {language === 'ru' ? 'История уроков' : 'Lesson History'}
                 </Typography>
                 <Box mb={3}>
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={12} sm={4}>
                             <DatePicker
-                                label="Start Date"
+                                label={
+                                    language === 'ru'
+                                        ? 'Дата начала'
+                                        : 'Start Date'
+                                }
                                 value={startDate}
                                 onChange={(newValue) => setStartDate(newValue)}
-                                textField={(params) => (
+                                renderInput={(params) => (
                                     <TextField {...params} fullWidth />
                                 )}
                             />
                         </Grid>
                         <Grid item xs={12} sm={4}>
                             <DatePicker
-                                label="End Date"
+                                label={
+                                    language === 'ru'
+                                        ? 'Дата окончания'
+                                        : 'End Date'
+                                }
                                 value={endDate}
                                 onChange={(newValue) => setEndDate(newValue)}
-                                textField={(params) => (
+                                renderInput={(params) => (
                                     <TextField {...params} fullWidth />
                                 )}
                             />
@@ -116,7 +124,7 @@ const History = () => {
                                 onClick={handleFilter}
                                 fullWidth
                             >
-                                Filter
+                                {language === 'ru' ? 'Фильтр' : 'Filter'}
                             </Button>
                         </Grid>
                     </Grid>
@@ -125,39 +133,51 @@ const History = () => {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Date</TableCell>
-                                <TableCell>Currency Pair</TableCell>
-                                <TableCell>Type</TableCell>
-                                <TableCell>Amount</TableCell>
-                                <TableCell>Price</TableCell>
-                                <TableCell>Profit/Loss</TableCell>
-                                <TableCell>Status</TableCell>
+                                <TableCell>
+                                    {language === 'ru' ? 'Дата' : 'Date'}
+                                </TableCell>
+                                <TableCell>
+                                    {language === 'ru' ? 'Урок' : 'Lesson'}
+                                </TableCell>
+                                <TableCell>
+                                    {language === 'ru' ? 'Тема' : 'Topic'}
+                                </TableCell>
+                                <TableCell>
+                                    {language === 'ru' ? 'Оценка' : 'Score'}
+                                </TableCell>
+                                <TableCell>
+                                    {language === 'ru'
+                                        ? 'Время выполнения'
+                                        : 'Completion Time'}
+                                </TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {sortedTrades.map((trade) => (
-                                <TableRow key={trade.id}>
+                            {sortedLessons.map((lesson) => (
+                                <TableRow key={lesson.id}>
                                     <TableCell>
                                         {format(
-                                            new Date(trade.date),
+                                            new Date(lesson.date),
                                             'yyyy-MM-dd HH:mm:ss'
                                         )}
                                     </TableCell>
-                                    <TableCell>{trade.pair}</TableCell>
-                                    <TableCell>{trade.type}</TableCell>
-                                    <TableCell>{trade.amount}</TableCell>
-                                    <TableCell>{trade.price}</TableCell>
+                                    <TableCell>{lesson.lessonName}</TableCell>
+                                    <TableCell>{lesson.topic}</TableCell>
                                     <TableCell
                                         sx={{
                                             color:
-                                                trade.profit > 0
+                                                lesson.score >= 80
                                                     ? theme.palette.success.main
+                                                    : lesson.score >= 60
+                                                    ? theme.palette.warning.main
                                                     : theme.palette.error.main
                                         }}
                                     >
-                                        {trade.profit}
+                                        {lesson.score}%
                                     </TableCell>
-                                    <TableCell>{trade.status}</TableCell>
+                                    <TableCell>
+                                        {lesson.completionTime} min
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

@@ -8,7 +8,11 @@ import {
     Button,
     useMediaQuery,
     Snackbar,
-    Alert
+    Alert,
+    List,
+    ListItem,
+    ListItemText,
+    ListItemIcon
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -16,13 +20,15 @@ import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
-import Chart from 'react-apexcharts';
 import Onboarding from '../components/Onboarding';
+import { useLanguage } from '../contexts/LanguageContext';
+import TranslateIcon from '@mui/icons-material/Translate';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import SchoolIcon from '@mui/icons-material/School';
 
 const Dashboard = () => {
-    const [currencyPairs, setCurrencyPairs] = useState([]);
-    const [accountBalance, setAccountBalance] = useState(null);
-    const [dashboardData, setDashboardData] = useState(null);
+    const [lessons, setLessons] = useState([]);
+    const [userProgress, setUserProgress] = useState({});
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -32,101 +38,46 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const { language } = useLanguage();
 
     const {
-        data: quotesData,
-        isLoading: quotesLoading,
-        error: quotesError
-    } = useQuery(
-        'quotes',
-        () => apiService.getQuotes(['EUR/USD', 'GBP/USD', 'USD/JPY']),
-        {
-            refetchInterval: 10000
-        }
-    );
-
-    const {
-        data: accountData,
-        isLoading: accountLoading,
-        error: accountError
-    } = useQuery('account', apiService.getUserAccount);
-
-    const {
-        data: dashboardConfig,
-        isLoading: dashboardLoading,
-        error: dashboardError
+        data: dashboardData,
+        isLoading,
+        error
     } = useQuery('dashboard', apiService.getDashboardData);
 
     useEffect(() => {
-        if (quotesData) setCurrencyPairs(quotesData);
-        if (accountData) setAccountBalance(accountData.balance);
-        if (dashboardConfig) setDashboardData(dashboardConfig);
-    }, [quotesData, accountData, dashboardConfig]);
-
-    const sortedCurrencyPairs = useMemo(() => {
-        return [...currencyPairs].sort((a, b) => a.pair.localeCompare(b.pair));
-    }, [currencyPairs]);
-
-    const chartOptions = {
-        chart: {
-            type: 'line',
-            height: 300,
-            toolbar: { show: !isMobile }
-        },
-        xaxis: { categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'] },
-        theme: { mode: theme.palette.mode },
-        responsive: [
-            {
-                breakpoint: 480,
-                options: {
-                    chart: { width: '100%' },
-                    legend: { position: 'bottom' }
-                }
-            }
-        ]
-    };
-
-    const chartSeries = [
-        {
-            name: 'EUR/USD',
-            data: [1.12, 1.13, 1.15, 1.14, 1.16, 1.15]
+        if (dashboardData) {
+            setLessons(dashboardData.lessons || []);
+            setUserProgress(dashboardData.userProgress || {});
         }
-    ];
+    }, [dashboardData]);
+
+    const handleStartLesson = (lessonId) => {
+        navigate(`/lesson/${lessonId}`);
+    };
 
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') return;
         setSnackbar({ ...snackbar, open: false });
     };
 
-    const handleQuickTrade = () => {
-        navigate('/trading');
-        setSnackbar({
-            open: true,
-            message: 'Redirecting to trading page',
-            severity: 'info'
-        });
-    };
-
     const onboardingSteps = [
         {
-            target: '#account-balance',
-            content: 'This is your current account balance.'
+            target: '#lessons-overview',
+            content: 'Here you can see all available lessons.'
         },
         {
-            target: '#quick-trade',
-            content: 'Click here to start trading quickly.'
-        },
-        {
-            target: '#currency-pairs',
-            content: 'View real-time currency pair quotes here.'
+            target: '#user-progress',
+            content: 'Track your learning progress here.'
         }
     ];
 
-    if (quotesLoading || accountLoading || dashboardLoading) {
+    if (isLoading) {
         return <Loading />;
     }
 
-    if (quotesError || accountError || dashboardError) {
+    if (error) {
         return (
             <Box
                 display="flex"
@@ -134,11 +85,7 @@ const Dashboard = () => {
                 alignItems="center"
                 minHeight="100vh"
             >
-                <Typography color="error">
-                    {quotesError?.message ||
-                        accountError?.message ||
-                        dashboardError?.message}
-                </Typography>
+                <Typography color="error">{error.message}</Typography>
             </Box>
         );
     }
@@ -146,150 +93,103 @@ const Dashboard = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard - FX Trading Platform</title>
+                <title>Dashboard - Learn Czech from Russian</title>
                 <meta
                     name="description"
-                    content="View your FX trading dashboard with real-time currency pair quotes and account information."
+                    content="Learn Czech language with interactive lessons designed for Russian speakers."
                 />
             </Helmet>
             <Container maxWidth="lg">
                 <Box my={4}>
                     <Typography variant="h4" component="h1" gutterBottom>
-                        Dashboard
+                        {language === 'ru' ? 'Панель управления' : 'Dashboard'}
                     </Typography>
                     <Grid container spacing={3}>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={8}>
                             <Paper
                                 elevation={3}
                                 sx={{ p: 2 }}
-                                id="account-balance"
+                                id="lessons-overview"
                             >
                                 <Typography variant="h6" gutterBottom>
-                                    Account Balance
+                                    {language === 'ru' ? 'Уроки' : 'Lessons'}
                                 </Typography>
-                                {accountBalance !== null ? (
-                                    <Typography variant="h4">
-                                        ${accountBalance.toFixed(2)}
-                                    </Typography>
-                                ) : (
-                                    <Typography>Balance unavailable</Typography>
-                                )}
+                                <List>
+                                    {lessons.map((lesson) => (
+                                        <ListItem
+                                            key={lesson.id}
+                                            secondaryAction={
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={() =>
+                                                        handleStartLesson(
+                                                            lesson.id
+                                                        )
+                                                    }
+                                                >
+                                                    {language === 'ru'
+                                                        ? 'Начать'
+                                                        : 'Start'}
+                                                </Button>
+                                            }
+                                        >
+                                            <ListItemIcon>
+                                                <SchoolIcon />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={lesson.title}
+                                                secondary={lesson.description}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Paper elevation={3} sx={{ p: 2 }} id="quick-trade">
+                        <Grid item xs={12} md={4}>
+                            <Paper
+                                elevation={3}
+                                sx={{ p: 2 }}
+                                id="user-progress"
+                            >
                                 <Typography variant="h6" gutterBottom>
-                                    Quick Trade
+                                    {language === 'ru'
+                                        ? 'Ваш прогресс'
+                                        : 'Your Progress'}
+                                </Typography>
+                                <List>
+                                    {Object.entries(userProgress).map(
+                                        ([key, value]) => (
+                                            <ListItem key={key}>
+                                                <ListItemIcon>
+                                                    <CheckCircleIcon />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={key}
+                                                    secondary={`${value}%`}
+                                                />
+                                            </ListItem>
+                                        )
+                                    )}
+                                </List>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Paper elevation={3} sx={{ p: 2 }}>
+                                <Typography variant="h6" gutterBottom>
+                                    {language === 'ru'
+                                        ? 'Языковая практика'
+                                        : 'Language Practice'}
                                 </Typography>
                                 <Button
                                     variant="contained"
-                                    color="primary"
-                                    onClick={handleQuickTrade}
-                                    fullWidth
+                                    startIcon={<TranslateIcon />}
+                                    onClick={() => navigate('/practice')}
+                                    fullWidth={isMobile}
                                 >
-                                    Start Trading
+                                    {language === 'ru'
+                                        ? 'Начать практику'
+                                        : 'Start Practice'}
                                 </Button>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2 }}
-                                id="currency-pairs"
-                            >
-                                <Typography variant="h6" gutterBottom>
-                                    Currency Pairs
-                                </Typography>
-                                {sortedCurrencyPairs.length > 0 ? (
-                                    <Grid container spacing={2}>
-                                        {sortedCurrencyPairs.map(
-                                            ({ pair, bid, ask }) => (
-                                                <Grid
-                                                    item
-                                                    xs={12}
-                                                    sm={6}
-                                                    md={4}
-                                                    key={pair}
-                                                >
-                                                    <Paper
-                                                        elevation={1}
-                                                        sx={{
-                                                            p: 2,
-                                                            backgroundColor:
-                                                                theme.palette
-                                                                    .background
-                                                                    .default
-                                                        }}
-                                                    >
-                                                        <Typography variant="subtitle1">
-                                                            {pair}
-                                                        </Typography>
-                                                        <Typography variant="body2">
-                                                            Bid:{' '}
-                                                            {bid.toFixed(5)}
-                                                        </Typography>
-                                                        <Typography variant="body2">
-                                                            Ask:{' '}
-                                                            {ask.toFixed(5)}
-                                                        </Typography>
-                                                    </Paper>
-                                                </Grid>
-                                            )
-                                        )}
-                                    </Grid>
-                                ) : (
-                                    <Typography>
-                                        No currency pairs available
-                                    </Typography>
-                                )}
-                            </Paper>
-                        </Grid>
-                        {dashboardData && dashboardData.openPositions > 0 && (
-                            <Grid item xs={12} md={6}>
-                                <Paper elevation={3} sx={{ p: 2 }}>
-                                    <Typography variant="h6" gutterBottom>
-                                        Open Positions
-                                    </Typography>
-                                    <Button
-                                        variant="outlined"
-                                        color="primary"
-                                        onClick={() => navigate('/positions')}
-                                        fullWidth
-                                    >
-                                        View Positions
-                                    </Button>
-                                </Paper>
-                            </Grid>
-                        )}
-                        <Grid item xs={12} md={6}>
-                            <Paper elevation={3} sx={{ p: 2 }}>
-                                <Typography variant="h6" gutterBottom>
-                                    Recent Orders
-                                </Typography>
-                                <Button
-                                    variant="outlined"
-                                    color="primary"
-                                    onClick={() => navigate('/history')}
-                                    fullWidth
-                                >
-                                    View Order History
-                                </Button>
-                            </Paper>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Paper elevation={3} sx={{ p: 2 }}>
-                                <Typography variant="h6" gutterBottom>
-                                    Market Chart
-                                </Typography>
-                                <Box height={300}>
-                                    <Chart
-                                        options={chartOptions}
-                                        series={chartSeries}
-                                        type="line"
-                                        height={300}
-                                        width="100%"
-                                    />
-                                </Box>
                             </Paper>
                         </Grid>
                     </Grid>
