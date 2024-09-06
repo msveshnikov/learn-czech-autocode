@@ -69,14 +69,3 @@ through various exercises and lessons.
 5. Optimize performance and user experience
 6. Beta testing and user feedback collection
 7. Continuous improvement and feature additions
-
-# TODO
-
-ERROR in ./src/pages/Achievements.js 20:27-48
-export 'fetchUserAchievements' (imported as 'fetchUserAchievements') was not found in '../services/apiService' (possible exports: default)
-ERROR in ./src/pages/Leaderboard.js 20:27-43
-export 'fetchLeaderboard' (imported as 'fetchLeaderboard') was not found in '../services/apiService' (possible exports: default)
-ERROR in ./src/pages/Lessons.js 18:37-49
-export 'fetchLessons' (imported as 'fetchLessons') was not found in '../services/apiService' (possible exports: default)
-ERROR in ./src/pages/Progress.js 22:27-44
-export 'fetchUserProgress' (imported as 'fetchUserProgress') was not found in '../services/apiService' (possible exports: default)

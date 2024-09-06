@@ -83,7 +83,7 @@ const Progress = () => {
                     <Typography variant="h5" gutterBottom>
                         Прогресс по урокам
                     </Typography>
-                    {progress.lessonProgress.map((lesson, index) => (
+                    {progress?.lessonProgress?.map((lesson, index) => (
                         <Box key={index} sx={{ mb: 2 }}>
                             <Typography variant="subtitle1" gutterBottom>
                                 {lesson.name}

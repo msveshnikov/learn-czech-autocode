@@ -92,7 +92,7 @@ const Footer = () => {
                         <br />
                         <Link
                             component={RouterLink}
-                            to="/practice"
+                            to="/lessons"
                             color="inherit"
                         >
                             {t.practice}

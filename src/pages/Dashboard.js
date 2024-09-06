@@ -183,7 +183,7 @@ const Dashboard = () => {
                                 <Button
                                     variant="contained"
                                     startIcon={<TranslateIcon />}
-                                    onClick={() => navigate('/practice')}
+                                    onClick={() => navigate('/lessons')}
                                     fullWidth={isMobile}
                                 >
                                     {language === 'ru'
