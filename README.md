@@ -1,4 +1,6 @@
-# Duolingo clone to learn Czech from Russian
+# Duolingo clone to learn Czech from Russian (built by [AutoCode](https://autocode.work) in 1 minute)
+
+![alt text](image.png)
 
 ## Project Overview
 
