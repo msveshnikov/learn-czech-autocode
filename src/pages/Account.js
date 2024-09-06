@@ -11,12 +11,7 @@ import {
     Stepper,
     Step,
     StepLabel,
-    Tooltip,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogActions
-} from '@mui/material';
+    Tooltip} from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import apiService from '../services/apiService';
@@ -32,7 +27,6 @@ const Account = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [activeStep] = useState(0);
-    const [openDialog, setOpenDialog] = useState(false);
     const queryClient = useQueryClient();
     const navigate = useNavigate();
     const { language } = useLanguage();
@@ -84,19 +78,6 @@ const Account = () => {
             tooltip: 'Настройте ваш опыт обучения'
         }
     ];
-
-    const handleCreateDemoAccount = () => {
-        setOpenDialog(true);
-    };
-
-    const handleCloseDialog = () => {
-        setOpenDialog(false);
-    };
-
-    const handleConfirmDemoAccount = () => {
-        setOpenDialog(false);
-        setSuccessMessage('Демо-аккаунт успешно создан');
-    };
 
     if (isLoading) {
         return (
@@ -217,20 +198,6 @@ const Account = () => {
             </Paper>
             <Paper elevation={3} sx={{ padding: 3, mt: 3 }}>
                 <Typography variant="h6" gutterBottom>
-                    {language === 'ru' ? 'Демо-аккаунт' : 'Demo Account'}
-                </Typography>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleCreateDemoAccount}
-                >
-                    {language === 'ru'
-                        ? 'Создать демо-аккаунт'
-                        : 'Create Demo Account'}
-                </Button>
-            </Paper>
-            <Paper elevation={3} sx={{ padding: 3, mt: 3 }}>
-                <Typography variant="h6" gutterBottom>
                     {language === 'ru' ? 'Быстрые ссылки' : 'Quick Links'}
                 </Typography>
                 <Button
@@ -251,34 +218,6 @@ const Account = () => {
                     {language === 'ru' ? 'Просмотреть уроки' : 'View Lessons'}
                 </Button>
             </Paper>
-            <Dialog open={openDialog} onClose={handleCloseDialog}>
-                <DialogTitle>
-                    {language === 'ru'
-                        ? 'Создать демо-аккаунт'
-                        : 'Create Demo Account'}
-                </DialogTitle>
-                <DialogContent>
-                    <Typography>
-                        {language === 'ru'
-                            ? 'Вы уверены, что хотите создать демо-аккаунт? Это позволит вам попробовать все функции без риска.'
-                            : 'Are you sure you want to create a demo account? This will allow you to try all features without any risk.'}
-                    </Typography>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCloseDialog}>
-                        {language === 'ru' ? 'Отмена' : 'Cancel'}
-                    </Button>
-                    <Button
-                        onClick={handleConfirmDemoAccount}
-                        variant="contained"
-                        color="primary"
-                    >
-                        {language === 'ru'
-                            ? 'Создать демо-аккаунт'
-                            : 'Create Demo Account'}
-                    </Button>
-                </DialogActions>
-            </Dialog>
         </Box>
     );
 };

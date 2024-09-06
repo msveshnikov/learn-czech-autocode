@@ -13,8 +13,6 @@ import Footer from './components/Footer';
 import Loading from './components/Loading';
 import createCustomTheme from './utils/theme';
 import { LanguageProvider } from './contexts/LanguageContext';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PrivateRoute from './components/PrivateRoute';
 import Onboarding from './components/Onboarding';
 
@@ -69,107 +67,99 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <ThemeProvider theme={theme}>
-                    <LanguageProvider value={{ language, changeLanguage }}>
-                        <CssBaseline />
-                        <Router>
-                            <div className="App">
-                                <Helmet>
-                                    <title>Учим чешский с русского</title>
-                                    <meta
-                                        name="description"
-                                        content="Изучайте чешский язык с русского с нашим интерактивным приложением"
-                                    />
-                                </Helmet>
-                                <Header
-                                    toggleTheme={toggleDarkMode}
-                                    changeLanguage={changeLanguage}
-                                    isAuthenticated={isAuthenticated}
-                                    setIsAuthenticated={setIsAuthenticated}
+            <ThemeProvider theme={theme}>
+                <LanguageProvider value={{ language, changeLanguage }}>
+                    <CssBaseline />
+                    <Router>
+                        <div className="App">
+                            <Helmet>
+                                <title>Учим чешский с русского</title>
+                                <meta
+                                    name="description"
+                                    content="Изучайте чешский язык с русского с нашим интерактивным приложением"
                                 />
-                                {showOnboarding && isAuthenticated && (
-                                    <Onboarding
-                                        onComplete={handleOnboardingComplete}
+                            </Helmet>
+                            <Header
+                                toggleTheme={toggleDarkMode}
+                                changeLanguage={changeLanguage}
+                                isAuthenticated={isAuthenticated}
+                                setIsAuthenticated={setIsAuthenticated}
+                            />
+                            {showOnboarding && isAuthenticated && (
+                                <Onboarding
+                                    onComplete={handleOnboardingComplete}
+                                />
+                            )}
+                            <Suspense fallback={<Loading />}>
+                                <Routes>
+                                    <Route
+                                        path="/"
+                                        element={
+                                            <Navigate to="/dashboard" replace />
+                                        }
                                     />
-                                )}
-                                <Suspense fallback={<Loading />}>
-                                    <Routes>
-                                        <Route
-                                            path="/"
-                                            element={
-                                                <Navigate
-                                                    to="/dashboard"
-                                                    replace
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path="/login"
-                                            element={
-                                                <Login
-                                                    setIsAuthenticated={
-                                                        setIsAuthenticated
-                                                    }
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path="/register"
-                                            element={<Register />}
-                                        />
-                                        <Route
-                                            path="/dashboard"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <Dashboard />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/lesson"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <Lesson />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/account"
-                                            element={
-                                                <PrivateRoute
-                                                    isAuthenticated={
-                                                        isAuthenticated
-                                                    }
-                                                >
-                                                    <Account />
-                                                </PrivateRoute>
-                                            }
-                                        />
-                                        <Route
-                                            path="/privacy"
-                                            element={<Privacy />}
-                                        />
-                                        <Route
-                                            path="/terms"
-                                            element={<Terms />}
-                                        />
-                                    </Routes>
-                                </Suspense>
-                                <Footer />
-                            </div>
-                        </Router>
-                    </LanguageProvider>
-                </ThemeProvider>
-            </LocalizationProvider>
+                                    <Route
+                                        path="/login"
+                                        element={
+                                            <Login
+                                                setIsAuthenticated={
+                                                    setIsAuthenticated
+                                                }
+                                            />
+                                        }
+                                    />
+                                    <Route
+                                        path="/register"
+                                        element={<Register />}
+                                    />
+                                    <Route
+                                        path="/dashboard"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Dashboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/lesson"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Lesson />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/account"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Account />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/privacy"
+                                        element={<Privacy />}
+                                    />
+                                    <Route path="/terms" element={<Terms />} />
+                                </Routes>
+                            </Suspense>
+                            <Footer />
+                        </div>
+                    </Router>
+                </LanguageProvider>
+            </ThemeProvider>
         </QueryClientProvider>
     );
 }
