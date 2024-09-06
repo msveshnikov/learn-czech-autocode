@@ -31,7 +31,7 @@ const apiService = {
         return { message: 'Account updated successfully' };
     },
 
-    getLessons: async () => {
+    fetchLessons: async () => {
         await mockDelay(300);
         return [
             { id: 1, title: 'Basic Vocabulary', completed: false },
@@ -72,7 +72,7 @@ const apiService = {
         };
     },
 
-    getProgress: async () => {
+    fetchUserProgress: async () => {
         await mockDelay(300);
         return {
             lessonsCompleted: 5,
@@ -82,7 +82,7 @@ const apiService = {
         };
     },
 
-    getLeaderboard: async () => {
+    fetchLeaderboard: async () => {
         await mockDelay(300);
         return [
             { id: 1, username: 'user1', xp: 2000 },
@@ -91,7 +91,7 @@ const apiService = {
         ];
     },
 
-    getAchievements: async () => {
+    fetchUserAchievements: async () => {
         await mockDelay(300);
         return [
             { id: 1, title: 'First Lesson Completed', earned: true },
@@ -104,7 +104,7 @@ const apiService = {
         await mockDelay(300);
         return [
             { id: 1, message: 'New lesson available!', read: false },
-            { id: 2, message: `You've reached a 3-day streak!`, read: true }
+            { id: 2, message: "You've reached a 3-day streak!", read: true }
         ];
     },
 

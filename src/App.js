@@ -17,12 +17,17 @@ import PrivateRoute from './components/PrivateRoute';
 import Onboarding from './components/Onboarding';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-const Lesson = lazy(() => import('./pages/Lesson'));
+// const Lesson = lazy(() => import('./pages/Lesson'));
 const Account = lazy(() => import('./pages/Account'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Terms = lazy(() => import('./pages/Terms'));
+const Lessons = lazy(() => import('./pages/Lessons'));
+const Exercises = lazy(() => import('./pages/Exercises'));
+const Progress = lazy(() => import('./pages/Progress'));
+const Achievements = lazy(() => import('./pages/Achievements'));
+const Leaderboard = lazy(() => import('./pages/Leaderboard'));
 
 const queryClient = new QueryClient();
 
@@ -125,18 +130,6 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path="/lesson"
-                                        element={
-                                            <PrivateRoute
-                                                isAuthenticated={
-                                                    isAuthenticated
-                                                }
-                                            >
-                                                <Lesson />
-                                            </PrivateRoute>
-                                        }
-                                    />
-                                    <Route
                                         path="/account"
                                         element={
                                             <PrivateRoute
@@ -153,6 +146,66 @@ function App() {
                                         element={<Privacy />}
                                     />
                                     <Route path="/terms" element={<Terms />} />
+                                    <Route
+                                        path="/lessons"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Lessons />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/exercises"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Exercises />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/progress"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Progress />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/achievements"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Achievements />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/leaderboard"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Leaderboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
                                 </Routes>
                             </Suspense>
                             <Footer />
