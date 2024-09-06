@@ -17,7 +17,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Onboarding from './components/Onboarding';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
-// const Lesson = lazy(() => import('./pages/Lesson'));
+const Lesson = lazy(() => import('./pages/Lesson'));
 const Account = lazy(() => import('./pages/Account'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
@@ -155,6 +155,18 @@ function App() {
                                                 }
                                             >
                                                 <Lessons />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/lesson/:id"
+                                        element={
+                                            <PrivateRoute
+                                                isAuthenticated={
+                                                    isAuthenticated
+                                                }
+                                            >
+                                                <Lesson />
                                             </PrivateRoute>
                                         }
                                     />

@@ -39,7 +39,6 @@ const apiService = {
             { id: 3, title: 'Numbers', completed: false }
         ];
     },
-
     getLesson: async (lessonId) => {
         await mockDelay(300);
         return {

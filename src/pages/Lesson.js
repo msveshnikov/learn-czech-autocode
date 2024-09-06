@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
     Container,
     Typography,
@@ -9,30 +10,49 @@ import {
     RadioGroup,
     FormControlLabel,
     FormControl,
-    FormLabel
+    FormLabel,
+    TextField
 } from '@mui/material';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { Helmet } from 'react-helmet';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const Lesson = () => {
-    const [currentQuestion, setCurrentQuestion] = useState(0);
+    const { lessonId } = useParams();
+    const navigate = useNavigate();
+    const [currentExercise, setCurrentExercise] = useState(0);
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
-    const { language } = useLanguage();
 
     const {
         data: lessonData,
         isLoading,
         error
-    } = useQuery('lesson', () => apiService.getLesson(language));
+    } = useQuery(['lesson', lessonId], () => apiService.getLesson(lessonId));
+
+    const submitExerciseMutation = useMutation(
+        ({ exerciseId, answer }) =>
+            apiService.submitExercise(lessonId, exerciseId, answer),
+        {
+            onSuccess: (data) => {
+                if (data.correct) {
+                    setScore(score + 1);
+                }
+                if (currentExercise < lessonData.exercises.length - 1) {
+                    setCurrentExercise(currentExercise + 1);
+                    setUserAnswer('');
+                } else {
+                    setShowResult(true);
+                }
+            }
+        }
+    );
 
     useEffect(() => {
         if (lessonData) {
-            setCurrentQuestion(0);
+            setCurrentExercise(0);
             setUserAnswer('');
             setScore(0);
             setShowResult(false);
@@ -47,64 +67,83 @@ const Lesson = () => {
     };
 
     const handleSubmit = () => {
-        if (userAnswer === lessonData[currentQuestion].correctAnswer) {
-            setScore(score + 1);
-        }
-
-        if (currentQuestion < lessonData.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-            setUserAnswer('');
-        } else {
-            setShowResult(true);
-        }
+        const currentExerciseData = lessonData.exercises[currentExercise];
+        submitExerciseMutation.mutate({
+            exerciseId: currentExerciseData.id,
+            answer: userAnswer
+        });
     };
 
     const resetLesson = () => {
-        setCurrentQuestion(0);
+        setCurrentExercise(0);
         setUserAnswer('');
         setScore(0);
         setShowResult(false);
     };
 
+    const goToNextLesson = () => {
+        const nextLessonId = parseInt(lessonId) + 1;
+        navigate(`/lesson/${nextLessonId}`);
+    };
+
+    const renderExercise = () => {
+        const exercise = lessonData.exercises[currentExercise];
+        switch (exercise.type) {
+            case 'multiple-choice':
+                return (
+                    <FormControl component="fieldset" sx={{ mt: 2 }}>
+                        <FormLabel component="legend">
+                            Выберите правильный ответ
+                        </FormLabel>
+                        <RadioGroup
+                            aria-label="quiz"
+                            name="quiz"
+                            value={userAnswer}
+                            onChange={handleAnswer}
+                        >
+                            {exercise.options.map((option, index) => (
+                                <FormControlLabel
+                                    key={index}
+                                    value={option}
+                                    control={<Radio />}
+                                    label={option}
+                                />
+                            ))}
+                        </RadioGroup>
+                    </FormControl>
+                );
+            case 'fill-in-the-blank':
+                return (
+                    <TextField
+                        fullWidth
+                        label={'Введите ответ'}
+                        variant="outlined"
+                        value={userAnswer}
+                        onChange={handleAnswer}
+                        sx={{ mt: 2 }}
+                    />
+                );
+            default:
+                return null;
+        }
+    };
+
     return (
         <Container maxWidth="md">
             <Helmet>
-                <title>Lesson - Learn Czech from Russian</title>
+                <title>{`Урок ${lessonId} - Учим чешский с русского`}</title>
             </Helmet>
             <Box my={4}>
                 <Typography variant="h4" component="h1" gutterBottom>
-                    {language === 'ru' ? 'Урок' : 'Lekce'}
+                    {`Урок ${lessonId}: ${lessonData.title}`}
                 </Typography>
                 <Paper elevation={3} sx={{ p: 3 }}>
                     {!showResult ? (
                         <>
                             <Typography variant="h6" gutterBottom>
-                                {lessonData[currentQuestion].question}
+                                {lessonData.exercises[currentExercise].question}
                             </Typography>
-                            <FormControl component="fieldset" sx={{ mt: 2 }}>
-                                <FormLabel component="legend">
-                                    {language === 'ru'
-                                        ? 'Выберите правильный ответ'
-                                        : 'Vyberte správnou odpověď'}
-                                </FormLabel>
-                                <RadioGroup
-                                    aria-label="quiz"
-                                    name="quiz"
-                                    value={userAnswer}
-                                    onChange={handleAnswer}
-                                >
-                                    {lessonData[currentQuestion].options.map(
-                                        (option, index) => (
-                                            <FormControlLabel
-                                                key={index}
-                                                value={option}
-                                                control={<Radio />}
-                                                label={option}
-                                            />
-                                        )
-                                    )}
-                                </RadioGroup>
-                            </FormControl>
+                            {renderExercise()}
                             <Box mt={2}>
                                 <Button
                                     variant="contained"
@@ -112,31 +151,33 @@ const Lesson = () => {
                                     onClick={handleSubmit}
                                     disabled={!userAnswer}
                                 >
-                                    {language === 'ru'
-                                        ? 'Подтвердить'
-                                        : 'Potvrdit'}
+                                    Подтвердить
                                 </Button>
                             </Box>
                         </>
                     ) : (
                         <>
                             <Typography variant="h6" gutterBottom>
-                                {language === 'ru' ? 'Результат' : 'Výsledek'}
+                                Результат
                             </Typography>
                             <Typography>
-                                {language === 'ru'
-                                    ? `Вы ответили правильно на ${score} из ${lessonData.length} вопросов.`
-                                    : `Správně jste odpověděli na ${score} z ${lessonData.length} otázek.`}
+                                {`Вы ответили правильно на ${score} из ${lessonData.exercises.length} вопросов.`}
                             </Typography>
                             <Box mt={2}>
                                 <Button
                                     variant="contained"
                                     color="primary"
                                     onClick={resetLesson}
+                                    sx={{ mr: 2 }}
                                 >
-                                    {language === 'ru'
-                                        ? 'Начать заново'
-                                        : 'Začít znovu'}
+                                    Повторить урок
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={goToNextLesson}
+                                >
+                                    Следующий урок
                                 </Button>
                             </Box>
                         </>

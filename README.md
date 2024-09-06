@@ -69,3 +69,7 @@ through various exercises and lessons.
 5. Optimize performance and user experience
 6. Beta testing and user feedback collection
 7. Continuous improvement and feature additions
+
+# TODO
+
+-   fix /lesson/1 /lesson/2 etc routes
