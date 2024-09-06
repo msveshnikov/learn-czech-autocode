@@ -1,16 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn Czech from Russian - Duolingo Clone</title>
+    <title>Изучайте чешский с русского - Duolingo Clone</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #e74c3c;
+            --accent-color: #2ecc71;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+        }
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
+            background-color: var(--light-color);
         }
         .container {
             max-width: 1200px;
@@ -18,81 +26,115 @@
             padding: 0 20px;
         }
         header {
-            background-color: #2c3e50;
+            background-color: var(--dark-color);
             color: white;
             padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         nav ul {
             list-style-type: none;
             padding: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 20px;
+            display: flex;
+            justify-content: space-around;
         }
         nav ul li a {
             color: white;
             text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: var(--accent-color);
         }
         .hero {
-            background-color: #3498db;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             color: white;
             text-align: center;
-            padding: 100px 0;
+            padding: 150px 0 100px;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
         }
         .hero h1 {
-            font-size: 3em;
+            font-size: 3.5em;
             margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         .features {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             margin: 50px 0;
+            padding: 50px 0;
         }
         .feature {
             flex-basis: calc(33.333% - 20px);
             margin-bottom: 40px;
             text-align: center;
-        }
-        .pricing {
-            background-color: #ecf0f1;
-            padding: 50px 0;
-        }
-        .pricing-tiers {
-            display: flex;
-            justify-content: space-between;
-        }
-        .tier {
             background-color: white;
-            border-radius: 5px;
-            padding: 20px;
-            flex-basis: calc(33.333% - 20px);
-            text-align: center;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-10px);
+        }
+        .benefits {
+            background-color: var(--light-color);
+            padding: 100px 0;
+        }
+        .benefits ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .benefits li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        .benefits li::before {
+            content: "✓";
+            color: var(--accent-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
         }
         .cta {
-            background-color: #2ecc71;
+            background-color: var(--accent-color);
             color: white;
             text-align: center;
-            padding: 50px 0;
+            padding: 100px 0;
+            clip-path: polygon(0 15%, 100% 0, 100% 85%, 0 100%);
         }
         .button {
             display: inline-block;
-            background-color: #e74c3c;
+            background-color: var(--secondary-color);
             color: white;
-            padding: 10px 20px;
+            padding: 15px 30px;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 50px;
+            transition: all 0.3s;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         .button:hover {
             background-color: #c0392b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         footer {
-            background-color: #34495e;
+            background-color: var(--dark-color);
             color: white;
             text-align: center;
-            padding: 20px 0;
+            padding: 40px 0;
+        }
+        @media (max-width: 768px) {
+            .feature {
+                flex-basis: 100%;
+            }
         }
     </style>
 </head>
@@ -101,9 +143,9 @@
         <div class="container">
             <nav>
                 <ul>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Особенности</a></li>
+                    <li><a href="#benefits">Преимущества</a></li>
+                    <li><a href="#about">О нас</a></li>
                 </ul>
             </nav>
         </div>
@@ -111,90 +153,63 @@
 
     <section class="hero">
         <div class="container">
-            <h1>Learn Czech from Russian</h1>
-            <p>Master the Czech language with our interactive Duolingo-inspired app</p>
-            <a href="#" class="button">Start Learning Now</a>
+            <h1>Научитесь чешскому языку легко и быстро!</h1>
+            <p>Откройте для себя увлекательный мир чешского языка с нашим интерактивным приложением</p>
+            <a href="#" class="button">Начать обучение</a>
         </div>
     </section>
 
     <section id="features" class="features container">
         <div class="feature">
-            <h2>Interactive Lessons</h2>
-            <p>Engaging exercises covering vocabulary, grammar, and pronunciation</p>
+            <h2>Структурированные уроки</h2>
+            <p>Уроки по лексике, грамматике и произношению</p>
         </div>
         <div class="feature">
-            <h2>Progress Tracking</h2>
-            <p>Monitor your learning journey with detailed performance analytics</p>
+            <h2>Интерактивные упражнения</h2>
+            <p>Закрепляйте знания с помощью разнообразных заданий</p>
         </div>
         <div class="feature">
-            <h2>Gamification</h2>
-            <p>Stay motivated with streaks, achievements, and leaderboards</p>
+            <h2>Отслеживание прогресса</h2>
+            <p>Анализируйте свою успеваемость и достижения</p>
         </div>
         <div class="feature">
-            <h2>Spaced Repetition</h2>
-            <p>Efficient learning algorithm to optimize your memory retention</p>
+            <h2>Игровые элементы</h2>
+            <p>Повышайте мотивацию с помощью достижений и рейтингов</p>
         </div>
         <div class="feature">
-            <h2>Cross-Platform</h2>
-            <p>Learn on any device with our responsive React MUI-based app</p>
+            <h2>Интервальное повторение</h2>
+            <p>Эффективный алгоритм для лучшего запоминания</p>
         </div>
         <div class="feature">
-            <h2>Offline Mode</h2>
-            <p>Continue learning even without an internet connection</p>
+            <h2>Кроссплатформенность</h2>
+            <p>Учитесь на любом устройстве с нашим адаптивным приложением</p>
         </div>
     </section>
 
-    <section id="pricing" class="pricing">
+    <section id="benefits" class="benefits">
         <div class="container">
-            <h2>Pricing Plans</h2>
-            <div class="pricing-tiers">
-                <div class="tier">
-                    <h3>Basic</h3>
-                    <p>Free</p>
-                    <ul>
-                        <li>Access to core lessons</li>
-                        <li>Limited daily exercises</li>
-                        <li>Basic progress tracking</li>
-                    </ul>
-                    <a href="#" class="button">Choose Plan</a>
-                </div>
-                <div class="tier">
-                    <h3>Premium</h3>
-                    <p>$9.99/month</p>
-                    <ul>
-                        <li>Unlimited lessons and exercises</li>
-                        <li>Advanced progress analytics</li>
-                        <li>Offline mode</li>
-                        <li>Ad-free experience</li>
-                    </ul>
-                    <a href="#" class="button">Choose Plan</a>
-                </div>
-                <div class="tier">
-                    <h3>Pro</h3>
-                    <p>$19.99/month</p>
-                    <ul>
-                        <li>All Premium features</li>
-                        <li>Personalized learning path</li>
-                        <li>One-on-one tutoring sessions</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <a href="#" class="button">Choose Plan</a>
-                </div>
-            </div>
+            <h2>Преимущества нашего приложения:</h2>
+            <ul>
+                <li>Разработано специально для русскоговорящих пользователей</li>
+                <li>Учитесь в любое время и в любом месте</li>
+                <li>Адаптивный дизайн для всех устройств</li>
+                <li>Бесплатный доступ к базовому контенту</li>
+                <li>Регулярные обновления и новые уроки</li>
+            </ul>
         </div>
     </section>
 
     <section id="about" class="cta">
         <div class="container">
-            <h2>About Our Project</h2>
-            <p>We're passionate about creating an engaging platform for Russian speakers to learn Czech. Our team is dedicated to delivering a high-quality, user-friendly experience.</p>
-            <a href="#" class="button">Learn More</a>
+            <h2>О нашем проекте</h2>
+            <p>Мы стремимся создать увлекательную платформу для изучения чешского языка русскоговорящими пользователями. Наша команда посвящена разработке качественного и удобного приложения.</p>
+            <a href="#" class="button">Узнать больше</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 Czech from Russian Duolingo Clone. All rights reserved.</p>
+            <p>&copy; 2023 Чешский с русского - Duolingo Clone. Все права защищены.</p>
         </div>
     </footer>
 </body>
