@@ -56,7 +56,6 @@ const Onboarding = () => {
     useEffect(() => {
         if (user && user.onboardingCompleted) {
             setShowOnboarding(false);
-            navigate('/dashboard');
         }
     }, [user, navigate]);
 
@@ -78,7 +77,6 @@ const Onboarding = () => {
             });
             updateUser(updatedUser);
             setShowOnboarding(false);
-            navigate('/dashboard');
         } catch (error) {
             console.error('Error updating user:', error);
         }

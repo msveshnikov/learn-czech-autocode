@@ -138,7 +138,7 @@ const Dashboard = () => {
                                 <List>
                                     {lessons.map((lesson) => (
                                         <ListItem
-                                            key={lesson.id}
+                                            key={lesson._id}
                                             secondaryAction={
                                                 <Button
                                                     variant="contained"

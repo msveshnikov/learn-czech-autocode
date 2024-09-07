@@ -54,7 +54,7 @@ const apiService = {
     },
 
     fetchUserProgress: async () => {
-        const response = await axios.get(`${API_BASE_URL}/user/progress`);
+        const response = await axios.get(`${API_BASE_URL}/user-progress`);
         return response.data;
     },
 
@@ -64,7 +64,7 @@ const apiService = {
     },
 
     fetchUserAchievements: async () => {
-        const response = await axios.get(`${API_BASE_URL}/user/achievements`);
+        const response = await axios.get(`${API_BASE_URL}/achievements`);
         return response.data;
     },
 
