@@ -37,7 +37,7 @@ const Dashboard = () => {
         message: '',
         severity: 'info'
     });
-    const [showUIOverview, setShowUIOverview] = useState(true);
+    const [showUIOverview, setShowUIOverview] = useState(false);
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -55,6 +55,11 @@ const Dashboard = () => {
             setStreak(dashboardData.streak || 0);
         }
     }, [dashboardData]);
+
+    useEffect(() => {
+        const uiOverviewShown = localStorage.getItem('uiOverviewShown');
+        setShowUIOverview(!uiOverviewShown);
+    }, []);
 
     const handleStartLesson = (lessonId) => {
         navigate(`/lesson/${lessonId}`);
@@ -83,6 +88,11 @@ const Dashboard = () => {
             content: 'Нажмите здесь, чтобы начать практику.'
         }
     ];
+
+    const handleUIOverviewComplete = () => {
+        setShowUIOverview(false);
+        localStorage.setItem('uiOverviewShown', 'true');
+    };
 
     if (isLoading) {
         return <Loading />;
@@ -257,7 +267,7 @@ const Dashboard = () => {
             {showUIOverview && (
                 <UIOverview
                     steps={onboardingSteps}
-                    onComplete={() => setShowUIOverview(false)}
+                    onComplete={handleUIOverviewComplete}
                 />
             )}
         </>

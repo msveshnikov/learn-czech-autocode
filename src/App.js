@@ -34,7 +34,6 @@ const queryClient = new QueryClient();
 function App() {
     const [darkMode, setDarkMode] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(false);
-
     useEffect(() => {
         const savedMode = localStorage.getItem('darkMode');
         if (savedMode !== null) {
@@ -78,6 +77,7 @@ function App() {
                                     onComplete={handleOnboardingComplete}
                                 />
                             )}
+
                             <Suspense fallback={<Loading />}>
                                 <Routes>
                                     <Route
