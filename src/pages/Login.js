@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     TextField,
@@ -24,12 +24,22 @@ const Login = () => {
     const theme = useTheme();
     const { language } = useContext(LanguageContext);
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const rememberedUser = localStorage.getItem('rememberMe');
+        if (token && rememberedUser) {
+            apiService.setToken(token);
+            navigate('/dashboard');
+        }
+    }, [navigate]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
 
         try {
             const response = await apiService.login({ email, password });
+            apiService.setToken(response.token);
             localStorage.setItem('token', response.token);
             if (rememberMe) {
                 localStorage.setItem('rememberMe', 'true');
@@ -38,7 +48,7 @@ const Login = () => {
             }
             navigate('/dashboard');
         } catch (err) {
-            setError(err.message || 'Login failed. Please try again.');
+            setError(err.response?.data?.message || t.loginFailed);
         }
     };
 
@@ -125,7 +135,7 @@ const Login = () => {
                     />
                     {error && (
                         <Alert severity="error" sx={{ mt: 2 }}>
-                            {t.loginFailed}
+                            {error}
                         </Alert>
                     )}
                     <Button

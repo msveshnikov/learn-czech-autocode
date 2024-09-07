@@ -1,5 +1,3 @@
-// src/services/apiService.js
-
 import axios from 'axios';
 
 const API_BASE_URL =
@@ -16,11 +14,13 @@ const apiService = {
 
     login: async (credentials) => {
         const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+        apiService.setToken(response.data.token);
         return response.data;
     },
 
     register: async (userData) => {
         const response = await axios.post(`${API_BASE_URL}/register`, userData);
+        apiService.setToken(response.data.token);
         return response.data;
     },
 
@@ -117,6 +117,84 @@ const apiService = {
     getNextLesson: async (currentLessonId) => {
         const response = await axios.get(
             `${API_BASE_URL}/next-lesson/${currentLessonId}`
+        );
+        return response.data;
+    },
+
+    refreshToken: async () => {
+        const response = await axios.post(`${API_BASE_URL}/refresh-token`);
+        apiService.setToken(response.data.token);
+        return response.data;
+    },
+
+    logout: async () => {
+        const response = await axios.post(`${API_BASE_URL}/logout`);
+        apiService.clearToken();
+        return response.data;
+    },
+
+    getLanguageSettings: async () => {
+        const response = await axios.get(`${API_BASE_URL}/language-settings`);
+        return response.data;
+    },
+
+    updateLanguageSettings: async (settings) => {
+        const response = await axios.put(
+            `${API_BASE_URL}/language-settings`,
+            settings
+        );
+        return response.data;
+    },
+
+    getFeedback: async () => {
+        const response = await axios.get(`${API_BASE_URL}/feedback`);
+        return response.data;
+    },
+
+    submitFeedback: async (feedback) => {
+        const response = await axios.post(`${API_BASE_URL}/feedback`, feedback);
+        return response.data;
+    },
+
+    getSpacedRepetitionExercises: async () => {
+        const response = await axios.get(
+            `${API_BASE_URL}/spaced-repetition-exercises`
+        );
+        return response.data;
+    },
+
+    submitSpacedRepetitionExercise: async (exerciseId, answer) => {
+        const response = await axios.post(
+            `${API_BASE_URL}/spaced-repetition-exercises/${exerciseId}`,
+            { answer }
+        );
+        return response.data;
+    },
+
+    getGamificationData: async () => {
+        const response = await axios.get(`${API_BASE_URL}/gamification-data`);
+        return response.data;
+    },
+
+    updateGamificationData: async (data) => {
+        const response = await axios.put(
+            `${API_BASE_URL}/gamification-data`,
+            data
+        );
+        return response.data;
+    },
+
+    getPerformanceAnalytics: async () => {
+        const response = await axios.get(
+            `${API_BASE_URL}/performance-analytics`
+        );
+        return response.data;
+    },
+
+    updatePerformanceAnalytics: async (data) => {
+        const response = await axios.put(
+            `${API_BASE_URL}/performance-analytics`,
+            data
         );
         return response.data;
     }
