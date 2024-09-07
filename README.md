@@ -73,3 +73,8 @@ through various exercises and lessons.
 5. Optimize performance and user experience
 6. Beta testing and user feedback collection
 7. Continuous improvement and feature additions
+
+# TODO
+
+-   autoload lessons.json and exercises.json to Mongo
+-   create docker deploy to czech.autocode.work via ssh (with default page landing index.html and app below link)

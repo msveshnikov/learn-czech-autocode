@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcryptjs';
 
 const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
@@ -15,13 +16,28 @@ const userSchema = new mongoose.Schema({
     achievements: [{ type: String }],
     leaderboardScore: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
-    updatedAt: { type: Date, default: Date.now }
+    updatedAt: { type: Date, default: Date.now },
+    language: { type: String, default: 'ru' },
+    notifications: [
+        {
+            message: String,
+            read: { type: Boolean, default: false },
+            createdAt: { type: Date, default: Date.now }
+        }
+    ]
 });
 
-userSchema.pre('save', function (next) {
+userSchema.pre('save', async function (next) {
+    if (this.isModified('password')) {
+        this.password = await bcrypt.hash(this.password, 10);
+    }
     this.updatedAt = Date.now();
     next();
 });
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
 
 userSchema.methods.updateStreak = function () {
     const now = new Date();
@@ -68,6 +84,21 @@ userSchema.methods.getProgress = function () {
         achievements: this.achievements.length,
         leaderboardScore: this.leaderboardScore
     };
+};
+
+userSchema.methods.addNotification = function (message) {
+    this.notifications.push({ message });
+};
+
+userSchema.methods.markNotificationAsRead = function (notificationId) {
+    const notification = this.notifications.id(notificationId);
+    if (notification) {
+        notification.read = true;
+    }
+};
+
+userSchema.methods.getUnreadNotifications = function () {
+    return this.notifications.filter((notification) => !notification.read);
 };
 
 const User = mongoose.model('User', userSchema);

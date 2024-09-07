@@ -13,6 +13,14 @@ const lessonSchema = new mongoose.Schema({
     },
     category: { type: String, required: true },
     order: { type: Number, required: true },
+    content: { type: String, required: true },
+    vocabulary: [
+        {
+            czech: { type: String, required: true },
+            russian: { type: String, required: true },
+            english: { type: String, required: true }
+        }
+    ],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
@@ -65,6 +73,22 @@ lessonSchema.methods.getPreviousLesson = async function () {
 lessonSchema.methods.getExercisesWithDetails = async function () {
     await this.populate('exercises');
     return this.exercises;
+};
+
+lessonSchema.methods.addVocabulary = function (czech, russian, english) {
+    this.vocabulary.push({ czech, russian, english });
+    return this.save();
+};
+
+lessonSchema.methods.removeVocabulary = function (czechWord) {
+    this.vocabulary = this.vocabulary.filter(
+        (word) => word.czech !== czechWord
+    );
+    return this.save();
+};
+
+lessonSchema.statics.findWithExercises = function () {
+    return this.find().populate('exercises');
 };
 
 const Lesson = mongoose.model('Lesson', lessonSchema);

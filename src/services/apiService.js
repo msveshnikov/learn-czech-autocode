@@ -1,170 +1,124 @@
 // src/services/apiService.js
 
-const mockDelay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+import axios from 'axios';
+
+const API_BASE_URL =
+    process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
 
 const apiService = {
+    setToken: (token) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    },
+
+    clearToken: () => {
+        delete axios.defaults.headers.common['Authorization'];
+    },
+
     login: async (credentials) => {
-        await mockDelay(500);
-        return {
-            token: 'mock_token',
-            user: { id: 1, username: credentials.username }
-        };
+        const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+        return response.data;
     },
 
     register: async (userData) => {
-        await mockDelay(500);
-        return { message: 'User registered successfully' };
+        const response = await axios.post(`${API_BASE_URL}/register`, userData);
+        return response.data;
     },
 
     getUserAccount: async () => {
-        await mockDelay(300);
-        return {
-            id: 1,
-            username: 'johndoe',
-            email: 'john@example.com',
-            balance: 50000
-        };
+        const response = await axios.get(`${API_BASE_URL}/user-progress`);
+        return response.data;
     },
 
     updateUserAccount: async (accountData) => {
-        await mockDelay(400);
-        return { message: 'Account updated successfully' };
+        const response = await axios.put(`${API_BASE_URL}/user`, accountData);
+        return response.data;
     },
 
     fetchLessons: async () => {
-        await mockDelay(300);
-        return [
-            { id: 1, title: 'Basic Vocabulary', completed: false },
-            { id: 2, title: 'Greetings', completed: false },
-            { id: 3, title: 'Numbers', completed: false }
-        ];
-    },
-    getLesson: async (lessonId) => {
-        await mockDelay(300);
-        return {
-            id: lessonId,
-            title: 'Basic Vocabulary',
-            content: 'Content for Basic Vocabulary lesson',
-            exercises: [
-                {
-                    id: 1,
-                    type: 'multiple-choice',
-                    question: 'What is "hello" in Czech?',
-                    options: ['Ahoj', 'Nashledanou', 'Prosím', 'Děkuji'],
-                    correctAnswer: 'Ahoj'
-                },
-                {
-                    id: 2,
-                    type: 'fill-in-the-blank',
-                    question: 'Complete the sentence: "Jak se ___?"',
-                    correctAnswer: 'máš'
-                }
-            ]
-        };
+        const response = await axios.get(`${API_BASE_URL}/lessons`);
+        return response.data;
     },
 
-    submitExercise: async (lessonId, exerciseId, answer) => {
-        await mockDelay(300);
-        return {
-            correct: true,
-            feedback: 'Great job!'
-        };
+    getLesson: async (lessonId) => {
+        const response = await axios.get(`${API_BASE_URL}/lesson/${lessonId}`);
+        return response.data;
+    },
+
+    submitExercise: async (exerciseId, answer) => {
+        const response = await axios.post(`${API_BASE_URL}/complete-exercise`, {
+            exerciseId,
+            answer
+        });
+        return response.data;
     },
 
     fetchUserProgress: async () => {
-        await mockDelay(300);
-        return {
-            lessonsCompleted: 5,
-            totalLessons: 20,
-            streak: 3,
-            xp: 1500
-        };
+        const response = await axios.get(`${API_BASE_URL}/user-progress`);
+        return response.data;
     },
 
     fetchLeaderboard: async () => {
-        await mockDelay(300);
-        return [
-            { id: 1, username: 'user1', xp: 2000 },
-            { id: 2, username: 'user2', xp: 1800 },
-            { id: 3, username: 'user3', xp: 1600 }
-        ];
+        const response = await axios.get(`${API_BASE_URL}/leaderboard`);
+        return response.data;
     },
 
     fetchUserAchievements: async () => {
-        await mockDelay(300);
-        return [
-            { id: 1, title: 'First Lesson Completed', earned: true },
-            { id: 2, title: '7 Day Streak', earned: false },
-            { id: 3, title: 'Vocabulary Master', earned: false }
-        ];
+        const response = await axios.get(`${API_BASE_URL}/achievements`);
+        return response.data;
     },
 
     getNotifications: async () => {
-        await mockDelay(300);
-        return [
-            { id: 1, message: 'New lesson available!', read: false },
-            { id: 2, message: "You've reached a 3-day streak!", read: true }
-        ];
+        const response = await axios.get(`${API_BASE_URL}/notifications`);
+        return response.data;
     },
 
     markNotificationAsRead: async (notificationId) => {
-        await mockDelay(200);
-        return { message: `Notification ${notificationId} marked as read` };
+        const response = await axios.put(
+            `${API_BASE_URL}/notifications/${notificationId}`
+        );
+        return response.data;
     },
 
     getDashboardData: async () => {
-        await mockDelay(500);
-        return {
-            lessonsCompleted: 5,
-            totalLessons: 20,
-            streak: 3,
-            xp: 1500,
-            recentAchievements: [{ id: 1, title: 'First Lesson Completed' }],
-            nextLesson: { id: 6, title: 'Family Members' }
-        };
+        const response = await axios.get(`${API_BASE_URL}/dashboard`);
+        return response.data;
     },
 
     getVocabulary: async () => {
-        await mockDelay(400);
-        return [
-            { czech: 'Ahoj', russian: 'Привет', english: 'Hello' },
-            { czech: 'Děkuji', russian: 'Спасибо', english: 'Thank you' },
-            { czech: 'Prosím', russian: 'Пожалуйста', english: 'Please' }
-        ];
+        const response = await axios.get(`${API_BASE_URL}/vocabulary`);
+        return response.data;
     },
 
     getPracticeExercises: async () => {
-        await mockDelay(400);
-        return [
-            {
-                id: 1,
-                type: 'multiple-choice',
-                question: 'Translate "Dobrý den" to Russian',
-                options: [
-                    'Добрый день',
-                    'Спокойной ночи',
-                    'Пока',
-                    'Здравствуйте'
-                ],
-                correctAnswer: 'Добрый день'
-            },
-            {
-                id: 2,
-                type: 'listening',
-                audioUrl: 'https://example.com/audio/jak-se-mas.mp3',
-                question: 'What did you hear?',
-                options: ['Jak se máš?', 'Dobrý den', 'Na shledanou', 'Děkuji'],
-                correctAnswer: 'Jak se máš?'
-            }
-        ];
+        const response = await axios.get(`${API_BASE_URL}/practice-exercises`);
+        return response.data;
     },
 
     submitPracticeExercise: async (exerciseId, answer) => {
-        await mockDelay(300);
-        return {
-            correct: true,
-            explanation: 'Correct! "Dobrý den" means "Добрый день" in Russian.'
-        };
+        const response = await axios.post(
+            `${API_BASE_URL}/practice-exercises/${exerciseId}`,
+            { answer }
+        );
+        return response.data;
+    },
+
+    updateStreak: async () => {
+        const response = await axios.post(`${API_BASE_URL}/update-streak`);
+        return response.data;
+    },
+
+    completeLesson: async (lessonId) => {
+        const response = await axios.post(`${API_BASE_URL}/complete-lesson`, {
+            lessonId
+        });
+        return response.data;
+    },
+
+    getNextLesson: async (currentLessonId) => {
+        const response = await axios.get(
+            `${API_BASE_URL}/next-lesson/${currentLessonId}`
+        );
+        return response.data;
     }
 };
 

@@ -1,0 +1,156 @@
+[
+    {
+        "id": 1,
+        "title": "Basic Vocabulary",
+        "description": "Learn essential Czech words and phrases",
+        "level": "beginner",
+        "category": "vocabulary",
+        "order": 1,
+        "content": "In this lesson, we'll cover basic Czech vocabulary that you'll use in everyday conversations.",
+        "vocabulary": [
+            {
+                "czech": "Ahoj",
+                "russian": "Привет",
+                "english": "Hello"
+            },
+            {
+                "czech": "Děkuji",
+                "russian": "Спасибо",
+                "english": "Thank you"
+            },
+            {
+                "czech": "Prosím",
+                "russian": "Пожалуйста",
+                "english": "Please"
+            },
+            {
+                "czech": "Ano",
+                "russian": "Да",
+                "english": "Yes"
+            },
+            {
+                "czech": "Ne",
+                "russian": "Нет",
+                "english": "No"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "What is 'hello' in Czech?",
+                "answers": ["Ahoj", "Děkuji", "Prosím", "Ne"],
+                "correctAnswer": "Ahoj"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Complete the sentence: '_____ vám' (Thank you)",
+                "correctAnswer": "Děkuji"
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Greetings",
+        "description": "Learn how to greet people in Czech",
+        "level": "beginner",
+        "category": "conversation",
+        "order": 2,
+        "content": "In this lesson, we'll learn various greetings in Czech for different times of the day and situations.",
+        "vocabulary": [
+            {
+                "czech": "Dobrý den",
+                "russian": "Добрый день",
+                "english": "Good day"
+            },
+            {
+                "czech": "Dobré ráno",
+                "russian": "Доброе утро",
+                "english": "Good morning"
+            },
+            {
+                "czech": "Dobrý večer",
+                "russian": "Добрый вечер",
+                "english": "Good evening"
+            },
+            {
+                "czech": "Na shledanou",
+                "russian": "До свидания",
+                "english": "Goodbye"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "How do you say 'Good morning' in Czech?",
+                "answers": [
+                    "Dobrý den",
+                    "Dobré ráno",
+                    "Dobrý večer",
+                    "Na shledanou"
+                ],
+                "correctAnswer": "Dobré ráno"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Listen and select the correct greeting",
+                "audioUrl": "https://example.com/audio/dobry_den.mp3",
+                "answers": [
+                    "Dobrý den",
+                    "Dobré ráno",
+                    "Dobrý večer",
+                    "Na shledanou"
+                ],
+                "correctAnswer": "Dobrý den"
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Numbers",
+        "description": "Learn to count in Czech",
+        "level": "beginner",
+        "category": "vocabulary",
+        "order": 3,
+        "content": "In this lesson, we'll learn the numbers from 1 to 10 in Czech.",
+        "vocabulary": [
+            {
+                "czech": "Jedna",
+                "russian": "Один",
+                "english": "One"
+            },
+            {
+                "czech": "Dva",
+                "russian": "Два",
+                "english": "Two"
+            },
+            {
+                "czech": "Tři",
+                "russian": "Три",
+                "english": "Three"
+            },
+            {
+                "czech": "Čtyři",
+                "russian": "Четыре",
+                "english": "Four"
+            },
+            {
+                "czech": "Pět",
+                "russian": "Пять",
+                "english": "Five"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "fillInTheBlank",
+                "question": "Write the number 3 in Czech: ___",
+                "correctAnswer": "Tři"
+            },
+            {
+                "type": "multipleChoice",
+                "question": "What is the Czech word for 'five'?",
+                "answers": ["Jedna", "Dva", "Tři", "Pět"],
+                "correctAnswer": "Pět"
+            }
+        ]
+    }
+]
