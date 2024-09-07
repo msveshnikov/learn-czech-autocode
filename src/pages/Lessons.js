@@ -60,7 +60,7 @@ const Lessons = () => {
                     <Grid item xs={12} sm={6} md={4} key={lesson.id}>
                         <Card>
                             <CardActionArea
-                                onClick={() => handleLessonClick(lesson.id)}
+                                onClick={() => handleLessonClick(lesson._id)}
                             >
                                 <CardContent>
                                     <Typography variant="h6" component="h2">

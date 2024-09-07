@@ -75,4 +75,4 @@ through various exercises and lessons.
 
 # TODO
 
--   persist passed onbaording and dont ask again
+

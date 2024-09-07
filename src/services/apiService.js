@@ -40,7 +40,7 @@ const apiService = {
     },
 
     getLesson: async (lessonId) => {
-        const response = await axios.get(`${API_BASE_URL}/lessons/${lessonId}`);
+        const response = await axios.get(`${API_BASE_URL}/lesson/${lessonId}`);
         return response.data;
     },
 

@@ -121,7 +121,7 @@ function App() {
                                         }
                                     />
                                     <Route
-                                        path="/lesson/:id"
+                                        path="/lesson/:lessonId"
                                         element={
                                             <PrivateRoute>
                                                 <Lesson />
