@@ -233,7 +233,7 @@ const Account = () => {
                     sx={{ mr: 2 }}
                     startIcon={<WhatshotIcon />}
                 >
-                    Панель управления
+                    Главная
                 </Button>
                 <Button
                     variant="outlined"

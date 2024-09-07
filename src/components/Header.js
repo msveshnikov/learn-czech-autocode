@@ -125,10 +125,7 @@ const Header = ({ toggleTheme }) => {
                             onClose={handleNotificationClose}
                         >
                             <MenuItem onClick={handleNotificationClose}>
-                                Уведомление 1
-                            </MenuItem>
-                            <MenuItem onClick={handleNotificationClose}>
-                                Уведомление 2
+                                Уведомление
                             </MenuItem>
                         </Menu>
                         <IconButton

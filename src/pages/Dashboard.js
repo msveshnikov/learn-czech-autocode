@@ -84,7 +84,6 @@ const Dashboard = () => {
             setAchievements(dashboardData.achievements || []);
             setLeaderboardScore(dashboardData.leaderboardScore || 0);
             setLearningGoal(dashboardData.learningGoal || '');
-          
         }
     }, [dashboardData]);
 
@@ -168,7 +167,7 @@ const Dashboard = () => {
     return (
         <>
             <Helmet>
-                <title>Панель управления - Изучение чешского языка</title>
+                <title>Главная - Изучение чешского языка</title>
                 <meta
                     name="description"
                     content="Изучайте чешский язык с помощью интерактивных уроков, разработанных для русскоговорящих."
@@ -176,9 +175,7 @@ const Dashboard = () => {
             </Helmet>
             <Container maxWidth="lg">
                 <Box my={4}>
-                    <Typography variant="h4" component="h1" gutterBottom>
-                        Панель управления
-                    </Typography>
+               
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={8}>
                             <Paper
