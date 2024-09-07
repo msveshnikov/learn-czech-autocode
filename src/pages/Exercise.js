@@ -34,8 +34,12 @@ const Exercise = () => {
     );
 
     const submitExerciseMutation = useMutation(
-        ({ exerciseId, answer, timeSpent }) =>
-            apiService.submitExercise(exerciseId, answer, timeSpent),
+        (data) =>
+            apiService.submitPracticeExercise(
+                data.exerciseId,
+                data.answer,
+                data.timeSpent
+            ),
         {
             onSuccess: (data) => {
                 setIsCorrect(data.correct);

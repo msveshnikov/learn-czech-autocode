@@ -291,6 +291,21 @@ app.get('/api/exercises', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/api/exercise/:id', authenticateToken, async (req, res) => {
+    try {
+        const exercise = await Exercise.findById(req.params.id);
+        if (!exercise) {
+            return res.status(404).json({ message: 'Упражнение не найдено' });
+        }
+        res.json(exercise);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при получении упражнения',
+            error: error.message
+        });
+    }
+});
+
 app.put('/api/user', authenticateToken, async (req, res) => {
     try {
         const { username, learningGoal, language } = req.body;

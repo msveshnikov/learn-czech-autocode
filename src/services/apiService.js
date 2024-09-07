@@ -44,10 +44,11 @@ const apiService = {
         return response.data;
     },
 
-    submitExercise: async (lessonId, exerciseId, answer) => {
+    submitExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(`${API_BASE_URL}/complete-exercise`, {
             exerciseId,
-            answer
+            answer,
+            timeSpent
         });
         return response.data;
     },
@@ -126,6 +127,13 @@ const apiService = {
 
     getExercises: async () => {
         const response = await axios.get(`${API_BASE_URL}/exercises`);
+        return response.data;
+    },
+
+    getExercise: async (exerciseId) => {
+        const response = await axios.get(
+            `${API_BASE_URL}/exercise/${exerciseId}`
+        );
         return response.data;
     }
 };

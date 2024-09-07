@@ -75,8 +75,4 @@ through various exercises and lessons.
 
 # TODO
 
-
-1. Implement Russian UI for all existing components (8 story points)
-
-    - Translate all UI elements to Russian
-    - Ensure proper rendering of Cyrillic characters
+-   get /exercise route for single one
