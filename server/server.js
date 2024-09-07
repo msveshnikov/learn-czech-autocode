@@ -334,6 +334,18 @@ app.post('/api/mark-notification-read', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/api/user', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching user data',
+            error: error.message
+        });
+    }
+});
+
 const loadDataToMongo = async () => {
     try {
         const lessonsData = JSON.parse(

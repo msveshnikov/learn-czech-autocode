@@ -2,72 +2,73 @@
 
 import { createTheme } from '@mui/material/styles';
 
-const lightPalette = {
-    mode: 'light',
+const duolingoPalette = {
     primary: {
-        main: '#1976d2',
-        light: '#42a5f5',
-        dark: '#1565c0'
+        main: '#58CC02',
+        light: '#89E219',
+        dark: '#45A302'
     },
     secondary: {
-        main: '#dc004e',
-        light: '#ff4081',
-        dark: '#c51162'
+        main: '#FF4B4B',
+        light: '#FF7676',
+        dark: '#D33131'
     },
     background: {
-        default: '#f5f5f5',
-        paper: '#ffffff'
+        default: '#FFFFFF',
+        paper: '#F7F7F7'
     },
     text: {
-        primary: '#212121',
-        secondary: '#757575'
+        primary: '#3C3C3C',
+        secondary: '#777777'
     }
 };
 
 const darkPalette = {
-    mode: 'dark',
     primary: {
-        main: '#90caf9',
-        light: '#e3f2fd',
-        dark: '#42a5f5'
+        main: '#58CC02',
+        light: '#89E219',
+        dark: '#45A302'
     },
     secondary: {
-        main: '#f48fb1',
-        light: '#fce4ec',
-        dark: '#f06292'
+        main: '#FF4B4B',
+        light: '#FF7676',
+        dark: '#D33131'
     },
     background: {
         default: '#121212',
-        paper: '#1e1e1e'
+        paper: '#1E1E1E'
     },
     text: {
-        primary: '#ffffff',
-        secondary: '#b0bec5'
+        primary: '#FFFFFF',
+        secondary: '#B0BEC5'
     }
 };
 
 const createCustomTheme = (mode) => {
-    const palette = mode === 'dark' ? darkPalette : lightPalette;
+    const palette = mode === 'dark' ? darkPalette : duolingoPalette;
 
     return createTheme({
-        palette,
+        palette: {
+            mode,
+            ...palette
+        },
         typography: {
             fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
             h1: {
                 fontSize: '2.5rem',
-                fontWeight: 500
+                fontWeight: 700
             },
             h2: {
                 fontSize: '2rem',
-                fontWeight: 500
+                fontWeight: 700
             },
             h3: {
                 fontSize: '1.75rem',
-                fontWeight: 500
+                fontWeight: 600
             },
             h4: {
                 fontSize: '1.5rem',
-                fontWeight: 500
+                fontWeight: 600
             },
             h5: {
                 fontSize: '1.25rem',
@@ -76,59 +77,76 @@ const createCustomTheme = (mode) => {
             h6: {
                 fontSize: '1rem',
                 fontWeight: 500
+            },
+            button: {
+                textTransform: 'none',
+                fontWeight: 600
             }
         },
         components: {
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        textTransform: 'none'
+                        borderRadius: '8px',
+                        padding: '10px 16px'
+                    },
+                    containedPrimary: {
+                        '&:hover': {
+                            backgroundColor: palette.primary.dark
+                        }
+                    },
+                    containedSecondary: {
+                        '&:hover': {
+                            backgroundColor: palette.secondary.dark
+                        }
                     }
                 }
             },
             MuiTextField: {
                 defaultProps: {
                     variant: 'outlined'
+                },
+                styleOverrides: {
+                    root: {
+                        '& .MuiOutlinedInput-root': {
+                            borderRadius: '8px'
+                        }
+                    }
                 }
             },
             MuiCard: {
                 styleOverrides: {
                     root: {
                         boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                        borderRadius: '8px'
+                        borderRadius: '12px'
                     }
                 }
             },
             MuiCssBaseline: {
                 styleOverrides: {
                     body: {
-                        scrollbarColor: '#6b6b6b #2b2b2b',
+                        scrollbarColor: `${palette.primary.main} ${palette.background.default}`,
                         '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
-                            backgroundColor: palette.background.default
+                            backgroundColor: palette.background.default,
+                            width: '8px'
                         },
-                        '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb':
-                            {
-                                borderRadius: 8,
-                                backgroundColor: palette.primary.main,
-                                minHeight: 24,
-                                border: `3px solid ${palette.background.default}`
-                            },
-                        '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus':
-                            {
-                                backgroundColor: palette.primary.dark
-                            },
-                        '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active':
-                            {
-                                backgroundColor: palette.primary.dark
-                            },
-                        '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover':
-                            {
-                                backgroundColor: palette.primary.light
-                            },
-                        '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner':
-                            {
-                                backgroundColor: palette.background.default
-                            }
+                        '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
+                            borderRadius: '8px',
+                            backgroundColor: palette.primary.main,
+                            minHeight: '24px'
+                        },
+                        '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
+                            backgroundColor: palette.primary.dark
+                        },
+                        '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
+                            backgroundColor: palette.primary.dark
+                        },
+                        '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
+                            backgroundColor: palette.primary.light
+                        },
+                        '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
+                            backgroundColor: palette.background.default
+                        }
                     }
                 }
             }
