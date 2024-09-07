@@ -23,7 +23,10 @@ const Leaderboard = () => {
                 setLeaderboardData(data);
                 setLoading(false);
             } catch (error) {
-                console.error('Ошибка при получении данных таблицы лидеров:', error);
+                console.error(
+                    'Ошибка при получении данных таблицы лидеров:',
+                    error
+                );
                 setLoading(false);
             }
         };

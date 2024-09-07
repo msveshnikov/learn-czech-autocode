@@ -46,7 +46,10 @@ const Login = () => {
             }
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || 'Ошибка входа. Пожалуйста, попробуйте снова.');
+            setError(
+                err.response?.data?.message ||
+                    'Ошибка входа. Пожалуйста, попробуйте снова.'
+            );
         }
     };
 

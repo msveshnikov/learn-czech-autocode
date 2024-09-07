@@ -46,7 +46,7 @@ const Privacy = () => {
         }
     };
 
-    const currentContent =  content.ru;
+    const currentContent = content.ru;
 
     return (
         <Container maxWidth="md">

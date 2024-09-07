@@ -62,12 +62,16 @@ const Register = () => {
         if (validateForm()) {
             try {
                 await apiService.register(formData);
-                setAlertMessage('Регистрация успешна. Пожалуйста, войдите в систему.');
+                setAlertMessage(
+                    'Регистрация успешна. Пожалуйста, войдите в систему.'
+                );
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
             } catch (error) {
-                setAlertMessage('Ошибка регистрации. Пожалуйста, попробуйте снова.');
+                setAlertMessage(
+                    'Ошибка регистрации. Пожалуйста, попробуйте снова.'
+                );
             }
         }
     };
