@@ -104,14 +104,14 @@ app.get('/api/lesson/:id', authenticateToken, async (req, res) => {
 
 app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
     try {
-        const { exerciseId, timeSpent } = req.body;
+        const { exerciseId, answer, timeSpent } = req.body;
         const user = await User.findById(req.user.id);
         const exercise = await Exercise.findById(exerciseId);
+        const correct = exercise.checkAnswer(answer);
         const score = exercise.calculateScore(timeSpent);
-        user.addCompletedExercise(exerciseId);
-        user.updateLeaderboardScore(score);
+        user.addCompletedExercise(exerciseId, correct, score);
         await user.save();
-        res.json({ message: 'Exercise completed successfully', score });
+        res.json({ correct, score });
     } catch (error) {
         res.status(500).json({
             message: 'Error completing exercise',

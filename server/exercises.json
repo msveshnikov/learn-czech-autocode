@@ -1,7 +1,7 @@
 [
     {
         "type": "multipleChoice",
-        "question": "What is 'hello' in Czech?",
+        "question": "Как сказать 'привет' на чешском?",
         "answers": ["Ahoj", "Nashledanou", "Prosím", "Děkuji"],
         "correctAnswer": "Ahoj",
         "difficulty": "easy",
@@ -9,23 +9,28 @@
     },
     {
         "type": "fillInTheBlank",
-        "question": "Complete the sentence: 'Jak se ___?'",
+        "question": "Дополните предложение: 'Jak se ___?'",
         "correctAnswer": "máš",
         "difficulty": "medium",
         "category": "grammar"
     },
     {
         "type": "listeningComprehension",
-        "question": "Listen and choose the correct translation",
-        "answers": ["Good morning", "Good night", "Hello", "Goodbye"],
-        "correctAnswer": "Good morning",
+        "question": "Прослушайте и выберите правильный перевод",
+        "answers": [
+            "Доброе утро",
+            "Спокойной ночи",
+            "Здравствуйте",
+            "До свидания"
+        ],
+        "correctAnswer": "Доброе утро",
         "audioUrl": "https://example.com/audio/dobry-den.mp3",
         "difficulty": "medium",
         "category": "pronunciation"
     },
     {
         "type": "multipleChoice",
-        "question": "What is the Czech word for 'please'?",
+        "question": "Как сказать 'пожалуйста' на чешском?",
         "answers": ["Prosím", "Děkuji", "Ano", "Ne"],
         "correctAnswer": "Prosím",
         "difficulty": "easy",
@@ -33,14 +38,14 @@
     },
     {
         "type": "fillInTheBlank",
-        "question": "Complete the sentence: 'Jak se ___ Petr.'",
-        "correctAnswer": "jmenuji",
+        "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
+        "correctAnswer": "se",
         "difficulty": "hard",
         "category": "grammar"
     },
     {
         "type": "listeningComprehension",
-        "question": "Listen and choose the correct word",
+        "question": "Прослушайте и выберите правильное слово",
         "answers": ["Dobrý", "Špatný", "Velký", "Malý"],
         "correctAnswer": "Dobrý",
         "audioUrl": "https://example.com/audio/dobry.mp3",
@@ -49,7 +54,7 @@
     },
     {
         "type": "multipleChoice",
-        "question": "What is the Czech word for 'thank you'?",
+        "question": "Как сказать 'спасибо' на чешском?",
         "answers": ["Děkuji", "Prosím", "Ahoj", "Na shledanou"],
         "correctAnswer": "Děkuji",
         "difficulty": "easy",
@@ -57,14 +62,14 @@
     },
     {
         "type": "fillInTheBlank",
-        "question": "Complete the sentence: 'Kolik je ti ___?'",
+        "question": "Дополните предложение: 'Kolik je ti ___?'",
         "correctAnswer": "let",
         "difficulty": "medium",
         "category": "grammar"
     },
     {
         "type": "listeningComprehension",
-        "question": "Listen and choose the correct number",
+        "question": "Прослушайте и выберите правильное число",
         "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
         "correctAnswer": "Tři",
         "audioUrl": "https://example.com/audio/tri.mp3",
@@ -73,7 +78,7 @@
     },
     {
         "type": "multipleChoice",
-        "question": "What is the Czech word for 'yes'?",
+        "question": "Как сказать 'да' на чешском?",
         "answers": ["Ano", "Ne", "Možná", "Nevím"],
         "correctAnswer": "Ano",
         "difficulty": "easy",

@@ -75,4 +75,4 @@ through various exercises and lessons.
 
 # TODO
 
-
+-   UI and routes for individual exercise

@@ -1,8 +1,32 @@
-// server/playground-1.mongodb.js
 
 /* global use, db */
+const database = 'learn_czech';
+const collection = 'lessons';
 
-use('learn_czech');
+// Create a new database.
+use(database);
+
+// Create a new collection.
+db.createCollection(collection);
+
+// The prototype form to create a collection:
+/* db.createCollection( <name>,
+  {
+    capped: <boolean>,
+    autoIndexId: <boolean>,
+    size: <number>,
+    max: <number>,
+    storageEngine: <document>,
+    validator: <document>,
+    validationLevel: <string>,
+    validationAction: <string>,
+    indexOptionDefaults: <document>,
+    viewOn: <string>,
+    pipeline: <pipeline>,
+    collation: <document>,
+    writeConcern: <document>
+  }
+) */
 
 // Insert sample lessons
 db.lessons.insertMany([
@@ -21,7 +45,8 @@ db.lessons.insertMany([
                 russian: 'До свидания',
                 english: 'Goodbye'
             }
-        ]
+        ],
+        exercises: []
     },
     {
         title: 'Numbers 1-10',
@@ -34,7 +59,8 @@ db.lessons.insertMany([
             { czech: 'Jedna', russian: 'Один', english: 'One' },
             { czech: 'Dva', russian: 'Два', english: 'Two' },
             { czech: 'Tři', russian: 'Три', english: 'Three' }
-        ]
+        ],
+        exercises: []
     }
 ]);
 
@@ -115,6 +141,5 @@ db.lessons
     ])
     .toArray();
 
-use('learn_czech');
-
+// Drop the unique index on the 'username' field of the 'users' collection
 db.users.dropIndex('username_1');

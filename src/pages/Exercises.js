@@ -8,7 +8,8 @@ import {
     CardContent,
     CircularProgress,
     Snackbar,
-    Alert
+    Alert,
+    Chip
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import apiService from '../services/apiService';
@@ -17,12 +18,13 @@ const Exercises = () => {
     const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [filter, setFilter] = useState({ category: null, difficulty: null });
     const navigate = useNavigate();
 
     const fetchExercises = useCallback(async () => {
         try {
             setLoading(true);
-            const response = await apiService.getPracticeExercises();
+            const response = await apiService.getExercises();
             setExercises(response);
             setLoading(false);
         } catch (error) {
@@ -39,12 +41,23 @@ const Exercises = () => {
     }, [fetchExercises]);
 
     const handleExerciseClick = (exerciseId) => {
-        navigate(`/lesson/${exerciseId}`);
+        navigate(`/exercise/${exerciseId}`);
     };
 
     const handleCloseError = () => {
         setError(null);
     };
+
+    const handleFilterChange = (type, value) => {
+        setFilter((prev) => ({ ...prev, [type]: value }));
+    };
+
+    const filteredExercises = exercises.filter((exercise) => {
+        return (
+            (!filter.category || exercise.category === filter.category) &&
+            (!filter.difficulty || exercise.difficulty === filter.difficulty)
+        );
+    });
 
     if (loading) {
         return (
@@ -64,8 +77,47 @@ const Exercises = () => {
             <Typography variant="h4" gutterBottom>
                 Упражнения
             </Typography>
+            <Box sx={{ mb: 2 }}>
+                <Typography variant="h6" gutterBottom>
+                    Фильтры:
+                </Typography>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap', mb: 1 }}>
+                    {['vocabulary', 'grammar', 'pronunciation'].map(
+                        (category) => (
+                            <Chip
+                                key={category}
+                                label={category}
+                                onClick={() =>
+                                    handleFilterChange('category', category)
+                                }
+                                color={
+                                    filter.category === category
+                                        ? 'primary'
+                                        : 'default'
+                                }
+                            />
+                        )
+                    )}
+                </Box>
+                <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
+                    {['easy', 'medium', 'hard'].map((difficulty) => (
+                        <Chip
+                            key={difficulty}
+                            label={difficulty}
+                            onClick={() =>
+                                handleFilterChange('difficulty', difficulty)
+                            }
+                            color={
+                                filter.difficulty === difficulty
+                                    ? 'primary'
+                                    : 'default'
+                            }
+                        />
+                    ))}
+                </Box>
+            </Box>
             <Grid container spacing={3}>
-                {exercises.map((exercise) => (
+                {filteredExercises.map((exercise) => (
                     <Grid item xs={12} sm={6} md={4} key={exercise._id}>
                         <Card>
                             <CardContent>
@@ -84,6 +136,23 @@ const Exercises = () => {
                                         'listeningComprehension' &&
                                         'Прослушайте и ответьте'}
                                 </Typography>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        mt: 2
+                                    }}
+                                >
+                                    <Chip
+                                        label={exercise.category}
+                                        size="small"
+                                    />
+                                    <Chip
+                                        label={exercise.difficulty}
+                                        size="small"
+                                    />
+                                </Box>
                                 <Button
                                     variant="contained"
                                     color="primary"

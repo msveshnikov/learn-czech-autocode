@@ -28,12 +28,14 @@ const Exercises = lazy(() => import('./pages/Exercises'));
 const Progress = lazy(() => import('./pages/Progress'));
 const Achievements = lazy(() => import('./pages/Achievements'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
+const Exercise = lazy(() => import('./pages/Exercise'));
 
 const queryClient = new QueryClient();
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(false);
+
     useEffect(() => {
         const savedMode = localStorage.getItem('darkMode');
         if (savedMode !== null) {
@@ -133,6 +135,14 @@ function App() {
                                         element={
                                             <PrivateRoute>
                                                 <Exercises />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/exercise/:exerciseId"
+                                        element={
+                                            <PrivateRoute>
+                                                <Exercise />
                                             </PrivateRoute>
                                         }
                                     />

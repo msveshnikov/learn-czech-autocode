@@ -45,7 +45,7 @@ const apiService = {
     },
 
     submitExercise: async (exerciseId, answer, timeSpent) => {
-        const response = await axios.post(`${API_BASE_URL}/exercises/submit`, {
+        const response = await axios.post(`${API_BASE_URL}/complete-exercise`, {
             exerciseId,
             answer,
             timeSpent
@@ -74,8 +74,11 @@ const apiService = {
     },
 
     markNotificationAsRead: async (notificationId) => {
-        const response = await axios.put(
-            `${API_BASE_URL}/notifications/${notificationId}`
+        const response = await axios.post(
+            `${API_BASE_URL}/mark-notification-read`,
+            {
+                notificationId
+            }
         );
         return response.data;
     },
@@ -91,25 +94,25 @@ const apiService = {
     },
 
     getPracticeExercises: async () => {
-        const response = await axios.get(`${API_BASE_URL}/exercises`);
+        const response = await axios.get(`${API_BASE_URL}/practice-exercises`);
         return response.data;
     },
 
     submitPracticeExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(
-            `${API_BASE_URL}/exercises/submit`,
+            `${API_BASE_URL}/submit-practice-exercise`,
             { exerciseId, answer, timeSpent }
         );
         return response.data;
     },
 
     updateStreak: async () => {
-        const response = await axios.post(`${API_BASE_URL}/user/streak`);
+        const response = await axios.post(`${API_BASE_URL}/update-streak`);
         return response.data;
     },
 
     completeLesson: async (lessonId) => {
-        const response = await axios.post(`${API_BASE_URL}/lessons/complete`, {
+        const response = await axios.post(`${API_BASE_URL}/complete-lesson`, {
             lessonId
         });
         return response.data;
@@ -117,7 +120,7 @@ const apiService = {
 
     getNextLesson: async (currentLessonId) => {
         const response = await axios.get(
-            `${API_BASE_URL}/lessons/next/${currentLessonId}`
+            `${API_BASE_URL}/next-lesson/${currentLessonId}`
         );
         return response.data;
     },
