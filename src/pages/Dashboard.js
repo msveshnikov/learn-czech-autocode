@@ -144,7 +144,7 @@ const Dashboard = () => {
                                                     variant="contained"
                                                     onClick={() =>
                                                         handleStartLesson(
-                                                            lesson.id
+                                                            lesson._id
                                                         )
                                                     }
                                                 >

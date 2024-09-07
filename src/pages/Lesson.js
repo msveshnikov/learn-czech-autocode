@@ -131,11 +131,11 @@ const Lesson = () => {
     return (
         <Container maxWidth="md">
             <Helmet>
-                <title>{`Урок ${lessonId} - Учим чешский с русского`}</title>
+                <title>{`Урок ${lessonData.title} - Учим чешский с русского`}</title>
             </Helmet>
             <Box my={4}>
                 <Typography variant="h4" component="h1" gutterBottom>
-                    {`Урок ${lessonId}: ${lessonData.title}`}
+                    {`Урок ${lessonData.title}: ${lessonData.description}`}
                 </Typography>
                 <Paper elevation={3} sx={{ p: 3 }}>
                     {!showResult ? (

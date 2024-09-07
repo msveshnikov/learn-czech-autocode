@@ -74,3 +74,9 @@ through various exercises and lessons.
 7. Continuous improvement and feature additions
 
 # TODO
+
+2. Develop core lesson structure for Czech language (13 story points)
+
+    - Design initial lesson progression (5-10 lessons)
+    - Create database schema for lesson content in Czech and Russian
+    - Implement basic lesson display functionality
