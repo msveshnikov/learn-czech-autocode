@@ -37,7 +37,8 @@ const userSchema = new mongoose.Schema({
     onboardingCompleted: { type: Boolean, default: false },
     dailyGoal: { type: Number, default: 50 },
     experiencePoints: { type: Number, default: 0 },
-    level: { type: Number, default: 1 }
+    level: { type: Number, default: 1 },
+    lastActivity: { type: Date, default: Date.now }
 });
 
 userSchema.pre('save', async function (next) {
@@ -91,6 +92,7 @@ userSchema.methods.addCompletedExercise = function (
 
     this.updateLeaderboardScore(score);
     this.addExperiencePoints(score);
+    this.lastActivity = Date.now();
 };
 
 userSchema.methods.addAchievement = function (achievement) {
@@ -107,6 +109,7 @@ userSchema.methods.addCompletedLesson = function (lessonId) {
     if (!this.progress.lessons.includes(lessonId)) {
         this.progress.lessons.push(lessonId);
     }
+    this.lastActivity = Date.now();
 };
 
 userSchema.methods.getProgress = function () {
@@ -143,6 +146,9 @@ userSchema.methods.updateLevel = function () {
     const newLevel = Math.floor(this.experiencePoints / 100) + 1;
     if (newLevel > this.level) {
         this.level = newLevel;
+        this.addNotification(
+            `Congratulations! You've reached level ${newLevel}!`
+        );
     }
 };
 
@@ -157,6 +163,22 @@ userSchema.methods.checkDailyGoal = function () {
     );
     const todayScore = todayExercises.reduce((sum, ce) => sum + ce.score, 0);
     return todayScore >= this.dailyGoal;
+};
+
+userSchema.methods.updateLearningGoal = function (newGoal) {
+    this.learningGoal = newGoal;
+};
+
+userSchema.methods.completeOnboarding = function () {
+    this.onboardingCompleted = true;
+};
+
+userSchema.methods.getLastActivity = function () {
+    return this.lastActivity;
+};
+
+userSchema.methods.updateLanguage = function (newLanguage) {
+    this.language = newLanguage;
 };
 
 const User = mongoose.model('User', userSchema);
