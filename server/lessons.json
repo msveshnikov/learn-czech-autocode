@@ -319,5 +319,131 @@
                 "category": "pronunciation"
             }
         ]
+    },
+    {
+        "title": "Семья",
+        "description": "Изучите слова, связанные с семьей на чешском языке",
+        "level": "beginner",
+        "category": "vocabulary",
+        "order": 6,
+        "content": "В этом уроке мы изучим слова, обозначающие членов семьи на чешском языке.",
+        "vocabulary": [
+            {
+                "czech": "Matka",
+                "russian": "Мать",
+                "english": "Mother"
+            },
+            {
+                "czech": "Otec",
+                "russian": "Отец",
+                "english": "Father"
+            },
+            {
+                "czech": "Sestra",
+                "russian": "Сестра",
+                "english": "Sister"
+            },
+            {
+                "czech": "Bratr",
+                "russian": "Брат",
+                "english": "Brother"
+            },
+            {
+                "czech": "Babička",
+                "russian": "Бабушка",
+                "english": "Grandmother"
+            },
+            {
+                "czech": "Dědeček",
+                "russian": "Дедушка",
+                "english": "Grandfather"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "Как сказать 'сестра' на чешском?",
+                "answers": ["Matka", "Otec", "Sestra", "Bratr"],
+                "correctAnswer": "Sestra",
+                "category": "vocabulary"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Дополните предложение: 'Moje _____ se jmenuje Anna.' (Моя мать зовут Анна)",
+                "correctAnswer": "matka",
+                "category": "vocabulary"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Прослушайте и выберите правильное слово",
+                "audioUrl": "https://example.com/audio/dedecek.mp3",
+                "answers": ["Matka", "Otec", "Babička", "Dědeček"],
+                "correctAnswer": "Dědeček",
+                "category": "pronunciation"
+            }
+        ]
+    },
+    {
+        "title": "Еда и напитки",
+        "description": "Изучите названия продуктов питания и напитков на чешском",
+        "level": "beginner",
+        "category": "vocabulary",
+        "order": 7,
+        "content": "В этом уроке мы познакомимся с названиями некоторых продуктов питания и напитков на чешском языке.",
+        "vocabulary": [
+            {
+                "czech": "Chléb",
+                "russian": "Хлеб",
+                "english": "Bread"
+            },
+            {
+                "czech": "Mléko",
+                "russian": "Молоко",
+                "english": "Milk"
+            },
+            {
+                "czech": "Voda",
+                "russian": "Вода",
+                "english": "Water"
+            },
+            {
+                "czech": "Káva",
+                "russian": "Кофе",
+                "english": "Coffee"
+            },
+            {
+                "czech": "Čaj",
+                "russian": "Чай",
+                "english": "Tea"
+            },
+            {
+                "czech": "Pivo",
+                "russian": "Пиво",
+                "english": "Beer"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "Как сказать 'хлеб' на чешском?",
+                "answers": ["Chléb", "Mléko", "Voda", "Káva"],
+                "correctAnswer": "Chléb",
+                "category": "vocabulary"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
+                "correctAnswer": "pivo",
+                "category": "vocabulary"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Прослушайте и выберите правильное слово",
+                "audioUrl": "https://example.com/audio/kava.mp3",
+                "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
+                "correctAnswer": "Káva",
+                "category": "pronunciation"
+            }
+        ]
     }
 ]

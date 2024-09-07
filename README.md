@@ -1,4 +1,4 @@
-# Language App to learn Czech from Russian (built by [AutoCode](https://autocode.work) in 15 minutes)
+# Language App to learn Czech from Russian (built by [AutoCode](https://autocode.work) in 1 day)
 
 ![alt text](image.png)
 
@@ -32,6 +32,7 @@ through various exercises and lessons.
 -   Database: MongoDB for flexible data storage
 -   Authentication: JWT (JSON Web Tokens)
 -   State Management: Context API
+-   Prop types generated for React components
 
 ## Design Considerations
 
@@ -71,8 +72,5 @@ through various exercises and lessons.
 4. Implement gamification features and leaderboards
 5. Optimize performance and user experience
 6. Beta testing and user feedback collection
-7. Continuous improvement and feature additions
 
 # TODO
-
-

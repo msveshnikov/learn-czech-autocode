@@ -123,5 +123,44 @@
         "audioUrl": "https://example.com/audio/dobre.mp3",
         "difficulty": "medium",
         "category": "pronunciation"
+    },
+    {
+        "type": "multipleChoice",
+        "question": "Как сказать 'один' на чешском?",
+        "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
+        "correctAnswer": "Jedna",
+        "difficulty": "easy",
+        "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: '___ jsem student.' (Я студент)",
+        "correctAnswer": "Jsem",
+        "difficulty": "medium",
+        "category": "grammar"
+    },
+    {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное число",
+        "answers": ["Pět", "Šest", "Sedm", "Osm"],
+        "correctAnswer": "Sedm",
+        "audioUrl": "https://example.com/audio/sedm.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
+    },
+    {
+        "type": "multipleChoice",
+        "question": "Как сказать 'Я не понимаю' на чешском?",
+        "answers": ["Nerozumím", "Rozumím", "Mluvím česky", "Nevím"],
+        "correctAnswer": "Nerozumím",
+        "difficulty": "medium",
+        "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Oni ___ studenti.' (Они студенты)",
+        "correctAnswer": "jsou",
+        "difficulty": "hard",
+        "category": "grammar"
     }
 ]
