@@ -16,14 +16,15 @@ through various exercises and lessons.
 ## Features
 
 -   User authentication and profile management
--   Mobile-first design
--   Russian UI
+-   Mobile-first, responsive design
+-   Russian UI with localization support
 -   Structured lessons covering vocabulary, grammar, and pronunciation
 -   Interactive exercises (multiple choice, fill-in-the-blanks, listening
     comprehension)
 -   Progress tracking and performance analytics
 -   Gamification elements (streaks, achievements, leaderboards)
 -   Spaced repetition algorithm for efficient learning
+-   Onboarding process for new users
 
 ## Technology Stack
 
@@ -32,7 +33,8 @@ through various exercises and lessons.
 -   Database: MongoDB for flexible data storage
 -   Authentication: JWT (JSON Web Tokens)
 -   State Management: Context API
--   Prop types generated for React components
+-   Docker for containerization and easy deployment
+-   Nginx as a reverse proxy and static file server
 
 ## Design Considerations
 
@@ -41,6 +43,8 @@ through various exercises and lessons.
     cultural elements
 -   Optimize app performance and minimize battery usage
 -   Design a user-friendly onboarding process
+-   Utilize lazy loading for improved initial load times
+-   Implement error boundaries for robust error handling
 
 ## Project Structure
 
@@ -49,6 +53,7 @@ through various exercises and lessons.
     -   `pages/`: Individual page components
     -   `services/`: API service for backend communication
     -   `utils/`: Utility functions and theme configuration
+    -   `context/`: React Context for state management
 -   `server/`: Backend Node.js and Express.js server
     -   `model/`: MongoDB schema definitions
 -   `public/`: Static assets and HTML template
@@ -63,6 +68,9 @@ through various exercises and lessons.
 -   Offline mode for learning without internet connection
 -   Social features for connecting with other learners
 -   Integration with popular language proficiency tests
+-   Dark mode and theme customization options
+-   Push notifications for reminders and streak maintenance
+-   Implement PWA (Progressive Web App) capabilities
 
 ## Development Roadmap
 
@@ -71,8 +79,24 @@ through various exercises and lessons.
 3. Create interactive exercises and progress tracking
 4. Implement gamification features and leaderboards
 5. Optimize performance and user experience
-6. Beta testing and user feedback collection
+6. Implement containerization with Docker
+7. Set up CI/CD pipeline for automated testing and deployment
+8. Beta testing and user feedback collection
+10. Implement advanced features (voice recognition, AI chatbot)
 
-# TODO
+## Getting Started
 
--  When checking fillInTheBlank exercises, don't pay attention to diacritic signs
+1. Clone the repository
+2. Install dependencies for both frontend and backend
+3. Set up MongoDB database
+4. Configure environment variables
+5. Run the development servers
+
+## Contributing
+
+We welcome contributions to improve the Language App. Please read our
+contributing guidelines before submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License.
