@@ -1,50 +1,37 @@
 version: '3.8'
 
 services:
-    app:
-        build:
-            context: .
-            dockerfile: Dockerfile
+    backend:
+        image: extender777/czech-backend
         ports:
-            - '3000:3000'
+            - '6003:5000'
         environment:
             - NODE_ENV=production
-            - REACT_APP_API_BASE_URL=http://server:5000/api
-        depends_on:
-            - server
-        networks:
-            - app-network
-
-    server:
-        build:
-            context: ./server
-            dockerfile: Dockerfile
-        ports:
-            - '5000:5000'
-        environment:
-            - NODE_ENV=production
-            - MONGODB_URI=mongodb://mongo:27017/learn_czech
+            - MONGODB_URI=mongodb://mongodb:27017/learn_czech
             - JWT_SECRET=${JWT_SECRET}
-            - REFRESH_TOKEN_SECRET=${REFRESH_TOKEN_SECRET}
-            - TOKEN_EXPIRY=1h
-            - REFRESH_TOKEN_EXPIRY=7d
+        restart: unless-stopped
         depends_on:
-            - mongo
-        networks:
-            - app-network
+            - mongodb
 
-    mongo:
-        image: mongo:latest
+    frontend:
+        image: extender777/czech-frontend
+        environment:
+            - NODE_ENV=production
         ports:
-            - '27017:27017'
-        volumes:
-            - mongo_data:/data/db
-        networks:
-            - app-network
+            - '8686:80'
+        restart: unless-stopped
+        depends_on:
+            - backend
+        logging:
+            driver: none
 
-networks:
-    app-network:
-        driver: bridge
+    mongodb:
+        image: mongo:latest
+        volumes:
+            - mongo-data:/data/db
+        restart: unless-stopped
+        logging:
+            driver: none
 
 volumes:
-    mongo_data:
+    mongo-data:

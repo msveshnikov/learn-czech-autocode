@@ -1,21 +1,27 @@
-FROM node:20-alpine AS base
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+# Use the official Node.js image as the base image
+FROM --platform=$BUILDPLATFORM node:20-slim AS build
 
-FROM base AS client
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the package.json and package-lock.json files
+COPY package*.json ./
+
+# Install the dependencies
+RUN npm install
+
+# Copy the rest of the application code
 COPY . .
+
+ENV REACT_APP_API_BASE_URL https://czech.autocode.work/api
+
+# Build the React app for production
 RUN npm run build
 
-FROM base AS server
-COPY server ./server
-RUN npm run build:server
-
-FROM node:20-alpine
-WORKDIR /app
-COPY --from=server /app/server ./server
-COPY --from=client /app/build ./client
-COPY package*.json ./
-RUN npm ci --production
-EXPOSE 5000
-CMD ["node", "server/server.js"]
+# Use a lightweight server to serve the built React app
+FROM nginx:stable-alpine
+COPY --from=0 /app/build /usr/share/nginx/html
+RUN rm /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]

@@ -74,5 +74,3 @@ through various exercises and lessons.
 7. Continuous improvement and feature additions
 
 # TODO
-
--   UI and routes for individual exercise

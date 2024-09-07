@@ -1,13 +1,19 @@
-FROM node:20-alpine
+FROM node:20-slim
 
-WORKDIR /app/server
+# Set the working directory in the container
+WORKDIR /app
 
+# Copy the package.json and package-lock.json files
 COPY package*.json ./
 
-RUN npm ci --only=production
+# Install the dependencies
+RUN npm install
 
+# Copy the rest of the application code
 COPY . .
 
+# Expose the port that your backend runs on
 EXPOSE 5000
 
-CMD ["node", "server.js"]
+# Start the backend application
+CMD [ "node", "server.js" ]
