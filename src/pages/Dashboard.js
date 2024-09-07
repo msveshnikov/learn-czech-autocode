@@ -26,6 +26,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import LeaderboardIcon from '@mui/icons-material/Leaderboard';
 import UIOverview from '../components/UIOverview';
 
 const Dashboard = () => {
@@ -86,6 +87,14 @@ const Dashboard = () => {
         {
             target: '#practice-button',
             content: 'Нажмите здесь, чтобы начать практику.'
+        },
+        {
+            target: '#achievements',
+            content: 'Ваши достижения и награды.'
+        },
+        {
+            target: '#leaderboard',
+            content: 'Сравните свой прогресс с другими учениками.'
         }
     ];
 
@@ -167,7 +176,10 @@ const Dashboard = () => {
                                                     <CheckCircleIcon />
                                                 </ListItemIcon>
                                                 <ListItemText
-                                                    primary={key}
+                                                    primary={key === 'completedLessons' ? 'Завершенные уроки' :
+                                                             key === 'completedExercises' ? 'Завершенные упражнения' :
+                                                             key === 'experiencePoints' ? 'Очки опыта' :
+                                                             key === 'level' ? 'Уровень' : key}
                                                     secondary={
                                                         <LinearProgress
                                                             variant="determinate"
@@ -219,8 +231,8 @@ const Dashboard = () => {
                                 </Button>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12}>
-                            <Paper elevation={3} sx={{ p: 2 }}>
+                        <Grid item xs={12} md={6}>
+                            <Paper elevation={3} sx={{ p: 2 }} id="achievements">
                                 <Typography variant="h6" gutterBottom>
                                     Достижения
                                 </Typography>
@@ -231,6 +243,21 @@ const Dashboard = () => {
                                     fullWidth={isMobile}
                                 >
                                     Посмотреть достижения
+                                </Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Paper elevation={3} sx={{ p: 2 }} id="leaderboard">
+                                <Typography variant="h6" gutterBottom>
+                                    Таблица лидеров
+                                </Typography>
+                                <Button
+                                    variant="outlined"
+                                    startIcon={<LeaderboardIcon />}
+                                    onClick={() => navigate('/leaderboard')}
+                                    fullWidth={isMobile}
+                                >
+                                    Открыть таблицу лидеров
                                 </Button>
                             </Paper>
                         </Grid>

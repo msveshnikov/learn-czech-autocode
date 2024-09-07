@@ -75,4 +75,4 @@ through various exercises and lessons.
 
 # TODO
 
--   get /exercise route for single one
+-   Translate these keys !!! streak achievements leaderboardScore
