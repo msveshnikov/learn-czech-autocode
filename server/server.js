@@ -201,9 +201,7 @@ app.get(
             const currentLesson = await Lesson.findById(
                 req.params.currentLessonId
             );
-            const nextLesson = await Lesson.findOne({
-                order: currentLesson.order + 1
-            });
+            const nextLesson = await currentLesson.getNextLesson();
             res.json(nextLesson);
         } catch (error) {
             res.status(500).json({

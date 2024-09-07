@@ -1,4 +1,3 @@
-
 /* global use, db */
 const database = 'learn_czech';
 const collection = 'lessons';

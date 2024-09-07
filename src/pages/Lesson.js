@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
     Container,
@@ -11,7 +11,10 @@ import {
     FormControlLabel,
     FormControl,
     FormLabel,
-    TextField
+    TextField,
+    List,
+    ListItem,
+    ListItemText
 } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import { Helmet } from 'react-helmet';
@@ -25,6 +28,7 @@ const Lesson = () => {
     const [userAnswer, setUserAnswer] = useState('');
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
+    const [timeSpent, setTimeSpent] = useState(0);
 
     const {
         data: lessonData,
@@ -33,8 +37,8 @@ const Lesson = () => {
     } = useQuery(['lesson', lessonId], () => apiService.getLesson(lessonId));
 
     const submitExerciseMutation = useMutation(
-        ({ exerciseId, answer }) =>
-            apiService.submitExercise(lessonId, exerciseId, answer),
+        ({ exerciseId, answer, timeSpent }) =>
+            apiService.submitExercise(exerciseId, answer, timeSpent),
         {
             onSuccess: (data) => {
                 if (data.correct) {
@@ -43,11 +47,16 @@ const Lesson = () => {
                 if (currentExercise < lessonData.exercises.length - 1) {
                     setCurrentExercise(currentExercise + 1);
                     setUserAnswer('');
+                    setTimeSpent(0);
                 } else {
                     setShowResult(true);
                 }
             }
         }
+    );
+
+    const completeLessonMutation = useMutation(() =>
+        apiService.completeLesson(lessonId)
     );
 
     useEffect(() => {
@@ -56,40 +65,65 @@ const Lesson = () => {
             setUserAnswer('');
             setScore(0);
             setShowResult(false);
+            setTimeSpent(0);
         }
     }, [lessonData]);
 
-    if (isLoading) return <Loading />;
-    if (error) return <Typography color="error">{error.message}</Typography>;
+    useEffect(() => {
+        let timer;
+        if (!showResult) {
+            timer = setInterval(() => {
+                setTimeSpent((prevTime) => prevTime + 1);
+            }, 1000);
+        }
+        return () => clearInterval(timer);
+    }, [showResult]);
 
-    const handleAnswer = (event) => {
+    const handleAnswer = useCallback((event) => {
         setUserAnswer(event.target.value);
-    };
+    }, []);
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
         const currentExerciseData = lessonData.exercises[currentExercise];
         submitExerciseMutation.mutate({
-            exerciseId: currentExerciseData.id,
-            answer: userAnswer
+            exerciseId: currentExerciseData._id,
+            answer: userAnswer,
+            timeSpent
         });
-    };
+    }, [
+        currentExercise,
+        lessonData,
+        submitExerciseMutation,
+        userAnswer,
+        timeSpent
+    ]);
 
-    const resetLesson = () => {
+    const resetLesson = useCallback(() => {
         setCurrentExercise(0);
         setUserAnswer('');
         setScore(0);
         setShowResult(false);
-    };
+        setTimeSpent(0);
+    }, []);
 
-    const goToNextLesson = () => {
-        const nextLessonId = parseInt(lessonId) + 1;
-        navigate(`/lesson/${nextLessonId}`);
-    };
+    const goToNextLesson = useCallback(() => {
+        completeLessonMutation.mutate(null, {
+            onSuccess: () => {
+                apiService.getNextLesson(lessonId).then((nextLesson) => {
+                    if (nextLesson) {
+                        navigate(`/lesson/${nextLesson._id}`);
+                    } else {
+                        navigate('/lessons');
+                    }
+                });
+            }
+        });
+    }, [completeLessonMutation, lessonId, navigate]);
 
-    const renderExercise = () => {
+    const renderExercise = useCallback(() => {
         const exercise = lessonData.exercises[currentExercise];
         switch (exercise.type) {
-            case 'multiple-choice':
+            case 'multipleChoice':
                 return (
                     <FormControl component="fieldset" sx={{ mt: 2 }}>
                         <FormLabel component="legend">
@@ -101,7 +135,7 @@ const Lesson = () => {
                             value={userAnswer}
                             onChange={handleAnswer}
                         >
-                            {exercise.options.map((option, index) => (
+                            {exercise.answers.map((option, index) => (
                                 <FormControlLabel
                                     key={index}
                                     value={option}
@@ -112,11 +146,11 @@ const Lesson = () => {
                         </RadioGroup>
                     </FormControl>
                 );
-            case 'fill-in-the-blank':
+            case 'fillInTheBlank':
                 return (
                     <TextField
                         fullWidth
-                        label={'Введите ответ'}
+                        label="Введите ответ"
                         variant="outlined"
                         value={userAnswer}
                         onChange={handleAnswer}
@@ -126,7 +160,10 @@ const Lesson = () => {
             default:
                 return null;
         }
-    };
+    }, [lessonData, currentExercise, userAnswer, handleAnswer]);
+
+    if (isLoading) return <Loading />;
+    if (error) return <Typography color="error">{error.message}</Typography>;
 
     return (
         <Container maxWidth="md">
@@ -141,7 +178,10 @@ const Lesson = () => {
                     {!showResult ? (
                         <>
                             <Typography variant="h6" gutterBottom>
-                                {lessonData.exercises[currentExercise].question}
+                                {
+                                    lessonData.exercises[currentExercise]
+                                        .question
+                                }
                             </Typography>
                             {renderExercise()}
                             <Box mt={2}>
@@ -182,6 +222,21 @@ const Lesson = () => {
                             </Box>
                         </>
                     )}
+                </Paper>
+                <Paper elevation={3} sx={{ p: 3, mt: 3 }}>
+                    <Typography variant="h6" gutterBottom>
+                        Словарь урока
+                    </Typography>
+                    <List>
+                        {lessonData.vocabulary.map((word, index) => (
+                            <ListItem key={index}>
+                                <ListItemText
+                                    primary={`${word.czech} - ${word.russian}`}
+                                    secondary={word.english}
+                                />
+                            </ListItem>
+                        ))}
+                    </List>
                 </Paper>
             </Box>
         </Container>

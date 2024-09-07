@@ -44,11 +44,10 @@ const apiService = {
         return response.data;
     },
 
-    submitExercise: async (exerciseId, answer, timeSpent) => {
+    submitExercise: async (lessonId, exerciseId, answer) => {
         const response = await axios.post(`${API_BASE_URL}/complete-exercise`, {
             exerciseId,
-            answer,
-            timeSpent
+            answer
         });
         return response.data;
     },
@@ -121,81 +120,6 @@ const apiService = {
     getNextLesson: async (currentLessonId) => {
         const response = await axios.get(
             `${API_BASE_URL}/next-lesson/${currentLessonId}`
-        );
-        return response.data;
-    },
-
-    refreshToken: async () => {
-        const response = await axios.post(`${API_BASE_URL}/auth/refresh-token`);
-        apiService.setToken(response.data.token);
-        return response.data;
-    },
-
-    logout: async () => {
-        const response = await axios.post(`${API_BASE_URL}/auth/logout`);
-        apiService.clearToken();
-        return response.data;
-    },
-
-    getLanguageSettings: async () => {
-        const response = await axios.get(`${API_BASE_URL}/settings/language`);
-        return response.data;
-    },
-
-    updateLanguageSettings: async (settings) => {
-        const response = await axios.put(
-            `${API_BASE_URL}/settings/language`,
-            settings
-        );
-        return response.data;
-    },
-
-    getFeedback: async () => {
-        const response = await axios.get(`${API_BASE_URL}/feedback`);
-        return response.data;
-    },
-
-    submitFeedback: async (feedback) => {
-        const response = await axios.post(`${API_BASE_URL}/feedback`, feedback);
-        return response.data;
-    },
-
-    getSpacedRepetitionExercises: async () => {
-        const response = await axios.get(
-            `${API_BASE_URL}/exercises/spaced-repetition`
-        );
-        return response.data;
-    },
-
-    submitSpacedRepetitionExercise: async (exerciseId, answer, timeSpent) => {
-        const response = await axios.post(
-            `${API_BASE_URL}/exercises/spaced-repetition/submit`,
-            { exerciseId, answer, timeSpent }
-        );
-        return response.data;
-    },
-
-    getGamificationData: async () => {
-        const response = await axios.get(`${API_BASE_URL}/gamification`);
-        return response.data;
-    },
-
-    updateGamificationData: async (data) => {
-        const response = await axios.put(`${API_BASE_URL}/gamification`, data);
-        return response.data;
-    },
-
-    getPerformanceAnalytics: async () => {
-        const response = await axios.get(
-            `${API_BASE_URL}/analytics/performance`
-        );
-        return response.data;
-    },
-
-    updatePerformanceAnalytics: async (data) => {
-        const response = await axios.put(
-            `${API_BASE_URL}/analytics/performance`,
-            data
         );
         return response.data;
     },
