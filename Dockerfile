@@ -13,7 +13,7 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-ENV REACT_APP_API_BASE_URL https://czech.autocode.work/api
+ENV REACT_APP_API_BASE_URL https://czech.autocode.work/api/api
 
 # Build the React app for production
 RUN npm run build
