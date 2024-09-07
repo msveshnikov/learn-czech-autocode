@@ -91,13 +91,13 @@ const apiService = {
     },
 
     getPracticeExercises: async () => {
-        const response = await axios.get(`${API_BASE_URL}/exercises/practice`);
+        const response = await axios.get(`${API_BASE_URL}/exercises`);
         return response.data;
     },
 
     submitPracticeExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(
-            `${API_BASE_URL}/exercises/practice/submit`,
+            `${API_BASE_URL}/exercises/submit`,
             { exerciseId, answer, timeSpent }
         );
         return response.data;
