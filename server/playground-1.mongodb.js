@@ -115,6 +115,6 @@ db.lessons
     ])
     .toArray();
 
-    use('learn_czech');
+use('learn_czech');
 
-    db.users.dropIndex("username_1");
+db.users.dropIndex('username_1');
