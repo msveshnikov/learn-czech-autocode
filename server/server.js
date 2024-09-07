@@ -5,7 +5,6 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcryptjs';
 import fs from 'fs/promises';
 import path from 'path';
 
@@ -58,7 +57,7 @@ app.post('/api/login', async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: 'User not found' });
 
-        const validPassword = await bcrypt.compare(password, user.password);
+        const validPassword = await user.comparePassword(password);
         if (!validPassword)
             return res.status(400).json({ message: 'Invalid password' });
 
@@ -109,7 +108,8 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         const exercise = await Exercise.findById(exerciseId);
         const score = exercise.calculateScore(timeSpent);
-        user.addCompletedExercise(exerciseId, score);
+        user.addCompletedExercise(exerciseId);
+        user.updateLeaderboardScore(score);
         await user.save();
         res.json({ message: 'Exercise completed successfully', score });
     } catch (error) {
@@ -201,7 +201,9 @@ app.get(
             const currentLesson = await Lesson.findById(
                 req.params.currentLessonId
             );
-            const nextLesson = await currentLesson.getNextLesson();
+            const nextLesson = await Lesson.findOne({
+                order: currentLesson.order + 1
+            });
             res.json(nextLesson);
         } catch (error) {
             res.status(500).json({
@@ -230,7 +232,7 @@ app.get('/api/vocabulary', authenticateToken, async (req, res) => {
 
 app.get('/api/practice-exercises', authenticateToken, async (req, res) => {
     try {
-        const exercises = await Exercise.getRandomExercises(10);
+        const exercises = await Exercise.aggregate([{ $sample: { size: 10 } }]);
         res.json(exercises);
     } catch (error) {
         res.status(500).json({
@@ -250,7 +252,7 @@ app.post(
             const correct = exercise.checkAnswer(answer);
             const score = exercise.calculateScore(timeSpent);
             const user = await User.findById(req.user.id);
-            user.updateScore(score);
+            user.updateLeaderboardScore(score);
             await user.save();
             res.json({ correct, score });
         } catch (error) {
@@ -283,6 +285,50 @@ app.get('/api/exercises', authenticateToken, async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Error fetching exercises',
+            error: error.message
+        });
+    }
+});
+
+app.put('/api/user', authenticateToken, async (req, res) => {
+    try {
+        const { username, learningGoal, language } = req.body;
+        const user = await User.findById(req.user.id);
+        if (username) user.username = username;
+        if (learningGoal) user.learningGoal = learningGoal;
+        if (language) user.language = language;
+        await user.save();
+        res.json({ message: 'User updated successfully' });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error updating user',
+            error: error.message
+        });
+    }
+});
+
+app.get('/api/notifications', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        res.json(user.getUnreadNotifications());
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching notifications',
+            error: error.message
+        });
+    }
+});
+
+app.post('/api/mark-notification-read', authenticateToken, async (req, res) => {
+    try {
+        const { notificationId } = req.body;
+        const user = await User.findById(req.user.id);
+        user.markNotificationAsRead(notificationId);
+        await user.save();
+        res.json({ message: 'Notification marked as read' });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error marking notification as read',
             error: error.message
         });
     }

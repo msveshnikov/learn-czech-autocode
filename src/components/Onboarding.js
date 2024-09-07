@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import {
     Box,
     Stepper,
@@ -13,9 +13,13 @@ import {
     RadioGroup,
     FormControlLabel,
     FormControl,
-    FormLabel
+    FormLabel,
+    Select,
+    MenuItem
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import apiService from '../services/apiService';
 
 const steps = [
     'Добро пожаловать',
@@ -44,7 +48,17 @@ const Onboarding = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [username, setUsername] = useState('');
     const [learningGoal, setLearningGoal] = useState('');
+    const [learningPace, setLearningPace] = useState('');
+    const [showOnboarding, setShowOnboarding] = useState(true);
     const navigate = useNavigate();
+    const { user, updateUser } = useContext(AuthContext);
+
+    useEffect(() => {
+        if (user && user.onboardingCompleted) {
+            setShowOnboarding(false);
+            navigate('/dashboard');
+        }
+    }, [user, navigate]);
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -54,9 +68,20 @@ const Onboarding = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleFinish = () => {
-        // TODO: Save user preferences and navigate to dashboard
-        navigate('/dashboard');
+    const handleFinish = async () => {
+        try {
+            const updatedUser = await apiService.updateUser({
+                username,
+                learningGoal,
+                learningPace,
+                onboardingCompleted: true
+            });
+            updateUser(updatedUser);
+            setShowOnboarding(false);
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
     };
 
     const renderStepContent = (step) => {
@@ -94,36 +119,65 @@ const Onboarding = () => {
                 );
             case 4:
                 return (
-                    <FormControl component="fieldset">
-                        <FormLabel component="legend">
-                            Выберите цель обучения:
-                        </FormLabel>
-                        <RadioGroup
-                            value={learningGoal}
-                            onChange={(e) => setLearningGoal(e.target.value)}
+                    <>
+                        <FormControl
+                            component="fieldset"
+                            fullWidth
+                            margin="normal"
                         >
-                            <FormControlLabel
-                                value="basic"
-                                control={<Radio />}
-                                label="Базовое общение"
-                            />
-                            <FormControlLabel
-                                value="intermediate"
-                                control={<Radio />}
-                                label="Средний уровень"
-                            />
-                            <FormControlLabel
-                                value="advanced"
-                                control={<Radio />}
-                                label="Продвинутый уровень"
-                            />
-                        </RadioGroup>
-                    </FormControl>
+                            <FormLabel component="legend">
+                                Выберите цель обучения:
+                            </FormLabel>
+                            <RadioGroup
+                                value={learningGoal}
+                                onChange={(e) =>
+                                    setLearningGoal(e.target.value)
+                                }
+                            >
+                                <FormControlLabel
+                                    value="basic"
+                                    control={<Radio />}
+                                    label="Базовое общение"
+                                />
+                                <FormControlLabel
+                                    value="intermediate"
+                                    control={<Radio />}
+                                    label="Средний уровень"
+                                />
+                                <FormControlLabel
+                                    value="advanced"
+                                    control={<Radio />}
+                                    label="Продвинутый уровень"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                        <FormControl fullWidth margin="normal">
+                            <FormLabel component="legend">
+                                Выберите темп обучения:
+                            </FormLabel>
+                            <Select
+                                value={learningPace}
+                                onChange={(e) =>
+                                    setLearningPace(e.target.value)
+                                }
+                            >
+                                <MenuItem value="relaxed">
+                                    Расслабленный
+                                </MenuItem>
+                                <MenuItem value="regular">Регулярный</MenuItem>
+                                <MenuItem value="intense">Интенсивный</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </>
                 );
             default:
                 return null;
         }
     };
+
+    if (!showOnboarding) {
+        return null;
+    }
 
     return (
         <Box sx={{ width: '100%', p: 3 }}>

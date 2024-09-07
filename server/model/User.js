@@ -4,10 +4,17 @@ import bcrypt from 'bcryptjs';
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    username: { type: String },
     progress: {
         lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
         completedExercises: [
-            { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }
+            {
+                exercise: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Exercise'
+                },
+                score: { type: Number, default: 0 }
+            }
         ],
         streak: { type: Number, default: 0 },
         lastLoginDate: { type: Date, default: Date.now }
@@ -23,7 +30,9 @@ const userSchema = new mongoose.Schema({
             read: { type: Boolean, default: false },
             createdAt: { type: Date, default: Date.now }
         }
-    ]
+    ],
+    learningGoal: { type: String },
+    onboardingCompleted: { type: Boolean, default: false }
 });
 
 userSchema.pre('save', async function (next) {
@@ -53,10 +62,18 @@ userSchema.methods.updateStreak = function () {
     this.progress.lastLoginDate = now;
 };
 
-userSchema.methods.addCompletedExercise = function (exerciseId) {
-    if (!this.progress.completedExercises.includes(exerciseId)) {
-        this.progress.completedExercises.push(exerciseId);
+userSchema.methods.addCompletedExercise = function (exerciseId, score) {
+    const existingExercise = this.progress.completedExercises.find(
+        (ce) => ce.exercise.toString() === exerciseId.toString()
+    );
+
+    if (existingExercise) {
+        existingExercise.score = Math.max(existingExercise.score, score);
+    } else {
+        this.progress.completedExercises.push({ exercise: exerciseId, score });
     }
+
+    this.updateLeaderboardScore(score);
 };
 
 userSchema.methods.addAchievement = function (achievement) {
@@ -98,6 +115,10 @@ userSchema.methods.markNotificationAsRead = function (notificationId) {
 
 userSchema.methods.getUnreadNotifications = function () {
     return this.notifications.filter((notification) => !notification.read);
+};
+
+userSchema.methods.updateScore = function (score) {
+    this.leaderboardScore += score;
 };
 
 const User = mongoose.model('User', userSchema);

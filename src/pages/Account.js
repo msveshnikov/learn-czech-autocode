@@ -36,7 +36,7 @@ const Account = () => {
         error
     } = useQuery('userAccount', apiService.getUserAccount);
 
-    const updateUserMutation = useMutation(apiService.updateUserAccount, {
+    const updateUserMutation = useMutation(apiService.updateUser, {
         onSuccess: () => {
             queryClient.invalidateQueries('userAccount');
             setIsEditing(false);

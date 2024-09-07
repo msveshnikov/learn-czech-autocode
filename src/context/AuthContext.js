@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     const updateUser = async (updatedUserData) => {
-        const updatedUser = await apiService.updateUserAccount(updatedUserData);
+        const updatedUser = await apiService.updateUser(updatedUserData);
         setUser(updatedUser);
     };
 
