@@ -112,7 +112,7 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
         const exercise = await Exercise.findById(exerciseId);
         const correct = exercise.checkAnswer(answer);
         const score = exercise.calculateScore(timeSpent);
-        user.addCompletedExercise(exerciseId, correct, score);
+        user.addCompletedExercise(exerciseId, score);
         await user.save();
         res.json({ correct, score });
     } catch (error) {
@@ -253,7 +253,7 @@ app.post(
             const correct = exercise.checkAnswer(answer);
             const score = exercise.calculateScore(timeSpent);
             const user = await User.findById(req.user.id);
-            user.addCompletedExercise(exerciseId, correct, score);
+            user.addCompletedExercise(exerciseId, score);
             await user.save();
             res.json({ correct, score });
         } catch (error) {

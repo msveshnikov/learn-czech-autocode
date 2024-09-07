@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
                     type: mongoose.Schema.Types.ObjectId,
                     ref: 'Exercise'
                 },
-                score: { type: Number, default: 0 }
+                score: { type: Number, default: 0 },
+                correct: { type: Boolean, default: false }
             }
         ],
         streak: { type: Number, default: 0 },
@@ -65,15 +66,24 @@ userSchema.methods.updateStreak = function () {
     this.progress.lastLoginDate = now;
 };
 
-userSchema.methods.addCompletedExercise = function (exerciseId, score) {
+userSchema.methods.addCompletedExercise = function (
+    exerciseId,
+    correct,
+    score
+) {
     const existingExercise = this.progress.completedExercises.find(
         (ce) => ce.exercise.toString() === exerciseId.toString()
     );
 
     if (existingExercise) {
         existingExercise.score = Math.max(existingExercise.score, score);
+        existingExercise.correct = correct;
     } else {
-        this.progress.completedExercises.push({ exercise: exerciseId, score });
+        this.progress.completedExercises.push({
+            exercise: exerciseId,
+            score,
+            correct
+        });
     }
 
     this.updateLeaderboardScore(score);
@@ -87,7 +97,7 @@ userSchema.methods.addAchievement = function (achievement) {
 };
 
 userSchema.methods.updateLeaderboardScore = function (score) {
-    this.leaderboardScore = (this.leaderboardScore || 0) + score;
+    this.leaderboardScore += score;
 };
 
 userSchema.methods.addCompletedLesson = function (lessonId) {
@@ -122,7 +132,7 @@ userSchema.methods.getUnreadNotifications = function () {
 };
 
 userSchema.methods.addExperiencePoints = function (points) {
-    this.experiencePoints = (this.experiencePoints || 0) + points;
+    this.experiencePoints += points;
     this.updateLevel();
 };
 

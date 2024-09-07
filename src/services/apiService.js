@@ -147,6 +147,18 @@ const apiService = {
     getWordOfTheDay: async () => {
         const response = await axios.get(`${API_BASE_URL}/word-of-the-day`);
         return response.data;
+    },
+
+    updateDailyGoal: async (newGoal) => {
+        const response = await axios.put(`${API_BASE_URL}/user`, {
+            dailyGoal: newGoal
+        });
+        return response.data;
+    },
+
+    checkDailyGoal: async () => {
+        const response = await axios.get(`${API_BASE_URL}/user`);
+        return response.data.checkDailyGoal();
     }
 };
 
