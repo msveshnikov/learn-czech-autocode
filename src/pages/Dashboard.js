@@ -22,7 +22,6 @@ import { useQuery } from 'react-query';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
 import Onboarding from '../components/Onboarding';
-import { useLanguage } from '../contexts/LanguageContext';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SchoolIcon from '@mui/icons-material/School';
@@ -42,7 +41,6 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const { language } = useLanguage();
 
     const {
         data: dashboardData,

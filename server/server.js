@@ -23,10 +23,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+mongoose.connect(process.env.MONGODB_URI, {});
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
