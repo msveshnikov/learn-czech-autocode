@@ -76,9 +76,7 @@ const apiService = {
     markNotificationAsRead: async (notificationId) => {
         const response = await axios.post(
             `${API_BASE_URL}/mark-notification-read`,
-            {
-                notificationId
-            }
+            { notificationId }
         );
         return response.data;
     },

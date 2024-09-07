@@ -103,4 +103,4 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   fix Achievments
+-   fix Achievments and Ratings

@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
                     ref: 'Exercise'
                 },
                 score: { type: Number, default: 0 },
-                correct: { type: Boolean, default: false }
+                correct: { type: Boolean, default: false },
+                createdAt: { type: Date, default: Date.now }
             }
         ],
         streak: { type: Number, default: 0 },
@@ -78,11 +79,13 @@ userSchema.methods.addCompletedExercise = function (
     if (existingExercise) {
         existingExercise.score = Math.max(existingExercise.score, score);
         existingExercise.correct = correct;
+        existingExercise.createdAt = Date.now();
     } else {
         this.progress.completedExercises.push({
             exercise: exerciseId,
             score,
-            correct
+            correct,
+            createdAt: Date.now()
         });
     }
 

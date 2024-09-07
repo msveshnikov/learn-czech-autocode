@@ -9,11 +9,12 @@ import {
     Paper,
     Grid,
     Divider,
-    Box
+    Box,
+    LinearProgress
 } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LockIcon from '@mui/icons-material/Lock';
-import apiService from './../services/apiService';
+import apiService from '../services/apiService';
 import { Helmet } from 'react-helmet';
 import Loading from '../components/Loading';
 import { useQuery } from 'react-query';
@@ -68,16 +69,23 @@ const Achievements = () => {
                                         <ListItemText
                                             primary={achievement.name}
                                             secondary={
-                                                <Grid
-                                                    container
-                                                    justifyContent="space-between"
-                                                >
-                                                    <Grid item>
+                                                <Grid container spacing={1}>
+                                                    <Grid item xs={12}>
                                                         {
                                                             achievement.description
                                                         }
                                                     </Grid>
-                                                    <Grid item>
+                                                    <Grid item xs={12}>
+                                                        <LinearProgress
+                                                            variant="determinate"
+                                                            value={
+                                                                (achievement.progress /
+                                                                    achievement.target) *
+                                                                100
+                                                            }
+                                                        />
+                                                    </Grid>
+                                                    <Grid item xs={12}>
                                                         {achievement.unlocked
                                                             ? 'Разблокировано'
                                                             : `${achievement.progress}/${achievement.target}`}

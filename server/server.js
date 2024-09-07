@@ -112,7 +112,7 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
         const exercise = await Exercise.findById(exerciseId);
         const correct = exercise.checkAnswer(answer);
         const score = exercise.calculateScore(timeSpent);
-        user.addCompletedExercise(exerciseId, score);
+        user.addCompletedExercise(exerciseId, correct, score);
         await user.save();
         res.json({ correct, score });
     } catch (error) {
@@ -204,7 +204,9 @@ app.get(
             const currentLesson = await Lesson.findById(
                 req.params.currentLessonId
             );
-            const nextLesson = await currentLesson.getNextLesson();
+            const nextLesson = await Lesson.findOne({
+                order: currentLesson.order + 1
+            });
             res.json(nextLesson);
         } catch (error) {
             res.status(500).json({
@@ -253,7 +255,7 @@ app.post(
             const correct = exercise.checkAnswer(answer);
             const score = exercise.calculateScore(timeSpent);
             const user = await User.findById(req.user.id);
-            user.addCompletedExercise(exerciseId, score);
+            user.addCompletedExercise(exerciseId, correct, score);
             await user.save();
             res.json({ correct, score });
         } catch (error) {
@@ -308,11 +310,12 @@ app.get('/api/exercise/:id', authenticateToken, async (req, res) => {
 
 app.put('/api/user', authenticateToken, async (req, res) => {
     try {
-        const { username, learningGoal, language } = req.body;
+        const { username, learningGoal, language, dailyGoal } = req.body;
         const user = await User.findById(req.user.id);
         if (username) user.username = username;
         if (learningGoal) user.learningGoal = learningGoal;
         if (language) user.language = language;
+        if (dailyGoal) user.updateDailyGoal(dailyGoal);
         user.onboardingCompleted = true;
         await user.save();
         res.json({ message: 'Данные пользователя успешно обновлены' });
@@ -373,6 +376,19 @@ app.get('/api/word-of-the-day', async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Ошибка при получении слова дня',
+            error: error.message
+        });
+    }
+});
+
+app.get('/api/check-daily-goal', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const goalAchieved = user.checkDailyGoal();
+        res.json({ goalAchieved });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при проверке ежедневной цели',
             error: error.message
         });
     }
