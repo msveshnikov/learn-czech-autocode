@@ -91,6 +91,41 @@ lessonSchema.statics.findWithExercises = function () {
     return this.find().populate('exercises');
 };
 
+lessonSchema.statics.getRandomLessons = function (count, level) {
+    const query = level ? { level } : {};
+    return this.aggregate([{ $match: query }, { $sample: { size: count } }]);
+};
+
+lessonSchema.methods.updateProgress = async function (userId, progress) {
+    const User = mongoose.model('User');
+    await User.findByIdAndUpdate(userId, {
+        $set: { [`progress.lessons.${this._id}`]: progress }
+    });
+};
+
+lessonSchema.methods.getAverageCompletionTime = async function () {
+    const Exercise = mongoose.model('Exercise');
+    const exercises = await Exercise.find({ _id: { $in: this.exercises } });
+    const totalTime = exercises.reduce(
+        (sum, exercise) => sum + exercise.averageCompletionTime,
+        0
+    );
+    return totalTime / exercises.length;
+};
+
+lessonSchema.statics.getLessonsByDifficulty = function (difficulty) {
+    return this.find({ level: difficulty }).sort('order');
+};
+
+lessonSchema.methods.getRelatedLessons = function () {
+    return this.model('Lesson')
+        .find({
+            category: this.category,
+            _id: { $ne: this._id }
+        })
+        .limit(3);
+};
+
 const Lesson = mongoose.model('Lesson', lessonSchema);
 
 export default Lesson;

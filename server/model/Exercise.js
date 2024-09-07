@@ -1,5 +1,3 @@
-// server/model/Exercise.js
-
 import mongoose from 'mongoose';
 
 const exerciseSchema = new mongoose.Schema({

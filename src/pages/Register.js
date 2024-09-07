@@ -18,7 +18,6 @@ import LanguageContext from '../contexts/LanguageContext';
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        username: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -40,9 +39,6 @@ const Register = () => {
 
     const validateForm = () => {
         const newErrors = {};
-        if (!formData.username.trim()) {
-            newErrors.username = 'Username is required';
-        }
         if (!formData.email.trim()) {
             newErrors.email = 'Email is required';
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -82,7 +78,6 @@ const Register = () => {
         const translations = {
             en: {
                 register: 'Register',
-                username: 'Username',
                 email: 'Email Address',
                 password: 'Password',
                 confirmPassword: 'Confirm Password',
@@ -92,7 +87,6 @@ const Register = () => {
             },
             ru: {
                 register: 'Регистрация',
-                username: 'Имя пользователя',
                 email: 'Адрес электронной почты',
                 password: 'Пароль',
                 confirmPassword: 'Подтвердите пароль',
@@ -128,17 +122,6 @@ const Register = () => {
                 )}
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label={getTranslation('username')}
-                                name="username"
-                                value={formData.username}
-                                onChange={handleChange}
-                                error={!!errors.username}
-                                helperText={errors.username}
-                            />
-                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth

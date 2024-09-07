@@ -76,5 +76,6 @@ through various exercises and lessons.
 
 # TODO
 
--   autoload lessons.json and exercises.json to Mongo
--   create docker deploy to czech.autocode.work via ssh (with default page landing index.html and app below link)
+-   fix autoload error \_id: CastError: Cast to ObjectId failed for value "1"
+    (type number) at path "\_id" because of "BSONError"
+-    pass token in apiService

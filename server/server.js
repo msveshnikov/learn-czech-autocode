@@ -6,6 +6,8 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import fs from 'fs/promises';
+import path from 'path';
 
 import User from './model/User.js';
 import Lesson from './model/Lesson.js';
@@ -41,9 +43,8 @@ const authenticateToken = (req, res, next) => {
 
 app.post('/api/register', async (req, res) => {
     try {
-        const { username, email, password } = req.body;
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const user = new User({ username, email, password: hashedPassword });
+        const { email, password } = req.body;
+        const user = new User({ email, password });
         await user.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (error) {
@@ -56,8 +57,8 @@ app.post('/api/register', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = await User.findOne({ username });
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
         if (!user) return res.status(400).json({ message: 'User not found' });
 
         const validPassword = await bcrypt.compare(password, user.password);
@@ -141,7 +142,7 @@ app.get('/api/leaderboard', authenticateToken, async (req, res) => {
         const leaderboard = await User.find()
             .sort({ leaderboardScore: -1 })
             .limit(10)
-            .select('username leaderboardScore');
+            .select('email leaderboardScore');
         res.json(leaderboard);
     } catch (error) {
         res.status(500).json({
@@ -263,6 +264,59 @@ app.post(
         }
     }
 );
+
+app.get('/api/dashboard', authenticateToken, async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id);
+        const lessons = await Lesson.find().select('title description');
+        const userProgress = user.getProgress();
+        res.json({ lessons, userProgress });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching dashboard data',
+            error: error.message
+        });
+    }
+});
+
+const loadDataToMongo = async () => {
+    try {
+        const lessonsData = JSON.parse(
+            await fs.readFile(
+                path.join(process.cwd(), 'lessons.json'),
+                'utf-8'
+            )
+        );
+        const exercisesData = JSON.parse(
+            await fs.readFile(
+                path.join(process.cwd(), 'exercises.json'),
+                'utf-8'
+            )
+        );
+
+        await Lesson.deleteMany({});
+        await Exercise.deleteMany({});
+
+        for (const lessonData of lessonsData) {
+            const lesson = new Lesson(lessonData);
+            await lesson.save();
+        }
+
+        for (const exerciseData of exercisesData) {
+            const exercise = new Exercise(exerciseData);
+            await exercise.save();
+        }
+
+        console.log('Data loaded successfully');
+    } catch (error) {
+        console.error('Error loading data:', error);
+    }
+};
+
+mongoose.connection.once('open', () => {
+    console.log('Connected to MongoDB');
+    loadDataToMongo();
+});
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);

@@ -137,6 +137,31 @@
                 "czech": "Pět",
                 "russian": "Пять",
                 "english": "Five"
+            },
+            {
+                "czech": "Šest",
+                "russian": "Шесть",
+                "english": "Six"
+            },
+            {
+                "czech": "Sedm",
+                "russian": "Семь",
+                "english": "Seven"
+            },
+            {
+                "czech": "Osm",
+                "russian": "Восемь",
+                "english": "Eight"
+            },
+            {
+                "czech": "Devět",
+                "russian": "Девять",
+                "english": "Nine"
+            },
+            {
+                "czech": "Deset",
+                "russian": "Десять",
+                "english": "Ten"
             }
         ],
         "exercises": [
@@ -150,6 +175,130 @@
                 "question": "What is the Czech word for 'five'?",
                 "answers": ["Jedna", "Dva", "Tři", "Pět"],
                 "correctAnswer": "Pět"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Listen and select the correct number",
+                "audioUrl": "https://example.com/audio/sedm.mp3",
+                "answers": ["Pět", "Šest", "Sedm", "Osm"],
+                "correctAnswer": "Sedm"
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "Basic Phrases",
+        "description": "Learn essential Czech phrases for everyday situations",
+        "level": "beginner",
+        "category": "conversation",
+        "order": 4,
+        "content": "In this lesson, we'll cover some basic Czech phrases that will help you in everyday situations.",
+        "vocabulary": [
+            {
+                "czech": "Jak se máš?",
+                "russian": "Как дела?",
+                "english": "How are you?"
+            },
+            {
+                "czech": "Mám se dobře",
+                "russian": "У меня все хорошо",
+                "english": "I'm fine"
+            },
+            {
+                "czech": "Nerozumím",
+                "russian": "Я не понимаю",
+                "english": "I don't understand"
+            },
+            {
+                "czech": "Mluvíte anglicky?",
+                "russian": "Вы говорите по-английски?",
+                "english": "Do you speak English?"
+            },
+            {
+                "czech": "Kde je...?",
+                "russian": "Где находится...?",
+                "english": "Where is...?"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "How do you say 'How are you?' in Czech?",
+                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
+                "correctAnswer": "Jak se máš?"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Complete the phrase: 'Mluvíte _____?' (Do you speak English?)",
+                "correctAnswer": "anglicky"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Listen and select the correct phrase",
+                "audioUrl": "https://example.com/audio/nerozumim.mp3",
+                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
+                "correctAnswer": "Nerozumím"
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "title": "Basic Grammar: Verb 'To Be'",
+        "description": "Learn the conjugation of the verb 'to be' in Czech",
+        "level": "beginner",
+        "category": "grammar",
+        "order": 5,
+        "content": "In this lesson, we'll learn how to conjugate the verb 'být' (to be) in the present tense.",
+        "vocabulary": [
+            {
+                "czech": "Jsem",
+                "russian": "Я есть",
+                "english": "I am"
+            },
+            {
+                "czech": "Jsi",
+                "russian": "Ты есть",
+                "english": "You are (singular)"
+            },
+            {
+                "czech": "Je",
+                "russian": "Он/Она/Оно есть",
+                "english": "He/She/It is"
+            },
+            {
+                "czech": "Jsme",
+                "russian": "Мы есть",
+                "english": "We are"
+            },
+            {
+                "czech": "Jste",
+                "russian": "Вы есть",
+                "english": "You are (plural/formal)"
+            },
+            {
+                "czech": "Jsou",
+                "russian": "Они есть",
+                "english": "They are"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "multipleChoice",
+                "question": "What is the correct form of 'to be' for 'I' in Czech?",
+                "answers": ["Jsem", "Jsi", "Je", "Jsme"],
+                "correctAnswer": "Jsem"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Complete the sentence: 'Oni _____ studenti.' (They are students)",
+                "correctAnswer": "jsou"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Listen and select the correct form of 'to be'",
+                "audioUrl": "https://example.com/audio/jste.mp3",
+                "answers": ["Jsem", "Jsi", "Je", "Jste"],
+                "correctAnswer": "Jste"
             }
         ]
     }

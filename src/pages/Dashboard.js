@@ -12,7 +12,8 @@ import {
     List,
     ListItem,
     ListItemText,
-    ListItemIcon
+    ListItemIcon,
+    LinearProgress
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
@@ -25,10 +26,13 @@ import { useLanguage } from '../contexts/LanguageContext';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SchoolIcon from '@mui/icons-material/School';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 const Dashboard = () => {
     const [lessons, setLessons] = useState([]);
     const [userProgress, setUserProgress] = useState({});
+    const [streak, setStreak] = useState(0);
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -50,6 +54,7 @@ const Dashboard = () => {
         if (dashboardData) {
             setLessons(dashboardData.lessons || []);
             setUserProgress(dashboardData.userProgress || {});
+            setStreak(dashboardData.streak || 0);
         }
     }, [dashboardData]);
 
@@ -65,11 +70,19 @@ const Dashboard = () => {
     const onboardingSteps = [
         {
             target: '#lessons-overview',
-            content: 'Here you can see all available lessons.'
+            content: 'Здесь вы можете видеть все доступные уроки.'
         },
         {
             target: '#user-progress',
-            content: 'Track your learning progress here.'
+            content: 'Отслеживайте свой прогресс обучения здесь.'
+        },
+        {
+            target: '#streak',
+            content: 'Следите за своей серией ежедневных занятий.'
+        },
+        {
+            target: '#practice-button',
+            content: 'Нажмите здесь, чтобы начать практику.'
         }
     ];
 
@@ -93,16 +106,16 @@ const Dashboard = () => {
     return (
         <>
             <Helmet>
-                <title>Dashboard - Learn Czech from Russian</title>
+                <title>Панель управления - Изучение чешского языка</title>
                 <meta
                     name="description"
-                    content="Learn Czech language with interactive lessons designed for Russian speakers."
+                    content="Изучайте чешский язык с помощью интерактивных уроков, разработанных для русскоговорящих."
                 />
             </Helmet>
             <Container maxWidth="lg">
                 <Box my={4}>
                     <Typography variant="h4" component="h1" gutterBottom>
-                        {language === 'ru' ? 'Панель управления' : 'Dashboard'}
+                        Панель управления
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} md={8}>
@@ -112,7 +125,7 @@ const Dashboard = () => {
                                 id="lessons-overview"
                             >
                                 <Typography variant="h6" gutterBottom>
-                                    {language === 'ru' ? 'Уроки' : 'Lessons'}
+                                    Уроки
                                 </Typography>
                                 <List>
                                     {lessons.map((lesson) => (
@@ -127,9 +140,7 @@ const Dashboard = () => {
                                                         )
                                                     }
                                                 >
-                                                    {language === 'ru'
-                                                        ? 'Начать'
-                                                        : 'Start'}
+                                                    Начать
                                                 </Button>
                                             }
                                         >
@@ -152,9 +163,7 @@ const Dashboard = () => {
                                 id="user-progress"
                             >
                                 <Typography variant="h6" gutterBottom>
-                                    {language === 'ru'
-                                        ? 'Ваш прогресс'
-                                        : 'Your Progress'}
+                                    Ваш прогресс
                                 </Typography>
                                 <List>
                                     {Object.entries(userProgress).map(
@@ -165,30 +174,69 @@ const Dashboard = () => {
                                                 </ListItemIcon>
                                                 <ListItemText
                                                     primary={key}
-                                                    secondary={`${value}%`}
+                                                    secondary={
+                                                        <LinearProgress
+                                                            variant="determinate"
+                                                            value={value}
+                                                            sx={{ mt: 1 }}
+                                                        />
+                                                    }
                                                 />
                                             </ListItem>
                                         )
                                     )}
                                 </List>
                             </Paper>
+                            <Paper
+                                elevation={3}
+                                sx={{ p: 2, mt: 2 }}
+                                id="streak"
+                            >
+                                <Typography variant="h6" gutterBottom>
+                                    Серия
+                                </Typography>
+                                <Box display="flex" alignItems="center">
+                                    <WhatshotIcon
+                                        color="error"
+                                        sx={{ mr: 1 }}
+                                    />
+                                    <Typography variant="h4">
+                                        {streak}
+                                    </Typography>
+                                    <Typography variant="body2" sx={{ ml: 1 }}>
+                                        дней
+                                    </Typography>
+                                </Box>
+                            </Paper>
                         </Grid>
                         <Grid item xs={12}>
                             <Paper elevation={3} sx={{ p: 2 }}>
                                 <Typography variant="h6" gutterBottom>
-                                    {language === 'ru'
-                                        ? 'Языковая практика'
-                                        : 'Language Practice'}
+                                    Языковая практика
                                 </Typography>
                                 <Button
                                     variant="contained"
                                     startIcon={<TranslateIcon />}
-                                    onClick={() => navigate('/lessons')}
+                                    onClick={() => navigate('/exercises')}
+                                    fullWidth={isMobile}
+                                    id="practice-button"
+                                >
+                                    Начать практику
+                                </Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Paper elevation={3} sx={{ p: 2 }}>
+                                <Typography variant="h6" gutterBottom>
+                                    Достижения
+                                </Typography>
+                                <Button
+                                    variant="outlined"
+                                    startIcon={<EmojiEventsIcon />}
+                                    onClick={() => navigate('/achievements')}
                                     fullWidth={isMobile}
                                 >
-                                    {language === 'ru'
-                                        ? 'Начать практику'
-                                        : 'Start Practice'}
+                                    Посмотреть достижения
                                 </Button>
                             </Paper>
                         </Grid>
