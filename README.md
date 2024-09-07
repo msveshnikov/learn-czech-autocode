@@ -46,7 +46,6 @@ through various exercises and lessons.
 -   `src/`: Contains all frontend React components and logic
     -   `components/`: Reusable UI components
     -   `pages/`: Individual page components
-    -   `contexts/`: React Context for state management
     -   `services/`: API service for backend communication
     -   `utils/`: Utility functions and theme configuration
 -   `server/`: Backend Node.js and Express.js server
@@ -76,4 +75,5 @@ through various exercises and lessons.
 
 # TODO
 
--   add /exercises route
+-   Fix token lost after F5 in browser and then 401
+-   Deploy to czech.autocode.work via docker and ssh (both FE and BE)

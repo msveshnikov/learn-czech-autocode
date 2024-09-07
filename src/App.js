@@ -41,7 +41,7 @@ function App() {
             setDarkMode(JSON.parse(savedMode));
         }
 
-        const token = localStorage.getItem('authToken');
+        const token = localStorage.getItem('token');
         setIsAuthenticated(!!token);
         const onboardingCompleted = localStorage.getItem('onboardingCompleted');
         setShowOnboarding(!onboardingCompleted);
