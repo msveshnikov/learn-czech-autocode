@@ -42,10 +42,10 @@ app.post('/api/register', async (req, res) => {
         const { email, password } = req.body;
         const user = new User({ email, password });
         await user.save();
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'Пользователь успешно зарегистрирован' });
     } catch (error) {
         res.status(500).json({
-            message: 'Error registering user',
+            message: 'Ошибка при регистрации пользователя',
             error: error.message
         });
     }
@@ -55,11 +55,11 @@ app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user) return res.status(400).json({ message: 'User not found' });
+        if (!user) return res.status(400).json({ message: 'Пользователь не найден' });
 
         const validPassword = await user.comparePassword(password);
         if (!validPassword)
-            return res.status(400).json({ message: 'Invalid password' });
+            return res.status(400).json({ message: 'Неверный пароль' });
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: '14d'
@@ -67,7 +67,7 @@ app.post('/api/login', async (req, res) => {
         res.json({ token });
     } catch (error) {
         res.status(500).json({
-            message: 'Error logging in',
+            message: 'Ошибка при входе в систему',
             error: error.message
         });
     }
@@ -79,7 +79,7 @@ app.get('/api/lessons', authenticateToken, async (req, res) => {
         res.json(lessons);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching lessons',
+            message: 'Ошибка при получении уроков',
             error: error.message
         });
     }
@@ -91,12 +91,12 @@ app.get('/api/lesson/:id', authenticateToken, async (req, res) => {
             'exercises'
         );
         if (!lesson) {
-            return res.status(404).json({ message: 'Lesson not found' });
+            return res.status(404).json({ message: 'Урок не найден' });
         }
         res.json(lesson);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching lesson',
+            message: 'Ошибка при получении урока',
             error: error.message
         });
     }
@@ -114,7 +114,7 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
         res.json({ correct, score });
     } catch (error) {
         res.status(500).json({
-            message: 'Error completing exercise',
+            message: 'Ошибка при выполнении упражнения',
             error: error.message
         });
     }
@@ -128,7 +128,7 @@ app.get('/api/user-progress', authenticateToken, async (req, res) => {
         res.json(user.getProgress());
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching user progress',
+            message: 'Ошибка при получении прогресса пользователя',
             error: error.message
         });
     }
@@ -143,7 +143,7 @@ app.get('/api/leaderboard', authenticateToken, async (req, res) => {
         res.json(leaderboard);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching leaderboard',
+            message: 'Ошибка при получении таблицы лидеров',
             error: error.message
         });
     }
@@ -155,7 +155,7 @@ app.get('/api/achievements', authenticateToken, async (req, res) => {
         res.json(user.achievements);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching achievements',
+            message: 'Ошибка при получении достижений',
             error: error.message
         });
     }
@@ -167,12 +167,12 @@ app.post('/api/update-streak', authenticateToken, async (req, res) => {
         user.updateStreak();
         await user.save();
         res.json({
-            message: 'Streak updated successfully',
+            message: 'Серия обновлена успешно',
             streak: user.progress.streak
         });
     } catch (error) {
         res.status(500).json({
-            message: 'Error updating streak',
+            message: 'Ошибка при обновлении серии',
             error: error.message
         });
     }
@@ -184,10 +184,10 @@ app.post('/api/complete-lesson', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         user.addCompletedLesson(lessonId);
         await user.save();
-        res.json({ message: 'Lesson completed successfully' });
+        res.json({ message: 'Урок успешно завершен' });
     } catch (error) {
         res.status(500).json({
-            message: 'Error completing lesson',
+            message: 'Ошибка при завершении урока',
             error: error.message
         });
     }
@@ -205,7 +205,7 @@ app.get(
             res.json(nextLesson);
         } catch (error) {
             res.status(500).json({
-                message: 'Error fetching next lesson',
+                message: 'Ошибка при получении следующего урока',
                 error: error.message
             });
         }
@@ -222,7 +222,7 @@ app.get('/api/vocabulary', authenticateToken, async (req, res) => {
         res.json(vocabulary);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching vocabulary',
+            message: 'Ошибка при получении словаря',
             error: error.message
         });
     }
@@ -234,7 +234,7 @@ app.get('/api/practice-exercises', authenticateToken, async (req, res) => {
         res.json(exercises);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching practice exercises',
+            message: 'Ошибка при получении упражнений для практики',
             error: error.message
         });
     }
@@ -255,7 +255,7 @@ app.post(
             res.json({ correct, score });
         } catch (error) {
             res.status(500).json({
-                message: 'Error submitting practice exercise',
+                message: 'Ошибка при отправке упражнения для практики',
                 error: error.message
             });
         }
@@ -270,7 +270,7 @@ app.get('/api/dashboard', authenticateToken, async (req, res) => {
         res.json({ lessons, userProgress });
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching dashboard data',
+            message: 'Ошибка при получении данных для панели управления',
             error: error.message
         });
     }
@@ -282,7 +282,7 @@ app.get('/api/exercises', authenticateToken, async (req, res) => {
         res.json(exercises);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching exercises',
+            message: 'Ошибка при получении упражнений',
             error: error.message
         });
     }
@@ -297,10 +297,10 @@ app.put('/api/user', authenticateToken, async (req, res) => {
         if (language) user.language = language;
         user.onboardingCompleted = true;
         await user.save();
-        res.json({ message: 'User updated successfully' });
+        res.json({ message: 'Данные пользователя успешно обновлены' });
     } catch (error) {
         res.status(500).json({
-            message: 'Error updating user',
+            message: 'Ошибка при обновлении данных пользователя',
             error: error.message
         });
     }
@@ -312,7 +312,7 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
         res.json(user.getUnreadNotifications());
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching notifications',
+            message: 'Ошибка при получении уведомлений',
             error: error.message
         });
     }
@@ -324,10 +324,10 @@ app.post('/api/mark-notification-read', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         user.markNotificationAsRead(notificationId);
         await user.save();
-        res.json({ message: 'Notification marked as read' });
+        res.json({ message: 'Уведомление отмечено как прочитанное' });
     } catch (error) {
         res.status(500).json({
-            message: 'Error marking notification as read',
+            message: 'Ошибка при отметке уведомления как прочитанного',
             error: error.message
         });
     }
@@ -339,7 +339,7 @@ app.get('/api/user', authenticateToken, async (req, res) => {
         res.json(user);
     } catch (error) {
         res.status(500).json({
-            message: 'Error fetching user data',
+            message: 'Ошибка при получении данных пользователя',
             error: error.message
         });
     }
@@ -369,17 +369,17 @@ const loadDataToMongo = async () => {
             await lesson.save();
         }
 
-        console.log('Data loaded successfully');
+        console.log('Данные успешно загружены');
     } catch (error) {
-        console.error('Error loading data:', error);
+        console.error('Ошибка при загрузке данных:', error);
     }
 };
 
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
+    console.log('Подключено к MongoDB');
     loadDataToMongo();
 });
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Сервер запущен на порту ${port}`);
 });

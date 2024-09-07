@@ -75,8 +75,8 @@ through various exercises and lessons.
 
 # TODO
 
-2. Develop core lesson structure for Czech language (13 story points)
 
-    - Design initial lesson progression (5-10 lessons)
-    - Create database schema for lesson content in Czech and Russian
-    - Implement basic lesson display functionality
+1. Implement Russian UI for all existing components (8 story points)
+
+    - Translate all UI elements to Russian
+    - Ensure proper rendering of Cyrillic characters

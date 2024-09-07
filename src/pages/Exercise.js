@@ -3,7 +3,6 @@ import {
     Box,
     Typography,
     Button,
-    CircularProgress,
     Radio,
     RadioGroup,
     FormControlLabel,
@@ -13,41 +12,37 @@ import {
     Alert
 } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from 'react-query';
+import { Helmet } from 'react-helmet';
 import apiService from '../services/apiService';
+import Loading from '../components/Loading';
 
 const Exercise = () => {
     const { exerciseId } = useParams();
     const navigate = useNavigate();
-    const [exercise, setExercise] = useState(null);
     const [userAnswer, setUserAnswer] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [timeSpent, setTimeSpent] = useState(0);
     const [showFeedback, setShowFeedback] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
 
-    const fetchExercise = useCallback(async () => {
-        try {
-            setLoading(true);
-            const response = await apiService.getExercises();
-            const fetchedExercise = response.find(
-                (ex) => ex._id === exerciseId
-            );
-            if (fetchedExercise) {
-                setExercise(fetchedExercise);
-            } else {
-                setError('Exercise not found');
-            }
-        } catch (err) {
-            setError('Failed to load exercise');
-        } finally {
-            setLoading(false);
-        }
-    }, [exerciseId]);
+    const {
+        data: exercise,
+        isLoading,
+        error
+    } = useQuery(['exercise', exerciseId], () =>
+        apiService.getExercise(exerciseId)
+    );
 
-    useEffect(() => {
-        fetchExercise();
-    }, [fetchExercise]);
+    const submitExerciseMutation = useMutation(
+        ({ exerciseId, answer, timeSpent }) =>
+            apiService.submitExercise(exerciseId, answer, timeSpent),
+        {
+            onSuccess: (data) => {
+                setIsCorrect(data.correct);
+                setShowFeedback(true);
+            }
+        }
+    );
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -57,53 +52,35 @@ const Exercise = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const handleAnswerChange = (event) => {
+    const handleAnswerChange = useCallback((event) => {
         setUserAnswer(event.target.value);
-    };
+    }, []);
 
-    const handleSubmit = async () => {
-        try {
-            const response = await apiService.submitExercise(
-                exerciseId,
-                userAnswer,
-                timeSpent
-            );
-            setIsCorrect(response.correct);
-            setShowFeedback(true);
-        } catch (err) {
-            setError('Failed to submit answer');
-        }
-    };
+    const handleSubmit = useCallback(() => {
+        submitExerciseMutation.mutate({
+            exerciseId,
+            answer: userAnswer,
+            timeSpent
+        });
+    }, [exerciseId, userAnswer, timeSpent, submitExerciseMutation]);
 
-    const handleNextExercise = () => {
+    const handleNextExercise = useCallback(() => {
         navigate('/exercises');
-    };
+    }, [navigate]);
 
-    if (loading) {
+    if (isLoading) return <Loading />;
+    if (error)
         return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
-                <CircularProgress />
-            </Box>
+            <Typography color="error">
+                Ошибка при загрузке упражнения
+            </Typography>
         );
-    }
-
-    if (error) {
-        return (
-            <Box p={3}>
-                <Typography variant="h6" color="error">
-                    {error}
-                </Typography>
-            </Box>
-        );
-    }
 
     return (
         <Box p={3}>
+            <Helmet>
+                <title>Упражнение - Учим чешский с русского</title>
+            </Helmet>
             <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
                 <Typography variant="h5" gutterBottom>
                     {exercise.question}
@@ -159,6 +136,7 @@ const Exercise = () => {
                         variant="contained"
                         color="primary"
                         onClick={handleSubmit}
+                        disabled={!userAnswer}
                     >
                         Подтвердить
                     </Button>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
     Container,
     Grid,
@@ -89,27 +89,13 @@ const Dashboard = () => {
         }
     ];
 
-    const handleUIOverviewComplete = () => {
+    const handleUIOverviewComplete = useCallback(() => {
         setShowUIOverview(false);
         localStorage.setItem('uiOverviewShown', 'true');
-    };
+    }, []);
 
-    if (isLoading) {
-        return <Loading />;
-    }
-
-    if (error) {
-        return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
-                <Typography color="error">{error.message}</Typography>
-            </Box>
-        );
-    }
+    if (isLoading) return <Loading />;
+    if (error) return <Typography color="error">{error.message}</Typography>;
 
     return (
         <>

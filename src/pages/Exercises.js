@@ -86,7 +86,13 @@ const Exercises = () => {
                         (category) => (
                             <Chip
                                 key={category}
-                                label={category}
+                                label={
+                                    category === 'vocabulary'
+                                        ? 'Словарь'
+                                        : category === 'grammar'
+                                        ? 'Грамматика'
+                                        : 'Произношение'
+                                }
                                 onClick={() =>
                                     handleFilterChange('category', category)
                                 }
@@ -103,7 +109,13 @@ const Exercises = () => {
                     {['easy', 'medium', 'hard'].map((difficulty) => (
                         <Chip
                             key={difficulty}
-                            label={difficulty}
+                            label={
+                                difficulty === 'easy'
+                                    ? 'Легкий'
+                                    : difficulty === 'medium'
+                                    ? 'Средний'
+                                    : 'Сложный'
+                            }
                             onClick={() =>
                                 handleFilterChange('difficulty', difficulty)
                             }
@@ -145,11 +157,25 @@ const Exercises = () => {
                                     }}
                                 >
                                     <Chip
-                                        label={exercise.category}
+                                        label={
+                                            exercise.category === 'vocabulary'
+                                                ? 'Словарь'
+                                                : exercise.category ===
+                                                  'grammar'
+                                                ? 'Грамматика'
+                                                : 'Произношение'
+                                        }
                                         size="small"
                                     />
                                     <Chip
-                                        label={exercise.difficulty}
+                                        label={
+                                            exercise.difficulty === 'easy'
+                                                ? 'Легкий'
+                                                : exercise.difficulty ===
+                                                  'medium'
+                                                ? 'Средний'
+                                                : 'Сложный'
+                                        }
                                         size="small"
                                     />
                                 </Box>

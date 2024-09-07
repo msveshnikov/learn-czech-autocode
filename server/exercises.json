@@ -83,5 +83,45 @@
         "correctAnswer": "Ano",
         "difficulty": "easy",
         "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Jak se ___?' (Как вас зовут?)",
+        "correctAnswer": "jmenujete",
+        "difficulty": "medium",
+        "category": "grammar"
+    },
+    {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное приветствие",
+        "answers": ["Dobrý den", "Dobrou noc", "Na shledanou", "Ahoj"],
+        "correctAnswer": "Dobrý den",
+        "audioUrl": "https://example.com/audio/dobry-den.mp3",
+        "difficulty": "easy",
+        "category": "pronunciation"
+    },
+    {
+        "type": "multipleChoice",
+        "question": "Как сказать 'извините' на чешском?",
+        "answers": ["Promiňte", "Děkuji", "Prosím", "Ano"],
+        "correctAnswer": "Promiňte",
+        "difficulty": "medium",
+        "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
+        "correctAnswer": "jste",
+        "difficulty": "hard",
+        "category": "grammar"
+    },
+    {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
+        "answers": ["Dobře", "Špatně", "Ano", "Ne"],
+        "correctAnswer": "Dobře",
+        "audioUrl": "https://example.com/audio/dobre.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
     }
 ]

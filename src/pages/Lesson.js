@@ -14,7 +14,9 @@ import {
     TextField,
     List,
     ListItem,
-    ListItemText
+    ListItemText,
+    Snackbar,
+    Alert
 } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import { Helmet } from 'react-helmet';
@@ -29,6 +31,11 @@ const Lesson = () => {
     const [score, setScore] = useState(0);
     const [showResult, setShowResult] = useState(false);
     const [timeSpent, setTimeSpent] = useState(0);
+    const [snackbar, setSnackbar] = useState({
+        open: false,
+        message: '',
+        severity: 'info'
+    });
 
     const {
         data: lessonData,
@@ -43,6 +50,17 @@ const Lesson = () => {
             onSuccess: (data) => {
                 if (data.correct) {
                     setScore(score + 1);
+                    setSnackbar({
+                        open: true,
+                        message: 'Правильно!',
+                        severity: 'success'
+                    });
+                } else {
+                    setSnackbar({
+                        open: true,
+                        message: 'Неправильно. Попробуйте еще раз.',
+                        severity: 'error'
+                    });
                 }
                 if (currentExercise < lessonData.exercises.length - 1) {
                     setCurrentExercise(currentExercise + 1);
@@ -157,6 +175,31 @@ const Lesson = () => {
                         sx={{ mt: 2 }}
                     />
                 );
+            case 'listeningComprehension':
+                return (
+                    <>
+                        <audio
+                            controls
+                            src={exercise.audioUrl}
+                            style={{ marginBottom: '1rem' }}
+                        />
+                        <RadioGroup
+                            aria-label="listening"
+                            name="listening"
+                            value={userAnswer}
+                            onChange={handleAnswer}
+                        >
+                            {exercise.answers.map((option, index) => (
+                                <FormControlLabel
+                                    key={index}
+                                    value={option}
+                                    control={<Radio />}
+                                    label={option}
+                                />
+                            ))}
+                        </RadioGroup>
+                    </>
+                );
             default:
                 return null;
         }
@@ -178,10 +221,7 @@ const Lesson = () => {
                     {!showResult ? (
                         <>
                             <Typography variant="h6" gutterBottom>
-                                {
-                                    lessonData.exercises[currentExercise]
-                                        .question
-                                }
+                                {lessonData.exercises[currentExercise].question}
                             </Typography>
                             {renderExercise()}
                             <Box mt={2}>
@@ -239,6 +279,19 @@ const Lesson = () => {
                     </List>
                 </Paper>
             </Box>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={3000}
+                onClose={() => setSnackbar({ ...snackbar, open: false })}
+            >
+                <Alert
+                    onClose={() => setSnackbar({ ...snackbar, open: false })}
+                    severity={snackbar.severity}
+                    sx={{ width: '100%' }}
+                >
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </Container>
     );
 };
