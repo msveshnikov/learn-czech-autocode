@@ -75,6 +75,3 @@ through various exercises and lessons.
 
 # TODO
 
-
--   use Duolingo colors and nice dark theme
--   add GET /api/user

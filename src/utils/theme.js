@@ -130,23 +130,28 @@ const createCustomTheme = (mode) => {
                             backgroundColor: palette.background.default,
                             width: '8px'
                         },
-                        '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
-                            borderRadius: '8px',
-                            backgroundColor: palette.primary.main,
-                            minHeight: '24px'
-                        },
-                        '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus': {
-                            backgroundColor: palette.primary.dark
-                        },
-                        '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active': {
-                            backgroundColor: palette.primary.dark
-                        },
-                        '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover': {
-                            backgroundColor: palette.primary.light
-                        },
-                        '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner': {
-                            backgroundColor: palette.background.default
-                        }
+                        '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb':
+                            {
+                                borderRadius: '8px',
+                                backgroundColor: palette.primary.main,
+                                minHeight: '24px'
+                            },
+                        '&::-webkit-scrollbar-thumb:focus, & *::-webkit-scrollbar-thumb:focus':
+                            {
+                                backgroundColor: palette.primary.dark
+                            },
+                        '&::-webkit-scrollbar-thumb:active, & *::-webkit-scrollbar-thumb:active':
+                            {
+                                backgroundColor: palette.primary.dark
+                            },
+                        '&::-webkit-scrollbar-thumb:hover, & *::-webkit-scrollbar-thumb:hover':
+                            {
+                                backgroundColor: palette.primary.light
+                            },
+                        '&::-webkit-scrollbar-corner, & *::-webkit-scrollbar-corner':
+                            {
+                                backgroundColor: palette.background.default
+                            }
                     }
                 }
             }

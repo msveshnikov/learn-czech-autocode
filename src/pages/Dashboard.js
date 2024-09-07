@@ -21,12 +21,12 @@ import { Helmet } from 'react-helmet';
 import { useQuery } from 'react-query';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
-import Onboarding from '../components/Onboarding';
 import TranslateIcon from '@mui/icons-material/Translate';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
+import UIOverview from '../components/UIOverview';
 
 const Dashboard = () => {
     const [lessons, setLessons] = useState([]);
@@ -37,7 +37,7 @@ const Dashboard = () => {
         message: '',
         severity: 'info'
     });
-    const [showOnboarding, setShowOnboarding] = useState(true);
+    const [showUIOverview, setShowUIOverview] = useState(true);
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -254,10 +254,10 @@ const Dashboard = () => {
                     {snackbar.message}
                 </Alert>
             </Snackbar>
-            {showOnboarding && (
-                <Onboarding
+            {showUIOverview && (
+                <UIOverview
                     steps={onboardingSteps}
-                    onComplete={() => setShowOnboarding(false)}
+                    onComplete={() => setShowUIOverview(false)}
                 />
             )}
         </>
