@@ -297,6 +297,7 @@ app.put('/api/user', authenticateToken, async (req, res) => {
         if (username) user.username = username;
         if (learningGoal) user.learningGoal = learningGoal;
         if (language) user.language = language;
+        user.onboardingCompleted = true;
         await user.save();
         res.json({ message: 'User updated successfully' });
     } catch (error) {
