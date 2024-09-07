@@ -74,3 +74,6 @@ through various exercises and lessons.
 6. Beta testing and user feedback collection
 7. Continuous improvement and feature additions
 
+# TODO
+
+-   add /exercises route

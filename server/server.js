@@ -276,6 +276,18 @@ app.get('/api/dashboard', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/api/exercises', authenticateToken, async (req, res) => {
+    try {
+        const exercises = await Exercise.find();
+        res.json(exercises);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error fetching exercises',
+            error: error.message
+        });
+    }
+});
+
 const loadDataToMongo = async () => {
     try {
         const lessonsData = JSON.parse(

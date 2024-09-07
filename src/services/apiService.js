@@ -44,10 +44,11 @@ const apiService = {
         return response.data;
     },
 
-    submitExercise: async (exerciseId, answer) => {
+    submitExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(`${API_BASE_URL}/complete-exercise`, {
             exerciseId,
-            answer
+            answer,
+            timeSpent
         });
         return response.data;
     },
@@ -94,10 +95,10 @@ const apiService = {
         return response.data;
     },
 
-    submitPracticeExercise: async (exerciseId, answer) => {
+    submitPracticeExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(
-            `${API_BASE_URL}/practice-exercises/${exerciseId}`,
-            { answer }
+            `${API_BASE_URL}/submit-practice-exercise`,
+            { exerciseId, answer, timeSpent }
         );
         return response.data;
     },
@@ -163,10 +164,10 @@ const apiService = {
         return response.data;
     },
 
-    submitSpacedRepetitionExercise: async (exerciseId, answer) => {
+    submitSpacedRepetitionExercise: async (exerciseId, answer, timeSpent) => {
         const response = await axios.post(
             `${API_BASE_URL}/spaced-repetition-exercises/${exerciseId}`,
-            { answer }
+            { answer, timeSpent }
         );
         return response.data;
     },
@@ -196,6 +197,11 @@ const apiService = {
             `${API_BASE_URL}/performance-analytics`,
             data
         );
+        return response.data;
+    },
+
+    getExercises: async () => {
+        const response = await axios.get(`${API_BASE_URL}/exercises`);
         return response.data;
     }
 };
