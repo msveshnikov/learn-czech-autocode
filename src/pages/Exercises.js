@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Box,
     Typography,
@@ -9,13 +9,11 @@ import {
     CircularProgress
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import LanguageContext from '../contexts/LanguageContext';
 import apiService from '../services/apiService';
 
 const Exercises = () => {
     const [exercises, setExercises] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { language } = useContext(LanguageContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -53,7 +51,7 @@ const Exercises = () => {
     return (
         <Box sx={{ p: 3 }}>
             <Typography variant="h4" gutterBottom>
-                {language === 'ru' ? 'Упражнения' : 'Exercises'}
+                Упражнения
             </Typography>
             <Grid container spacing={3}>
                 {exercises.map((exercise) => (
@@ -77,7 +75,7 @@ const Exercises = () => {
                                     }
                                     sx={{ mt: 2 }}
                                 >
-                                    {language === 'ru' ? 'Начать' : 'Start'}
+                                    Начать
                                 </Button>
                             </CardContent>
                         </Card>

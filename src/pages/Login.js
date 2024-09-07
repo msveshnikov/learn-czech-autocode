@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     TextField,
@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import apiService from '../services/apiService';
-import LanguageContext from '../contexts/LanguageContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -22,7 +21,6 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const theme = useTheme();
-    const { language } = useContext(LanguageContext);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -48,32 +46,9 @@ const Login = () => {
             }
             navigate('/dashboard');
         } catch (err) {
-            setError(err.response?.data?.message || t.loginFailed);
+            setError(err.response?.data?.message || 'Ошибка входа. Пожалуйста, попробуйте снова.');
         }
     };
-
-    const translations = {
-        ru: {
-            title: 'Вход',
-            email: 'Электронная почта',
-            password: 'Пароль',
-            rememberMe: 'Запомнить меня',
-            login: 'Войти',
-            noAccount: 'Нет аккаунта? Зарегистрируйтесь',
-            loginFailed: 'Ошибка входа. Пожалуйста, попробуйте снова.'
-        },
-        en: {
-            title: 'Log in',
-            email: 'Email Address',
-            password: 'Password',
-            rememberMe: 'Remember me',
-            login: 'Sign In',
-            noAccount: "Don't have an account? Sign Up",
-            loginFailed: 'Login failed. Please try again.'
-        }
-    };
-
-    const t = translations[language] || translations.en;
 
     return (
         <Container component="main" maxWidth="xs">
@@ -91,7 +66,7 @@ const Login = () => {
                     align="center"
                     color="textPrimary"
                 >
-                    {t.title}
+                    Вход
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     <TextField
@@ -99,7 +74,7 @@ const Login = () => {
                         required
                         fullWidth
                         id="email"
-                        label={t.email}
+                        label="Электронная почта"
                         name="email"
                         autoComplete="email"
                         autoFocus
@@ -112,7 +87,7 @@ const Login = () => {
                         required
                         fullWidth
                         name="password"
-                        label={t.password}
+                        label="Пароль"
                         type="password"
                         id="password"
                         autoComplete="current-password"
@@ -131,7 +106,7 @@ const Login = () => {
                                 }
                             />
                         }
-                        label={t.rememberMe}
+                        label="Запомнить меня"
                     />
                     {error && (
                         <Alert severity="error" sx={{ mt: 2 }}>
@@ -145,7 +120,7 @@ const Login = () => {
                         sx={{ mt: 3, mb: 2 }}
                         color="primary"
                     >
-                        {t.login}
+                        Войти
                     </Button>
                     <Box sx={{ textAlign: 'center' }}>
                         <Link
@@ -156,7 +131,7 @@ const Login = () => {
                             }}
                         >
                             <Typography variant="body2">
-                                {t.noAccount}
+                                Нет аккаунта? Зарегистрируйтесь
                             </Typography>
                         </Link>
                     </Box>

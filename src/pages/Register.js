@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
     Container,
@@ -14,7 +14,6 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import apiService from '../services/apiService';
-import LanguageContext from '../contexts/LanguageContext';
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -27,7 +26,6 @@ const Register = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const navigate = useNavigate();
     const theme = useTheme();
-    const { language } = useContext(LanguageContext);
 
     const handleChange = (e) => {
         const { name, value, checked } = e.target;
@@ -40,20 +38,20 @@ const Register = () => {
     const validateForm = () => {
         const newErrors = {};
         if (!formData.email.trim()) {
-            newErrors.email = 'Email is required';
+            newErrors.email = 'Email обязателен';
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-            newErrors.email = 'Email is invalid';
+            newErrors.email = 'Неверный формат email';
         }
         if (!formData.password) {
-            newErrors.password = 'Password is required';
+            newErrors.password = 'Пароль обязателен';
         } else if (formData.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
+            newErrors.password = 'Пароль должен содержать минимум 6 символов';
         }
         if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match';
+            newErrors.confirmPassword = 'Пароли не совпадают';
         }
         if (!formData.acceptTerms) {
-            newErrors.acceptTerms = 'You must accept the terms and conditions';
+            newErrors.acceptTerms = 'Вы должны принять условия использования';
         }
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -64,38 +62,14 @@ const Register = () => {
         if (validateForm()) {
             try {
                 await apiService.register(formData);
-                setAlertMessage('Registration successful. Please log in.');
+                setAlertMessage('Регистрация успешна. Пожалуйста, войдите в систему.');
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
             } catch (error) {
-                setAlertMessage('Registration failed. Please try again.');
+                setAlertMessage('Ошибка регистрации. Пожалуйста, попробуйте снова.');
             }
         }
-    };
-
-    const getTranslation = (key) => {
-        const translations = {
-            en: {
-                register: 'Register',
-                email: 'Email Address',
-                password: 'Password',
-                confirmPassword: 'Confirm Password',
-                acceptTerms: 'I accept the terms and conditions',
-                submit: 'Register',
-                alreadyHaveAccount: 'Already have an account? Sign in'
-            },
-            ru: {
-                register: 'Регистрация',
-                email: 'Адрес электронной почты',
-                password: 'Пароль',
-                confirmPassword: 'Подтвердите пароль',
-                acceptTerms: 'Я принимаю условия использования',
-                submit: 'Зарегистрироваться',
-                alreadyHaveAccount: 'Уже есть аккаунт? Войти'
-            }
-        };
-        return translations[language][key] || translations['en'][key];
     };
 
     return (
@@ -109,7 +83,7 @@ const Register = () => {
                 }}
             >
                 <Typography component="h1" variant="h5" align="center">
-                    {getTranslation('register')}
+                    Регистрация
                 </Typography>
                 {alertMessage && (
                     <Alert
@@ -125,7 +99,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label={getTranslation('email')}
+                                label="Адрес электронной почты"
                                 name="email"
                                 type="email"
                                 value={formData.email}
@@ -137,7 +111,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label={getTranslation('password')}
+                                label="Пароль"
                                 name="password"
                                 type="password"
                                 value={formData.password}
@@ -149,7 +123,7 @@ const Register = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label={getTranslation('confirmPassword')}
+                                label="Подтвердите пароль"
                                 name="confirmPassword"
                                 type="password"
                                 value={formData.confirmPassword}
@@ -168,7 +142,7 @@ const Register = () => {
                                         color="primary"
                                     />
                                 }
-                                label={getTranslation('acceptTerms')}
+                                label="Я принимаю условия использования"
                             />
                             {errors.acceptTerms && (
                                 <Typography color="error" variant="caption">
@@ -183,12 +157,12 @@ const Register = () => {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        {getTranslation('submit')}
+                        Зарегистрироваться
                     </Button>
                     <Grid container justifyContent="flex-end">
                         <Grid item>
                             <Link to="/login" variant="body2">
-                                {getTranslation('alreadyHaveAccount')}
+                                Уже есть аккаунт? Войти
                             </Link>
                         </Grid>
                     </Grid>

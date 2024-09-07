@@ -1,52 +1,9 @@
 import React from 'react';
 import { Typography, Container, Box, Paper } from '@mui/material';
 import { Helmet } from 'react-helmet';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const Privacy = () => {
-    const { language } = useLanguage();
-
     const content = {
-        en: {
-            title: 'Privacy Policy',
-            sections: [
-                {
-                    title: '1. Information Collection',
-                    content:
-                        'We collect personal information that you provide directly to us when you create an account, use our services, or communicate with us. This may include your name, email address, and language learning progress data.'
-                },
-                {
-                    title: '2. Use of Information',
-                    content:
-                        'We use the information we collect to provide, maintain, and improve our language learning services, to process your requests, to send you technical notices and support messages, and to comply with legal obligations.'
-                },
-                {
-                    title: '3. Data Security',
-                    content:
-                        'We implement appropriate technical and organizational measures to protect your personal information against unauthorized or unlawful processing, accidental loss, destruction, or damage.'
-                },
-                {
-                    title: '4. Data Sharing',
-                    content:
-                        'We do not sell your personal information. We may share your information with third-party service providers who perform services on our behalf, subject to confidentiality agreements.'
-                },
-                {
-                    title: '5. Your Rights',
-                    content:
-                        'You have the right to access, correct, or delete your personal information. You may also have the right to restrict or object to certain processing of your data.'
-                },
-                {
-                    title: '6. Changes to This Policy',
-                    content:
-                        'We may update this privacy policy from time to time. We will notify you of any changes by posting the new privacy policy on this page.'
-                },
-                {
-                    title: '7. Contact Us',
-                    content:
-                        'If you have any questions about this privacy policy, please contact us at privacy@czechfromrussian.com.'
-                }
-            ]
-        },
         ru: {
             title: 'Политика конфиденциальности',
             sections: [
@@ -89,7 +46,7 @@ const Privacy = () => {
         }
     };
 
-    const currentContent = content[language] || content.en;
+    const currentContent =  content.ru;
 
     return (
         <Container maxWidth="md">
@@ -97,7 +54,7 @@ const Privacy = () => {
                 <title>{currentContent.title} - Czech from Russian</title>
                 <meta
                     name="description"
-                    content="Privacy policy for Czech from Russian language learning application"
+                    content="Политика конфиденциальности для приложения по изучению чешского языка с русского"
                 />
             </Helmet>
             <Paper elevation={3} sx={{ p: 4, mt: 4 }}>
@@ -117,7 +74,7 @@ const Privacy = () => {
                     color="textSecondary"
                     align="center"
                 >
-                    Last Updated: {new Date().toLocaleDateString()}
+                    Последнее обновление: {new Date().toLocaleDateString()}
                 </Typography>
             </Paper>
         </Container>

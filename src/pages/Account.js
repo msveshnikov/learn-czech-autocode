@@ -17,7 +17,6 @@ import { Helmet } from 'react-helmet';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
-import { useLanguage } from '../contexts/LanguageContext';
 
 const Account = () => {
     const [user, setUser] = useState({
@@ -30,7 +29,6 @@ const Account = () => {
     const [activeStep] = useState(0);
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const { language } = useLanguage();
 
     const {
         data: userData,
@@ -103,7 +101,7 @@ const Account = () => {
                 />
             </Helmet>
             <Typography variant="h4" gutterBottom>
-                {language === 'ru' ? 'Детали аккаунта' : 'Account Details'}
+                Детали аккаунта
             </Typography>
             {error && (
                 <Alert severity="error" sx={{ mb: 2 }}>
@@ -132,11 +130,7 @@ const Account = () => {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 fullWidth
-                                label={
-                                    language === 'ru'
-                                        ? 'Имя пользователя'
-                                        : 'Username'
-                                }
+                                label="Имя пользователя"
                                 name="username"
                                 value={user.username}
                                 onChange={handleInputChange}
@@ -156,8 +150,7 @@ const Account = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h6">
-                                {language === 'ru' ? 'Баланс: ' : 'Balance: '}
-                                {user?.balance?.toFixed(2)} XP
+                                Баланс: {user?.balance?.toFixed(2)} XP
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
@@ -170,17 +163,13 @@ const Account = () => {
                                         sx={{ marginRight: 2 }}
                                         disabled={updateUserMutation.isLoading}
                                     >
-                                        {language === 'ru'
-                                            ? 'Сохранить изменения'
-                                            : 'Save Changes'}
+                                        Сохранить изменения
                                     </Button>
                                     <Button
                                         variant="outlined"
                                         onClick={() => setIsEditing(false)}
                                     >
-                                        {language === 'ru'
-                                            ? 'Отмена'
-                                            : 'Cancel'}
+                                        Отмена
                                     </Button>
                                 </>
                             ) : (
@@ -188,9 +177,7 @@ const Account = () => {
                                     variant="contained"
                                     onClick={() => setIsEditing(true)}
                                 >
-                                    {language === 'ru'
-                                        ? 'Редактировать профиль'
-                                        : 'Edit Profile'}
+                                    Редактировать профиль
                                 </Button>
                             )}
                         </Grid>
@@ -199,7 +186,7 @@ const Account = () => {
             </Paper>
             <Paper elevation={3} sx={{ padding: 3, mt: 3 }}>
                 <Typography variant="h6" gutterBottom>
-                    {language === 'ru' ? 'Быстрые ссылки' : 'Quick Links'}
+                    Быстрые ссылки
                 </Typography>
                 <Button
                     variant="outlined"
@@ -207,16 +194,14 @@ const Account = () => {
                     onClick={() => navigate('/dashboard')}
                     sx={{ mr: 2 }}
                 >
-                    {language === 'ru'
-                        ? 'Перейти к панели управления'
-                        : 'Go to Dashboard'}
+                    Перейти к панели управления
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
                     onClick={() => navigate('/lessons')}
                 >
-                    {language === 'ru' ? 'Просмотреть уроки' : 'View Lessons'}
+                    Просмотреть уроки
                 </Button>
             </Paper>
         </Box>

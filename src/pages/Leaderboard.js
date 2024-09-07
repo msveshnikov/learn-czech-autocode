@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Container,
     Typography,
@@ -10,13 +10,11 @@ import {
     Paper,
     CircularProgress
 } from '@mui/material';
-import LanguageContext from '../contexts/LanguageContext';
 import apiService from '../services/apiService';
 
 const Leaderboard = () => {
     const [leaderboardData, setLeaderboardData] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { language } = useContext(LanguageContext);
 
     useEffect(() => {
         const getLeaderboardData = async () => {
@@ -25,7 +23,7 @@ const Leaderboard = () => {
                 setLeaderboardData(data);
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching leaderboard data:', error);
+                console.error('Ошибка при получении данных таблицы лидеров:', error);
                 setLoading(false);
             }
         };
@@ -34,21 +32,11 @@ const Leaderboard = () => {
     }, []);
 
     const translations = {
-        ru: {
-            title: 'Таблица лидеров',
-            rank: 'Ранг',
-            name: 'Имя',
-            score: 'Очки'
-        },
-        en: {
-            title: 'Leaderboard',
-            rank: 'Rank',
-            name: 'Name',
-            score: 'Score'
-        }
+        title: 'Таблица лидеров',
+        rank: 'Ранг',
+        name: 'Имя',
+        score: 'Очки'
     };
-
-    const t = translations[language];
 
     if (loading) {
         return (
@@ -68,7 +56,7 @@ const Leaderboard = () => {
     return (
         <Container maxWidth="sm" sx={{ mt: 4 }}>
             <Typography variant="h4" component="h1" gutterBottom align="center">
-                {t.title}
+                {translations.title}
             </Typography>
             <Paper elevation={3}>
                 <List>
