@@ -73,7 +73,3 @@ through various exercises and lessons.
 6. Beta testing and user feedback collection
 7. Continuous improvement and feature additions
 
-# TODO
-
--   Fix token lost after F5 in browser and then 401
--   Deploy to czech.autocode.work via docker and ssh (both FE and BE)

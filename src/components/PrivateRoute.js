@@ -1,33 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Navigate, useLocation } from 'react-router-dom';
 import Loading from './Loading';
+import { AuthContext } from '../context/AuthContext';
 
 const PrivateRoute = ({ children }) => {
-    const [isAuthenticated, setIsAuthenticated] = React.useState(null);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const { isAuthenticated, isLoading } = useContext(AuthContext);
     const location = useLocation();
-
-    React.useEffect(() => {
-        const checkAuth = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                if (token) {
-                    // TODO: Implement token validation with the backend
-                    setIsAuthenticated(true);
-                } else {
-                    setIsAuthenticated(false);
-                }
-            } catch (error) {
-                console.error('Authentication check failed:', error);
-                setIsAuthenticated(false);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        checkAuth();
-    }, []);
 
     if (isLoading) {
         return <Loading />;

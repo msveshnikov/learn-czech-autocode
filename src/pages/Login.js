@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     TextField,
@@ -13,6 +13,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import apiService from '../services/apiService';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,15 +22,17 @@ const Login = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const theme = useTheme();
+    const { setIsAuthenticated } = useContext(AuthContext);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const rememberedUser = localStorage.getItem('rememberMe');
         if (token && rememberedUser) {
             apiService.setToken(token);
+            setIsAuthenticated(true);
             navigate('/dashboard');
         }
-    }, [navigate]);
+    }, [navigate, setIsAuthenticated]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -44,6 +47,7 @@ const Login = () => {
             } else {
                 localStorage.removeItem('rememberMe');
             }
+            setIsAuthenticated(true);
             navigate('/dashboard');
         } catch (err) {
             setError(

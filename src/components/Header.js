@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar,
@@ -10,17 +10,25 @@ import {
     MenuItem,
     useTheme,
     useMediaQuery,
-    Box
+    Box,
+    Avatar
 } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import apiService from '../services/apiService';
+import { AuthContext } from '../context/AuthContext';
 
 const Header = ({ toggleTheme }) => {
     const [anchorEl, setAnchorEl] = useState(null);
+    const [notificationAnchorEl, setNotificationAnchorEl] = useState(null);
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+    const navigate = useNavigate();
+    const { isAuthenticated, setIsAuthenticated, user } =
+        useContext(AuthContext);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -28,6 +36,26 @@ const Header = ({ toggleTheme }) => {
 
     const handleClose = () => {
         setAnchorEl(null);
+    };
+
+    const handleNotificationMenu = (event) => {
+        setNotificationAnchorEl(event.currentTarget);
+    };
+
+    const handleNotificationClose = () => {
+        setNotificationAnchorEl(null);
+    };
+
+    const handleLogout = async () => {
+        try {
+            await apiService.logout();
+            setIsAuthenticated(false);
+            localStorage.removeItem('token');
+            localStorage.removeItem('rememberMe');
+            navigate('/login');
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
     };
 
     const menuItems = [
@@ -57,7 +85,7 @@ const Header = ({ toggleTheme }) => {
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                     Чешский с нуля
                 </Typography>
-                {!isMobile && (
+                {!isMobile && isAuthenticated && (
                     <Box sx={{ display: 'flex' }}>
                         {menuItems.map((item) => (
                             <Button
@@ -83,40 +111,109 @@ const Header = ({ toggleTheme }) => {
                         <Brightness4Icon />
                     )}
                 </IconButton>
-
-                <Button color="inherit" component={RouterLink} to="/account">
-                    Аккаунт
-                </Button>
-                <Button color="inherit" component={RouterLink} to="/login">
-                    Войти
-                </Button>
+                {isAuthenticated && (
+                    <>
+                        <IconButton
+                            color="inherit"
+                            onClick={handleNotificationMenu}
+                        >
+                            <NotificationsIcon />
+                        </IconButton>
+                        <Menu
+                            anchorEl={notificationAnchorEl}
+                            open={Boolean(notificationAnchorEl)}
+                            onClose={handleNotificationClose}
+                        >
+                            <MenuItem onClick={handleNotificationClose}>
+                                Уведомление 1
+                            </MenuItem>
+                            <MenuItem onClick={handleNotificationClose}>
+                                Уведомление 2
+                            </MenuItem>
+                        </Menu>
+                        <IconButton
+                            size="large"
+                            aria-label="account of current user"
+                            aria-controls="menu-appbar"
+                            aria-haspopup="true"
+                            onClick={handleMenu}
+                            color="inherit"
+                        >
+                            <Avatar alt={user?.name} src={user?.avatar} />
+                        </IconButton>
+                        <Menu
+                            id="menu-appbar"
+                            anchorEl={anchorEl}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right'
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: 'top',
+                                horizontal: 'right'
+                            }}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                        >
+                            <MenuItem
+                                component={RouterLink}
+                                to="/account"
+                                onClick={handleClose}
+                            >
+                                Аккаунт
+                            </MenuItem>
+                            <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+                        </Menu>
+                    </>
+                )}
+                {!isAuthenticated && (
+                    <>
+                        <Button
+                            color="inherit"
+                            component={RouterLink}
+                            to="/login"
+                        >
+                            Войти
+                        </Button>
+                        <Button
+                            color="inherit"
+                            component={RouterLink}
+                            to="/register"
+                        >
+                            Регистрация
+                        </Button>
+                    </>
+                )}
             </Toolbar>
-            <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                }}
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-            >
-                {menuItems.map((item) => (
-                    <MenuItem
-                        key={item.path}
-                        component={RouterLink}
-                        to={item.path}
-                        onClick={handleClose}
-                    >
-                        {item.label}
-                    </MenuItem>
-                ))}
-            </Menu>
+            {isMobile && isAuthenticated && (
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right'
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'right'
+                    }}
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                >
+                    {menuItems.map((item) => (
+                        <MenuItem
+                            key={item.path}
+                            component={RouterLink}
+                            to={item.path}
+                            onClick={handleClose}
+                        >
+                            {item.label}
+                        </MenuItem>
+                    ))}
+                </Menu>
+            )}
         </AppBar>
     );
 };

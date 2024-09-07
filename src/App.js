@@ -14,6 +14,7 @@ import Loading from './components/Loading';
 import createCustomTheme from './utils/theme';
 import PrivateRoute from './components/PrivateRoute';
 import Onboarding from './components/Onboarding';
+import { AuthProvider } from './context/AuthContext';
 
 const Dashboard = lazy(() => import('./pages/Dashboard'));
 const Lesson = lazy(() => import('./pages/Lesson'));
@@ -32,7 +33,6 @@ const queryClient = new QueryClient();
 
 function App() {
     const [darkMode, setDarkMode] = useState(false);
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [showOnboarding, setShowOnboarding] = useState(false);
 
     useEffect(() => {
@@ -41,8 +41,6 @@ function App() {
             setDarkMode(JSON.parse(savedMode));
         }
 
-        const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token);
         const onboardingCompleted = localStorage.getItem('onboardingCompleted');
         setShowOnboarding(!onboardingCompleted);
     }, []);
@@ -62,135 +60,113 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <ThemeProvider theme={theme}>
-                <CssBaseline />
-                <Router>
-                    <div className="App">
-                        <Helmet>
-                            <title>Учим чешский с русского</title>
-                            <meta
-                                name="description"
-                                content="Изучайте чешский язык с русского с нашим интерактивным приложением"
-                            />
-                        </Helmet>
-                        <Header
-                            toggleTheme={toggleDarkMode}
-                            isAuthenticated={isAuthenticated}
-                            setIsAuthenticated={setIsAuthenticated}
-                        />
-                        {showOnboarding && isAuthenticated && (
-                            <Onboarding onComplete={handleOnboardingComplete} />
-                        )}
-                        <Suspense fallback={<Loading />}>
-                            <Routes>
-                                <Route
-                                    path="/"
-                                    element={
-                                        <Navigate to="/dashboard" replace />
-                                    }
+            <AuthProvider>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline />
+                    <Router>
+                        <div className="App">
+                            <Helmet>
+                                <title>Учим чешский с русского</title>
+                                <meta
+                                    name="description"
+                                    content="Изучайте чешский язык с русского с нашим интерактивным приложением"
                                 />
-                                <Route
-                                    path="/login"
-                                    element={
-                                        <Login
-                                            setIsAuthenticated={
-                                                setIsAuthenticated
-                                            }
-                                        />
-                                    }
+                            </Helmet>
+                            <Header toggleTheme={toggleDarkMode} />
+                            {showOnboarding && (
+                                <Onboarding
+                                    onComplete={handleOnboardingComplete}
                                 />
-                                <Route
-                                    path="/register"
-                                    element={<Register />}
-                                />
-                                <Route
-                                    path="/dashboard"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Dashboard />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/account"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Account />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route path="/privacy" element={<Privacy />} />
-                                <Route path="/terms" element={<Terms />} />
-                                <Route
-                                    path="/lessons"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Lessons />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/lesson/:id"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Lesson />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/exercises"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Exercises />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/progress"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Progress />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/achievements"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Achievements />
-                                        </PrivateRoute>
-                                    }
-                                />
-                                <Route
-                                    path="/leaderboard"
-                                    element={
-                                        <PrivateRoute
-                                            isAuthenticated={isAuthenticated}
-                                        >
-                                            <Leaderboard />
-                                        </PrivateRoute>
-                                    }
-                                />
-                            </Routes>
-                        </Suspense>
-                        <Footer />
-                    </div>
-                </Router>
-            </ThemeProvider>
+                            )}
+                            <Suspense fallback={<Loading />}>
+                                <Routes>
+                                    <Route
+                                        path="/"
+                                        element={
+                                            <Navigate to="/dashboard" replace />
+                                        }
+                                    />
+                                    <Route path="/login" element={<Login />} />
+                                    <Route
+                                        path="/register"
+                                        element={<Register />}
+                                    />
+                                    <Route
+                                        path="/dashboard"
+                                        element={
+                                            <PrivateRoute>
+                                                <Dashboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/account"
+                                        element={
+                                            <PrivateRoute>
+                                                <Account />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/privacy"
+                                        element={<Privacy />}
+                                    />
+                                    <Route path="/terms" element={<Terms />} />
+                                    <Route
+                                        path="/lessons"
+                                        element={
+                                            <PrivateRoute>
+                                                <Lessons />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/lesson/:id"
+                                        element={
+                                            <PrivateRoute>
+                                                <Lesson />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/exercises"
+                                        element={
+                                            <PrivateRoute>
+                                                <Exercises />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/progress"
+                                        element={
+                                            <PrivateRoute>
+                                                <Progress />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/achievements"
+                                        element={
+                                            <PrivateRoute>
+                                                <Achievements />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/leaderboard"
+                                        element={
+                                            <PrivateRoute>
+                                                <Leaderboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                </Routes>
+                            </Suspense>
+                            <Footer />
+                        </div>
+                    </Router>
+                </ThemeProvider>
+            </AuthProvider>
         </QueryClientProvider>
     );
 }

@@ -27,7 +27,9 @@ const Exercises = () => {
             setLoading(false);
         } catch (error) {
             console.error('Error fetching exercises:', error);
-            setError('Не удалось загрузить упражнения. Пожалуйста, попробуйте позже.');
+            setError(
+                'Не удалось загрузить упражнения. Пожалуйста, попробуйте позже.'
+            );
             setLoading(false);
         }
     }, []);
@@ -46,7 +48,12 @@ const Exercises = () => {
 
     if (loading) {
         return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
+            <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                minHeight="100vh"
+            >
                 <CircularProgress />
             </Box>
         );
@@ -65,15 +72,24 @@ const Exercises = () => {
                                 <Typography variant="h6" gutterBottom>
                                     {exercise.question}
                                 </Typography>
-                                <Typography variant="body2" color="text.secondary">
-                                    {exercise.type === 'multipleChoice' && 'Выберите правильный ответ'}
-                                    {exercise.type === 'fillInTheBlank' && 'Заполните пропуск'}
-                                    {exercise.type === 'listeningComprehension' && 'Прослушайте и ответьте'}
+                                <Typography
+                                    variant="body2"
+                                    color="text.secondary"
+                                >
+                                    {exercise.type === 'multipleChoice' &&
+                                        'Выберите правильный ответ'}
+                                    {exercise.type === 'fillInTheBlank' &&
+                                        'Заполните пропуск'}
+                                    {exercise.type ===
+                                        'listeningComprehension' &&
+                                        'Прослушайте и ответьте'}
                                 </Typography>
                                 <Button
                                     variant="contained"
                                     color="primary"
-                                    onClick={() => handleExerciseClick(exercise._id)}
+                                    onClick={() =>
+                                        handleExerciseClick(exercise._id)
+                                    }
                                     sx={{ mt: 2 }}
                                 >
                                     Начать
@@ -83,8 +99,16 @@ const Exercises = () => {
                     </Grid>
                 ))}
             </Grid>
-            <Snackbar open={!!error} autoHideDuration={6000} onClose={handleCloseError}>
-                <Alert onClose={handleCloseError} severity="error" sx={{ width: '100%' }}>
+            <Snackbar
+                open={!!error}
+                autoHideDuration={6000}
+                onClose={handleCloseError}
+            >
+                <Alert
+                    onClose={handleCloseError}
+                    severity="error"
+                    sx={{ width: '100%' }}
+                >
                     {error}
                 </Alert>
             </Snackbar>
