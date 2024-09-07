@@ -52,7 +52,19 @@ exerciseSchema.pre('save', function (next) {
 });
 
 exerciseSchema.methods.checkAnswer = function (userAnswer) {
-    return userAnswer === this.correctAnswer;
+    if (this.type === 'fillInTheBlank') {
+        const normalizedUserAnswer = userAnswer
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        const normalizedCorrectAnswer = this.correctAnswer
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+        return (
+            normalizedUserAnswer.toLowerCase() ===
+            normalizedCorrectAnswer.toLowerCase()
+        );
+    }
+    return userAnswer.toLowerCase() === this.correctAnswer.toLowerCase();
 };
 
 exerciseSchema.methods.updateLastReviewed = function () {

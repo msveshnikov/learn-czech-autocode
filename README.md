@@ -74,3 +74,5 @@ through various exercises and lessons.
 6. Beta testing and user feedback collection
 
 # TODO
+
+-  When checking fillInTheBlank exercises, don't pay attention to diacritic signs
