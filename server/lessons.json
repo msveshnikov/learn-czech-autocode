@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "title": "Basic Vocabulary",
         "description": "Learn essential Czech words and phrases",
         "level": "beginner",
@@ -49,7 +48,6 @@
         ]
     },
     {
-        "id": 2,
         "title": "Greetings",
         "description": "Learn how to greet people in Czech",
         "level": "beginner",
@@ -105,7 +103,6 @@
         ]
     },
     {
-        "id": 3,
         "title": "Numbers",
         "description": "Learn to count in Czech",
         "level": "beginner",
@@ -186,7 +183,6 @@
         ]
     },
     {
-        "id": 4,
         "title": "Basic Phrases",
         "description": "Learn essential Czech phrases for everyday situations",
         "level": "beginner",
@@ -224,7 +220,12 @@
             {
                 "type": "multipleChoice",
                 "question": "How do you say 'How are you?' in Czech?",
-                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
+                "answers": [
+                    "Jak se máš?",
+                    "Mám se dobře",
+                    "Nerozumím",
+                    "Kde je...?"
+                ],
                 "correctAnswer": "Jak se máš?"
             },
             {
@@ -236,13 +237,17 @@
                 "type": "listeningComprehension",
                 "question": "Listen and select the correct phrase",
                 "audioUrl": "https://example.com/audio/nerozumim.mp3",
-                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
+                "answers": [
+                    "Jak se máš?",
+                    "Mám se dobře",
+                    "Nerozumím",
+                    "Kde je...?"
+                ],
                 "correctAnswer": "Nerozumím"
             }
         ]
     },
     {
-        "id": 5,
         "title": "Basic Grammar: Verb 'To Be'",
         "description": "Learn the conjugation of the verb 'to be' in Czech",
         "level": "beginner",

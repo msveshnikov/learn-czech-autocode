@@ -76,5 +76,4 @@ through various exercises and lessons.
 
 # TODO
 
--   fix autoload error \_id: CastError: Cast to ObjectId failed for value "1"
-    (type number) at path "\_id" because of "BSONError"
+-   remove id's from jsons

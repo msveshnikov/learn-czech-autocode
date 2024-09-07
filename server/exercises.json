@@ -1,6 +1,5 @@
 [
     {
-        "id": "1",
         "type": "multipleChoice",
         "question": "What is 'hello' in Czech?",
         "answers": ["Ahoj", "Nashledanou", "Prosím", "Děkuji"],
@@ -9,7 +8,6 @@
         "category": "vocabulary"
     },
     {
-        "id": "2",
         "type": "fillInTheBlank",
         "question": "Complete the sentence: 'Jak se ___?'",
         "correctAnswer": "máš",
@@ -17,7 +15,6 @@
         "category": "grammar"
     },
     {
-        "id": "3",
         "type": "listeningComprehension",
         "question": "Listen and choose the correct translation",
         "answers": ["Good morning", "Good night", "Hello", "Goodbye"],
@@ -27,7 +24,6 @@
         "category": "pronunciation"
     },
     {
-        "id": "4",
         "type": "multipleChoice",
         "question": "What is the Czech word for 'please'?",
         "answers": ["Prosím", "Děkuji", "Ano", "Ne"],
@@ -36,7 +32,6 @@
         "category": "vocabulary"
     },
     {
-        "id": "5",
         "type": "fillInTheBlank",
         "question": "Complete the sentence: 'Jak se ___ Petr.'",
         "correctAnswer": "jmenuji",
@@ -44,7 +39,6 @@
         "category": "grammar"
     },
     {
-        "id": "6",
         "type": "listeningComprehension",
         "question": "Listen and choose the correct word",
         "answers": ["Dobrý", "Špatný", "Velký", "Malý"],
@@ -54,7 +48,6 @@
         "category": "pronunciation"
     },
     {
-        "id": "7",
         "type": "multipleChoice",
         "question": "What is the Czech word for 'thank you'?",
         "answers": ["Děkuji", "Prosím", "Ahoj", "Na shledanou"],
@@ -63,7 +56,6 @@
         "category": "vocabulary"
     },
     {
-        "id": "8",
         "type": "fillInTheBlank",
         "question": "Complete the sentence: 'Kolik je ti ___?'",
         "correctAnswer": "let",
@@ -71,7 +63,6 @@
         "category": "grammar"
     },
     {
-        "id": "9",
         "type": "listeningComprehension",
         "question": "Listen and choose the correct number",
         "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
@@ -81,7 +72,6 @@
         "category": "pronunciation"
     },
     {
-        "id": "10",
         "type": "multipleChoice",
         "question": "What is the Czech word for 'yes'?",
         "answers": ["Ano", "Ne", "Možná", "Nevím"],

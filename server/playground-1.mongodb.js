@@ -114,3 +114,7 @@ db.lessons
         }
     ])
     .toArray();
+
+    use('learn_czech');
+
+    db.users.dropIndex("username_1");

@@ -282,25 +282,19 @@ app.get('/api/dashboard', authenticateToken, async (req, res) => {
 const loadDataToMongo = async () => {
     try {
         const lessonsData = JSON.parse(
-            await fs.readFile(
-                path.join(process.cwd(), 'lessons.json'),
-                'utf-8'
-            )
+            await fs.readFile(path.join(process.cwd(), 'lessons.json'), 'utf-8')
         );
         const exercisesData = JSON.parse(
-            await fs.readFile(
-                path.join(process.cwd(), 'exercises.json'),
-                'utf-8'
-            )
+            await fs.readFile( path.join(process.cwd(), 'exercises.json'), 'utf-8' )
         );
 
         await Lesson.deleteMany({});
         await Exercise.deleteMany({});
 
-        for (const lessonData of lessonsData) {
-            const lesson = new Lesson(lessonData);
-            await lesson.save();
-        }
+        // for (const lessonData of lessonsData) {
+        //     const lesson = new Lesson(lessonData);
+        //     await lesson.save();
+        // }
 
         for (const exerciseData of exercisesData) {
             const exercise = new Exercise(exerciseData);
