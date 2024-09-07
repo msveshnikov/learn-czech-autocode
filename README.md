@@ -2,6 +2,10 @@
 
 ![alt text](image.png)
 
+# DEMO
+
+https://learn-czech.netlify.app/
+
 ## Project Overview
 
 This project aims to create a language learning application similar to Duolingo,
