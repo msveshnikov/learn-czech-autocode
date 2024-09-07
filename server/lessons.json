@@ -38,12 +38,14 @@
                 "type": "multipleChoice",
                 "question": "What is 'hello' in Czech?",
                 "answers": ["Ahoj", "Děkuji", "Prosím", "Ne"],
-                "correctAnswer": "Ahoj"
+                "correctAnswer": "Ahoj",
+                "category": "vocabulary"
             },
             {
                 "type": "fillInTheBlank",
                 "question": "Complete the sentence: '_____ vám' (Thank you)",
-                "correctAnswer": "Děkuji"
+                "correctAnswer": "Děkuji",
+                "category": "vocabulary"
             }
         ]
     },
@@ -86,7 +88,8 @@
                     "Dobrý večer",
                     "Na shledanou"
                 ],
-                "correctAnswer": "Dobré ráno"
+                "correctAnswer": "Dobré ráno",
+                "category": "vocabulary"
             },
             {
                 "type": "listeningComprehension",
@@ -98,7 +101,8 @@
                     "Dobrý večer",
                     "Na shledanou"
                 ],
-                "correctAnswer": "Dobrý den"
+                "correctAnswer": "Dobrý den",
+                "category": "pronunciation"
             }
         ]
     },
@@ -165,20 +169,23 @@
             {
                 "type": "fillInTheBlank",
                 "question": "Write the number 3 in Czech: ___",
-                "correctAnswer": "Tři"
+                "correctAnswer": "Tři",
+                "category": "vocabulary"
             },
             {
                 "type": "multipleChoice",
                 "question": "What is the Czech word for 'five'?",
                 "answers": ["Jedna", "Dva", "Tři", "Pět"],
-                "correctAnswer": "Pět"
+                "correctAnswer": "Pět",
+                "category": "vocabulary"
             },
             {
                 "type": "listeningComprehension",
                 "question": "Listen and select the correct number",
                 "audioUrl": "https://example.com/audio/sedm.mp3",
                 "answers": ["Pět", "Šest", "Sedm", "Osm"],
-                "correctAnswer": "Sedm"
+                "correctAnswer": "Sedm",
+                "category": "pronunciation"
             }
         ]
     },
@@ -226,12 +233,14 @@
                     "Nerozumím",
                     "Kde je...?"
                 ],
-                "correctAnswer": "Jak se máš?"
+                "correctAnswer": "Jak se máš?",
+                "category": "vocabulary"
             },
             {
                 "type": "fillInTheBlank",
                 "question": "Complete the phrase: 'Mluvíte _____?' (Do you speak English?)",
-                "correctAnswer": "anglicky"
+                "correctAnswer": "anglicky",
+                "category": "grammar"
             },
             {
                 "type": "listeningComprehension",
@@ -243,7 +252,8 @@
                     "Nerozumím",
                     "Kde je...?"
                 ],
-                "correctAnswer": "Nerozumím"
+                "correctAnswer": "Nerozumím",
+                "category": "pronunciation"
             }
         ]
     },
@@ -291,19 +301,22 @@
                 "type": "multipleChoice",
                 "question": "What is the correct form of 'to be' for 'I' in Czech?",
                 "answers": ["Jsem", "Jsi", "Je", "Jsme"],
-                "correctAnswer": "Jsem"
+                "correctAnswer": "Jsem",
+                "category": "grammar"
             },
             {
                 "type": "fillInTheBlank",
                 "question": "Complete the sentence: 'Oni _____ studenti.' (They are students)",
-                "correctAnswer": "jsou"
+                "correctAnswer": "jsou",
+                "category": "grammar"
             },
             {
                 "type": "listeningComprehension",
                 "question": "Listen and select the correct form of 'to be'",
                 "audioUrl": "https://example.com/audio/jste.mp3",
                 "answers": ["Jsem", "Jsi", "Je", "Jste"],
-                "correctAnswer": "Jste"
+                "correctAnswer": "Jste",
+                "category": "pronunciation"
             }
         ]
     }

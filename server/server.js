@@ -284,21 +284,23 @@ const loadDataToMongo = async () => {
         const lessonsData = JSON.parse(
             await fs.readFile(path.join(process.cwd(), 'lessons.json'), 'utf-8')
         );
-        const exercisesData = JSON.parse(
-            await fs.readFile( path.join(process.cwd(), 'exercises.json'), 'utf-8' )
-        );
 
         await Lesson.deleteMany({});
         await Exercise.deleteMany({});
 
-        // for (const lessonData of lessonsData) {
-        //     const lesson = new Lesson(lessonData);
-        //     await lesson.save();
-        // }
+        for (const lessonData of lessonsData) {
+            const lesson = new Lesson({
+                ...lessonData,
+                exercises: []
+            });
 
-        for (const exerciseData of exercisesData) {
-            const exercise = new Exercise(exerciseData);
-            await exercise.save();
+            for (const exerciseData of lessonData.exercises) {
+                const exercise = new Exercise(exerciseData);
+                await exercise.save();
+                lesson.exercises.push(exercise._id);
+            }
+
+            await lesson.save();
         }
 
         console.log('Data loaded successfully');

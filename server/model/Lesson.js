@@ -1,11 +1,8 @@
-// server/model/Lesson.js
-
 import mongoose from 'mongoose';
 
 const lessonSchema = new mongoose.Schema({
-    title: { type: String, required: true }, 
+    title: { type: String, required: true },
     description: { type: String, required: true },
-    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     level: {
         type: String,
         enum: ['beginner', 'intermediate', 'advanced'],
@@ -21,6 +18,7 @@ const lessonSchema = new mongoose.Schema({
             english: { type: String, required: true }
         }
     ],
+    exercises: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' }],
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now }
 });
@@ -30,14 +28,14 @@ lessonSchema.pre('save', function (next) {
     next();
 });
 
-lessonSchema.methods.addExercise = function (exerciseId) {
-    this.exercises.push(exerciseId);
+lessonSchema.methods.addExercise = function (exerciseData) {
+    this.exercises.push(exerciseData);
     return this.save();
 };
 
 lessonSchema.methods.removeExercise = function (exerciseId) {
     this.exercises = this.exercises.filter(
-        (id) => id.toString() !== exerciseId.toString()
+        (exercise) => exercise.toString() !== exerciseId.toString()
     );
     return this.save();
 };
@@ -51,28 +49,21 @@ lessonSchema.statics.findByLevel = function (level) {
 };
 
 lessonSchema.methods.getNextLesson = async function () {
-    const nextLesson = await this.model('Lesson')
+    return this.model('Lesson')
         .findOne({
             level: this.level,
             order: { $gt: this.order }
         })
         .sort('order');
-    return nextLesson;
 };
 
 lessonSchema.methods.getPreviousLesson = async function () {
-    const previousLesson = await this.model('Lesson')
+    return this.model('Lesson')
         .findOne({
             level: this.level,
             order: { $lt: this.order }
         })
         .sort('-order');
-    return previousLesson;
-};
-
-lessonSchema.methods.getExercisesWithDetails = async function () {
-    await this.populate('exercises');
-    return this.exercises;
 };
 
 lessonSchema.methods.addVocabulary = function (czech, russian, english) {
@@ -85,10 +76,6 @@ lessonSchema.methods.removeVocabulary = function (czechWord) {
         (word) => word.czech !== czechWord
     );
     return this.save();
-};
-
-lessonSchema.statics.findWithExercises = function () {
-    return this.find().populate('exercises');
 };
 
 lessonSchema.statics.getRandomLessons = function (count, level) {
@@ -107,7 +94,7 @@ lessonSchema.methods.getAverageCompletionTime = async function () {
     const Exercise = mongoose.model('Exercise');
     const exercises = await Exercise.find({ _id: { $in: this.exercises } });
     const totalTime = exercises.reduce(
-        (sum, exercise) => sum + exercise.averageCompletionTime,
+        (sum, exercise) => sum + (exercise.averageCompletionTime || 0),
         0
     );
     return totalTime / exercises.length;
