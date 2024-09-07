@@ -135,6 +135,18 @@ const apiService = {
             `${API_BASE_URL}/exercise/${exerciseId}`
         );
         return response.data;
+    },
+
+    setLearningGoal: async (goal) => {
+        const response = await axios.put(`${API_BASE_URL}/user`, {
+            learningGoal: goal
+        });
+        return response.data;
+    },
+
+    getWordOfTheDay: async () => {
+        const response = await axios.get(`${API_BASE_URL}/word-of-the-day`);
+        return response.data;
     }
 };
 

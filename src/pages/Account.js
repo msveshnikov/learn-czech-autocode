@@ -11,17 +11,26 @@ import {
     Stepper,
     Step,
     StepLabel,
-    Tooltip
+    Tooltip,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel
 } from '@mui/material';
 import { Helmet } from 'react-helmet';
 import { useQuery, useMutation, useQueryClient } from 'react-query';
 import apiService from '../services/apiService';
 import { useNavigate } from 'react-router-dom';
+import TranslateIcon from '@mui/icons-material/Translate';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 const Account = () => {
     const [user, setUser] = useState({
         username: '',
         email: '',
+        learningGoal: '',
+        language: '',
         balance: 0
     });
     const [isEditing, setIsEditing] = useState(false);
@@ -69,12 +78,12 @@ const Account = () => {
             tooltip: 'Просмотр и обновление информации об аккаунте'
         },
         {
-            label: 'Подтвердить email',
-            tooltip: 'Подтвердите ваш email адрес'
+            label: 'Цели обучения',
+            tooltip: 'Установите свои цели изучения чешского языка'
         },
         {
-            label: 'Настройки',
-            tooltip: 'Настройте ваш опыт обучения'
+            label: 'Настройки языка',
+            tooltip: 'Выберите язык интерфейса'
         }
     ];
 
@@ -148,6 +157,35 @@ const Account = () => {
                                 disabled={!isEditing}
                             />
                         </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                fullWidth
+                                label="Цель обучения"
+                                name="learningGoal"
+                                value={user.learningGoal}
+                                onChange={handleInputChange}
+                                disabled={!isEditing}
+                                multiline
+                                rows={2}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <FormControl fullWidth disabled={!isEditing}>
+                                <InputLabel id="language-select-label">
+                                    Язык интерфейса
+                                </InputLabel>
+                                <Select
+                                    labelId="language-select-label"
+                                    name="language"
+                                    value={user.language}
+                                    onChange={handleInputChange}
+                                    label="Язык интерфейса"
+                                >
+                                    <MenuItem value="ru">Русский</MenuItem>
+                                    <MenuItem value="cs">Чешский</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h6">
                                 Баланс: {user?.balance?.toFixed(2)} XP
@@ -193,15 +231,26 @@ const Account = () => {
                     color="primary"
                     onClick={() => navigate('/dashboard')}
                     sx={{ mr: 2 }}
+                    startIcon={<WhatshotIcon />}
                 >
-                    Перейти к панели управления
+                    Панель управления
                 </Button>
                 <Button
                     variant="outlined"
                     color="primary"
                     onClick={() => navigate('/lessons')}
+                    sx={{ mr: 2 }}
+                    startIcon={<TranslateIcon />}
                 >
-                    Просмотреть уроки
+                    Уроки
+                </Button>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => navigate('/achievements')}
+                    startIcon={<EmojiEventsIcon />}
+                >
+                    Достижения
                 </Button>
             </Paper>
         </Box>

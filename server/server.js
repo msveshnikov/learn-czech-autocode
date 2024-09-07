@@ -112,7 +112,7 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
         const exercise = await Exercise.findById(exerciseId);
         const correct = exercise.checkAnswer(answer);
         const score = exercise.calculateScore(timeSpent);
-        user.addCompletedExercise(exerciseId, correct, score);
+        user.addCompletedExercise(exerciseId, score);
         await user.save();
         res.json({ correct, score });
     } catch (error) {
@@ -358,6 +358,21 @@ app.get('/api/user', authenticateToken, async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Ошибка при получении данных пользователя',
+            error: error.message
+        });
+    }
+});
+
+app.get('/api/word-of-the-day', async (req, res) => {
+    try {
+        const vocabulary = await Lesson.aggregate([
+            { $unwind: '$vocabulary' },
+            { $sample: { size: 1 } }
+        ]);
+        res.json(vocabulary[0].vocabulary);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при получении слова дня',
             error: error.message
         });
     }

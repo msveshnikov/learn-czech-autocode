@@ -1,4 +1,4 @@
-Here's a series of 3 emails for your Duolingo clone project to learn Czech from Russian, formatted for a markdown file:
+Here's a series of 3 emails for your Language app project to learn Czech from Russian, formatted for a markdown file:
 
 ```markdown
 # Email Marketing Campaign for Czech-Russian Language Learning App

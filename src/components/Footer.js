@@ -1,8 +1,11 @@
 import React from 'react';
 import { Box, Typography, Link, Container, Grid } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
+    const theme = useTheme();
+
     const translations = {
         about: 'О нас',
         description:
@@ -25,10 +28,8 @@ const Footer = () => {
                 py: 3,
                 px: 2,
                 mt: 'auto',
-                backgroundColor: (theme) =>
-                    theme.palette.mode === 'light'
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[800]
+                backgroundColor: theme.palette.background.paper,
+                borderTop: `1px solid ${theme.palette.divider}`
             }}
         >
             <Container maxWidth="lg">
@@ -57,22 +58,31 @@ const Footer = () => {
                             component={RouterLink}
                             to="/dashboard"
                             color="inherit"
+                            display="block"
                         >
                             {translations.dashboard}
                         </Link>
-                        <br />
                         <Link
                             component={RouterLink}
                             to="/lessons"
                             color="inherit"
+                            display="block"
                         >
                             {translations.lessons}
                         </Link>
-                        <br />
+                        <Link
+                            component={RouterLink}
+                            to="/exercises"
+                            color="inherit"
+                            display="block"
+                        >
+                            {translations.practice}
+                        </Link>
                         <Link
                             component={RouterLink}
                             to="/progress"
                             color="inherit"
+                            display="block"
                         >
                             {translations.progress}
                         </Link>
@@ -89,14 +99,15 @@ const Footer = () => {
                             component={RouterLink}
                             to="/terms"
                             color="inherit"
+                            display="block"
                         >
                             {translations.terms}
                         </Link>
-                        <br />
                         <Link
                             component={RouterLink}
                             to="/privacy"
                             color="inherit"
+                            display="block"
                         >
                             {translations.privacy}
                         </Link>

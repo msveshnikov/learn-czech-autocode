@@ -1,4 +1,4 @@
-# Duolingo clone to learn Czech from Russian (built by [AutoCode](https://autocode.work) in 15 minutes)
+# Language App to learn Czech from Russian (built by [AutoCode](https://autocode.work) in 15 minutes)
 
 ![alt text](image.png)
 
@@ -75,4 +75,4 @@ through various exercises and lessons.
 
 # TODO
 
--   Translate these keys !!! streak achievements leaderboardScore
+

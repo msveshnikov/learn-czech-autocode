@@ -65,7 +65,11 @@ userSchema.methods.updateStreak = function () {
     this.progress.lastLoginDate = now;
 };
 
-userSchema.methods.addCompletedExercise = function (exerciseId, score) {
+userSchema.methods.addCompletedExercise = function (
+    exerciseId,
+    correct,
+    score
+) {
     const existingExercise = this.progress.completedExercises.find(
         (ce) => ce.exercise.toString() === exerciseId.toString()
     );
@@ -101,7 +105,8 @@ userSchema.methods.getProgress = function () {
         completedLessons: this.progress.lessons.length,
         completedExercises: this.progress.completedExercises.length,
         experiencePoints: this.experiencePoints,
-        level: this.level
+        level: this.level,
+        streak: this.progress.streak
     };
 };
 
@@ -118,10 +123,6 @@ userSchema.methods.markNotificationAsRead = function (notificationId) {
 
 userSchema.methods.getUnreadNotifications = function () {
     return this.notifications.filter((notification) => !notification.read);
-};
-
-userSchema.methods.updateScore = function (score) {
-    this.leaderboardScore += score;
 };
 
 userSchema.methods.addExperiencePoints = function (points) {

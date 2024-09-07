@@ -13,12 +13,13 @@ import {
     ListItem,
     ListItemText,
     ListItemIcon,
-    LinearProgress
+    LinearProgress,
+    TextField
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@mui/material/styles';
 import { Helmet } from 'react-helmet';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import apiService from '../services/apiService';
 import Loading from '../components/Loading';
 import TranslateIcon from '@mui/icons-material/Translate';
@@ -41,15 +42,39 @@ const Dashboard = () => {
         severity: 'info'
     });
     const [showUIOverview, setShowUIOverview] = useState(false);
+    const [learningGoal, setLearningGoal] = useState('');
+    const [wordOfTheDay, setWordOfTheDay] = useState({
+        czech: '',
+        russian: ''
+    });
     const navigate = useNavigate();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const queryClient = useQueryClient();
 
     const {
         data: dashboardData,
         isLoading,
         error
     } = useQuery('dashboard', apiService.getDashboardData);
+
+    const updateUserMutation = useMutation(apiService.updateUser, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('dashboard');
+            setSnackbar({
+                open: true,
+                message: 'Цель обучения успешно обновлена',
+                severity: 'success'
+            });
+        },
+        onError: (error) => {
+            setSnackbar({
+                open: true,
+                message: 'Ошибка при обновлении цели обучения',
+                severity: 'error'
+            });
+        }
+    });
 
     useEffect(() => {
         if (dashboardData) {
@@ -58,12 +83,26 @@ const Dashboard = () => {
             setStreak(dashboardData.streak || 0);
             setAchievements(dashboardData.achievements || []);
             setLeaderboardScore(dashboardData.leaderboardScore || 0);
+            setLearningGoal(dashboardData.learningGoal || '');
+          
         }
     }, [dashboardData]);
 
     useEffect(() => {
         const uiOverviewShown = localStorage.getItem('uiOverviewShown');
         setShowUIOverview(!uiOverviewShown);
+    }, []);
+
+    useEffect(() => {
+        const fetchWordOfTheDay = async () => {
+            try {
+                const word = await apiService.getWordOfTheDay();
+                setWordOfTheDay(word);
+            } catch (error) {
+                console.error('Error fetching word of the day:', error);
+            }
+        };
+        fetchWordOfTheDay();
     }, []);
 
     const handleStartLesson = (lessonId) => {
@@ -73,6 +112,14 @@ const Dashboard = () => {
     const handleSnackbarClose = (event, reason) => {
         if (reason === 'clickaway') return;
         setSnackbar({ ...snackbar, open: false });
+    };
+
+    const handleLearningGoalChange = (event) => {
+        setLearningGoal(event.target.value);
+    };
+
+    const handleLearningGoalSubmit = () => {
+        updateUserMutation.mutate({ learningGoal });
     };
 
     const onboardingSteps = [
@@ -99,6 +146,14 @@ const Dashboard = () => {
         {
             target: '#leaderboard',
             content: 'Сравните свой прогресс с другими учениками.'
+        },
+        {
+            target: '#learning-goal',
+            content: 'Установите свою цель обучения здесь.'
+        },
+        {
+            target: '#word-of-the-day',
+            content: 'Изучайте новое чешское слово каждый день.'
         }
     ];
 
@@ -298,6 +353,49 @@ const Dashboard = () => {
                                 >
                                     Открыть таблицу лидеров
                                 </Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Paper
+                                elevation={3}
+                                sx={{ p: 2 }}
+                                id="learning-goal"
+                            >
+                                <Typography variant="h6" gutterBottom>
+                                    Цель обучения
+                                </Typography>
+                                <TextField
+                                    fullWidth
+                                    label="Ваша цель"
+                                    value={learningGoal}
+                                    onChange={handleLearningGoalChange}
+                                    margin="normal"
+                                />
+                                <Button
+                                    variant="contained"
+                                    onClick={handleLearningGoalSubmit}
+                                    fullWidth={isMobile}
+                                    sx={{ mt: 2 }}
+                                >
+                                    Установить цель
+                                </Button>
+                            </Paper>
+                        </Grid>
+                        <Grid item xs={12} md={6}>
+                            <Paper
+                                elevation={3}
+                                sx={{ p: 2 }}
+                                id="word-of-the-day"
+                            >
+                                <Typography variant="h6" gutterBottom>
+                                    Слово дня
+                                </Typography>
+                                <Typography variant="h5" gutterBottom>
+                                    {wordOfTheDay.czech}
+                                </Typography>
+                                <Typography variant="body1">
+                                    {wordOfTheDay.russian}
+                                </Typography>
                             </Paper>
                         </Grid>
                     </Grid>
