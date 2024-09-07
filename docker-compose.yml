@@ -4,7 +4,7 @@ services:
     backend:
         image: extender777/czech-backend
         ports:
-            - '6003:5000'
+            - '6004:5000'
         environment:
             - NODE_ENV=production
             - MONGODB_URI=mongodb://mongodb:27017/learn_czech
