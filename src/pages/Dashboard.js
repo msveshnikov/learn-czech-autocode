@@ -33,6 +33,8 @@ const Dashboard = () => {
     const [lessons, setLessons] = useState([]);
     const [userProgress, setUserProgress] = useState({});
     const [streak, setStreak] = useState(0);
+    const [achievements, setAchievements] = useState([]);
+    const [leaderboardScore, setLeaderboardScore] = useState(0);
     const [snackbar, setSnackbar] = useState({
         open: false,
         message: '',
@@ -54,6 +56,8 @@ const Dashboard = () => {
             setLessons(dashboardData.lessons || []);
             setUserProgress(dashboardData.userProgress || {});
             setStreak(dashboardData.streak || 0);
+            setAchievements(dashboardData.achievements || []);
+            setLeaderboardScore(dashboardData.leaderboardScore || 0);
         }
     }, [dashboardData]);
 
@@ -176,10 +180,20 @@ const Dashboard = () => {
                                                     <CheckCircleIcon />
                                                 </ListItemIcon>
                                                 <ListItemText
-                                                    primary={key === 'completedLessons' ? 'Завершенные уроки' :
-                                                             key === 'completedExercises' ? 'Завершенные упражнения' :
-                                                             key === 'experiencePoints' ? 'Очки опыта' :
-                                                             key === 'level' ? 'Уровень' : key}
+                                                    primary={
+                                                        key ===
+                                                        'completedLessons'
+                                                            ? 'Завершенные уроки'
+                                                            : key ===
+                                                              'completedExercises'
+                                                            ? 'Завершенные упражнения'
+                                                            : key ===
+                                                              'experiencePoints'
+                                                            ? 'Очки опыта'
+                                                            : key === 'level'
+                                                            ? 'Уровень'
+                                                            : key
+                                                    }
                                                     secondary={
                                                         <LinearProgress
                                                             variant="determinate"
@@ -232,17 +246,36 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Paper elevation={3} sx={{ p: 2 }} id="achievements">
+                            <Paper
+                                elevation={3}
+                                sx={{ p: 2 }}
+                                id="achievements"
+                            >
                                 <Typography variant="h6" gutterBottom>
                                     Достижения
                                 </Typography>
+                                <List>
+                                    {achievements
+                                        .slice(0, 3)
+                                        .map((achievement, index) => (
+                                            <ListItem key={index}>
+                                                <ListItemIcon>
+                                                    <EmojiEventsIcon />
+                                                </ListItemIcon>
+                                                <ListItemText
+                                                    primary={achievement}
+                                                />
+                                            </ListItem>
+                                        ))}
+                                </List>
                                 <Button
                                     variant="outlined"
                                     startIcon={<EmojiEventsIcon />}
                                     onClick={() => navigate('/achievements')}
                                     fullWidth={isMobile}
+                                    sx={{ mt: 2 }}
                                 >
-                                    Посмотреть достижения
+                                    Посмотреть все достижения
                                 </Button>
                             </Paper>
                         </Grid>
@@ -251,6 +284,12 @@ const Dashboard = () => {
                                 <Typography variant="h6" gutterBottom>
                                     Таблица лидеров
                                 </Typography>
+                                <Box display="flex" alignItems="center" mb={2}>
+                                    <LeaderboardIcon sx={{ mr: 1 }} />
+                                    <Typography variant="body1">
+                                        Ваш текущий счет: {leaderboardScore}
+                                    </Typography>
+                                </Box>
                                 <Button
                                     variant="outlined"
                                     startIcon={<LeaderboardIcon />}

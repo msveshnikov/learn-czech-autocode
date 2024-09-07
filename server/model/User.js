@@ -100,9 +100,6 @@ userSchema.methods.getProgress = function () {
     return {
         completedLessons: this.progress.lessons.length,
         completedExercises: this.progress.completedExercises.length,
-        streak: this.progress.streak,
-        achievements: this.achievements.length,
-        leaderboardScore: this.leaderboardScore,
         experiencePoints: this.experiencePoints,
         level: this.level
     };
