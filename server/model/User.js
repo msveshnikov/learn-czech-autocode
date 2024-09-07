@@ -32,7 +32,10 @@ const userSchema = new mongoose.Schema({
         }
     ],
     learningGoal: { type: String },
-    onboardingCompleted: { type: Boolean, default: false }
+    onboardingCompleted: { type: Boolean, default: false },
+    dailyGoal: { type: Number, default: 50 },
+    experiencePoints: { type: Number, default: 0 },
+    level: { type: Number, default: 1 }
 });
 
 userSchema.pre('save', async function (next) {
@@ -74,6 +77,7 @@ userSchema.methods.addCompletedExercise = function (exerciseId, score) {
     }
 
     this.updateLeaderboardScore(score);
+    this.addExperiencePoints(score);
 };
 
 userSchema.methods.addAchievement = function (achievement) {
@@ -98,7 +102,9 @@ userSchema.methods.getProgress = function () {
         completedExercises: this.progress.completedExercises.length,
         streak: this.progress.streak,
         achievements: this.achievements.length,
-        leaderboardScore: this.leaderboardScore
+        leaderboardScore: this.leaderboardScore,
+        experiencePoints: this.experiencePoints,
+        level: this.level
     };
 };
 
@@ -119,6 +125,31 @@ userSchema.methods.getUnreadNotifications = function () {
 
 userSchema.methods.updateScore = function (score) {
     this.leaderboardScore += score;
+};
+
+userSchema.methods.addExperiencePoints = function (points) {
+    this.experiencePoints += points;
+    this.updateLevel();
+};
+
+userSchema.methods.updateLevel = function () {
+    const newLevel = Math.floor(this.experiencePoints / 100) + 1;
+    if (newLevel > this.level) {
+        this.level = newLevel;
+    }
+};
+
+userSchema.methods.updateDailyGoal = function (newGoal) {
+    this.dailyGoal = newGoal;
+};
+
+userSchema.methods.checkDailyGoal = function () {
+    const today = new Date().toDateString();
+    const todayExercises = this.progress.completedExercises.filter(
+        (ce) => new Date(ce.createdAt).toDateString() === today
+    );
+    const todayScore = todayExercises.reduce((sum, ce) => sum + ce.score, 0);
+    return todayScore >= this.dailyGoal;
 };
 
 const User = mongoose.model('User', userSchema);

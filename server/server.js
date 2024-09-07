@@ -42,7 +42,9 @@ app.post('/api/register', async (req, res) => {
         const { email, password } = req.body;
         const user = new User({ email, password });
         await user.save();
-        res.status(201).json({ message: 'Пользователь успешно зарегистрирован' });
+        res.status(201).json({
+            message: 'Пользователь успешно зарегистрирован'
+        });
     } catch (error) {
         res.status(500).json({
             message: 'Ошибка при регистрации пользователя',
@@ -55,7 +57,8 @@ app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user) return res.status(400).json({ message: 'Пользователь не найден' });
+        if (!user)
+            return res.status(400).json({ message: 'Пользователь не найден' });
 
         const validPassword = await user.comparePassword(password);
         if (!validPassword)

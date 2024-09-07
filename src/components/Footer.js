@@ -111,7 +111,7 @@ const Footer = () => {
                         {'© '}
                         {new Date().getFullYear()}{' '}
                         <Link color="inherit" href="https://autocode.work/">
-                            Czech from Russian
+                            MaxSoft
                         </Link>
                         {'. '}
                         {translations.rights}
