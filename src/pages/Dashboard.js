@@ -175,11 +175,11 @@ const Dashboard = () => {
             </Helmet>
             <Container maxWidth="lg">
                 <Box my={4}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={2}>
                         <Grid item xs={12} md={8}>
                             <Paper
                                 elevation={3}
-                                sx={{ p: 2 }}
+                                sx={{ p: 1 }}
                                 id="lessons-overview"
                             >
                                 <Typography variant="h6" gutterBottom>
@@ -206,6 +206,7 @@ const Dashboard = () => {
                                                 <SchoolIcon />
                                             </ListItemIcon>
                                             <ListItemText
+                                                sx={{ mr: 6 }}
                                                 primary={lesson.title}
                                                 secondary={lesson.description}
                                             />

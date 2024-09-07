@@ -1,7 +1,6 @@
 {
     "name": "czech-from-russian",
-    "version": "0.1.0",
-    "private": true,
+    "version": "0.2.0",
     "dependencies": {
         "@emotion/react": "^11.13.3",
         "@emotion/styled": "^11.13.0",
