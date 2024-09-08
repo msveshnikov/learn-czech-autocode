@@ -154,22 +154,12 @@ app.get('/achievements', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/update-streak', authenticateToken, async (req, res) => {
-    try {
-        const user = await User.findById(req.user.id);
-        user.updateStreak();
-        await user.save();
-        res.json({ message: 'Серия обновлена успешно', streak: user.progress.streak });
-    } catch (error) {
-        res.status(500).json({ message: 'Ошибка при обновлении серии', error: error.message });
-    }
-});
-
 app.post('/complete-lesson', authenticateToken, async (req, res) => {
     try {
         const { lessonId } = req.body;
         const user = await User.findById(req.user.id);
         user.addCompletedLesson(lessonId);
+        user.updateStreak();
         await user.save();
         res.json({ message: 'Урок успешно завершен' });
     } catch (error) {
