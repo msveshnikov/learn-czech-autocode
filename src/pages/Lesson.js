@@ -169,7 +169,8 @@ const Lesson = () => {
                 return (
                     <>
                         <audio
-                            controls crossOrigin="anonymous" 
+                            controls
+                            crossOrigin="anonymous"
                             src={API_BASE_URL + exercise.audioUrl}
                             style={{ marginBottom: '1rem' }}
                         />

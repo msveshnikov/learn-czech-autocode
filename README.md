@@ -104,4 +104,4 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   Add Achievements
+-   Add 5 more lessons with exercises

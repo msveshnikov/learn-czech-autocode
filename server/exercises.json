@@ -148,5 +148,53 @@
         "correctAnswer": "jsou",
         "difficulty": "hard",
         "category": "grammar"
+    },
+    {
+        "type": "multipleChoice",
+        "question": "Как сказать 'мать' на чешском?",
+        "answers": ["Matka", "Otec", "Sestra", "Bratr"],
+        "correctAnswer": "Matka",
+        "difficulty": "easy",
+        "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Moje _____ se jmenuje Jan.' (Мой отец зовут Ян)",
+        "correctAnswer": "otec",
+        "difficulty": "medium",
+        "category": "vocabulary"
+    },
+    {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "answers": ["Matka", "Otec", "Babička", "Dědeček"],
+        "correctAnswer": "Dědeček",
+        "audioUrl": "/audio/ddeek.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
+    },
+    {
+        "type": "multipleChoice",
+        "question": "Как сказать 'хлеб' на чешском?",
+        "answers": ["Chléb", "Mléko", "Voda", "Káva"],
+        "correctAnswer": "Chléb",
+        "difficulty": "easy",
+        "category": "vocabulary"
+    },
+    {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
+        "correctAnswer": "pivo",
+        "difficulty": "medium",
+        "category": "vocabulary"
+    },
+    {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
+        "correctAnswer": "Káva",
+        "audioUrl": "/audio/kva.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
     }
 ]
