@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
-import fetch from 'node-fetch';
 
 dotenv.config({ override: true });
 
@@ -15,18 +14,15 @@ const getElevenAudio = async (text, voiceId) => {
         model_id: 'eleven_multilingual_v2'
     };
 
-    const response = await fetch(
-        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
-        {
-            method: 'POST',
-            headers: {
-                Accept: 'audio/mpeg',
-                'Content-Type': 'application/json',
-                'xi-api-key': process.env.ELEVEN_KEY
-            },
-            body: JSON.stringify(body)
-        }
-    );
+    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
+        method: 'POST',
+        headers: {
+            Accept: 'audio/mpeg',
+            'Content-Type': 'application/json',
+            'xi-api-key': process.env.ELEVEN_KEY
+        },
+        body: JSON.stringify(body)
+    });
 
     if (!response.ok) {
         throw new Error(`Error from ElevenLabs API: ${response.status}`);
@@ -39,16 +35,10 @@ const getElevenAudio = async (text, voiceId) => {
 const processLessonsAndExercises = async () => {
     try {
         const lessonsData = JSON.parse(
-            await fs.readFile(
-                path.join(process.cwd(), 'server', 'lessons.json'),
-                'utf-8'
-            )
+            await fs.readFile(path.join(process.cwd(), 'lessons.json'), 'utf-8')
         );
         const exercisesData = JSON.parse(
-            await fs.readFile(
-                path.join(process.cwd(), 'server', 'exercises.json'),
-                'utf-8'
-            )
+            await fs.readFile(path.join(process.cwd(), 'exercises.json'), 'utf-8')
         );
 
         for (const lesson of lessonsData) {
@@ -62,11 +52,11 @@ const processLessonsAndExercises = async () => {
         }
 
         await fs.writeFile(
-            path.join(process.cwd(), 'server', 'lessons.json'),
+            path.join(process.cwd(), 'lessons.json'),
             JSON.stringify(lessonsData, null, 2)
         );
         await fs.writeFile(
-            path.join(process.cwd(), 'server', 'exercises.json'),
+            path.join(process.cwd(), 'exercises.json'),
             JSON.stringify(exercisesData, null, 2)
         );
 
