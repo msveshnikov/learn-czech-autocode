@@ -1,100 +1,103 @@
-import dotenv from "dotenv";
-import pLimit from "p-limit";
-import Voice from "./model/Voice.js";
+import dotenv from 'dotenv';
+import fs from 'fs/promises';
+import path from 'path';
+import fetch from 'node-fetch';
+
 dotenv.config({ override: true });
 
-const limiter = pLimit(1);
-
 const elevenVoicesSeed = {
-    Rachel: "21m00Tcm4TlvDq8ikWAM",
-    Simeon: "alMSnmMfBQWEfTP8MRcX",
-    AnaRita: "wJqPPQ618aTW29mptyoc",
-    Max: "Q5LoqC73D5BN0PVtcOl3",
-    Putin: "MxEUV4BmhCDPsC7K5IRU",
-    Aerisita: "5x4OabTaxKEADQiUryOC",
+    CzechMale: 'GyUHLb3fVDc1ZSEJWkCt'
 };
 
-export async function seedVoices() {
-    const voiceCount = await Voice.countDocuments();
-    if (voiceCount === 0) {
-        const voiceData = Object.entries(elevenVoicesSeed).map(([name, voiceId]) => ({ name, voiceId }));
-        await Voice.insertMany(voiceData);
-        console.log("Eleven voices inserted into the database.");
-    } else {
-        console.log("Eleven voices already exist in the database.");
-    }
-}
-
-export const findElevenVoice = async (voice, userId) => {
-    const userVoices = await Voice.find({ user: userId });
-    const globalVoices = await Voice.find({ user: null });
-    const allVoices = [...userVoices, ...globalVoices];
-    return allVoices.find((v) => v.name === voice);
-};
-
-export const getElevenAudio = async (text, voiceId) => {
+const getElevenAudio = async (text, voiceId) => {
     const body = {
         text: text,
-        model_id: "eleven_multilingual_v2",
+        model_id: 'eleven_multilingual_v2'
     };
 
-    const response = await limiter(() =>
-        fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
-            method: "POST",
+    const response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+        {
+            method: 'POST',
             headers: {
-                Accept: "audio/mpeg",
-                "Content-Type": "application/json",
-                "xi-api-key": process.env.ELEVEN_KEY,
+                Accept: 'audio/mpeg',
+                'Content-Type': 'application/json',
+                'xi-api-key': process.env.ELEVEN_KEY
             },
-            body: JSON.stringify(body),
-        })
+            body: JSON.stringify(body)
+        }
     );
 
     if (!response.ok) {
-        throw new Error("Error from ElevenLabs API:", await response.status());
+        throw new Error(`Error from ElevenLabs API: ${response.status}`);
     }
 
-    const audioBlob = await response.blob();
-    return Buffer.from(await audioBlob.arrayBuffer());
+    const arrayBuffer = await response.arrayBuffer();
+    return Buffer.from(arrayBuffer);
 };
 
-export const generateSoundEffect = async (text, durationSeconds = null, promptInfluence = 0.3) => {
-    const url = "https://api.elevenlabs.io/v1/sound-generation";
-
-    const headers = {
-        Accept: "audio/mpeg",
-        "Content-Type": "application/json",
-        "xi-api-key": process.env.ELEVEN_KEY,
-    };
-
-    const payload = {
-        text: text,
-        prompt_influence: promptInfluence,
-    };
-
-    if (durationSeconds !== null) {
-        if (durationSeconds >= 0.5 && durationSeconds <= 22) {
-            payload.duration_seconds = durationSeconds;
-        } else {
-            throw new Error("duration_seconds must be between 0.5 and 22 seconds.");
-        }
-    }
-
+const processLessonsAndExercises = async () => {
     try {
-        const response = await fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(payload),
-        });
+        const lessonsData = JSON.parse(
+            await fs.readFile(
+                path.join(process.cwd(), 'server', 'lessons.json'),
+                'utf-8'
+            )
+        );
+        const exercisesData = JSON.parse(
+            await fs.readFile(
+                path.join(process.cwd(), 'server', 'exercises.json'),
+                'utf-8'
+            )
+        );
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        for (const lesson of lessonsData) {
+            for (const exercise of lesson.exercises) {
+                await processExercise(exercise);
+            }
         }
 
-        const audioBlob = await response.blob();
-        return Buffer.from(await audioBlob.arrayBuffer());
+        for (const exercise of exercisesData) {
+            await processExercise(exercise);
+        }
+
+        await fs.writeFile(
+            path.join(process.cwd(), 'server', 'lessons.json'),
+            JSON.stringify(lessonsData, null, 2)
+        );
+        await fs.writeFile(
+            path.join(process.cwd(), 'server', 'exercises.json'),
+            JSON.stringify(exercisesData, null, 2)
+        );
+
+        console.log('Audio processing completed');
     } catch (error) {
-        console.error("Error occurred while generating sound effect:", error);
-        return null;
+        console.error('Error processing lessons and exercises:', error);
     }
 };
+
+const processExercise = async (exercise) => {
+    if (
+        exercise.type === 'listeningComprehension' &&
+        (!exercise.audioUrl || exercise.audioUrl.includes('example.com'))
+    ) {
+        const audioBuffer = await getElevenAudio(
+            exercise.correctAnswer,
+            elevenVoicesSeed.CzechMale
+        );
+        const fileName = `${exercise.correctAnswer
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '')
+            .replace(/\s+/g, '_')}.mp3`;
+        const filePath = path.join(process.cwd(), 'public', 'audio', fileName);
+        await fs.writeFile(filePath, audioBuffer);
+        exercise.audioUrl = `/audio/${fileName}`;
+        console.log(`Audio generated for: ${exercise.correctAnswer}`);
+    }
+};
+
+const main = async () => {
+    await processLessonsAndExercises();
+};
+
+main();

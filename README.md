@@ -104,4 +104,5 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   Add Achievments
+-   Add Achievements
+-   Save back lessons.json and exercises.json and dont use non-ASCII chatrs in filenames
