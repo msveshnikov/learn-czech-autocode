@@ -171,7 +171,13 @@ const apiService = {
             headers: { 'Content-Type': 'multipart/form-data' }
         });
         return response.data;
-    }
+    },
+
+    getNextExercise: async (currentExerciseId) => {
+        const response = await axios.get(`${API_BASE_URL}/next-exercise/${currentExerciseId}`);
+        return response.data;
+    },
+
 };
 
 export default apiService;

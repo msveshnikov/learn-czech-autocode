@@ -101,5 +101,3 @@ submitting pull requests.
 This project is licensed under the MIT License.
 
 # TODO
-
-

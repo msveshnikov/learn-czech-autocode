@@ -130,6 +130,21 @@ exerciseSchema.methods.updateDifficulty = function (userPerformance) {
     return this.save();
 };
 
+exerciseSchema.statics.getNextExercise = async function (currentExerciseId) {
+    const lesson = await mongoose.model('Lesson').findOne({ exercises: currentExerciseId });
+    const exerciseIndex = lesson.exercises.findIndex(
+        (ex) => ex.toString() === currentExerciseId.toString()
+    );
+    if (exerciseIndex < lesson.exercises.length - 1) {
+        return this.findById(lesson.exercises[exerciseIndex + 1]);
+    }
+    const nextLesson = await mongoose.model('Lesson').findOne({ order: lesson.order + 1 });
+    if (nextLesson && nextLesson.exercises.length > 0) {
+        return this.findById(nextLesson.exercises[0]);
+    }
+    return null;
+};
+
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 
 export default Exercise;

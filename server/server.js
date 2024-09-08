@@ -350,13 +350,30 @@ app.post('/speak-to-teacher', authenticateToken, async (req, res) => {
     }
 });
 
+app.get('/next-exercise/:currentExerciseId', authenticateToken, async (req, res) => {
+    try {
+        const currentExercise = await Exercise.findById(req.params.currentExerciseId);
+        const lesson = await Lesson.findOne({ exercises: currentExercise._id });
+        const nextExercise = await currentExercise.getNextExercise(lesson._id);
+        if (nextExercise) {
+            res.json(nextExercise);
+        } else {
+            res.json({ message: 'No more exercises in this lesson' });
+        }
+    } catch (error) {
+        res.status(500).json({
+            message: 'Error getting next exercise',
+            error: error.message
+        });
+    }
+});
+
 const loadDataToMongo = async () => {
     try {
         const files = await fs.readdir(__dirname);
         const lessonFiles = files.filter(
             (file) => file.startsWith('lesson') && file.endsWith('.json')
         );
-        console.log(lessonFiles)
         await Lesson.deleteMany({});
         await Exercise.deleteMany({});
 

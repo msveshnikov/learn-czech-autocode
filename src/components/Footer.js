@@ -24,10 +24,11 @@ const Footer = () => {
                             О нас
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Изучайте чешский с русского с помощью нашей интерактивной платформы для изучения языков.
+                            Изучайте чешский с русского с помощью нашей интерактивной платформы для
+                            изучения языков.
                         </Typography>
                     </Grid>
-             
+
                     <Grid item xs={12} sm={4}>
                         <Typography variant="h6" color="text.primary" gutterBottom>
                             Юридическая информация
