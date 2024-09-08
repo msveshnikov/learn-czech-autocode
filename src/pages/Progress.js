@@ -104,18 +104,18 @@ const Progress = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                </Grid>
-                <Grid item xs={6} sm={6}>
-                    <Card>
-                        <CardContent>
-                            <Typography variant="h5" gutterBottom>
-                                Завершенные уроки
-                            </Typography>
-                            <Typography variant="h3" color="text.secondary">
-                                {progress.completedLessons}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                    <Grid item xs={6} sm={6}>
+                        <Card>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>
+                                    Завершенные уроки
+                                </Typography>
+                                <Typography variant="h3" color="text.secondary">
+                                    {progress.completedLessons}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
             </Box>
         </Container>

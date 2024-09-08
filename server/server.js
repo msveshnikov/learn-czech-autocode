@@ -120,7 +120,7 @@ app.post('/complete-exercise', authenticateToken, async (req, res) => {
 app.get('/user-progress', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate(
-            'progress.lessons progress.completedExercises'
+            'progress progress.completedExercises'
         );
         res.json(user.getProgress());
     } catch (error) {
