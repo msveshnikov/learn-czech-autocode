@@ -152,7 +152,7 @@ userSchema.methods.addExperiencePoints = function (points) {
 };
 
 userSchema.methods.updateLevel = function () {
-    const newLevel = Math.floor(this.experiencePoints / 100) + 1;
+    const newLevel = Math.floor(this.experiencePoints / 1000) + 1;
     if (newLevel > this.level) {
         this.level = newLevel;
         this.addNotification(`Поздравляем! Вы достигли уровня ${newLevel}!`);

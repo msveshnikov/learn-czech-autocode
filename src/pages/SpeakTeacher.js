@@ -6,16 +6,32 @@ import {
     Button,
     Paper,
     Box,
-    CircularProgress
+    CircularProgress,
+    Avatar,
+    Grid
 } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { AuthContext } from '../context/AuthContext';
 import apiService from '../services/apiService';
+
+const MessageContainer = styled(Box)(({ theme, isUser }) => ({
+    display: 'flex',
+    justifyContent: isUser ? 'flex-end' : 'flex-start',
+    marginBottom: theme.spacing(2)
+}));
+
+const MessageBubble = styled(Paper)(({ theme, isUser }) => ({
+    padding: theme.spacing(1, 2),
+    maxWidth: '70%',
+    borderRadius: isUser ? '20px 20px 0 20px' : '20px 20px 20px 0',
+    backgroundColor: isUser ? theme.palette.primary.light : theme.palette.secondary.light
+}));
 
 const SpeakTeacher = () => {
     const [input, setInput] = useState('');
     const [conversation, setConversation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const { isAuthenticated } = useContext(AuthContext);
+    const { isAuthenticated, user } = useContext(AuthContext);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -66,52 +82,47 @@ const SpeakTeacher = () => {
 
     return (
         <Container maxWidth="md">
-            <Typography variant="h4" gutterBottom>
+            <Typography sx={{ mt: 3 }} variant="h4" gutterBottom>
                 Говорите с учителем
             </Typography>
-            <Paper elevation={3} sx={{ p: 2, mb: 2, maxHeight: '60vh', overflowY: 'auto' }}>
+            <Paper elevation={3} sx={{ p: 2, mb: 2, height: '60vh', overflowY: 'auto' }}>
                 {conversation.map((message, index) => (
-                    <Box
-                        key={index}
-                        sx={{
-                            mb: 2,
-                            textAlign: message.role === 'user' ? 'right' : 'left'
-                        }}
-                    >
-                        <Typography
-                            variant="body1"
-                            sx={{
-                                display: 'inline-block',
-                                p: 1,
-                                borderRadius: 1,
-                                bgcolor:
-                                    message.role === 'user' ? 'primary.light' : 'secondary.light'
-                            }}
-                        >
-                            {message.content}
-                        </Typography>
-                    </Box>
+                    <MessageContainer key={index} isUser={message.role === 'user'}>
+                        {message.role === 'teacher' && <Avatar sx={{ mr: 1 }}>T</Avatar>}
+                        <MessageBubble isUser={message.role === 'user'}>
+                            <Typography variant="body1">{message.content}</Typography>
+                        </MessageBubble>
+                        {message.role === 'user' && (
+                            <Avatar sx={{ ml: 1 }}>{user?.name?.charAt(0) || 'U'}</Avatar>
+                        )}
+                    </MessageContainer>
                 ))}
             </Paper>
             <form onSubmit={handleSubmit}>
-                <TextField
-                    fullWidth
-                    variant="outlined"
-                    value={input}
-                    onChange={handleInputChange}
-                    placeholder="Введите ваше сообщение..."
-                    disabled={isLoading}
-                />
-                <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    sx={{ mt: 2 }}
-                    disabled={isLoading}
-                >
-                    {isLoading ? <CircularProgress size={24} /> : 'Отправить'}
-                </Button>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} sm={9}>
+                        <TextField
+                            fullWidth
+                            variant="outlined"
+                            value={input}
+                            onChange={handleInputChange}
+                            placeholder="Введите ваше сообщение..."
+                            disabled={isLoading}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={3}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            fullWidth
+                            disabled={isLoading}
+                            sx={{ height: '100%' }}
+                        >
+                            {isLoading ? <CircularProgress size={24} /> : 'Отправить'}
+                        </Button>
+                    </Grid>
+                </Grid>
             </form>
         </Container>
     );

@@ -6,21 +6,6 @@ import { useTheme } from '@mui/material/styles';
 const Footer = () => {
     const theme = useTheme();
 
-    const translations = {
-        about: 'О нас',
-        description:
-            'Изучайте чешский с русского с помощью нашей интерактивной платформы для изучения языков.',
-        quickLinks: 'Быстрые ссылки',
-        dashboard: 'Главная',
-        lessons: 'Уроки',
-        practice: 'Практика',
-        progress: 'Прогресс',
-        legal: 'Юридическая информация',
-        terms: 'Условия использования',
-        privacy: 'Политика конфиденциальности',
-        rights: 'Все права защищены.'
-    };
-
     return (
         <Box
             component="footer"
@@ -36,48 +21,22 @@ const Footer = () => {
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
                         <Typography variant="h6" color="text.primary" gutterBottom>
-                            {translations.about}
+                            О нас
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {translations.description}
+                            Изучайте чешский с русского с помощью нашей интерактивной платформы для изучения языков.
                         </Typography>
                     </Grid>
+             
                     <Grid item xs={12} sm={4}>
                         <Typography variant="h6" color="text.primary" gutterBottom>
-                            {translations.quickLinks}
-                        </Typography>
-                        <Link
-                            component={RouterLink}
-                            to="/dashboard"
-                            color="inherit"
-                            display="block"
-                        >
-                            {translations.dashboard}
-                        </Link>
-                        <Link component={RouterLink} to="/lessons" color="inherit" display="block">
-                            {translations.lessons}
-                        </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/exercises"
-                            color="inherit"
-                            display="block"
-                        >
-                            {translations.practice}
-                        </Link>
-                        <Link component={RouterLink} to="/progress" color="inherit" display="block">
-                            {translations.progress}
-                        </Link>
-                    </Grid>
-                    <Grid item xs={12} sm={4}>
-                        <Typography variant="h6" color="text.primary" gutterBottom>
-                            {translations.legal}
+                            Юридическая информация
                         </Typography>
                         <Link component={RouterLink} to="/terms" color="inherit" display="block">
-                            {translations.terms}
+                            Условия использования
                         </Link>
                         <Link component={RouterLink} to="/privacy" color="inherit" display="block">
-                            {translations.privacy}
+                            Политика конфиденциальности
                         </Link>
                     </Grid>
                 </Grid>
@@ -89,7 +48,7 @@ const Footer = () => {
                             MaxSoft
                         </Link>
                         {'. '}
-                        {translations.rights}
+                        Все права защищены.
                     </Typography>
                 </Box>
             </Container>
