@@ -19,8 +19,22 @@ const app = express();
 const port = process.env.PORT || 5000;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-app.use(cors());
-app.use(helmet());
+app.use(
+    cors({
+        origin: [
+            'https://czech.autocode.work',
+            'http://localhost:5000',
+            'http://localhost:3000',
+            '*'
+        ],
+        optionsSuccessStatus: 200
+    })
+);
+app.use(
+    helmet({
+        crossOriginEmbedderPolicy: false
+    })
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -45,9 +59,7 @@ app.post('/register', async (req, res) => {
         const { email, password } = req.body;
         const user = new User({ email, password });
         await user.save();
-        res.status(201).json({
-            message: 'Пользователь успешно зарегистрирован'
-        });
+        res.status(201).json({ message: 'Пользователь успешно зарегистрирован' });
     } catch (error) {
         res.status(500).json({
             message: 'Ошибка при регистрации пользователя',
@@ -65,15 +77,10 @@ app.post('/login', async (req, res) => {
         const validPassword = await user.comparePassword(password);
         if (!validPassword) return res.status(400).json({ message: 'Неверный пароль' });
 
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '14d'
-        });
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '14d' });
         res.json({ token });
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при входе в систему',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при входе в систему', error: error.message });
     }
 });
 
@@ -82,10 +89,7 @@ app.get('/lessons', authenticateToken, async (req, res) => {
         const lessons = await Lesson.find().populate('exercises');
         res.json(lessons);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении уроков',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении уроков', error: error.message });
     }
 });
 
@@ -97,10 +101,7 @@ app.get('/lesson/:id', authenticateToken, async (req, res) => {
         }
         res.json(lesson);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении урока',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении урока', error: error.message });
     }
 });
 
@@ -115,10 +116,7 @@ app.post('/complete-exercise', authenticateToken, async (req, res) => {
         await user.save();
         res.json({ correct, score });
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при выполнении упражнения',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при выполнении упражнения', error: error.message });
     }
 });
 
@@ -156,10 +154,7 @@ app.get('/achievements', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         res.json(user.achievements);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении достижений',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении достижений', error: error.message });
     }
 });
 
@@ -168,15 +163,9 @@ app.post('/update-streak', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         user.updateStreak();
         await user.save();
-        res.json({
-            message: 'Серия обновлена успешно',
-            streak: user.progress.streak
-        });
+        res.json({ message: 'Серия обновлена успешно', streak: user.progress.streak });
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при обновлении серии',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при обновлении серии', error: error.message });
     }
 });
 
@@ -188,19 +177,14 @@ app.post('/complete-lesson', authenticateToken, async (req, res) => {
         await user.save();
         res.json({ message: 'Урок успешно завершен' });
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при завершении урока',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при завершении урока', error: error.message });
     }
 });
 
 app.get('/next-lesson/:currentLessonId', authenticateToken, async (req, res) => {
     try {
         const currentLesson = await Lesson.findById(req.params.currentLessonId);
-        const nextLesson = await Lesson.findOne({
-            order: currentLesson.order + 1
-        });
+        const nextLesson = await Lesson.findOne({ order: currentLesson.order + 1 });
         res.json(nextLesson);
     } catch (error) {
         res.status(500).json({
@@ -216,10 +200,7 @@ app.get('/vocabulary', authenticateToken, async (req, res) => {
         const vocabulary = lessons.reduce((acc, lesson) => [...acc, ...lesson.vocabulary], []);
         res.json(vocabulary);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении словаря',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении словаря', error: error.message });
     }
 });
 
@@ -272,10 +253,7 @@ app.get('/exercises', authenticateToken, async (req, res) => {
         const exercises = await Exercise.find();
         res.json(exercises);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении упражнений',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении упражнений', error: error.message });
     }
 });
 
@@ -287,10 +265,7 @@ app.get('/exercise/:id', authenticateToken, async (req, res) => {
         }
         res.json(exercise);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении упражнения',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении упражнения', error: error.message });
     }
 });
 
@@ -318,10 +293,7 @@ app.get('/notifications', authenticateToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         res.json(user.getUnreadNotifications());
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении уведомлений',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении уведомлений', error: error.message });
     }
 });
 
@@ -360,10 +332,7 @@ app.get('/word-of-the-day', async (req, res) => {
         ]);
         res.json(vocabulary[0].vocabulary);
     } catch (error) {
-        res.status(500).json({
-            message: 'Ошибка при получении слова дня',
-            error: error.message
-        });
+        res.status(500).json({ message: 'Ошибка при получении слова дня', error: error.message });
     }
 });
 

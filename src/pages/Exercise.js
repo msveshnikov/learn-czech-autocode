@@ -101,7 +101,7 @@ const Exercise = () => {
                 {exercise.type === 'listeningComprehension' && (
                     <>
                         <audio
-                            controls
+                            controls crossOrigin="anonymous" 
                             src={API_BASE_URL + exercise.audioUrl}
                             style={{ marginBottom: '1rem' }}
                         />
