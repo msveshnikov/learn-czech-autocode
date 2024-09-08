@@ -61,7 +61,23 @@ const Leaderboard = () => {
                                     <ListItemAvatar>
                                         <Avatar>{index + 1}</Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText primary={user.username || user.email} />
+                                    <ListItemText
+                                        secondary={
+                                            <Typography
+                                                component="span"
+                                                variant="body2"
+                                                style={{
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis',
+                                                    whiteSpace: 'nowrap',
+                                                    maxWidth: '200px',
+                                                    display: 'inline-block'
+                                                }}
+                                            >
+                                                {user.email}
+                                            </Typography>
+                                        }
+                                    />
                                     <Typography variant="body2">{user.leaderboardScore}</Typography>
                                 </ListItem>
                             ))}

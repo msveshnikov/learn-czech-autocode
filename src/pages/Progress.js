@@ -56,7 +56,7 @@ const Progress = () => {
                     Ваш прогресс
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6} sm={6}>
                         <Card>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
@@ -68,7 +68,7 @@ const Progress = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6} sm={6}>
                         <Card>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
@@ -80,7 +80,7 @@ const Progress = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6} sm={6}>
                         <Card>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
@@ -92,7 +92,7 @@ const Progress = () => {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={6} sm={6}>
                         <Card>
                             <CardContent>
                                 <Typography variant="h6" gutterBottom>
@@ -105,14 +105,18 @@ const Progress = () => {
                         </Card>
                     </Grid>
                 </Grid>
-                <Box sx={{ mt: 4 }}>
-                    <Typography variant="h5" gutterBottom>
-                        Завершенные уроки
-                    </Typography>
-                    <Typography variant="h3" color="text.secondary">
-                        {progress.completedLessons}
-                    </Typography>
-                </Box>
+                <Grid item xs={6} sm={6}>
+                    <Card>
+                        <CardContent>
+                            <Typography variant="h5" gutterBottom>
+                                Завершенные уроки
+                            </Typography>
+                            <Typography variant="h3" color="text.secondary">
+                                {progress.completedLessons}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                </Grid>
             </Box>
         </Container>
     );
