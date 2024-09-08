@@ -82,7 +82,7 @@ through various exercises and lessons.
 6. Implement containerization with Docker
 7. Set up CI/CD pipeline for automated testing and deployment
 8. Beta testing and user feedback collection
-10. Implement advanced features (voice recognition, AI chatbot)
+9. Implement advanced features (voice recognition, AI chatbot)
 
 ## Getting Started
 
