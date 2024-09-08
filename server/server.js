@@ -8,7 +8,6 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { glob } from 'glob';
 
 import User from './model/User.js';
 import Lesson from './model/Lesson.js';
@@ -353,8 +352,11 @@ app.post('/speak-to-teacher', authenticateToken, async (req, res) => {
 
 const loadDataToMongo = async () => {
     try {
-        const lessonFiles = glob.sync(path.join(process.cwd(), 'lesson*.json'));
-
+        const files = await fs.readdir(__dirname);
+        const lessonFiles = files.filter(
+            (file) => file.startsWith('lesson') && file.endsWith('.json')
+        );
+        console.log(lessonFiles)
         await Lesson.deleteMany({});
         await Exercise.deleteMany({});
 
