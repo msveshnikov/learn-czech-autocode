@@ -110,7 +110,7 @@ const Header = ({ toggleTheme }) => {
                     </IconButton>
                 )}
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Чешский с нуля
+                    Чешский с 0
                 </Typography>
                 {!isMobile && isAuthenticated && (
                     <Box sx={{ display: 'flex' }}>
@@ -204,7 +204,7 @@ const Header = ({ toggleTheme }) => {
             </Toolbar>
             {isMobile && isAuthenticated && (
                 <Menu
-                    id="menu-appbar"
+                    id="mobile-menu"
                     anchorEl={anchorEl}
                     anchorOrigin={{
                         vertical: 'top',
@@ -218,6 +218,9 @@ const Header = ({ toggleTheme }) => {
                     open={Boolean(anchorEl)}
                     onClose={handleClose}
                 >
+                    <MenuItem component={RouterLink} to="/account" onClick={handleClose}>
+                        Аккаунт
+                    </MenuItem>
                     {menuItems.map((item) => (
                         <MenuItem
                             key={item.path}
@@ -228,6 +231,7 @@ const Header = ({ toggleTheme }) => {
                             {item.label}
                         </MenuItem>
                     ))}
+                    <MenuItem onClick={handleLogout}>Выйти</MenuItem>
                 </Menu>
             )}
         </AppBar>

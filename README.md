@@ -102,4 +102,4 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   when notification clicked, mark as read
+

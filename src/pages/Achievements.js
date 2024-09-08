@@ -79,7 +79,7 @@ const Achievements = () => {
                     <Paper elevation={3}>
                         <List>
                             {achievements.map((achievement, index) => (
-                                <React.Fragment key={achievement.id}>
+                                <React.Fragment key={achievement._id}>
                                     {index > 0 && <Divider variant="inset" component="li" />}
                                     <ListItem>
                                         <ListItemIcon>
