@@ -20,7 +20,7 @@ import {
 } from '@mui/material';
 import { useQuery, useMutation } from 'react-query';
 import { Helmet } from 'react-helmet';
-import apiService from '../services/apiService';
+import apiService, { API_BASE_URL } from '../services/apiService';
 import Loading from '../components/Loading';
 
 const Lesson = () => {
@@ -73,9 +73,7 @@ const Lesson = () => {
         }
     );
 
-    const completeLessonMutation = useMutation(() =>
-        apiService.completeLesson(lessonId)
-    );
+    const completeLessonMutation = useMutation(() => apiService.completeLesson(lessonId));
 
     useEffect(() => {
         if (lessonData) {
@@ -108,13 +106,7 @@ const Lesson = () => {
             answer: userAnswer,
             timeSpent
         });
-    }, [
-        currentExercise,
-        lessonData,
-        submitExerciseMutation,
-        userAnswer,
-        timeSpent
-    ]);
+    }, [currentExercise, lessonData, submitExerciseMutation, userAnswer, timeSpent]);
 
     const resetLesson = useCallback(() => {
         setCurrentExercise(0);
@@ -144,9 +136,7 @@ const Lesson = () => {
             case 'multipleChoice':
                 return (
                     <FormControl component="fieldset" sx={{ mt: 2 }}>
-                        <FormLabel component="legend">
-                            Выберите правильный ответ
-                        </FormLabel>
+                        <FormLabel component="legend">Выберите правильный ответ</FormLabel>
                         <RadioGroup
                             aria-label="quiz"
                             name="quiz"
@@ -180,7 +170,7 @@ const Lesson = () => {
                     <>
                         <audio
                             controls
-                            src={exercise.audioUrl}
+                            src={API_BASE_URL + exercise.audioUrl}
                             style={{ marginBottom: '1rem' }}
                         />
                         <RadioGroup

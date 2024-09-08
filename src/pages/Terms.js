@@ -1,13 +1,5 @@
 import React from 'react';
-import {
-    Container,
-    Typography,
-    Box,
-    Paper,
-    List,
-    ListItem,
-    ListItemText
-} from '@mui/material';
+import { Container, Typography, Box, Paper, List, ListItem, ListItemText } from '@mui/material';
 import { Helmet } from 'react-helmet';
 
 const Terms = () => {
@@ -57,9 +49,7 @@ const Terms = () => {
     return (
         <Container maxWidth="md">
             <Helmet>
-                <title>
-                    {termsContent.title} - Платформа для изучения чешского языка
-                </title>
+                <title>{termsContent.title} - Платформа для изучения чешского языка</title>
                 <meta
                     name="description"
                     content="Условия использования нашей платформы для изучения чешского языка"
@@ -76,16 +66,9 @@ const Terms = () => {
                     {termsContent.sections.map((section, index) => (
                         <ListItem key={index} disablePadding>
                             <ListItemText
-                                primary={
-                                    <Typography variant="h6">
-                                        {section.title}
-                                    </Typography>
-                                }
+                                primary={<Typography variant="h6">{section.title}</Typography>}
                                 secondary={
-                                    <Box
-                                        component="span"
-                                        sx={{ display: 'inline' }}
-                                    >
+                                    <Box component="span" sx={{ display: 'inline' }}>
                                         <Typography
                                             component="span"
                                             variant="body2"

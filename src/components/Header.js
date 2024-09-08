@@ -27,8 +27,7 @@ const Header = ({ toggleTheme }) => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const navigate = useNavigate();
-    const { isAuthenticated, setIsAuthenticated, user } =
-        useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -100,23 +99,12 @@ const Header = ({ toggleTheme }) => {
                         ))}
                     </Box>
                 )}
-                <IconButton
-                    sx={{ ml: 1 }}
-                    onClick={toggleTheme}
-                    color="inherit"
-                >
-                    {theme.palette.mode === 'dark' ? (
-                        <Brightness7Icon />
-                    ) : (
-                        <Brightness4Icon />
-                    )}
+                <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
+                    {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
                 </IconButton>
                 {isAuthenticated && (
                     <>
-                        <IconButton
-                            color="inherit"
-                            onClick={handleNotificationMenu}
-                        >
+                        <IconButton color="inherit" onClick={handleNotificationMenu}>
                             <NotificationsIcon />
                         </IconButton>
                         <Menu
@@ -124,9 +112,7 @@ const Header = ({ toggleTheme }) => {
                             open={Boolean(notificationAnchorEl)}
                             onClose={handleNotificationClose}
                         >
-                            <MenuItem onClick={handleNotificationClose}>
-                                Уведомление
-                            </MenuItem>
+                            <MenuItem onClick={handleNotificationClose}>Уведомление</MenuItem>
                         </Menu>
                         <IconButton
                             size="large"
@@ -153,11 +139,7 @@ const Header = ({ toggleTheme }) => {
                             open={Boolean(anchorEl)}
                             onClose={handleClose}
                         >
-                            <MenuItem
-                                component={RouterLink}
-                                to="/account"
-                                onClick={handleClose}
-                            >
+                            <MenuItem component={RouterLink} to="/account" onClick={handleClose}>
                                 Аккаунт
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>Выйти</MenuItem>
@@ -166,18 +148,10 @@ const Header = ({ toggleTheme }) => {
                 )}
                 {!isAuthenticated && (
                     <>
-                        <Button
-                            color="inherit"
-                            component={RouterLink}
-                            to="/login"
-                        >
+                        <Button color="inherit" component={RouterLink} to="/login">
                             Войти
                         </Button>
-                        <Button
-                            color="inherit"
-                            component={RouterLink}
-                            to="/register"
-                        >
+                        <Button color="inherit" component={RouterLink} to="/register">
                             Регистрация
                         </Button>
                     </>

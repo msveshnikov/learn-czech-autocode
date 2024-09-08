@@ -72,9 +72,7 @@ lessonSchema.methods.addVocabulary = function (czech, russian, english) {
 };
 
 lessonSchema.methods.removeVocabulary = function (czechWord) {
-    this.vocabulary = this.vocabulary.filter(
-        (word) => word.czech !== czechWord
-    );
+    this.vocabulary = this.vocabulary.filter((word) => word.czech !== czechWord);
     return this.save();
 };
 

@@ -82,25 +82,15 @@
             {
                 "type": "multipleChoice",
                 "question": "Как сказать 'Доброе утро' на чешском?",
-                "answers": [
-                    "Dobrý den",
-                    "Dobré ráno",
-                    "Dobrý večer",
-                    "Na shledanou"
-                ],
+                "answers": ["Dobrý den", "Dobré ráno", "Dobrý večer", "Na shledanou"],
                 "correctAnswer": "Dobré ráno",
                 "category": "vocabulary"
             },
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное приветствие",
-                "audioUrl": "https://example.com/audio/dobry_den.mp3",
-                "answers": [
-                    "Dobrý den",
-                    "Dobré ráno",
-                    "Dobrý večer",
-                    "Na shledanou"
-                ],
+                "audioUrl": "/audio/dobr_den.mp3",
+                "answers": ["Dobrý den", "Dobré ráno", "Dobrý večer", "Na shledanou"],
                 "correctAnswer": "Dobrý den",
                 "category": "pronunciation"
             }
@@ -182,7 +172,7 @@
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное число",
-                "audioUrl": "https://example.com/audio/sedm.mp3",
+                "audioUrl": "/audio/sedm.mp3",
                 "answers": ["Pět", "Šest", "Sedm", "Osm"],
                 "correctAnswer": "Sedm",
                 "category": "pronunciation"
@@ -227,12 +217,7 @@
             {
                 "type": "multipleChoice",
                 "question": "Как сказать 'Как дела?' на чешском?",
-                "answers": [
-                    "Jak se máš?",
-                    "Mám se dobře",
-                    "Nerozumím",
-                    "Kde je...?"
-                ],
+                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
                 "correctAnswer": "Jak se máš?",
                 "category": "vocabulary"
             },
@@ -245,13 +230,8 @@
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильную фразу",
-                "audioUrl": "https://example.com/audio/nerozumim.mp3",
-                "answers": [
-                    "Jak se máš?",
-                    "Mám se dobře",
-                    "Nerozumím",
-                    "Kde je...?"
-                ],
+                "audioUrl": "/audio/nerozumm.mp3",
+                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
                 "correctAnswer": "Nerozumím",
                 "category": "pronunciation"
             }
@@ -313,7 +293,7 @@
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильную форму глагола 'быть'",
-                "audioUrl": "https://example.com/audio/jste.mp3",
+                "audioUrl": "/audio/jste.mp3",
                 "answers": ["Jsem", "Jsi", "Je", "Jste"],
                 "correctAnswer": "Jste",
                 "category": "pronunciation"
@@ -376,7 +356,7 @@
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное слово",
-                "audioUrl": "https://example.com/audio/dedecek.mp3",
+                "audioUrl": "/audio/ddeek.mp3",
                 "answers": ["Matka", "Otec", "Babička", "Dědeček"],
                 "correctAnswer": "Dědeček",
                 "category": "pronunciation"
@@ -439,7 +419,7 @@
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное слово",
-                "audioUrl": "https://example.com/audio/kava.mp3",
+                "audioUrl": "/audio/kva.mp3",
                 "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
                 "correctAnswer": "Káva",
                 "category": "pronunciation"

@@ -1,14 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import {
-    Box,
-    Button,
-    Typography,
-    Popper,
-    Fade,
-    Paper,
-    ClickAwayListener
-} from '@mui/material';
+import { Box, Button, Typography, Popper, Fade, Paper, ClickAwayListener } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 const StyledPopper = styled(Popper)(({ theme }) => ({
@@ -25,9 +17,7 @@ const UIOverview = ({ steps, onComplete }) => {
 
     useEffect(() => {
         if (steps.length > 0) {
-            const targetElement = document.querySelector(
-                steps[activeStep].target
-            );
+            const targetElement = document.querySelector(steps[activeStep].target);
             if (targetElement) {
                 setAnchorEl(targetElement);
             }
@@ -60,11 +50,7 @@ const UIOverview = ({ steps, onComplete }) => {
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
-            <StyledPopper
-                open={Boolean(anchorEl)}
-                anchorEl={anchorEl}
-                transition
-            >
+            <StyledPopper open={Boolean(anchorEl)} anchorEl={anchorEl} transition>
                 {({ TransitionProps }) => (
                     <Fade {...TransitionProps} timeout={350}>
                         <Paper>
@@ -78,14 +64,8 @@ const UIOverview = ({ steps, onComplete }) => {
                                 <Button onClick={handleSkip} color="secondary">
                                     Пропустить
                                 </Button>
-                                <Button
-                                    onClick={handleNext}
-                                    variant="contained"
-                                    color="primary"
-                                >
-                                    {activeStep === steps.length - 1
-                                        ? 'Завершить'
-                                        : 'Далее'}
+                                <Button onClick={handleNext} variant="contained" color="primary">
+                                    {activeStep === steps.length - 1 ? 'Завершить' : 'Далее'}
                                 </Button>
                             </Box>
                         </Paper>

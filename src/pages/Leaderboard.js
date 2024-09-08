@@ -1,4 +1,4 @@
-import React, {  } from 'react';
+import React from 'react';
 import {
     Container,
     Typography,
@@ -48,12 +48,7 @@ const Leaderboard = () => {
             </Helmet>
             <Container maxWidth="sm">
                 <Box my={4}>
-                    <Typography
-                        variant="h4"
-                        component="h1"
-                        gutterBottom
-                        align="center"
-                    >
+                    <Typography variant="h4" component="h1" gutterBottom align="center">
                         {translations.title}
                     </Typography>
                     <Paper elevation={3}>
@@ -61,19 +56,13 @@ const Leaderboard = () => {
                             {leaderboardData.map((user, index) => (
                                 <ListItem
                                     key={user._id}
-                                    divider={
-                                        index !== leaderboardData.length - 1
-                                    }
+                                    divider={index !== leaderboardData.length - 1}
                                 >
                                     <ListItemAvatar>
                                         <Avatar>{index + 1}</Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText
-                                        primary={user.username || user.email}
-                                    />
-                                    <Typography variant="body2">
-                                        {user.leaderboardScore}
-                                    </Typography>
+                                    <ListItemText primary={user.username || user.email} />
+                                    <Typography variant="body2">{user.leaderboardScore}</Typography>
                                 </ListItem>
                             ))}
                         </List>

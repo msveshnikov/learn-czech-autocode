@@ -62,16 +62,12 @@ const Register = () => {
         if (validateForm()) {
             try {
                 await apiService.register(formData);
-                setAlertMessage(
-                    'Регистрация успешна. Пожалуйста, войдите в систему.'
-                );
+                setAlertMessage('Регистрация успешна. Пожалуйста, войдите в систему.');
                 setTimeout(() => {
                     navigate('/login');
                 }, 2000);
             } catch (error) {
-                setAlertMessage(
-                    'Ошибка регистрации. Пожалуйста, попробуйте снова.'
-                );
+                setAlertMessage('Ошибка регистрации. Пожалуйста, попробуйте снова.');
             }
         }
     };
@@ -90,11 +86,7 @@ const Register = () => {
                     Регистрация
                 </Typography>
                 {alertMessage && (
-                    <Alert
-                        severity="info"
-                        onClose={() => setAlertMessage('')}
-                        sx={{ mt: 2 }}
-                    >
+                    <Alert severity="info" onClose={() => setAlertMessage('')} sx={{ mt: 2 }}>
                         {alertMessage}
                     </Alert>
                 )}
@@ -155,12 +147,7 @@ const Register = () => {
                             )}
                         </Grid>
                     </Grid>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
+                    <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
                         Зарегистрироваться
                     </Button>
                     <Grid container justifyContent="flex-end">

@@ -50,10 +50,7 @@ const Login = () => {
             setIsAuthenticated(true);
             navigate('/dashboard');
         } catch (err) {
-            setError(
-                err.response?.data?.message ||
-                    'Ошибка входа. Пожалуйста, попробуйте снова.'
-            );
+            setError(err.response?.data?.message || 'Ошибка входа. Пожалуйста, попробуйте снова.');
         }
     };
 
@@ -67,12 +64,7 @@ const Login = () => {
                     backgroundColor: theme.palette.background.paper
                 }}
             >
-                <Typography
-                    component="h1"
-                    variant="h5"
-                    align="center"
-                    color="textPrimary"
-                >
+                <Typography component="h1" variant="h5" align="center" color="textPrimary">
                     Вход
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
@@ -108,9 +100,7 @@ const Login = () => {
                                 value="remember"
                                 color="primary"
                                 checked={rememberMe}
-                                onChange={(e) =>
-                                    setRememberMe(e.target.checked)
-                                }
+                                onChange={(e) => setRememberMe(e.target.checked)}
                             />
                         }
                         label="Запомнить меня"
@@ -137,9 +127,7 @@ const Login = () => {
                                 color: theme.palette.primary.main
                             }}
                         >
-                            <Typography variant="body2">
-                                Нет аккаунта? Зарегистрируйтесь
-                            </Typography>
+                            <Typography variant="body2">Нет аккаунта? Зарегистрируйтесь</Typography>
                         </Link>
                     </Box>
                 </Box>

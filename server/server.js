@@ -40,7 +40,7 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-app.post('/api/register', async (req, res) => {
+app.post('/register', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = new User({ email, password });
@@ -56,16 +56,14 @@ app.post('/api/register', async (req, res) => {
     }
 });
 
-app.post('/api/login', async (req, res) => {
+app.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
-        if (!user)
-            return res.status(400).json({ message: 'Пользователь не найден' });
+        if (!user) return res.status(400).json({ message: 'Пользователь не найден' });
 
         const validPassword = await user.comparePassword(password);
-        if (!validPassword)
-            return res.status(400).json({ message: 'Неверный пароль' });
+        if (!validPassword) return res.status(400).json({ message: 'Неверный пароль' });
 
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
             expiresIn: '14d'
@@ -79,7 +77,7 @@ app.post('/api/login', async (req, res) => {
     }
 });
 
-app.get('/api/lessons', authenticateToken, async (req, res) => {
+app.get('/lessons', authenticateToken, async (req, res) => {
     try {
         const lessons = await Lesson.find().populate('exercises');
         res.json(lessons);
@@ -91,11 +89,9 @@ app.get('/api/lessons', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/lesson/:id', authenticateToken, async (req, res) => {
+app.get('/lesson/:id', authenticateToken, async (req, res) => {
     try {
-        const lesson = await Lesson.findById(req.params.id).populate(
-            'exercises'
-        );
+        const lesson = await Lesson.findById(req.params.id).populate('exercises');
         if (!lesson) {
             return res.status(404).json({ message: 'Урок не найден' });
         }
@@ -108,7 +104,7 @@ app.get('/api/lesson/:id', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
+app.post('/complete-exercise', authenticateToken, async (req, res) => {
     try {
         const { exerciseId, answer, timeSpent } = req.body;
         const user = await User.findById(req.user.id);
@@ -126,7 +122,7 @@ app.post('/api/complete-exercise', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/user-progress', authenticateToken, async (req, res) => {
+app.get('/user-progress', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).populate(
             'progress.lessons progress.completedExercises'
@@ -140,7 +136,7 @@ app.get('/api/user-progress', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/leaderboard', authenticateToken, async (req, res) => {
+app.get('/leaderboard', authenticateToken, async (req, res) => {
     try {
         const leaderboard = await User.find()
             .sort({ leaderboardScore: -1 })
@@ -155,7 +151,7 @@ app.get('/api/leaderboard', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/achievements', authenticateToken, async (req, res) => {
+app.get('/achievements', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         res.json(user.achievements);
@@ -167,7 +163,7 @@ app.get('/api/achievements', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/update-streak', authenticateToken, async (req, res) => {
+app.post('/update-streak', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         user.updateStreak();
@@ -184,7 +180,7 @@ app.post('/api/update-streak', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/complete-lesson', authenticateToken, async (req, res) => {
+app.post('/complete-lesson', authenticateToken, async (req, res) => {
     try {
         const { lessonId } = req.body;
         const user = await User.findById(req.user.id);
@@ -199,34 +195,25 @@ app.post('/api/complete-lesson', authenticateToken, async (req, res) => {
     }
 });
 
-app.get(
-    '/api/next-lesson/:currentLessonId',
-    authenticateToken,
-    async (req, res) => {
-        try {
-            const currentLesson = await Lesson.findById(
-                req.params.currentLessonId
-            );
-            const nextLesson = await Lesson.findOne({
-                order: currentLesson.order + 1
-            });
-            res.json(nextLesson);
-        } catch (error) {
-            res.status(500).json({
-                message: 'Ошибка при получении следующего урока',
-                error: error.message
-            });
-        }
+app.get('/next-lesson/:currentLessonId', authenticateToken, async (req, res) => {
+    try {
+        const currentLesson = await Lesson.findById(req.params.currentLessonId);
+        const nextLesson = await Lesson.findOne({
+            order: currentLesson.order + 1
+        });
+        res.json(nextLesson);
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при получении следующего урока',
+            error: error.message
+        });
     }
-);
+});
 
-app.get('/api/vocabulary', authenticateToken, async (req, res) => {
+app.get('/vocabulary', authenticateToken, async (req, res) => {
     try {
         const lessons = await Lesson.find().select('vocabulary');
-        const vocabulary = lessons.reduce(
-            (acc, lesson) => [...acc, ...lesson.vocabulary],
-            []
-        );
+        const vocabulary = lessons.reduce((acc, lesson) => [...acc, ...lesson.vocabulary], []);
         res.json(vocabulary);
     } catch (error) {
         res.status(500).json({
@@ -236,7 +223,7 @@ app.get('/api/vocabulary', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/practice-exercises', authenticateToken, async (req, res) => {
+app.get('/practice-exercises', authenticateToken, async (req, res) => {
     try {
         const exercises = await Exercise.aggregate([{ $sample: { size: 10 } }]);
         res.json(exercises);
@@ -248,29 +235,25 @@ app.get('/api/practice-exercises', authenticateToken, async (req, res) => {
     }
 });
 
-app.post(
-    '/api/submit-practice-exercise',
-    authenticateToken,
-    async (req, res) => {
-        try {
-            const { exerciseId, answer, timeSpent } = req.body;
-            const exercise = await Exercise.findById(exerciseId);
-            const correct = exercise.checkAnswer(answer);
-            const score = exercise.calculateScore(timeSpent);
-            const user = await User.findById(req.user.id);
-            user.addCompletedExercise(exerciseId, correct, score);
-            await user.save();
-            res.json({ correct, score });
-        } catch (error) {
-            res.status(500).json({
-                message: 'Ошибка при отправке упражнения для практики',
-                error: error.message
-            });
-        }
+app.post('/submit-practice-exercise', authenticateToken, async (req, res) => {
+    try {
+        const { exerciseId, answer, timeSpent } = req.body;
+        const exercise = await Exercise.findById(exerciseId);
+        const correct = exercise.checkAnswer(answer);
+        const score = exercise.calculateScore(timeSpent);
+        const user = await User.findById(req.user.id);
+        user.addCompletedExercise(exerciseId, correct, score);
+        await user.save();
+        res.json({ correct, score });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при отправке упражнения для практики',
+            error: error.message
+        });
     }
-);
+});
 
-app.get('/api/dashboard', authenticateToken, async (req, res) => {
+app.get('/dashboard', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         const lessons = await Lesson.find().select('title description');
@@ -284,7 +267,7 @@ app.get('/api/dashboard', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/exercises', authenticateToken, async (req, res) => {
+app.get('/exercises', authenticateToken, async (req, res) => {
     try {
         const exercises = await Exercise.find();
         res.json(exercises);
@@ -296,7 +279,7 @@ app.get('/api/exercises', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/exercise/:id', authenticateToken, async (req, res) => {
+app.get('/exercise/:id', authenticateToken, async (req, res) => {
     try {
         const exercise = await Exercise.findById(req.params.id);
         if (!exercise) {
@@ -311,7 +294,7 @@ app.get('/api/exercise/:id', authenticateToken, async (req, res) => {
     }
 });
 
-app.put('/api/user', authenticateToken, async (req, res) => {
+app.put('/user', authenticateToken, async (req, res) => {
     try {
         const { username, learningGoal, language, dailyGoal } = req.body;
         const user = await User.findById(req.user.id);
@@ -330,7 +313,7 @@ app.put('/api/user', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/notifications', authenticateToken, async (req, res) => {
+app.get('/notifications', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         res.json(user.getUnreadNotifications());
@@ -342,7 +325,7 @@ app.get('/api/notifications', authenticateToken, async (req, res) => {
     }
 });
 
-app.post('/api/mark-notification-read', authenticateToken, async (req, res) => {
+app.post('/mark-notification-read', authenticateToken, async (req, res) => {
     try {
         const { notificationId } = req.body;
         const user = await User.findById(req.user.id);
@@ -357,7 +340,7 @@ app.post('/api/mark-notification-read', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/user', authenticateToken, async (req, res) => {
+app.get('/user', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id).select('-password');
         res.json(user);
@@ -369,7 +352,7 @@ app.get('/api/user', authenticateToken, async (req, res) => {
     }
 });
 
-app.get('/api/word-of-the-day', async (req, res) => {
+app.get('/word-of-the-day', async (req, res) => {
     try {
         const vocabulary = await Lesson.aggregate([
             { $unwind: '$vocabulary' },
@@ -384,7 +367,7 @@ app.get('/api/word-of-the-day', async (req, res) => {
     }
 });
 
-app.get('/api/check-daily-goal', authenticateToken, async (req, res) => {
+app.get('/check-daily-goal', authenticateToken, async (req, res) => {
     try {
         const user = await User.findById(req.user.id);
         const goalAchieved = user.checkDailyGoal();

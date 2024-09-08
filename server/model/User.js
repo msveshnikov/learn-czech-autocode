@@ -68,11 +68,7 @@ userSchema.methods.updateStreak = function () {
     this.progress.lastLoginDate = now;
 };
 
-userSchema.methods.addCompletedExercise = function (
-    exerciseId,
-    correct,
-    score
-) {
+userSchema.methods.addCompletedExercise = function (exerciseId, correct, score) {
     const existingExercise = this.progress.completedExercises.find(
         (ce) => ce.exercise.toString() === exerciseId.toString()
     );
@@ -146,9 +142,7 @@ userSchema.methods.updateLevel = function () {
     const newLevel = Math.floor(this.experiencePoints / 100) + 1;
     if (newLevel > this.level) {
         this.level = newLevel;
-        this.addNotification(
-            `Congratulations! You've reached level ${newLevel}!`
-        );
+        this.addNotification(`Congratulations! You've reached level ${newLevel}!`);
     }
 };
 

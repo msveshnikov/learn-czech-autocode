@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL =
-    process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
+export const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000';
 
 const apiService = {
     setToken: (token) => {
@@ -74,10 +73,9 @@ const apiService = {
     },
 
     markNotificationAsRead: async (notificationId) => {
-        const response = await axios.post(
-            `${API_BASE_URL}/mark-notification-read`,
-            { notificationId }
-        );
+        const response = await axios.post(`${API_BASE_URL}/mark-notification-read`, {
+            notificationId
+        });
         return response.data;
     },
 
@@ -97,10 +95,11 @@ const apiService = {
     },
 
     submitPracticeExercise: async (exerciseId, answer, timeSpent) => {
-        const response = await axios.post(
-            `${API_BASE_URL}/submit-practice-exercise`,
-            { exerciseId, answer, timeSpent }
-        );
+        const response = await axios.post(`${API_BASE_URL}/submit-practice-exercise`, {
+            exerciseId,
+            answer,
+            timeSpent
+        });
         return response.data;
     },
 
@@ -117,9 +116,7 @@ const apiService = {
     },
 
     getNextLesson: async (currentLessonId) => {
-        const response = await axios.get(
-            `${API_BASE_URL}/next-lesson/${currentLessonId}`
-        );
+        const response = await axios.get(`${API_BASE_URL}/next-lesson/${currentLessonId}`);
         return response.data;
     },
 
@@ -129,9 +126,7 @@ const apiService = {
     },
 
     getExercise: async (exerciseId) => {
-        const response = await axios.get(
-            `${API_BASE_URL}/exercise/${exerciseId}`
-        );
+        const response = await axios.get(`${API_BASE_URL}/exercise/${exerciseId}`);
         return response.data;
     },
 

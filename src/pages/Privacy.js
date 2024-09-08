@@ -69,11 +69,7 @@ const Privacy = () => {
                         <Typography paragraph>{section.content}</Typography>
                     </Box>
                 ))}
-                <Typography
-                    variant="body2"
-                    color="textSecondary"
-                    align="center"
-                >
+                <Typography variant="body2" color="textSecondary" align="center">
                     Последнее обновление: {new Date().toLocaleDateString()}
                 </Typography>
             </Paper>

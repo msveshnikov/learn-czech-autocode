@@ -15,20 +15,6 @@
         "category": "grammar"
     },
     {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильный перевод",
-        "answers": [
-            "Доброе утро",
-            "Спокойной ночи",
-            "Здравствуйте",
-            "До свидания"
-        ],
-        "correctAnswer": "Доброе утро",
-        "audioUrl": "https://example.com/audio/dobry-den.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    },
-    {
         "type": "multipleChoice",
         "question": "Как сказать 'пожалуйста' на чешском?",
         "answers": ["Prosím", "Děkuji", "Ano", "Ne"],
@@ -48,7 +34,7 @@
         "question": "Прослушайте и выберите правильное слово",
         "answers": ["Dobrý", "Špatný", "Velký", "Malý"],
         "correctAnswer": "Dobrý",
-        "audioUrl": "https://example.com/audio/dobry.mp3",
+        "audioUrl": "/audio/dobr.mp3",
         "difficulty": "easy",
         "category": "pronunciation"
     },
@@ -72,7 +58,7 @@
         "question": "Прослушайте и выберите правильное число",
         "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
         "correctAnswer": "Tři",
-        "audioUrl": "https://example.com/audio/tri.mp3",
+        "audioUrl": "/audio/ti.mp3",
         "difficulty": "medium",
         "category": "pronunciation"
     },
@@ -96,7 +82,7 @@
         "question": "Прослушайте и выберите правильное приветствие",
         "answers": ["Dobrý den", "Dobrou noc", "Na shledanou", "Ahoj"],
         "correctAnswer": "Dobrý den",
-        "audioUrl": "https://example.com/audio/dobry-den.mp3",
+        "audioUrl": "/audio/dobr_den.mp3",
         "difficulty": "easy",
         "category": "pronunciation"
     },
@@ -120,7 +106,7 @@
         "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
         "answers": ["Dobře", "Špatně", "Ano", "Ne"],
         "correctAnswer": "Dobře",
-        "audioUrl": "https://example.com/audio/dobre.mp3",
+        "audioUrl": "/audio/dobe.mp3",
         "difficulty": "medium",
         "category": "pronunciation"
     },
@@ -144,7 +130,7 @@
         "question": "Прослушайте и выберите правильное число",
         "answers": ["Pět", "Šest", "Sedm", "Osm"],
         "correctAnswer": "Sedm",
-        "audioUrl": "https://example.com/audio/sedm.mp3",
+        "audioUrl": "/audio/sedm.mp3",
         "difficulty": "medium",
         "category": "pronunciation"
     },

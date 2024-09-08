@@ -53,16 +53,11 @@ exerciseSchema.pre('save', function (next) {
 
 exerciseSchema.methods.checkAnswer = function (userAnswer) {
     if (this.type === 'fillInTheBlank') {
-        const normalizedUserAnswer = userAnswer
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '');
+        const normalizedUserAnswer = userAnswer.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         const normalizedCorrectAnswer = this.correctAnswer
             .normalize('NFD')
             .replace(/[\u0300-\u036f]/g, '');
-        return (
-            normalizedUserAnswer.toLowerCase() ===
-            normalizedCorrectAnswer.toLowerCase()
-        );
+        return normalizedUserAnswer.toLowerCase() === normalizedCorrectAnswer.toLowerCase();
     }
     return userAnswer.toLowerCase() === this.correctAnswer.toLowerCase();
 };
@@ -98,16 +93,10 @@ exerciseSchema.methods.calculateScore = function (timeSpent) {
     const baseScore = 10;
     const difficultyMultiplier = { easy: 1, medium: 1.5, hard: 2 };
     const timeBonus = Math.max(0, 30 - timeSpent);
-    return Math.round(
-        baseScore * difficultyMultiplier[this.difficulty] + timeBonus
-    );
+    return Math.round(baseScore * difficultyMultiplier[this.difficulty] + timeBonus);
 };
 
-exerciseSchema.statics.getRandomExercises = function (
-    count,
-    category,
-    difficulty
-) {
+exerciseSchema.statics.getRandomExercises = function (count, category, difficulty) {
     const query = {};
     if (category) query.category = category;
     if (difficulty) query.difficulty = difficulty;
@@ -116,13 +105,9 @@ exerciseSchema.statics.getRandomExercises = function (
 
 exerciseSchema.methods.getNextExercise = async function (lessonId) {
     const lesson = await mongoose.model('Lesson').findById(lessonId);
-    const exerciseIndex = lesson.exercises.findIndex(
-        (ex) => ex.toString() === this._id.toString()
-    );
+    const exerciseIndex = lesson.exercises.findIndex((ex) => ex.toString() === this._id.toString());
     if (exerciseIndex < lesson.exercises.length - 1) {
-        return mongoose
-            .model('Exercise')
-            .findById(lesson.exercises[exerciseIndex + 1]);
+        return mongoose.model('Exercise').findById(lesson.exercises[exerciseIndex + 1]);
     }
     return null;
 };

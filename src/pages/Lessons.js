@@ -57,19 +57,14 @@ const Lessons = () => {
             </Typography>
             <Grid container spacing={3}>
                 {lessons.map((lesson) => (
-                    <Grid item xs={12} sm={6} md={4} key={lesson.id}>
+                    <Grid item xs={12} sm={6} md={4} key={lesson._id}>
                         <Card>
-                            <CardActionArea
-                                onClick={() => handleLessonClick(lesson._id)}
-                            >
+                            <CardActionArea onClick={() => handleLessonClick(lesson._id)}>
                                 <CardContent>
                                     <Typography variant="h6" component="h2">
                                         {lesson.title}
                                     </Typography>
-                                    <Typography
-                                        variant="body2"
-                                        color="text.secondary"
-                                    >
+                                    <Typography variant="body2" color="text.secondary">
                                         {lesson.description}
                                     </Typography>
                                 </CardContent>

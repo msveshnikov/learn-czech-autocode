@@ -40,24 +40,14 @@ const Achievements = () => {
             </Helmet>
             <Container maxWidth="sm">
                 <Box my={4}>
-                    <Typography
-                        variant="h4"
-                        component="h1"
-                        gutterBottom
-                        align="center"
-                    >
+                    <Typography variant="h4" component="h1" gutterBottom align="center">
                         Достижения
                     </Typography>
                     <Paper elevation={3}>
                         <List>
                             {achievements.map((achievement, index) => (
                                 <React.Fragment key={achievement.id}>
-                                    {index > 0 && (
-                                        <Divider
-                                            variant="inset"
-                                            component="li"
-                                        />
-                                    )}
+                                    {index > 0 && <Divider variant="inset" component="li" />}
                                     <ListItem>
                                         <ListItemIcon>
                                             {achievement.unlocked ? (
@@ -71,9 +61,7 @@ const Achievements = () => {
                                             secondary={
                                                 <Grid container spacing={1}>
                                                     <Grid item xs={12}>
-                                                        {
-                                                            achievement.description
-                                                        }
+                                                        {achievement.description}
                                                     </Grid>
                                                     <Grid item xs={12}>
                                                         <LinearProgress

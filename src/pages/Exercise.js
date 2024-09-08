@@ -14,7 +14,7 @@ import {
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 import { Helmet } from 'react-helmet';
-import apiService from '../services/apiService';
+import apiService, { API_BASE_URL } from '../services/apiService';
 import Loading from '../components/Loading';
 
 const Exercise = () => {
@@ -29,17 +29,10 @@ const Exercise = () => {
         data: exercise,
         isLoading,
         error
-    } = useQuery(['exercise', exerciseId], () =>
-        apiService.getExercise(exerciseId)
-    );
+    } = useQuery(['exercise', exerciseId], () => apiService.getExercise(exerciseId));
 
     const submitExerciseMutation = useMutation(
-        (data) =>
-            apiService.submitPracticeExercise(
-                data.exerciseId,
-                data.answer,
-                data.timeSpent
-            ),
+        (data) => apiService.submitPracticeExercise(data.exerciseId, data.answer, data.timeSpent),
         {
             onSuccess: (data) => {
                 setIsCorrect(data.correct);
@@ -73,12 +66,7 @@ const Exercise = () => {
     }, [navigate]);
 
     if (isLoading) return <Loading />;
-    if (error)
-        return (
-            <Typography color="error">
-                Ошибка при загрузке упражнения
-            </Typography>
-        );
+    if (error) return <Typography color="error">Ошибка при загрузке упражнения</Typography>;
 
     return (
         <Box p={3}>
@@ -90,10 +78,7 @@ const Exercise = () => {
                     {exercise.question}
                 </Typography>
                 {exercise.type === 'multipleChoice' && (
-                    <RadioGroup
-                        value={userAnswer}
-                        onChange={handleAnswerChange}
-                    >
+                    <RadioGroup value={userAnswer} onChange={handleAnswerChange}>
                         {exercise.answers.map((answer, index) => (
                             <FormControlLabel
                                 key={index}
@@ -117,13 +102,10 @@ const Exercise = () => {
                     <>
                         <audio
                             controls
-                            src={exercise.audioUrl}
+                            src={API_BASE_URL + exercise.audioUrl}
                             style={{ marginBottom: '1rem' }}
                         />
-                        <RadioGroup
-                            value={userAnswer}
-                            onChange={handleAnswerChange}
-                        >
+                        <RadioGroup value={userAnswer} onChange={handleAnswerChange}>
                             {exercise.answers.map((answer, index) => (
                                 <FormControlLabel
                                     key={index}
@@ -147,8 +129,7 @@ const Exercise = () => {
                 </Box>
             </Paper>
             <Typography variant="body2">
-                Время: {Math.floor(timeSpent / 60)}:
-                {timeSpent % 60 < 10 ? '0' : ''}
+                Время: {Math.floor(timeSpent / 60)}:{timeSpent % 60 < 10 ? '0' : ''}
                 {timeSpent % 60}
             </Typography>
             <Snackbar
@@ -156,22 +137,13 @@ const Exercise = () => {
                 autoHideDuration={3000}
                 onClose={() => setShowFeedback(false)}
             >
-                <Alert
-                    severity={isCorrect ? 'success' : 'error'}
-                    sx={{ width: '100%' }}
-                >
-                    {isCorrect
-                        ? 'Правильно!'
-                        : 'Неправильно. Попробуйте еще раз.'}
+                <Alert severity={isCorrect ? 'success' : 'error'} sx={{ width: '100%' }}>
+                    {isCorrect ? 'Правильно!' : 'Неправильно. Попробуйте еще раз.'}
                 </Alert>
             </Snackbar>
             {showFeedback && (
                 <Box mt={2}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={handleNextExercise}
-                    >
+                    <Button variant="contained" color="primary" onClick={handleNextExercise}>
                         Следующее упражнение
                     </Button>
                 </Box>

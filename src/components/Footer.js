@@ -35,11 +35,7 @@ const Footer = () => {
             <Container maxWidth="lg">
                 <Grid container spacing={3}>
                     <Grid item xs={12} sm={4}>
-                        <Typography
-                            variant="h6"
-                            color="text.primary"
-                            gutterBottom
-                        >
+                        <Typography variant="h6" color="text.primary" gutterBottom>
                             {translations.about}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
@@ -47,11 +43,7 @@ const Footer = () => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography
-                            variant="h6"
-                            color="text.primary"
-                            gutterBottom
-                        >
+                        <Typography variant="h6" color="text.primary" gutterBottom>
                             {translations.quickLinks}
                         </Typography>
                         <Link
@@ -62,12 +54,7 @@ const Footer = () => {
                         >
                             {translations.dashboard}
                         </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/lessons"
-                            color="inherit"
-                            display="block"
-                        >
+                        <Link component={RouterLink} to="/lessons" color="inherit" display="block">
                             {translations.lessons}
                         </Link>
                         <Link
@@ -78,47 +65,24 @@ const Footer = () => {
                         >
                             {translations.practice}
                         </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/progress"
-                            color="inherit"
-                            display="block"
-                        >
+                        <Link component={RouterLink} to="/progress" color="inherit" display="block">
                             {translations.progress}
                         </Link>
                     </Grid>
                     <Grid item xs={12} sm={4}>
-                        <Typography
-                            variant="h6"
-                            color="text.primary"
-                            gutterBottom
-                        >
+                        <Typography variant="h6" color="text.primary" gutterBottom>
                             {translations.legal}
                         </Typography>
-                        <Link
-                            component={RouterLink}
-                            to="/terms"
-                            color="inherit"
-                            display="block"
-                        >
+                        <Link component={RouterLink} to="/terms" color="inherit" display="block">
                             {translations.terms}
                         </Link>
-                        <Link
-                            component={RouterLink}
-                            to="/privacy"
-                            color="inherit"
-                            display="block"
-                        >
+                        <Link component={RouterLink} to="/privacy" color="inherit" display="block">
                             {translations.privacy}
                         </Link>
                     </Grid>
                 </Grid>
                 <Box mt={3}>
-                    <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        align="center"
-                    >
+                    <Typography variant="body2" color="text.secondary" align="center">
                         {'© '}
                         {new Date().getFullYear()}{' '}
                         <Link color="inherit" href="https://autocode.work/">

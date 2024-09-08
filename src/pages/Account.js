@@ -39,11 +39,7 @@ const Account = () => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const {
-        data: userData,
-        isLoading,
-        error
-    } = useQuery('userAccount', apiService.getUserAccount);
+    const { data: userData, isLoading, error } = useQuery('userAccount', apiService.getUserAccount);
 
     const updateUserMutation = useMutation(apiService.updateUser, {
         onSuccess: () => {
@@ -89,12 +85,7 @@ const Account = () => {
 
     if (isLoading) {
         return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
                 <CircularProgress />
             </Box>
         );
@@ -171,9 +162,7 @@ const Account = () => {
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <FormControl fullWidth disabled={!isEditing}>
-                                <InputLabel id="language-select-label">
-                                    Язык интерфейса
-                                </InputLabel>
+                                <InputLabel id="language-select-label">Язык интерфейса</InputLabel>
                                 <Select
                                     labelId="language-select-label"
                                     name="language"
@@ -203,18 +192,12 @@ const Account = () => {
                                     >
                                         Сохранить изменения
                                     </Button>
-                                    <Button
-                                        variant="outlined"
-                                        onClick={() => setIsEditing(false)}
-                                    >
+                                    <Button variant="outlined" onClick={() => setIsEditing(false)}>
                                         Отмена
                                     </Button>
                                 </>
                             ) : (
-                                <Button
-                                    variant="contained"
-                                    onClick={() => setIsEditing(true)}
-                                >
+                                <Button variant="contained" onClick={() => setIsEditing(true)}>
                                     Редактировать профиль
                                 </Button>
                             )}

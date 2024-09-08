@@ -30,8 +30,7 @@ const steps = [
 ];
 
 const tooltips = {
-    'Добро пожаловать':
-        'Добро пожаловать в наше приложение для изучения чешского языка!',
+    'Добро пожаловать': 'Добро пожаловать в наше приложение для изучения чешского языка!',
     'Настройка аккаунта': 'Настройте свой профиль и предпочтения обучения.',
     'Обзор платформы': 'Ознакомьтесь с основными функциями нашей платформы.',
     'Основы чешского языка': 'Узнайте базовые концепции чешского языка.',
@@ -87,8 +86,7 @@ const Onboarding = () => {
             case 0:
                 return (
                     <Typography>
-                        Добро пожаловать в приложение для изучения чешского
-                        языка с русского!
+                        Добро пожаловать в приложение для изучения чешского языка с русского!
                     </Typography>
                 );
             case 1:
@@ -104,33 +102,25 @@ const Onboarding = () => {
             case 2:
                 return (
                     <Typography>
-                        Наша платформа предлагает интерактивные уроки,
-                        упражнения и отслеживание прогресса.
+                        Наша платформа предлагает интерактивные уроки, упражнения и отслеживание
+                        прогресса.
                     </Typography>
                 );
             case 3:
                 return (
                     <Typography>
-                        Чешский язык - западнославянский язык. Вы обнаружите
-                        много схожестей с русским!
+                        Чешский язык - западнославянский язык. Вы обнаружите много схожестей с
+                        русским!
                     </Typography>
                 );
             case 4:
                 return (
                     <>
-                        <FormControl
-                            component="fieldset"
-                            fullWidth
-                            margin="normal"
-                        >
-                            <FormLabel component="legend">
-                                Выберите цель обучения:
-                            </FormLabel>
+                        <FormControl component="fieldset" fullWidth margin="normal">
+                            <FormLabel component="legend">Выберите цель обучения:</FormLabel>
                             <RadioGroup
                                 value={learningGoal}
-                                onChange={(e) =>
-                                    setLearningGoal(e.target.value)
-                                }
+                                onChange={(e) => setLearningGoal(e.target.value)}
                             >
                                 <FormControlLabel
                                     value="basic"
@@ -150,18 +140,12 @@ const Onboarding = () => {
                             </RadioGroup>
                         </FormControl>
                         <FormControl fullWidth margin="normal">
-                            <FormLabel component="legend">
-                                Выберите темп обучения:
-                            </FormLabel>
+                            <FormLabel component="legend">Выберите темп обучения:</FormLabel>
                             <Select
                                 value={learningPace}
-                                onChange={(e) =>
-                                    setLearningPace(e.target.value)
-                                }
+                                onChange={(e) => setLearningPace(e.target.value)}
                             >
-                                <MenuItem value="relaxed">
-                                    Расслабленный
-                                </MenuItem>
+                                <MenuItem value="relaxed">Расслабленный</MenuItem>
                                 <MenuItem value="regular">Регулярный</MenuItem>
                                 <MenuItem value="intense">Интенсивный</MenuItem>
                             </Select>

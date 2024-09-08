@@ -114,10 +114,7 @@ db.lessons.updateOne(
     }
 );
 
-db.lessons.updateOne(
-    { _id: numbersLesson._id },
-    { $push: { exercises: listeningExercise._id } }
-);
+db.lessons.updateOne({ _id: numbersLesson._id }, { $push: { exercises: listeningExercise._id } });
 
 // Create indexes for better performance
 db.lessons.createIndex({ level: 1, order: 1 });

@@ -177,11 +177,7 @@ const Dashboard = () => {
                 <Box my={4}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={8}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 1 }}
-                                id="lessons-overview"
-                            >
+                            <Paper elevation={3} sx={{ p: 1 }} id="lessons-overview">
                                 <Typography variant="h6" gutterBottom>
                                     Уроки
                                 </Typography>
@@ -192,11 +188,7 @@ const Dashboard = () => {
                                             secondaryAction={
                                                 <Button
                                                     variant="contained"
-                                                    onClick={() =>
-                                                        handleStartLesson(
-                                                            lesson._id
-                                                        )
-                                                    }
+                                                    onClick={() => handleStartLesson(lesson._id)}
                                                 >
                                                     Начать
                                                 </Button>
@@ -216,65 +208,47 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={4}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2 }}
-                                id="user-progress"
-                            >
+                            <Paper elevation={3} sx={{ p: 2 }} id="user-progress">
                                 <Typography variant="h6" gutterBottom>
                                     Ваш прогресс
                                 </Typography>
                                 <List>
-                                    {Object.entries(userProgress).map(
-                                        ([key, value]) => (
-                                            <ListItem key={key}>
-                                                <ListItemIcon>
-                                                    <CheckCircleIcon />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={
-                                                        key ===
-                                                        'completedLessons'
-                                                            ? 'Завершенные уроки'
-                                                            : key ===
-                                                              'completedExercises'
-                                                            ? 'Завершенные упражнения'
-                                                            : key ===
-                                                              'experiencePoints'
-                                                            ? 'Очки опыта'
-                                                            : key === 'level'
-                                                            ? 'Уровень'
-                                                            : key
-                                                    }
-                                                    secondary={
-                                                        <LinearProgress
-                                                            variant="determinate"
-                                                            value={value}
-                                                            sx={{ mt: 1 }}
-                                                        />
-                                                    }
-                                                />
-                                            </ListItem>
-                                        )
-                                    )}
+                                    {Object.entries(userProgress).map(([key, value]) => (
+                                        <ListItem key={key}>
+                                            <ListItemIcon>
+                                                <CheckCircleIcon />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={
+                                                    key === 'completedLessons'
+                                                        ? 'Завершенные уроки'
+                                                        : key === 'completedExercises'
+                                                        ? 'Завершенные упражнения'
+                                                        : key === 'experiencePoints'
+                                                        ? 'Очки опыта'
+                                                        : key === 'level'
+                                                        ? 'Уровень'
+                                                        : key
+                                                }
+                                                secondary={
+                                                    <LinearProgress
+                                                        variant="determinate"
+                                                        value={value}
+                                                        sx={{ mt: 1 }}
+                                                    />
+                                                }
+                                            />
+                                        </ListItem>
+                                    ))}
                                 </List>
                             </Paper>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2, mt: 2 }}
-                                id="streak"
-                            >
+                            <Paper elevation={3} sx={{ p: 2, mt: 2 }} id="streak">
                                 <Typography variant="h6" gutterBottom>
                                     Серия
                                 </Typography>
                                 <Box display="flex" alignItems="center">
-                                    <WhatshotIcon
-                                        color="error"
-                                        sx={{ mr: 1 }}
-                                    />
-                                    <Typography variant="h4">
-                                        {streak}
-                                    </Typography>
+                                    <WhatshotIcon color="error" sx={{ mr: 1 }} />
+                                    <Typography variant="h4">{streak}</Typography>
                                     <Typography variant="body2" sx={{ ml: 1 }}>
                                         дней
                                     </Typography>
@@ -298,27 +272,19 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2 }}
-                                id="achievements"
-                            >
+                            <Paper elevation={3} sx={{ p: 2 }} id="achievements">
                                 <Typography variant="h6" gutterBottom>
                                     Достижения
                                 </Typography>
                                 <List>
-                                    {achievements
-                                        .slice(0, 3)
-                                        .map((achievement, index) => (
-                                            <ListItem key={index}>
-                                                <ListItemIcon>
-                                                    <EmojiEventsIcon />
-                                                </ListItemIcon>
-                                                <ListItemText
-                                                    primary={achievement}
-                                                />
-                                            </ListItem>
-                                        ))}
+                                    {achievements.slice(0, 3).map((achievement, index) => (
+                                        <ListItem key={index}>
+                                            <ListItemIcon>
+                                                <EmojiEventsIcon />
+                                            </ListItemIcon>
+                                            <ListItemText primary={achievement} />
+                                        </ListItem>
+                                    ))}
                                 </List>
                                 <Button
                                     variant="outlined"
@@ -353,11 +319,7 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2 }}
-                                id="learning-goal"
-                            >
+                            <Paper elevation={3} sx={{ p: 2 }} id="learning-goal">
                                 <Typography variant="h6" gutterBottom>
                                     Цель обучения
                                 </Typography>
@@ -379,30 +341,20 @@ const Dashboard = () => {
                             </Paper>
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <Paper
-                                elevation={3}
-                                sx={{ p: 2 }}
-                                id="word-of-the-day"
-                            >
+                            <Paper elevation={3} sx={{ p: 2 }} id="word-of-the-day">
                                 <Typography variant="h6" gutterBottom>
                                     Слово дня
                                 </Typography>
                                 <Typography variant="h5" gutterBottom>
                                     {wordOfTheDay.czech}
                                 </Typography>
-                                <Typography variant="body1">
-                                    {wordOfTheDay.russian}
-                                </Typography>
+                                <Typography variant="body1">{wordOfTheDay.russian}</Typography>
                             </Paper>
                         </Grid>
                     </Grid>
                 </Box>
             </Container>
-            <Snackbar
-                open={snackbar.open}
-                autoHideDuration={6000}
-                onClose={handleSnackbarClose}
-            >
+            <Snackbar open={snackbar.open} autoHideDuration={6000} onClose={handleSnackbarClose}>
                 <Alert
                     onClose={handleSnackbarClose}
                     severity={snackbar.severity}
@@ -412,10 +364,7 @@ const Dashboard = () => {
                 </Alert>
             </Snackbar>
             {showUIOverview && (
-                <UIOverview
-                    steps={onboardingSteps}
-                    onComplete={handleUIOverviewComplete}
-                />
+                <UIOverview steps={onboardingSteps} onComplete={handleUIOverviewComplete} />
             )}
         </>
     );

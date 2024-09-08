@@ -23,9 +23,7 @@ const Progress = () => {
             setError(null);
         } catch (err) {
             console.error('Error fetching progress:', err);
-            setError(
-                'Не удалось загрузить прогресс. Пожалуйста, попробуйте позже.'
-            );
+            setError('Не удалось загрузить прогресс. Пожалуйста, попробуйте позже.');
         } finally {
             setLoading(false);
         }
@@ -37,12 +35,7 @@ const Progress = () => {
 
     if (loading) {
         return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                height="100vh"
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <CircularProgress />
             </Box>
         );
@@ -50,12 +43,7 @@ const Progress = () => {
 
     if (error) {
         return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                height="100vh"
-            >
+            <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
                 <Typography color="error">{error}</Typography>
             </Box>
         );
