@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import glob from 'glob';
+import { glob } from 'glob';
 
 import User from './model/User.js';
 import Lesson from './model/Lesson.js';
