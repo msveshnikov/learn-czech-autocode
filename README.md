@@ -101,3 +101,7 @@ submitting pull requests.
 This project is licensed under the MIT License.
 
 # TODO
+
+-   Add lesson (topic - Yulia want to book to hairdresser by phone) with longer listening type of exercise
+-   Add lesson (topic - Daria wants to come to doctor, has pain in stomach) 
+-   Add lesson (topic - Max wants to order transfer service by phone to move from Praha to Neratovice and move funrniture and stuff) 

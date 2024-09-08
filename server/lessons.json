@@ -1,976 +1,1151 @@
 [
-    {
-        "title": "Основная лексика",
-        "description": "Изучите основные чешские слова и фразы",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 1,
-        "content": "В этом уроке мы рассмотрим базовую чешскую лексику, которую вы будете использовать в повседневных разговорах.",
-        "vocabulary": [
-            {
-                "czech": "Ahoj",
-                "russian": "Привет",
-                "english": "Hello"
-            },
-            {
-                "czech": "Děkuji",
-                "russian": "Спасибо",
-                "english": "Thank you"
-            },
-            {
-                "czech": "Prosím",
-                "russian": "Пожалуйста",
-                "english": "Please"
-            },
-            {
-                "czech": "Ano",
-                "russian": "Да",
-                "english": "Yes"
-            },
-            {
-                "czech": "Ne",
-                "russian": "Нет",
-                "english": "No"
-            }
+  {
+    "title": "Основная лексика",
+    "description": "Изучите основные чешские слова и фразы",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 1,
+    "content": "В этом уроке мы рассмотрим базовую чешскую лексику, которую вы будете использовать в повседневных разговорах.",
+    "vocabulary": [
+      {
+        "czech": "Ahoj",
+        "russian": "Привет",
+        "english": "Hello"
+      },
+      {
+        "czech": "Děkuji",
+        "russian": "Спасибо",
+        "english": "Thank you"
+      },
+      {
+        "czech": "Prosím",
+        "russian": "Пожалуйста",
+        "english": "Please"
+      },
+      {
+        "czech": "Ano",
+        "russian": "Да",
+        "english": "Yes"
+      },
+      {
+        "czech": "Ne",
+        "russian": "Нет",
+        "english": "No"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'привет' на чешском?",
+        "answers": [
+          "Ahoj",
+          "Děkuji",
+          "Prosím",
+          "Ne"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'привет' на чешском?",
-                "answers": ["Ahoj", "Děkuji", "Prosím", "Ne"],
-                "correctAnswer": "Ahoj",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: '_____ vám' (Спасибо)",
-                "correctAnswer": "Děkuji",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Jak se ___?'",
-                "correctAnswer": "máš",
-                "difficulty": "medium",
-                "category": "grammar"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'пожалуйста' на чешском?",
-                "answers": ["Prosím", "Děkuji", "Ano", "Ne"],
-                "correctAnswer": "Prosím",
-                "difficulty": "easy",
-                "category": "vocabulary"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'спасибо' на чешском?",
-                "answers": ["Děkuji", "Prosím", "Ahoj", "Na shledanou"],
-                "correctAnswer": "Děkuji",
-                "difficulty": "easy",
-                "category": "vocabulary"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'Я не понимаю' на чешском?",
-                "answers": ["Nerozumím", "Rozumím", "Mluvím česky", "Nevím"],
-                "correctAnswer": "Nerozumím",
-                "difficulty": "medium",
-                "category": "vocabulary"
-            }
-        ]
-    },
-    {
-        "title": "Приветствия",
-        "description": "Научитесь приветствовать людей на чешском",
-        "level": "beginner",
-        "category": "conversation",
-        "order": 2,
-        "content": "В этом уроке мы изучим различные приветствия на чешском языке для разного времени суток и ситуаций.",
-        "vocabulary": [
-            {
-                "czech": "Dobrý den",
-                "russian": "Добрый день",
-                "english": "Good day"
-            },
-            {
-                "czech": "Dobré ráno",
-                "russian": "Доброе утро",
-                "english": "Good morning"
-            },
-            {
-                "czech": "Dobrý večer",
-                "russian": "Добрый вечер",
-                "english": "Good evening"
-            },
-            {
-                "czech": "Na shledanou",
-                "russian": "До свидания",
-                "english": "Goodbye"
-            }
+        "correctAnswer": "Ahoj",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: '_____ vám' (Спасибо)",
+        "correctAnswer": "Děkuji",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Jak se ___?'",
+        "correctAnswer": "máš",
+        "difficulty": "medium",
+        "category": "grammar"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'пожалуйста' на чешском?",
+        "answers": [
+          "Prosím",
+          "Děkuji",
+          "Ano",
+          "Ne"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'Доброе утро' на чешском?",
-                "answers": ["Dobrý den", "Dobré ráno", "Dobrý večer", "Na shledanou"],
-                "correctAnswer": "Dobré ráno",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное приветствие",
-                "audioUrl": "/audio/dobr_den.mp3",
-                "answers": ["Dobrý den", "Dobré ráno", "Dobrý večer", "Na shledanou"],
-                "correctAnswer": "Dobrý den",
-                "category": "pronunciation"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
-                "correctAnswer": "se",
-                "difficulty": "hard",
-                "category": "grammar"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Kolik je ti ___?'",
-                "correctAnswer": "let",
-                "difficulty": "medium",
-                "category": "grammar"
-            }
-        ]
-    },
-    {
-        "title": "Числа",
-        "description": "Научитесь считать на чешском",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 3,
-        "content": "В этом уроке мы выучим числа от 1 до 10 на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Jedna",
-                "russian": "Один",
-                "english": "One"
-            },
-            {
-                "czech": "Dva",
-                "russian": "Два",
-                "english": "Two"
-            },
-            {
-                "czech": "Tři",
-                "russian": "Три",
-                "english": "Three"
-            },
-            {
-                "czech": "Čtyři",
-                "russian": "Четыре",
-                "english": "Four"
-            },
-            {
-                "czech": "Pět",
-                "russian": "Пять",
-                "english": "Five"
-            },
-            {
-                "czech": "Šest",
-                "russian": "Шесть",
-                "english": "Six"
-            },
-            {
-                "czech": "Sedm",
-                "russian": "Семь",
-                "english": "Seven"
-            },
-            {
-                "czech": "Osm",
-                "russian": "Восемь",
-                "english": "Eight"
-            },
-            {
-                "czech": "Devět",
-                "russian": "Девять",
-                "english": "Nine"
-            },
-            {
-                "czech": "Deset",
-                "russian": "Десять",
-                "english": "Ten"
-            }
+        "correctAnswer": "Prosím",
+        "difficulty": "easy",
+        "category": "vocabulary"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'спасибо' на чешском?",
+        "answers": [
+          "Děkuji",
+          "Prosím",
+          "Ahoj",
+          "Na shledanou"
         ],
-        "exercises": [
-            {
-                "type": "fillInTheBlank",
-                "question": "Напишите число 3 на чешском: ___",
-                "correctAnswer": "Tři",
-                "category": "vocabulary"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'пять' на чешском?",
-                "answers": ["Jedna", "Dva", "Tři", "Pět"],
-                "correctAnswer": "Pět",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное число",
-                "audioUrl": "/audio/sedm.mp3",
-                "answers": ["Pět", "Šest", "Sedm", "Osm"],
-                "correctAnswer": "Sedm",
-                "category": "pronunciation"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'один' на чешском?",
-                "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
-                "correctAnswer": "Jedna",
-                "difficulty": "easy",
-                "category": "vocabulary"
-            }
-        ]
-    },
-    {
-        "title": "Базовые фразы",
-        "description": "Изучите основные чешские фразы для повседневных ситуаций",
-        "level": "beginner",
-        "category": "conversation",
-        "order": 4,
-        "content": "В этом уроке мы рассмотрим некоторые базовые чешские фразы, которые помогут вам в повседневных ситуациях.",
-        "vocabulary": [
-            {
-                "czech": "Jak se máš?",
-                "russian": "Как дела?",
-                "english": "How are you?"
-            },
-            {
-                "czech": "Mám se dobře",
-                "russian": "У меня все хорошо",
-                "english": "I'm fine"
-            },
-            {
-                "czech": "Nerozumím",
-                "russian": "Я не понимаю",
-                "english": "I don't understand"
-            },
-            {
-                "czech": "Mluvíte anglicky?",
-                "russian": "Вы говорите по-английски?",
-                "english": "Do you speak English?"
-            },
-            {
-                "czech": "Kde je...?",
-                "russian": "Где находится...?",
-                "english": "Where is...?"
-            }
+        "correctAnswer": "Děkuji",
+        "difficulty": "easy",
+        "category": "vocabulary"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'Я не понимаю' на чешском?",
+        "answers": [
+          "Nerozumím",
+          "Rozumím",
+          "Mluvím česky",
+          "Nevím"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'Как дела?' на чешском?",
-                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
-                "correctAnswer": "Jak se máš?",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните фразу: 'Mluvíte _____?' (Вы говорите по-английски?)",
-                "correctAnswer": "anglicky",
-                "category": "grammar"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильную фразу",
-                "audioUrl": "/audio/nerozumm.mp3",
-                "answers": ["Jak se máš?", "Mám se dobře", "Nerozumím", "Kde je...?"],
-                "correctAnswer": "Nerozumím",
-                "category": "pronunciation"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное слово",
-                "answers": ["Dobrý", "Špatný", "Velký", "Malý"],
-                "correctAnswer": "Dobrý",
-                "audioUrl": "/audio/dobr.mp3",
-                "difficulty": "easy",
-                "category": "pronunciation"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное приветствие",
-                "answers": ["Dobrý den", "Dobrou noc", "Na shledanou", "Ahoj"],
-                "correctAnswer": "Dobrý den",
-                "audioUrl": "/audio/dobr_den.mp3",
-                "difficulty": "easy",
-                "category": "pronunciation"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'извините' на чешском?",
-                "answers": ["Promiňte", "Děkuji", "Prosím", "Ano"],
-                "correctAnswer": "Promiňte",
-                "difficulty": "medium",
-                "category": "vocabulary"
-            }
-        ]
-    },
-    {
-        "title": "Базовая грамматика: Глагол 'быть'",
-        "description": "Изучите спряжение глагола 'быть' в чешском языке",
-        "level": "beginner",
-        "category": "grammar",
-        "order": 5,
-        "content": "В этом уроке мы научимся спрягать глагол 'být' (быть) в настоящем времени.",
-        "vocabulary": [
-            {
-                "czech": "Jsem",
-                "russian": "Я есть",
-                "english": "I am"
-            },
-            {
-                "czech": "Jsi",
-                "russian": "Ты есть",
-                "english": "You are (singular)"
-            },
-            {
-                "czech": "Je",
-                "russian": "Он/Она/Оно есть",
-                "english": "He/She/It is"
-            },
-            {
-                "czech": "Jsme",
-                "russian": "Мы есть",
-                "english": "We are"
-            },
-            {
-                "czech": "Jste",
-                "russian": "Вы есть",
-                "english": "You are (plural/formal)"
-            },
-            {
-                "czech": "Jsou",
-                "russian": "Они есть",
-                "english": "They are"
-            }
+        "correctAnswer": "Nerozumím",
+        "difficulty": "medium",
+        "category": "vocabulary"
+      }
+    ]
+  },
+  {
+    "title": "Приветствия",
+    "description": "Научитесь приветствовать людей на чешском",
+    "level": "beginner",
+    "category": "conversation",
+    "order": 2,
+    "content": "В этом уроке мы изучим различные приветствия на чешском языке для разного времени суток и ситуаций.",
+    "vocabulary": [
+      {
+        "czech": "Dobrý den",
+        "russian": "Добрый день",
+        "english": "Good day"
+      },
+      {
+        "czech": "Dobré ráno",
+        "russian": "Доброе утро",
+        "english": "Good morning"
+      },
+      {
+        "czech": "Dobrý večer",
+        "russian": "Добрый вечер",
+        "english": "Good evening"
+      },
+      {
+        "czech": "Na shledanou",
+        "russian": "До свидания",
+        "english": "Goodbye"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'Доброе утро' на чешском?",
+        "answers": [
+          "Dobrý den",
+          "Dobré ráno",
+          "Dobrý večer",
+          "Na shledanou"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Какая правильная форма глагола 'быть' для 'Я' в чешском?",
-                "answers": ["Jsem", "Jsi", "Je", "Jsme"],
-                "correctAnswer": "Jsem",
-                "category": "grammar"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Oni _____ studenti.' (Они студенты)",
-                "correctAnswer": "jsou",
-                "category": "grammar"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильную форму глагола 'быть'",
-                "audioUrl": "/audio/jste.mp3",
-                "answers": ["Jsem", "Jsi", "Je", "Jste"],
-                "correctAnswer": "Jste",
-                "category": "pronunciation"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
-                "correctAnswer": "jste",
-                "difficulty": "hard",
-                "category": "grammar"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
-                "answers": ["Dobře", "Špatně", "Ano", "Ne"],
-                "correctAnswer": "Dobře",
-                "audioUrl": "/audio/dobe.mp3",
-                "difficulty": "medium",
-                "category": "pronunciation"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: '___ jsem student.' (Я студент)",
-                "correctAnswer": "Jsem",
-                "difficulty": "medium",
-                "category": "grammar"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Oni ___ studenti.' (Они студенты)",
-                "correctAnswer": "jsou",
-                "difficulty": "hard",
-                "category": "grammar"
-            }
-        ]
-    },
-    {
-        "title": "Семья",
-        "description": "Изучите слова, связанные с семьей на чешском языке",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 6,
-        "content": "В этом уроке мы изучим слова, обозначающие членов семьи на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Matka",
-                "russian": "Мать",
-                "english": "Mother"
-            },
-            {
-                "czech": "Otec",
-                "russian": "Отец",
-                "english": "Father"
-            },
-            {
-                "czech": "Sestra",
-                "russian": "Сестра",
-                "english": "Sister"
-            },
-            {
-                "czech": "Bratr",
-                "russian": "Брат",
-                "english": "Brother"
-            },
-            {
-                "czech": "Babička",
-                "russian": "Бабушка",
-                "english": "Grandmother"
-            },
-            {
-                "czech": "Dědeček",
-                "russian": "Дедушка",
-                "english": "Grandfather"
-            }
+        "correctAnswer": "Dobré ráno",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное приветствие",
+        "audioUrl": "/audio/dobr_den.mp3",
+        "answers": [
+          "Dobrý den",
+          "Dobré ráno",
+          "Dobrý večer",
+          "Na shledanou"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'сестра' на чешском?",
-                "answers": ["Matka", "Otec", "Sestra", "Bratr"],
-                "correctAnswer": "Sestra",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Moje _____ se jmenuje Anna.' (Моя мать зовут Анна)",
-                "correctAnswer": "matka",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное слово",
-                "audioUrl": "/audio/ddeek.mp3",
-                "answers": ["Matka", "Otec", "Babička", "Dědeček"],
-                "correctAnswer": "Dědeček",
-                "category": "pronunciation"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'мать' на чешском?",
-                "answers": ["Matka", "Otec", "Sestra", "Bratr"],
-                "correctAnswer": "Matka",
-                "difficulty": "easy",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Moje _____ se jmenuje Jan.' (Мой отец зовут Ян)",
-                "correctAnswer": "otec",
-                "difficulty": "medium",
-                "category": "vocabulary"
-            }
-        ]
-    },
-    {
-        "title": "Еда и напитки",
-        "description": "Изучите названия продуктов питания и напитков на чешском",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 7,
-        "content": "В этом уроке мы познакомимся с названиями некоторых продуктов питания и напитков на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Chléb",
-                "russian": "Хлеб",
-                "english": "Bread"
-            },
-            {
-                "czech": "Mléko",
-                "russian": "Молоко",
-                "english": "Milk"
-            },
-            {
-                "czech": "Voda",
-                "russian": "Вода",
-                "english": "Water"
-            },
-            {
-                "czech": "Káva",
-                "russian": "Кофе",
-                "english": "Coffee"
-            },
-            {
-                "czech": "Čaj",
-                "russian": "Чай",
-                "english": "Tea"
-            },
-            {
-                "czech": "Pivo",
-                "russian": "Пиво",
-                "english": "Beer"
-            }
+        "correctAnswer": "Dobrý den",
+        "category": "pronunciation"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
+        "correctAnswer": "se",
+        "difficulty": "hard",
+        "category": "grammar"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Kolik je ti ___?'",
+        "correctAnswer": "let",
+        "difficulty": "medium",
+        "category": "grammar"
+      }
+    ]
+  },
+  {
+    "title": "Числа",
+    "description": "Научитесь считать на чешском",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 3,
+    "content": "В этом уроке мы выучим числа от 1 до 10 на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Jedna",
+        "russian": "Один",
+        "english": "One"
+      },
+      {
+        "czech": "Dva",
+        "russian": "Два",
+        "english": "Two"
+      },
+      {
+        "czech": "Tři",
+        "russian": "Три",
+        "english": "Three"
+      },
+      {
+        "czech": "Čtyři",
+        "russian": "Четыре",
+        "english": "Four"
+      },
+      {
+        "czech": "Pět",
+        "russian": "Пять",
+        "english": "Five"
+      },
+      {
+        "czech": "Šest",
+        "russian": "Шесть",
+        "english": "Six"
+      },
+      {
+        "czech": "Sedm",
+        "russian": "Семь",
+        "english": "Seven"
+      },
+      {
+        "czech": "Osm",
+        "russian": "Восемь",
+        "english": "Eight"
+      },
+      {
+        "czech": "Devět",
+        "russian": "Девять",
+        "english": "Nine"
+      },
+      {
+        "czech": "Deset",
+        "russian": "Десять",
+        "english": "Ten"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "fillInTheBlank",
+        "question": "Напишите число 3 на чешском: ___",
+        "correctAnswer": "Tři",
+        "category": "vocabulary"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'пять' на чешском?",
+        "answers": [
+          "Jedna",
+          "Dva",
+          "Tři",
+          "Pět"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'хлеб' на чешском?",
-                "answers": ["Chléb", "Mléko", "Voda", "Káva"],
-                "correctAnswer": "Chléb",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
-                "correctAnswer": "pivo",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное слово",
-                "audioUrl": "/audio/kva.mp3",
-                "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
-                "correctAnswer": "Káva",
-                "category": "pronunciation"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'хлеб' на чешском?",
-                "answers": ["Chléb", "Mléko", "Voda", "Káva"],
-                "correctAnswer": "Chléb",
-                "difficulty": "easy",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
-                "correctAnswer": "pivo",
-                "difficulty": "medium",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное слово",
-                "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
-                "correctAnswer": "Káva",
-                "audioUrl": "/audio/kva.mp3",
-                "difficulty": "medium",
-                "category": "pronunciation"
-            }
-        ]
-    },
-    {
-        "title": "Цвета",
-        "description": "Изучите названия основных цветов на чешском языке",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 8,
-        "content": "В этом уроке мы познакомимся с названиями основных цветов на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Červená",
-                "russian": "Красный",
-                "english": "Red"
-            },
-            {
-                "czech": "Modrá",
-                "russian": "Синий",
-                "english": "Blue"
-            },
-            {
-                "czech": "Zelená",
-                "russian": "Зеленый",
-                "english": "Green"
-            },
-            {
-                "czech": "Žlutá",
-                "russian": "Желтый",
-                "english": "Yellow"
-            },
-            {
-                "czech": "Černá",
-                "russian": "Черный",
-                "english": "Black"
-            },
-            {
-                "czech": "Bílá",
-                "russian": "Белый",
-                "english": "White"
-            }
+        "correctAnswer": "Pět",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное число",
+        "audioUrl": "/audio/sedm.mp3",
+        "answers": [
+          "Pět",
+          "Šest",
+          "Sedm",
+          "Osm"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'красный' на чешском?",
-                "answers": ["Červená", "Modrá", "Zelená", "Žlutá"],
-                "correctAnswer": "Červená",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Nebe je _____.' (Небо синее)",
-                "correctAnswer": "modré",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильный цвет",
-                "answers": ["Červená", "Modrá", "Zelená", "Žlutá"],
-                "correctAnswer": "Zelená",
-                "category": "pronunciation",
-                "audioUrl": "/audio/zelen.mp3"
-            }
-        ]
-    },
-    {
-        "title": "Дни недели",
-        "description": "Изучите названия дней недели на чешском языке",
-        "level": "beginner",
-        "category": "vocabulary",
-        "order": 9,
-        "content": "В этом уроке мы познакомимся с названиями дней недели на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Pondělí",
-                "russian": "Понедельник",
-                "english": "Monday"
-            },
-            {
-                "czech": "Úterý",
-                "russian": "Вторник",
-                "english": "Tuesday"
-            },
-            {
-                "czech": "Středa",
-                "russian": "Среда",
-                "english": "Wednesday"
-            },
-            {
-                "czech": "Čtvrtek",
-                "russian": "Четверг",
-                "english": "Thursday"
-            },
-            {
-                "czech": "Pátek",
-                "russian": "Пятница",
-                "english": "Friday"
-            },
-            {
-                "czech": "Sobota",
-                "russian": "Суббота",
-                "english": "Saturday"
-            },
-            {
-                "czech": "Neděle",
-                "russian": "Воскресенье",
-                "english": "Sunday"
-            }
+        "correctAnswer": "Sedm",
+        "category": "pronunciation"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'один' на чешском?",
+        "answers": [
+          "Jedna",
+          "Dva",
+          "Tři",
+          "Čtyři"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'понедельник' на чешском?",
-                "answers": ["Pondělí", "Úterý", "Středa", "Čtvrtek"],
-                "correctAnswer": "Pondělí",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Dnes je _____.' (Сегодня пятница)",
-                "correctAnswer": "pátek",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильный день недели",
-                "answers": ["Pátek", "Sobota", "Neděle", "Pondělí"],
-                "correctAnswer": "Neděle",
-                "category": "pronunciation",
-                "audioUrl": "/audio/nedle.mp3"
-            }
-        ]
-    },
-    {
-        "title": "Простые глаголы",
-        "description": "Изучите некоторые простые глаголы на чешском языке",
-        "level": "beginner",
-        "category": "grammar",
-        "order": 10,
-        "content": "В этом уроке мы познакомимся с некоторыми простыми глаголами на чешском языке и их спряжением в настоящем времени.",
-        "vocabulary": [
-            {
-                "czech": "Mluvit",
-                "russian": "Говорить",
-                "english": "To speak"
-            },
-            {
-                "czech": "Jíst",
-                "russian": "Есть",
-                "english": "To eat"
-            },
-            {
-                "czech": "Pít",
-                "russian": "Пить",
-                "english": "To drink"
-            },
-            {
-                "czech": "Číst",
-                "russian": "Читать",
-                "english": "To read"
-            },
-            {
-                "czech": "Psát",
-                "russian": "Писать",
-                "english": "To write"
-            }
+        "correctAnswer": "Jedna",
+        "difficulty": "easy",
+        "category": "vocabulary"
+      }
+    ]
+  },
+  {
+    "title": "Базовые фразы",
+    "description": "Изучите основные чешские фразы для повседневных ситуаций",
+    "level": "beginner",
+    "category": "conversation",
+    "order": 4,
+    "content": "В этом уроке мы рассмотрим некоторые базовые чешские фразы, которые помогут вам в повседневных ситуациях.",
+    "vocabulary": [
+      {
+        "czech": "Jak se máš?",
+        "russian": "Как дела?",
+        "english": "How are you?"
+      },
+      {
+        "czech": "Mám se dobře",
+        "russian": "У меня все хорошо",
+        "english": "I'm fine"
+      },
+      {
+        "czech": "Nerozumím",
+        "russian": "Я не понимаю",
+        "english": "I don't understand"
+      },
+      {
+        "czech": "Mluvíte anglicky?",
+        "russian": "Вы говорите по-английски?",
+        "english": "Do you speak English?"
+      },
+      {
+        "czech": "Kde je...?",
+        "russian": "Где находится...?",
+        "english": "Where is...?"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'Как дела?' на чешском?",
+        "answers": [
+          "Jak se máš?",
+          "Mám se dobře",
+          "Nerozumím",
+          "Kde je...?"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'говорить' на чешском?",
-                "answers": ["Mluvit", "Jíst", "Pít", "Číst"],
-                "correctAnswer": "Mluvit",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Já _____ česky.' (Я говорю по-чешски)",
-                "correctAnswer": "mluvím",
-                "category": "grammar"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильный глагол",
-                "answers": ["Mluvit", "Jíst", "Pít", "Číst"],
-                "correctAnswer": "Jíst",
-                "category": "pronunciation",
-                "audioUrl": "/audio/jst.mp3"
-            }
-        ]
-    },
-    {
-        "title": "Времена года и погода",
-        "description": "Изучите названия времен года и погодных явлений на чешском языке",
-        "level": "advanced",
-        "category": "vocabulary",
-        "order": 11,
-        "content": "В этом уроке мы познакомимся с названиями времен года и различными погодными явлениями на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Jaro",
-                "russian": "Весна",
-                "english": "Spring"
-            },
-            {
-                "czech": "Léto",
-                "russian": "Лето",
-                "english": "Summer"
-            },
-            {
-                "czech": "Podzim",
-                "russian": "Осень",
-                "english": "Autumn"
-            },
-            {
-                "czech": "Zima",
-                "russian": "Зима",
-                "english": "Winter"
-            },
-            {
-                "czech": "Slunečno",
-                "russian": "Солнечно",
-                "english": "Sunny"
-            },
-            {
-                "czech": "Deštivo",
-                "russian": "Дождливо",
-                "english": "Rainy"
-            },
-            {
-                "czech": "Sněží",
-                "russian": "Идет снег",
-                "english": "It's snowing"
-            },
-            {
-                "czech": "Větrno",
-                "russian": "Ветрено",
-                "english": "Windy"
-            }
+        "correctAnswer": "Jak se máš?",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните фразу: 'Mluvíte _____?' (Вы говорите по-английски?)",
+        "correctAnswer": "anglicky",
+        "category": "grammar"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильную фразу",
+        "audioUrl": "/audio/nerozumm.mp3",
+        "answers": [
+          "Jak se máš?",
+          "Mám se dobře",
+          "Nerozumím",
+          "Kde je...?"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "difficulty": "easy",
-                "question": "Как сказать 'лето' на чешском?",
-                "answers": ["Jaro", "Léto", "Podzim", "Zima"],
-                "correctAnswer": "Léto",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "difficulty": "easy",
-                "question": "Дополните предложение: 'Dnes je _____.' (Сегодня солнечно)",
-                "correctAnswer": "slunečno",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное погодное явление",
-                "answers": ["Slunečno", "Deštivo", "Sněží", "Větrno"],
-                "correctAnswer": "Sněží",
-                "category": "pronunciation",
-                "audioUrl": "/audio/sn.mp3"
-            }
-        ]
-    },
-    {
-        "title": "Транспорт и путешествия",
-        "description": "Изучите слова и фразы, связанные с транспортом и путешествиями",
-        "level": "advanced",
-        "category": "vocabulary",
-        "order": 12,
-        "content": "В этом уроке мы изучим слова и фразы, связанные с различными видами транспорта и путешествиями на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Auto",
-                "russian": "Автомобиль",
-                "english": "Car"
-            },
-            {
-                "czech": "Vlak",
-                "russian": "Поезд",
-                "english": "Train"
-            },
-            {
-                "czech": "Letadlo",
-                "russian": "Самолет",
-                "english": "Airplane"
-            },
-            {
-                "czech": "Autobus",
-                "russian": "Автобус",
-                "english": "Bus"
-            },
-            {
-                "czech": "Jízdenka",
-                "russian": "Билет",
-                "english": "Ticket"
-            },
-            {
-                "czech": "Nádraží",
-                "russian": "Вокзал",
-                "english": "Station"
-            },
-            {
-                "czech": "Letiště",
-                "russian": "Аэропорт",
-                "english": "Airport"
-            },
-            {
-                "czech": "Cestovat",
-                "russian": "Путешествовать",
-                "english": "To travel"
-            }
+        "correctAnswer": "Nerozumím",
+        "category": "pronunciation"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "answers": [
+          "Dobrý",
+          "Špatný",
+          "Velký",
+          "Malý"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "difficulty": "medium",
-                "question": "Как сказать 'самолет' на чешском?",
-                "answers": ["Auto", "Vlak", "Letadlo", "Autobus"],
-                "correctAnswer": "Letadlo",
-                "category": "vocabulary"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Potřebuji koupit _____.' (Мне нужно купить билет)",
-                "correctAnswer": "jízdenku",
-                "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "difficulty": "medium",
-                "question": "Прослушайте и выберите правильное слово",
-                "answers": ["Nádraží", "Letiště", "Jízdenka", "Cestovat"],
-                "correctAnswer": "Letiště",
-                "category": "pronunciation",
-                "audioUrl": "/audio/letit.mp3"
-            }
-        ]
-    },
-    {
-        "title": "Хобби и свободное время",
-        "description": "Изучите слова и фразы, связанные с хобби и проведением свободного времени",
-        "level": "advanced",
-        "category": "vocabulary",
-        "order": 13,
-        "content": "В этом уроке мы изучим слова и фразы, связанные с различными хобби и способами проведения свободного времени на чешском языке.",
-        "vocabulary": [
-            {
-                "czech": "Číst knihy",
-                "russian": "Читать книги",
-                "english": "To read books"
-            },
-            {
-                "czech": "Hrát fotbal",
-                "russian": "Играть в футбол",
-                "english": "To play football"
-            },
-            {
-                "czech": "Poslouchat hudbu",
-                "russian": "Слушать музыку",
-                "english": "To listen to music"
-            },
-            {
-                "czech": "Vařit",
-                "russian": "Готовить",
-                "english": "To cook"
-            },
-            {
-                "czech": "Malovat",
-                "russian": "Рисовать",
-                "english": "To paint"
-            },
-            {
-                "czech": "Cestování",
-                "russian": "Путешествия",
-                "english": "Traveling"
-            },
-            {
-                "czech": "Zahradničení",
-                "russian": "Садоводство",
-                "english": "Gardening"
-            },
-            {
-                "czech": "Tanec",
-                "russian": "Танцы",
-                "english": "Dancing"
-            }
+        "correctAnswer": "Dobrý",
+        "audioUrl": "/audio/dobr.mp3",
+        "difficulty": "easy",
+        "category": "pronunciation"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное приветствие",
+        "answers": [
+          "Dobrý den",
+          "Dobrou noc",
+          "Na shledanou",
+          "Ahoj"
         ],
-        "exercises": [
-            {
-                "type": "multipleChoice",
-                "difficulty": "medium",
-                "question": "Как сказать 'слушать музыку' на чешском?",
-                "answers": ["Číst knihy", "Hrát fotbal", "Poslouchat hudbu", "Vařit"],
-                "correctAnswer": "Poslouchat hudbu",
-                "category": "vocabulary"
-            }
-        ]
-    }
+        "correctAnswer": "Dobrý den",
+        "audioUrl": "/audio/dobr_den.mp3",
+        "difficulty": "easy",
+        "category": "pronunciation"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'извините' на чешском?",
+        "answers": [
+          "Promiňte",
+          "Děkuji",
+          "Prosím",
+          "Ano"
+        ],
+        "correctAnswer": "Promiňte",
+        "difficulty": "medium",
+        "category": "vocabulary"
+      }
+    ]
+  },
+  {
+    "title": "Базовая грамматика: Глагол 'быть'",
+    "description": "Изучите спряжение глагола 'быть' в чешском языке",
+    "level": "beginner",
+    "category": "grammar",
+    "order": 5,
+    "content": "В этом уроке мы научимся спрягать глагол 'být' (быть) в настоящем времени.",
+    "vocabulary": [
+      {
+        "czech": "Jsem",
+        "russian": "Я есть",
+        "english": "I am"
+      },
+      {
+        "czech": "Jsi",
+        "russian": "Ты есть",
+        "english": "You are (singular)"
+      },
+      {
+        "czech": "Je",
+        "russian": "Он/Она/Оно есть",
+        "english": "He/She/It is"
+      },
+      {
+        "czech": "Jsme",
+        "russian": "Мы есть",
+        "english": "We are"
+      },
+      {
+        "czech": "Jste",
+        "russian": "Вы есть",
+        "english": "You are (plural/formal)"
+      },
+      {
+        "czech": "Jsou",
+        "russian": "Они есть",
+        "english": "They are"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Какая правильная форма глагола 'быть' для 'Я' в чешском?",
+        "answers": [
+          "Jsem",
+          "Jsi",
+          "Je",
+          "Jsme"
+        ],
+        "correctAnswer": "Jsem",
+        "category": "grammar"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Oni _____ studenti.' (Они студенты)",
+        "correctAnswer": "jsou",
+        "category": "grammar"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильную форму глагола 'быть'",
+        "audioUrl": "/audio/jste.mp3",
+        "answers": [
+          "Jsem",
+          "Jsi",
+          "Je",
+          "Jste"
+        ],
+        "correctAnswer": "Jste",
+        "category": "pronunciation"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
+        "correctAnswer": "jste",
+        "difficulty": "hard",
+        "category": "grammar"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
+        "answers": [
+          "Dobře",
+          "Špatně",
+          "Ano",
+          "Ne"
+        ],
+        "correctAnswer": "Dobře",
+        "audioUrl": "/audio/dobe.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: '___ jsem student.' (Я студент)",
+        "correctAnswer": "Jsem",
+        "difficulty": "medium",
+        "category": "grammar"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Oni ___ studenti.' (Они студенты)",
+        "correctAnswer": "jsou",
+        "difficulty": "hard",
+        "category": "grammar"
+      }
+    ]
+  },
+  {
+    "title": "Семья",
+    "description": "Изучите слова, связанные с семьей на чешском языке",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 6,
+    "content": "В этом уроке мы изучим слова, обозначающие членов семьи на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Matka",
+        "russian": "Мать",
+        "english": "Mother"
+      },
+      {
+        "czech": "Otec",
+        "russian": "Отец",
+        "english": "Father"
+      },
+      {
+        "czech": "Sestra",
+        "russian": "Сестра",
+        "english": "Sister"
+      },
+      {
+        "czech": "Bratr",
+        "russian": "Брат",
+        "english": "Brother"
+      },
+      {
+        "czech": "Babička",
+        "russian": "Бабушка",
+        "english": "Grandmother"
+      },
+      {
+        "czech": "Dědeček",
+        "russian": "Дедушка",
+        "english": "Grandfather"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'сестра' на чешском?",
+        "answers": [
+          "Matka",
+          "Otec",
+          "Sestra",
+          "Bratr"
+        ],
+        "correctAnswer": "Sestra",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Moje _____ se jmenuje Anna.' (Моя мать зовут Анна)",
+        "correctAnswer": "matka",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "audioUrl": "/audio/ddeek.mp3",
+        "answers": [
+          "Matka",
+          "Otec",
+          "Babička",
+          "Dědeček"
+        ],
+        "correctAnswer": "Dědeček",
+        "category": "pronunciation"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'мать' на чешском?",
+        "answers": [
+          "Matka",
+          "Otec",
+          "Sestra",
+          "Bratr"
+        ],
+        "correctAnswer": "Matka",
+        "difficulty": "easy",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Moje _____ se jmenuje Jan.' (Мой отец зовут Ян)",
+        "correctAnswer": "otec",
+        "difficulty": "medium",
+        "category": "vocabulary"
+      }
+    ]
+  },
+  {
+    "title": "Еда и напитки",
+    "description": "Изучите названия продуктов питания и напитков на чешском",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 7,
+    "content": "В этом уроке мы познакомимся с названиями некоторых продуктов питания и напитков на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Chléb",
+        "russian": "Хлеб",
+        "english": "Bread"
+      },
+      {
+        "czech": "Mléko",
+        "russian": "Молоко",
+        "english": "Milk"
+      },
+      {
+        "czech": "Voda",
+        "russian": "Вода",
+        "english": "Water"
+      },
+      {
+        "czech": "Káva",
+        "russian": "Кофе",
+        "english": "Coffee"
+      },
+      {
+        "czech": "Čaj",
+        "russian": "Чай",
+        "english": "Tea"
+      },
+      {
+        "czech": "Pivo",
+        "russian": "Пиво",
+        "english": "Beer"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'хлеб' на чешском?",
+        "answers": [
+          "Chléb",
+          "Mléko",
+          "Voda",
+          "Káva"
+        ],
+        "correctAnswer": "Chléb",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
+        "correctAnswer": "pivo",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "audioUrl": "/audio/kva.mp3",
+        "answers": [
+          "Chléb",
+          "Mléko",
+          "Káva",
+          "Čaj"
+        ],
+        "correctAnswer": "Káva",
+        "category": "pronunciation"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'хлеб' на чешском?",
+        "answers": [
+          "Chléb",
+          "Mléko",
+          "Voda",
+          "Káva"
+        ],
+        "correctAnswer": "Chléb",
+        "difficulty": "easy",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
+        "correctAnswer": "pivo",
+        "difficulty": "medium",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное слово",
+        "answers": [
+          "Chléb",
+          "Mléko",
+          "Káva",
+          "Čaj"
+        ],
+        "correctAnswer": "Káva",
+        "audioUrl": "/audio/kva.mp3",
+        "difficulty": "medium",
+        "category": "pronunciation"
+      }
+    ]
+  },
+  {
+    "title": "Цвета",
+    "description": "Изучите названия основных цветов на чешском языке",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 8,
+    "content": "В этом уроке мы познакомимся с названиями основных цветов на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Červená",
+        "russian": "Красный",
+        "english": "Red"
+      },
+      {
+        "czech": "Modrá",
+        "russian": "Синий",
+        "english": "Blue"
+      },
+      {
+        "czech": "Zelená",
+        "russian": "Зеленый",
+        "english": "Green"
+      },
+      {
+        "czech": "Žlutá",
+        "russian": "Желтый",
+        "english": "Yellow"
+      },
+      {
+        "czech": "Černá",
+        "russian": "Черный",
+        "english": "Black"
+      },
+      {
+        "czech": "Bílá",
+        "russian": "Белый",
+        "english": "White"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'красный' на чешском?",
+        "answers": [
+          "Červená",
+          "Modrá",
+          "Zelená",
+          "Žlutá"
+        ],
+        "correctAnswer": "Červená",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Nebe je _____.' (Небо синее)",
+        "correctAnswer": "modré",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильный цвет",
+        "answers": [
+          "Červená",
+          "Modrá",
+          "Zelená",
+          "Žlutá"
+        ],
+        "correctAnswer": "Zelená",
+        "category": "pronunciation",
+        "audioUrl": "/audio/zelen.mp3"
+      }
+    ]
+  },
+  {
+    "title": "Дни недели",
+    "description": "Изучите названия дней недели на чешском языке",
+    "level": "beginner",
+    "category": "vocabulary",
+    "order": 9,
+    "content": "В этом уроке мы познакомимся с названиями дней недели на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Pondělí",
+        "russian": "Понедельник",
+        "english": "Monday"
+      },
+      {
+        "czech": "Úterý",
+        "russian": "Вторник",
+        "english": "Tuesday"
+      },
+      {
+        "czech": "Středa",
+        "russian": "Среда",
+        "english": "Wednesday"
+      },
+      {
+        "czech": "Čtvrtek",
+        "russian": "Четверг",
+        "english": "Thursday"
+      },
+      {
+        "czech": "Pátek",
+        "russian": "Пятница",
+        "english": "Friday"
+      },
+      {
+        "czech": "Sobota",
+        "russian": "Суббота",
+        "english": "Saturday"
+      },
+      {
+        "czech": "Neděle",
+        "russian": "Воскресенье",
+        "english": "Sunday"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'понедельник' на чешском?",
+        "answers": [
+          "Pondělí",
+          "Úterý",
+          "Středa",
+          "Čtvrtek"
+        ],
+        "correctAnswer": "Pondělí",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Dnes je _____.' (Сегодня пятница)",
+        "correctAnswer": "pátek",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильный день недели",
+        "answers": [
+          "Pátek",
+          "Sobota",
+          "Neděle",
+          "Pondělí"
+        ],
+        "correctAnswer": "Neděle",
+        "category": "pronunciation",
+        "audioUrl": "/audio/nedle.mp3"
+      }
+    ]
+  },
+  {
+    "title": "Простые глаголы",
+    "description": "Изучите некоторые простые глаголы на чешском языке",
+    "level": "beginner",
+    "category": "grammar",
+    "order": 10,
+    "content": "В этом уроке мы познакомимся с некоторыми простыми глаголами на чешском языке и их спряжением в настоящем времени.",
+    "vocabulary": [
+      {
+        "czech": "Mluvit",
+        "russian": "Говорить",
+        "english": "To speak"
+      },
+      {
+        "czech": "Jíst",
+        "russian": "Есть",
+        "english": "To eat"
+      },
+      {
+        "czech": "Pít",
+        "russian": "Пить",
+        "english": "To drink"
+      },
+      {
+        "czech": "Číst",
+        "russian": "Читать",
+        "english": "To read"
+      },
+      {
+        "czech": "Psát",
+        "russian": "Писать",
+        "english": "To write"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'говорить' на чешском?",
+        "answers": [
+          "Mluvit",
+          "Jíst",
+          "Pít",
+          "Číst"
+        ],
+        "correctAnswer": "Mluvit",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Já _____ česky.' (Я говорю по-чешски)",
+        "correctAnswer": "mluvím",
+        "category": "grammar"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильный глагол",
+        "answers": [
+          "Mluvit",
+          "Jíst",
+          "Pít",
+          "Číst"
+        ],
+        "correctAnswer": "Jíst",
+        "category": "pronunciation",
+        "audioUrl": "/audio/jst.mp3"
+      }
+    ]
+  },
+  {
+    "title": "Времена года и погода",
+    "description": "Изучите названия времен года и погодных явлений на чешском языке",
+    "level": "advanced",
+    "category": "vocabulary",
+    "order": 11,
+    "content": "В этом уроке мы познакомимся с названиями времен года и различными погодными явлениями на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Jaro",
+        "russian": "Весна",
+        "english": "Spring"
+      },
+      {
+        "czech": "Léto",
+        "russian": "Лето",
+        "english": "Summer"
+      },
+      {
+        "czech": "Podzim",
+        "russian": "Осень",
+        "english": "Autumn"
+      },
+      {
+        "czech": "Zima",
+        "russian": "Зима",
+        "english": "Winter"
+      },
+      {
+        "czech": "Slunečno",
+        "russian": "Солнечно",
+        "english": "Sunny"
+      },
+      {
+        "czech": "Deštivo",
+        "russian": "Дождливо",
+        "english": "Rainy"
+      },
+      {
+        "czech": "Sněží",
+        "russian": "Идет снег",
+        "english": "It's snowing"
+      },
+      {
+        "czech": "Větrno",
+        "russian": "Ветрено",
+        "english": "Windy"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "difficulty": "easy",
+        "question": "Как сказать 'лето' на чешском?",
+        "answers": [
+          "Jaro",
+          "Léto",
+          "Podzim",
+          "Zima"
+        ],
+        "correctAnswer": "Léto",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "difficulty": "easy",
+        "question": "Дополните предложение: 'Dnes je _____.' (Сегодня солнечно)",
+        "correctAnswer": "slunečno",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Прослушайте и выберите правильное погодное явление",
+        "answers": [
+          "Slunečno",
+          "Deštivo",
+          "Sněží",
+          "Větrno"
+        ],
+        "correctAnswer": "Sněží",
+        "category": "pronunciation",
+        "audioUrl": "/audio/sn.mp3"
+      }
+    ]
+  },
+  {
+    "title": "Транспорт и путешествия",
+    "description": "Изучите слова и фразы, связанные с транспортом и путешествиями",
+    "level": "advanced",
+    "category": "vocabulary",
+    "order": 12,
+    "content": "В этом уроке мы изучим слова и фразы, связанные с различными видами транспорта и путешествиями на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Auto",
+        "russian": "Автомобиль",
+        "english": "Car"
+      },
+      {
+        "czech": "Vlak",
+        "russian": "Поезд",
+        "english": "Train"
+      },
+      {
+        "czech": "Letadlo",
+        "russian": "Самолет",
+        "english": "Airplane"
+      },
+      {
+        "czech": "Autobus",
+        "russian": "Автобус",
+        "english": "Bus"
+      },
+      {
+        "czech": "Jízdenka",
+        "russian": "Билет",
+        "english": "Ticket"
+      },
+      {
+        "czech": "Nádraží",
+        "russian": "Вокзал",
+        "english": "Station"
+      },
+      {
+        "czech": "Letiště",
+        "russian": "Аэропорт",
+        "english": "Airport"
+      },
+      {
+        "czech": "Cestovat",
+        "russian": "Путешествовать",
+        "english": "To travel"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "difficulty": "medium",
+        "question": "Как сказать 'самолет' на чешском?",
+        "answers": [
+          "Auto",
+          "Vlak",
+          "Letadlo",
+          "Autobus"
+        ],
+        "correctAnswer": "Letadlo",
+        "category": "vocabulary"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Potřebuji koupit _____.' (Мне нужно купить билет)",
+        "correctAnswer": "jízdenku",
+        "category": "vocabulary"
+      },
+      {
+        "type": "listeningComprehension",
+        "difficulty": "medium",
+        "question": "Прослушайте и выберите правильное слово",
+        "answers": [
+          "Nádraží",
+          "Letiště",
+          "Jízdenka",
+          "Cestovat"
+        ],
+        "correctAnswer": "Letiště",
+        "category": "pronunciation",
+        "audioUrl": "/audio/letit.mp3"
+      }
+    ]
+  },
+  {
+    "title": "Хобби и свободное время",
+    "description": "Изучите слова и фразы, связанные с хобби и проведением свободного времени",
+    "level": "advanced",
+    "category": "vocabulary",
+    "order": 13,
+    "content": "В этом уроке мы изучим слова и фразы, связанные с различными хобби и способами проведения свободного времени на чешском языке.",
+    "vocabulary": [
+      {
+        "czech": "Číst knihy",
+        "russian": "Читать книги",
+        "english": "To read books"
+      },
+      {
+        "czech": "Hrát fotbal",
+        "russian": "Играть в футбол",
+        "english": "To play football"
+      },
+      {
+        "czech": "Poslouchat hudbu",
+        "russian": "Слушать музыку",
+        "english": "To listen to music"
+      },
+      {
+        "czech": "Vařit",
+        "russian": "Готовить",
+        "english": "To cook"
+      },
+      {
+        "czech": "Malovat",
+        "russian": "Рисовать",
+        "english": "To paint"
+      },
+      {
+        "czech": "Cestování",
+        "russian": "Путешествия",
+        "english": "Traveling"
+      },
+      {
+        "czech": "Zahradničení",
+        "russian": "Садоводство",
+        "english": "Gardening"
+      },
+      {
+        "czech": "Tanec",
+        "russian": "Танцы",
+        "english": "Dancing"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "multipleChoice",
+        "difficulty": "medium",
+        "question": "Как сказать 'слушать музыку' на чешском?",
+        "answers": [
+          "Číst knihy",
+          "Hrát fotbal",
+          "Poslouchat hudbu",
+          "Vařit"
+        ],
+        "correctAnswer": "Poslouchat hudbu",
+        "category": "vocabulary"
+      }
+    ]
+  }
 ]

@@ -1,99 +1,430 @@
 [
-    {
-        "title": "Заказ обслуживания стиральной машины",
-        "description": "Заказ обслуживания стиральной машины по телефону",
-        "level": "intermediate",
-        "category": "conversation",
-        "order": 2,
-        "content": "В этом уроке мы рассмотрим сложную ситуацию: заказ обслуживания стиральной машины по телефону. Вы изучите специфическую лексику и фразы, необходимые для такого разговора.",
-        "vocabulary": [
-            {
-                "czech": "pračka",
-                "russian": "стиральная машина",
-                "english": "washing machine"
-            },
-            {
-                "czech": "oprava",
-                "russian": "ремонт",
-                "english": "repair"
-            },
-            {
-                "czech": "technik",
-                "russian": "техник",
-                "english": "technician"
-            },
-            {
-                "czech": "objednat",
-                "russian": "заказать",
-                "english": "to order"
-            },
-            {
-                "czech": "závada",
-                "russian": "неисправность",
-                "english": "malfunction"
-            }
+  {
+    "title": "Заказ обслуживания стиральной машины",
+    "description": "Заказ обслуживания стиральной машины по телефону",
+    "level": "intermediate",
+    "category": "conversation",
+    "order": 2,
+    "content": "В этом уроке мы рассмотрим сложную ситуацию: заказ обслуживания стиральной машины по телефону. Вы изучите специфическую лексику и фразы, необходимые для такого разговора.",
+    "vocabulary": [
+      {
+        "czech": "pračka",
+        "russian": "стиральная машина",
+        "english": "washing machine"
+      },
+      {
+        "czech": "oprava",
+        "russian": "ремонт",
+        "english": "repair"
+      },
+      {
+        "czech": "technik",
+        "russian": "техник",
+        "english": "technician"
+      },
+      {
+        "czech": "objednat",
+        "russian": "заказать",
+        "english": "to order"
+      },
+      {
+        "czech": "závada",
+        "russian": "неисправность",
+        "english": "malfunction"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте разговор и ответьте на вопрос: Какую проблему описывает Петр?",
+        "auditionText": "Dobrý den, volám ohledně opravy pračky. Pračka se mi nezapne a vydává divné zvuky. Můžete mi prosím poslat technika?",
+        "answers": [
+          "Стиральная машина не включается и издает странные звуки",
+          "Стиральная машина протекает",
+          "Стиральная машина не отжимает белье",
+          "Стиральная машина не нагревает воду"
         ],
-        "exercises": [
-            {
-                "type": "listeningComprehension",
-                "question": "Послушайте разговор и ответьте на вопрос: Какую проблему описывает Петр?",
-                "auditionText": "Dobrý den, volám ohledně opravy pračky. Pračka se mi nezapne a vydává divné zvuky. Můžete mi prosím poslat technika?",
-                "answers": [
-                    "Стиральная машина не включается и издает странные звуки",
-                    "Стиральная машина протекает",
-                    "Стиральная машина не отжимает белье",
-                    "Стиральная машина не нагревает воду"
-                ],
-                "correctAnswer": "Стиральная машина не включается и издает странные звуки",
-                "category": "listening",
-                "difficulty": "medium",
-                "audioUrl": "/audio/dobr_den_volm_ohledn_opravy_praky_praka_se_mi_neza.mp3"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Какое слово на чешском означает 'стиральная машина'?",
-                "answers": ["pračka", "oprava", "technik", "závada"],
-                "correctAnswer": "pračka",
-                "category": "vocabulary",
-                "difficulty": "easy"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните предложение: 'Potřebuji _____ pračky.' (Мне нужен ремонт стиральной машины)",
-                "correctAnswer": "opravu",
-                "category": "grammar",
-                "difficulty": "medium"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Послушайте ответ оператора и выберите правильное утверждение:",
-                "auditionText": "Rozumím, pane. Můžeme k vám poslat technika zítra mezi 10. a 12. hodinou. Vyhovuje vám to?",
-                "answers": [
-                    "Техник может прийти сегодня",
-                    "Техник может прийти завтра с 10 до 12",
-                    "Техник может прийти на следующей неделе",
-                    "Оператор не может отправить техника"
-                ],
-                "correctAnswer": "Техник может прийти завтра с 10 до 12",
-                "category": "listening",
-                "difficulty": "medium",
-                "audioUrl": "/audio/rozumm_pane_meme_k_vm_poslat_technika_ztra_mezi_10.mp3"
-            },
-            {
-                "type": "multipleChoice",
-                "question": "Как сказать 'неисправность' на чешском?",
-                "answers": ["závada", "oprava", "objednat", "technik"],
-                "correctAnswer": "závada",
-                "category": "vocabulary",
-                "difficulty": "medium"
-            },
-            {
-                "type": "fillInTheBlank",
-                "question": "Дополните фразу: 'Můžete mi prosím _____ technika?' (Не могли бы вы отправить мне техника?)",
-                "correctAnswer": "poslat",
-                "category": "grammar",
-                "difficulty": "hard"
-            }
-        ]
-    }
+        "correctAnswer": "Стиральная машина не включается и издает странные звуки",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/dobr_den_volm_ohledn_opravy_praky_praka_se_mi_neza.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Какое слово на чешском означает 'стиральная машина'?",
+        "answers": [
+          "pračka",
+          "oprava",
+          "technik",
+          "závada"
+        ],
+        "correctAnswer": "pračka",
+        "category": "vocabulary",
+        "difficulty": "easy"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Potřebuji _____ pračky.' (Мне нужен ремонт стиральной машины)",
+        "correctAnswer": "opravu",
+        "category": "grammar",
+        "difficulty": "medium"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте ответ оператора и выберите правильное утверждение:",
+        "auditionText": "Rozumím, pane. Můžeme k vám poslat technika zítra mezi 10. a 12. hodinou. Vyhovuje vám to?",
+        "answers": [
+          "Техник может прийти сегодня",
+          "Техник может прийти завтра с 10 до 12",
+          "Техник может прийти на следующей неделе",
+          "Оператор не может отправить техника"
+        ],
+        "correctAnswer": "Техник может прийти завтра с 10 до 12",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/rozumm_pane_meme_k_vm_poslat_technika_ztra_mezi_10.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'неисправность' на чешском?",
+        "answers": [
+          "závada",
+          "oprava",
+          "objednat",
+          "technik"
+        ],
+        "correctAnswer": "závada",
+        "category": "vocabulary",
+        "difficulty": "medium"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните фразу: 'Můžete mi prosím _____ technika?' (Не могли бы вы отправить мне техника?)",
+        "correctAnswer": "poslat",
+        "category": "grammar",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "title": "Запись к парикмахеру",
+    "description": "Юлия хочет записаться к парикмахеру по телефону",
+    "level": "intermediate",
+    "category": "conversation",
+    "order": 3,
+    "content": "В этом уроке мы научимся записываться к парикмахеру по телефону. Вы изучите специфическую лексику и фразы, необходимые для такого разговора.",
+    "vocabulary": [
+      {
+        "czech": "kadeřník",
+        "russian": "парикмахер",
+        "english": "hairdresser"
+      },
+      {
+        "czech": "objednat se",
+        "russian": "записаться",
+        "english": "to make an appointment"
+      },
+      {
+        "czech": "střih",
+        "russian": "стрижка",
+        "english": "haircut"
+      },
+      {
+        "czech": "barvení",
+        "russian": "окрашивание",
+        "english": "hair coloring"
+      },
+      {
+        "czech": "volný termín",
+        "russian": "свободное время",
+        "english": "available slot"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте разговор и ответьте на вопрос: Что Юлия хочет сделать в парикмахерской?",
+        "auditionText": "Dobrý den, ráda bych se objednala na střih a barvení vlasů. Máte nějaký volný termín příští týden?",
+        "answers": [
+          "Только стрижку",
+          "Только окрашивание",
+          "Стрижку и окрашивание",
+          "Укладку волос"
+        ],
+        "correctAnswer": "Стрижку и окрашивание",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/dobr_den_rda_bych_se_objednala_na_stih_a_barven_vl.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'парикмахер' на чешском?",
+        "answers": [
+          "kadeřník",
+          "střih",
+          "barvení",
+          "objednat se"
+        ],
+        "correctAnswer": "kadeřník",
+        "category": "vocabulary",
+        "difficulty": "easy"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Ráda bych se _____ na příští týden.' (Я бы хотела записаться на следующую неделю)",
+        "correctAnswer": "objednala",
+        "category": "grammar",
+        "difficulty": "medium"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте ответ администратора и выберите правильное утверждение:",
+        "auditionText": "Ano, máme volný termín v úterý v 14 hodin. Vyhovuje vám to?",
+        "answers": [
+          "Свободное время есть в понедельник",
+          "Свободное время есть во вторник в 14:00",
+          "Свободного времени нет",
+          "Свободное время есть в пятницу"
+        ],
+        "correctAnswer": "Свободное время есть во вторник в 14:00",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/ano_mme_voln_termn_v_ter_v_14_hodin_vyhovuje_vm_to.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'окрашивание' на чешском?",
+        "answers": [
+          "střih",
+          "barvení",
+          "kadeřník",
+          "objednat se"
+        ],
+        "correctAnswer": "barvení",
+        "category": "vocabulary",
+        "difficulty": "medium"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните фразу: 'Máte nějaký _____ termín?' (У вас есть какое-нибудь свободное время?)",
+        "correctAnswer": "volný",
+        "category": "grammar",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "title": "Запись к врачу",
+    "description": "Дарья хочет записаться к врачу из-за боли в животе",
+    "level": "intermediate",
+    "category": "conversation",
+    "order": 4,
+    "content": "В этом уроке мы научимся записываться к врачу по телефону и описывать симптомы. Вы изучите медицинскую лексику и фразы, необходимые для такого разговора.",
+    "vocabulary": [
+      {
+        "czech": "lékař",
+        "russian": "врач",
+        "english": "doctor"
+      },
+      {
+        "czech": "bolest břicha",
+        "russian": "боль в животе",
+        "english": "stomach ache"
+      },
+      {
+        "czech": "objednat se",
+        "russian": "записаться",
+        "english": "to make an appointment"
+      },
+      {
+        "czech": "vyšetření",
+        "russian": "обследование",
+        "english": "examination"
+      },
+      {
+        "czech": "příznaky",
+        "russian": "симптомы",
+        "english": "symptoms"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте разговор и ответьте на вопрос: Какую проблему описывает Дарья?",
+        "auditionText": "Dobrý den, chtěla bych se objednat k lékaři. Mám už několik dní bolesti břicha a není mi dobře.",
+        "answers": [
+          "У нее болит голова",
+          "У нее болит живот",
+          "У нее болит спина",
+          "У нее простуда"
+        ],
+        "correctAnswer": "У нее болит живот",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/dobr_den_chtla_bych_se_objednat_k_lkai_mm_u_nkolik.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'врач' на чешском?",
+        "answers": [
+          "lékař",
+          "bolest",
+          "vyšetření",
+          "příznaky"
+        ],
+        "correctAnswer": "lékař",
+        "category": "vocabulary",
+        "difficulty": "easy"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Mám _____ břicha.' (У меня болит живот)",
+        "correctAnswer": "bolest",
+        "category": "grammar",
+        "difficulty": "medium"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте ответ регистратора и выберите правильное утверждение:",
+        "auditionText": "Rozumím. Můžeme vás objednat na zítřek v 10:30. Vyhovuje vám tento čas?",
+        "answers": [
+          "Врач может принять сегодня",
+          "Врач может принять завтра в 10:30",
+          "Врач не может принять в ближайшее время",
+          "Врач может принять только на следующей неделе"
+        ],
+        "correctAnswer": "Врач может принять завтра в 10:30",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/rozumm_meme_vs_objednat_na_ztek_v_1030_vyhovuje_vm.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'симптомы' на чешском?",
+        "answers": [
+          "příznaky",
+          "vyšetření",
+          "bolest",
+          "lékař"
+        ],
+        "correctAnswer": "příznaky",
+        "category": "vocabulary",
+        "difficulty": "medium"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните фразу: 'Potřebuji _____ u lékaře.' (Мне нужно обследование у врача)",
+        "correctAnswer": "vyšetření",
+        "category": "grammar",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  {
+    "title": "Заказ услуги трансфера",
+    "description": "Макс хочет заказать услугу трансфера для переезда из Праги в Нератовице",
+    "level": "intermediate",
+    "category": "conversation",
+    "order": 5,
+    "content": "В этом уроке мы научимся заказывать услугу трансфера по телефону для переезда. Вы изучите специфическую лексику и фразы, необходимые для такого разговора.",
+    "vocabulary": [
+      {
+        "czech": "stěhování",
+        "russian": "переезд",
+        "english": "moving"
+      },
+      {
+        "czech": "nábytek",
+        "russian": "мебель",
+        "english": "furniture"
+      },
+      {
+        "czech": "přeprava",
+        "russian": "перевозка",
+        "english": "transportation"
+      },
+      {
+        "czech": "cena",
+        "russian": "цена",
+        "english": "price"
+      },
+      {
+        "czech": "termín",
+        "russian": "дата",
+        "english": "date"
+      }
+    ],
+    "exercises": [
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте разговор и ответьте на вопрос: Что Макс хочет заказать?",
+        "auditionText": "Dobrý den, rád bych si objednal službu stěhování z Prahy do Neratovic. Potřebuji převézt nábytek a osobní věci.",
+        "answers": [
+          "Такси",
+          "Доставку еды",
+          "Услугу переезда",
+          "Ремонт квартиры"
+        ],
+        "correctAnswer": "Услугу переезда",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/dobr_den_rd_bych_si_objednal_slubu_sthovn_z_prahy_.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'переезд' на чешском?",
+        "answers": [
+          "stěhování",
+          "nábytek",
+          "přeprava",
+          "cena"
+        ],
+        "correctAnswer": "stěhování",
+        "category": "vocabulary",
+        "difficulty": "easy"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните предложение: 'Potřebuji převézt _____ a osobní věci.' (Мне нужно перевезти мебель и личные вещи)",
+        "correctAnswer": "nábytek",
+        "category": "grammar",
+        "difficulty": "medium"
+      },
+      {
+        "type": "listeningComprehension",
+        "question": "Послушайте ответ оператора и выберите правильное утверждение:",
+        "auditionText": "Rozumím. Můžeme vám nabídnout přepravu příští sobotu. Cena za službu bude 5000 Kč. Vyhovuje vám to?",
+        "answers": [
+          "Переезд возможен завтра",
+          "Переезд возможен в следующую субботу",
+          "Цена услуги 3000 крон",
+          "Компания не может предоставить услугу"
+        ],
+        "correctAnswer": "Переезд возможен в следующую субботу",
+        "category": "listening",
+        "difficulty": "medium",
+        "audioUrl": "/audio/rozumm_meme_vm_nabdnout_pepravu_pt_sobotu_cena_za_.mp3"
+      },
+      {
+        "type": "multipleChoice",
+        "question": "Как сказать 'цена' на чешском?",
+        "answers": [
+          "cena",
+          "termín",
+          "přeprava",
+          "nábytek"
+        ],
+        "correctAnswer": "cena",
+        "category": "vocabulary",
+        "difficulty": "medium"
+      },
+      {
+        "type": "fillInTheBlank",
+        "question": "Дополните фразу: 'Můžeme vám nabídnout přepravu příští _____.' (Мы можем предложить вам перевозку в следующую субботу)",
+        "correctAnswer": "sobotu",
+        "category": "grammar",
+        "difficulty": "hard"
+      }
+    ]
+  }
 ]
