@@ -50,9 +50,9 @@ const Exercise = () => {
         return () => clearInterval(timer);
     }, []);
 
-    const handleAnswerChange = useCallback((event) => {
+    const handleAnswerChange = (event) => {
         setUserAnswer(event.target.value);
-    }, []);
+    };
 
     const handleSubmit = useCallback(() => {
         submitExerciseMutation.mutate({
@@ -62,9 +62,16 @@ const Exercise = () => {
         });
     }, [exerciseId, userAnswer, timeSpent, submitExerciseMutation]);
 
-    const handleNextExercise = useCallback(() => {
-        navigate('/exercises');
-    }, [navigate]);
+    const handleNextExercise = () => {
+        apiService.getNextExercise(exerciseId).then((nextExercise) => {
+            if (nextExercise._id) {
+                setUserAnswer('');
+                navigate(`/exercise/${nextExercise._id}`);
+            } else {
+                navigate('/exercises');
+            }
+        });
+    };
 
     if (isLoading) return <Loading />;
     if (error) return <Typography color="error">Ошибка при загрузке упражнения</Typography>;
@@ -142,7 +149,6 @@ const Exercise = () => {
             <Snackbar
                 open={showFeedback}
                 autoHideDuration={3000}
-                onClose={() => setShowFeedback(false)}
             >
                 <Alert severity={isCorrect ? 'success' : 'error'} sx={{ width: '100%' }}>
                     {isCorrect ? 'Правильно!' : 'Неправильно. Попробуйте еще раз.'}
