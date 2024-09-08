@@ -21,6 +21,14 @@ import { Helmet } from 'react-helmet';
 import Loading from '../components/Loading';
 import { useQuery } from 'react-query';
 
+const achievementIcons = {
+    '🏆': '🏆',
+    '🌟': '🌟',
+    '🔥': '🔥',
+    '📚': '📚',
+    '🧠': '🧠'
+};
+
 const Achievements = () => {
     const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
     const {
@@ -76,7 +84,11 @@ const Achievements = () => {
                                     <ListItem>
                                         <ListItemIcon>
                                             {achievement.unlocked ? (
-                                                <EmojiEventsIcon color="primary" />
+                                                <Typography variant="h5">
+                                                    {achievementIcons[achievement.icon] || (
+                                                        <EmojiEventsIcon color="primary" />
+                                                    )}
+                                                </Typography>
                                             ) : (
                                                 <LockIcon color="disabled" />
                                             )}

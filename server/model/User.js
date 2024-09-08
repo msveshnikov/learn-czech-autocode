@@ -9,10 +9,7 @@ const userSchema = new mongoose.Schema({
         lessons: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
         completedExercises: [
             {
-                exercise: {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'Exercise'
-                },
+                exercise: { type: mongoose.Schema.Types.ObjectId, ref: 'Exercise' },
                 score: { type: Number, default: 0 },
                 correct: { type: Boolean, default: false },
                 createdAt: { type: Date, default: Date.now }
@@ -21,7 +18,17 @@ const userSchema = new mongoose.Schema({
         streak: { type: Number, default: 0 },
         lastLoginDate: { type: Date, default: Date.now }
     },
-    achievements: [{ type: String }],
+    achievements: [
+        {
+            id: { type: String, required: true },
+            name: { type: String, required: true },
+            description: { type: String, required: true },
+            icon: { type: String, required: true },
+            unlocked: { type: Boolean, default: false },
+            progress: { type: Number, default: 0 },
+            target: { type: Number, required: true }
+        }
+    ],
     leaderboardScore: { type: Number, default: 0 },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
@@ -89,10 +96,15 @@ userSchema.methods.addCompletedExercise = function (exerciseId, correct, score) 
     this.updateLeaderboardScore(score);
     this.addExperiencePoints(score);
     this.lastActivity = Date.now();
+    this.checkAndUpdateAchievements();
 };
 
 userSchema.methods.addAchievement = function (achievement) {
-    if (!this.achievements.includes(achievement)) {
+    const existingAchievement = this.achievements.find((a) => a.id === achievement.id);
+    if (existingAchievement) {
+        existingAchievement.progress = achievement.progress;
+        existingAchievement.unlocked = achievement.unlocked;
+    } else {
         this.achievements.push(achievement);
     }
 };
@@ -106,6 +118,7 @@ userSchema.methods.addCompletedLesson = function (lessonId) {
         this.progress.lessons.push(lessonId);
     }
     this.lastActivity = Date.now();
+    this.checkAndUpdateAchievements();
 };
 
 userSchema.methods.getProgress = function () {
@@ -142,7 +155,7 @@ userSchema.methods.updateLevel = function () {
     const newLevel = Math.floor(this.experiencePoints / 100) + 1;
     if (newLevel > this.level) {
         this.level = newLevel;
-        this.addNotification(`Congratulations! You've reached level ${newLevel}!`);
+        this.addNotification(`Поздравляем! Вы достигли уровня ${newLevel}!`);
     }
 };
 
@@ -173,6 +186,61 @@ userSchema.methods.getLastActivity = function () {
 
 userSchema.methods.updateLanguage = function (newLanguage) {
     this.language = newLanguage;
+};
+
+userSchema.methods.checkAndUpdateAchievements = function () {
+    const achievementsToCheck = [
+        {
+            id: 'exercise_10',
+            name: 'Начинающий ученик',
+            description: 'Выполните 10 упражнений',
+            icon: '🎓',
+            target: 10,
+            check: () => this.progress.completedExercises.length
+        },
+        {
+            id: 'lesson_5',
+            name: 'Прилежный студент',
+            description: 'Завершите 5 уроков',
+            icon: '📚',
+            target: 5,
+            check: () => this.progress.lessons.length
+        },
+        {
+            id: 'streak_3',
+            name: 'На верном пути',
+            description: 'Достигните серии в 3 дня',
+            icon: '🔥',
+            target: 3,
+            check: () => this.progress.streak
+        },
+        {
+            id: 'perfect_score',
+            name: 'Отличник',
+            description: 'Получите идеальный результат в упражнении',
+            icon: '🏅',
+            target: 1,
+            check: () => this.progress.completedExercises.some((ce) => ce.score === 100)
+        },
+        {
+            id: 'level_5',
+            name: 'Восходящая звезда',
+            description: 'Достигните 5 уровня',
+            icon: '⭐',
+            target: 5,
+            check: () => this.level
+        }
+    ];
+
+    achievementsToCheck.forEach((achievement) => {
+        const progress = achievement.check();
+        const unlocked = progress >= achievement.target;
+        this.addAchievement({
+            ...achievement,
+            progress,
+            unlocked
+        });
+    });
 };
 
 const User = mongoose.model('User', userSchema);

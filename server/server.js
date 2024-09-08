@@ -261,10 +261,10 @@ app.put('/user', authenticateToken, async (req, res) => {
         const { username, learningGoal, language, dailyGoal } = req.body;
         const user = await User.findById(req.user.id);
         if (username) user.username = username;
-        if (learningGoal) user.learningGoal = learningGoal;
-        if (language) user.language = language;
+        if (learningGoal) user.updateLearningGoal(learningGoal);
+        if (language) user.updateLanguage(language);
         if (dailyGoal) user.updateDailyGoal(dailyGoal);
-        user.onboardingCompleted = true;
+        user.completeOnboarding();
         await user.save();
         res.json({ message: 'Данные пользователя успешно обновлены' });
     } catch (error) {
