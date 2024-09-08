@@ -37,20 +37,20 @@ const getElevenAudio = async (text, voiceId) => {
 
 const processLessonsAndExercises = async () => {
     try {
-        const lessonsData = JSON.parse(
-            await fs.readFile(path.join(__dirname, 'lessons.json'), 'utf-8')
+        const lessonFiles = await fs.readdir(__dirname);
+        const jsonFiles = lessonFiles.filter(
+            (file) => file.startsWith('lesson') && file.endsWith('.json')
         );
 
-        for (const lesson of lessonsData) {
-            for (const exercise of lesson.exercises) {
-                await processExercise(exercise);
+        for (const file of jsonFiles) {
+            const lessonsData = JSON.parse(await fs.readFile(path.join(__dirname, file), 'utf-8'));
+            for (const lesson of lessonsData) {
+                for (const exercise of lesson.exercises) {
+                    await processExercise(exercise);
+                }
             }
+            await fs.writeFile(path.join(__dirname, file), JSON.stringify(lessonsData, null, 2));
         }
-
-        await fs.writeFile(
-            path.join(__dirname, 'lessons.json'),
-            JSON.stringify(lessonsData, null, 2)
-        );
 
         console.log('Audio processing completed');
     } catch (error) {
@@ -60,21 +60,20 @@ const processLessonsAndExercises = async () => {
 
 const processExercise = async (exercise) => {
     if (
-        exercise.type === 'listeningComprehension' &&
+        (exercise.type === 'listeningComprehension' || exercise.type === 'audition') &&
         (!exercise.audioUrl || exercise.audioUrl.includes('example.com'))
     ) {
-        const audioBuffer = await getElevenAudio(
-            exercise.correctAnswer,
-            elevenVoicesSeed.CzechMale
-        );
-        const fileName = `${exercise.correctAnswer
+        const textToVoice = exercise.auditionText ?? exercise.correctAnswer;
+        const audioBuffer = await getElevenAudio(textToVoice, elevenVoicesSeed.CzechMale);
+        const fileName = `${textToVoice
             .toLowerCase()
             .replace(/[^\w\s-]/g, '')
-            .replace(/\s+/g, '_')}.mp3`;
+            .replace(/\s+/g, '_')
+            .slice(0, 50)}.mp3`;
         const filePath = path.join(__dirname, 'public', 'audio', fileName);
         await fs.writeFile(filePath, audioBuffer);
         exercise.audioUrl = `/audio/${fileName}`;
-        console.log(`Audio generated for: ${exercise.correctAnswer}`);
+        console.log(`Audio generated for: ${textToVoice}`);
     }
 };
 

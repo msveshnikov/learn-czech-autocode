@@ -15,6 +15,9 @@ const exerciseSchema = new mongoose.Schema({
             type: String
         }
     ],
+    auditionText: {
+        type: String
+    },
     correctAnswer: {
         type: String,
         required: true
@@ -26,7 +29,7 @@ const exerciseSchema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['vocabulary', 'grammar', 'pronunciation'],
+        enum: ['vocabulary', 'grammar', 'pronunciation', 'listening'],
         required: true
     },
     audioUrl: {

@@ -8,6 +8,7 @@ import jwt from 'jsonwebtoken';
 import fs from 'fs/promises';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import glob from 'glob';
 
 import User from './model/User.js';
 import Lesson from './model/Lesson.js';
@@ -352,26 +353,28 @@ app.post('/speak-to-teacher', authenticateToken, async (req, res) => {
 
 const loadDataToMongo = async () => {
     try {
-        const lessonsData = JSON.parse(
-            await fs.readFile(path.join(process.cwd(), 'lessons.json'), 'utf-8')
-        );
+        const lessonFiles = glob.sync(path.join(process.cwd(), 'lesson*.json'));
 
         await Lesson.deleteMany({});
         await Exercise.deleteMany({});
 
-        for (const lessonData of lessonsData) {
-            const lesson = new Lesson({
-                ...lessonData,
-                exercises: []
-            });
+        for (const file of lessonFiles) {
+            const lessonsData = JSON.parse(await fs.readFile(file, 'utf-8'));
 
-            for (const exerciseData of lessonData.exercises) {
-                const exercise = new Exercise(exerciseData);
-                await exercise.save();
-                lesson.exercises.push(exercise._id);
+            for (const lessonData of lessonsData) {
+                const lesson = new Lesson({
+                    ...lessonData,
+                    exercises: []
+                });
+
+                for (const exerciseData of lessonData.exercises) {
+                    const exercise = new Exercise(exerciseData);
+                    await exercise.save();
+                    lesson.exercises.push(exercise._id);
+                }
+
+                await lesson.save();
             }
-
-            await lesson.save();
         }
 
         console.log('Данные успешно загружены');

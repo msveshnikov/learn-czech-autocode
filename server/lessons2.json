@@ -1,0 +1,99 @@
+[
+    {
+        "title": "Заказ обслуживания стиральной машины",
+        "description": "Заказ обслуживания стиральной машины по телефону",
+        "level": "intermediate",
+        "category": "conversation",
+        "order": 2,
+        "content": "В этом уроке мы рассмотрим сложную ситуацию: заказ обслуживания стиральной машины по телефону. Вы изучите специфическую лексику и фразы, необходимые для такого разговора.",
+        "vocabulary": [
+            {
+                "czech": "pračka",
+                "russian": "стиральная машина",
+                "english": "washing machine"
+            },
+            {
+                "czech": "oprava",
+                "russian": "ремонт",
+                "english": "repair"
+            },
+            {
+                "czech": "technik",
+                "russian": "техник",
+                "english": "technician"
+            },
+            {
+                "czech": "objednat",
+                "russian": "заказать",
+                "english": "to order"
+            },
+            {
+                "czech": "závada",
+                "russian": "неисправность",
+                "english": "malfunction"
+            }
+        ],
+        "exercises": [
+            {
+                "type": "listeningComprehension",
+                "question": "Послушайте разговор и ответьте на вопрос: Какую проблему описывает Петр?",
+                "auditionText": "Dobrý den, volám ohledně opravy pračky. Pračka se mi nezapne a vydává divné zvuky. Můžete mi prosím poslat technika?",
+                "answers": [
+                    "Стиральная машина не включается и издает странные звуки",
+                    "Стиральная машина протекает",
+                    "Стиральная машина не отжимает белье",
+                    "Стиральная машина не нагревает воду"
+                ],
+                "correctAnswer": "Стиральная машина не включается и издает странные звуки",
+                "category": "listening",
+                "difficulty": "medium",
+                "audioUrl": "/audio/dobr_den_volm_ohledn_opravy_praky_praka_se_mi_neza.mp3"
+            },
+            {
+                "type": "multipleChoice",
+                "question": "Какое слово на чешском означает 'стиральная машина'?",
+                "answers": ["pračka", "oprava", "technik", "závada"],
+                "correctAnswer": "pračka",
+                "category": "vocabulary",
+                "difficulty": "easy"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Дополните предложение: 'Potřebuji _____ pračky.' (Мне нужен ремонт стиральной машины)",
+                "correctAnswer": "opravu",
+                "category": "grammar",
+                "difficulty": "medium"
+            },
+            {
+                "type": "listeningComprehension",
+                "question": "Послушайте ответ оператора и выберите правильное утверждение:",
+                "auditionText": "Rozumím, pane. Můžeme k vám poslat technika zítra mezi 10. a 12. hodinou. Vyhovuje vám to?",
+                "answers": [
+                    "Техник может прийти сегодня",
+                    "Техник может прийти завтра с 10 до 12",
+                    "Техник может прийти на следующей неделе",
+                    "Оператор не может отправить техника"
+                ],
+                "correctAnswer": "Техник может прийти завтра с 10 до 12",
+                "category": "listening",
+                "difficulty": "medium",
+                "audioUrl": "/audio/rozumm_pane_meme_k_vm_poslat_technika_ztra_mezi_10.mp3"
+            },
+            {
+                "type": "multipleChoice",
+                "question": "Как сказать 'неисправность' на чешском?",
+                "answers": ["závada", "oprava", "objednat", "technik"],
+                "correctAnswer": "závada",
+                "category": "vocabulary",
+                "difficulty": "medium"
+            },
+            {
+                "type": "fillInTheBlank",
+                "question": "Дополните фразу: 'Můžete mi prosím _____ technika?' (Не могли бы вы отправить мне техника?)",
+                "correctAnswer": "poslat",
+                "category": "grammar",
+                "difficulty": "hard"
+            }
+        ]
+    }
+]
