@@ -104,4 +104,9 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   Add 5 more lessons with exercises
+-   Add 5 more complex A2 lessons 
+-   Add longer audition type of exercise inside, where user listen for longer text and answer question about text
+-   Fix learning strike (shows always 0)
+-   Add some achievements
+-   Fix next exercise button goes nowhere
+-   Add "speak to teacher" feature, using Haiku model, use simple Czech conversation mode (via prompt)

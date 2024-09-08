@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 import fs from 'fs/promises';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 dotenv.config({ override: true });
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const elevenVoicesSeed = {
     CzechMale: 'GyUHLb3fVDc1ZSEJWkCt'
@@ -35,10 +38,10 @@ const getElevenAudio = async (text, voiceId) => {
 const processLessonsAndExercises = async () => {
     try {
         const lessonsData = JSON.parse(
-            await fs.readFile(path.join(process.cwd(), 'lessons.json'), 'utf-8')
+            await fs.readFile(path.join(__dirname, 'lessons.json'), 'utf-8')
         );
         const exercisesData = JSON.parse(
-            await fs.readFile(path.join(process.cwd(), 'exercises.json'), 'utf-8')
+            await fs.readFile(path.join(__dirname, 'exercises.json'), 'utf-8')
         );
 
         for (const lesson of lessonsData) {
@@ -52,11 +55,11 @@ const processLessonsAndExercises = async () => {
         }
 
         await fs.writeFile(
-            path.join(process.cwd(), 'lessons.json'),
+            path.join(__dirname, 'lessons.json'),
             JSON.stringify(lessonsData, null, 2)
         );
         await fs.writeFile(
-            path.join(process.cwd(), 'exercises.json'),
+            path.join(__dirname, 'exercises.json'),
             JSON.stringify(exercisesData, null, 2)
         );
 
@@ -79,7 +82,7 @@ const processExercise = async (exercise) => {
             .toLowerCase()
             .replace(/[^\w\s-]/g, '')
             .replace(/\s+/g, '_')}.mp3`;
-        const filePath = path.join(process.cwd(), 'public', 'audio', fileName);
+        const filePath = path.join(__dirname, 'public', 'audio', fileName);
         await fs.writeFile(filePath, audioBuffer);
         exercise.audioUrl = `/audio/${fileName}`;
         console.log(`Audio generated for: ${exercise.correctAnswer}`);

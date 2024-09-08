@@ -1,96 +1,87 @@
-Based on your request, I've updated the product backlog. Here's the revised version:
+Based on the current project state and recent developments, I've updated the product backlog. Here's the revised version:
 
 # Updated Product Backlog
 
 ## High Priority
 
-1. Implement Russian UI for all components
-   - Translate all existing UI elements to Russian
-   - Ensure proper text rendering for Cyrillic characters
+1. Add 5 more complex A2 level Czech lessons
+   - Design and implement lessons focusing on intermediate Czech grammar and vocabulary
+   - Ensure lessons are tailored for Russian speakers
 
-2. Develop core lesson structure for Czech language
-   - Design lesson progression focusing on Czech vocabulary and grammar
-   - Create a database schema for storing lesson content in both Czech and Russian
+2. Implement longer audition-type exercises
+   - Create exercises where users listen to longer Czech texts
+   - Develop comprehension questions in Russian about the Czech text
+   - Integrate with existing audio system
 
-3. Implement interactive exercise types
-   - Multiple choice questions with Russian instructions and Czech content
-   - Fill-in-the-blanks exercises using Czech words and phrases
-   - Listening comprehension exercises with Czech audio and Russian UI
+3. Fix learning streak functionality
+   - Debug and correct the streak counter (currently always shows 0)
+   - Implement proper streak tracking and persistence
 
-4. Implement spaced repetition algorithm tailored for Russian speakers learning Czech
-   - Design algorithm considering common challenges for Russian speakers learning Czech
-   - Integrate algorithm with lesson progression
+4. Develop achievement system
+   - Design and implement various achievements for learning milestones
+   - Create UI for displaying and tracking achievements
 
-5. Develop "False Friends" section
-   - Create a dedicated module highlighting words that are similar in Czech and Russian but have different meanings
-   - Implement interactive exercises to practice these tricky word pairs
+5. Enhance Russian localization
+   - Review and improve existing Russian translations
+   - Ensure all new features have proper Russian localization
 
 ## Medium Priority
 
-6. Enhance user profile management
-   - Allow users to set learning goals in Russian
-   - Implement detailed progress tracking for each Czech language skill
+6. Implement voice recognition for pronunciation exercises
+   - Integrate voice recognition API tailored for Czech language
+   - Design exercises specifically for Russian speakers learning Czech pronunciation
 
-7. Develop gamification elements with Czech cultural themes
-   - Implement streak tracking with Czech-inspired visuals
-   - Create an achievement system based on Czech landmarks or cultural icons
-   - Set up leaderboards with Czech-themed ranks or titles
+7. Develop customizable learning paths
+   - Allow users to set specific learning goals (e.g., travel, business, academic)
+   - Create tailored lesson plans based on user goals
 
-8. Create responsive UI design with Czech and Russian cultural elements
-   - Develop mobile-friendly layouts incorporating Czech and Russian design motifs
-   - Ensure compatibility across different device sizes
+8. Implement dark mode and theme customization
+   - Develop a dark mode option for the app
+   - Allow users to customize app color scheme
 
-9. Implement "Word of the Day" feature
-   - Showcase a daily Czech word with its Russian translation
-   - Include usage examples and pronunciation guide
+9. Add push notifications
+   - Implement reminders for daily practice
+   - Send notifications for streak maintenance and achievements
 
-10. Develop pronunciation guide for Russian speakers
-    - Create a comprehensive guide tailored for Russian speakers learning Czech phonetics
-    - Implement interactive exercises focusing on challenging Czech sounds for Russian speakers
+10. Develop offline mode
+    - Enable lesson and exercise caching for offline access
+    - Implement progress syncing when online connection is restored
 
 ## Low Priority
 
-11. Implement offline mode functionality
-    - Enable lesson caching for offline access to Czech language content
-    - Sync progress when online connection is restored
+11. Integrate with language exchange platforms
+    - Research and select appropriate language exchange platforms
+    - Implement integration for finding Czech-Russian language partners
 
-12. Enhance accessibility features for Russian-speaking users
-    - Implement screen reader compatibility with Russian voice output
-    - Add keyboard navigation support with Russian key mappings
+12. Develop AI-powered chatbot for conversation practice
+    - Create or integrate an AI chatbot capable of Czech conversation
+    - Implement Russian explanations and translations in the chat interface
 
-13. Optimize app performance for various mobile devices popular in Russian-speaking countries
-    - Minimize battery usage
-    - Improve load times and responsiveness
+13. Implement PWA (Progressive Web App) capabilities
+    - Convert the existing app to a PWA
+    - Ensure proper functionality across different devices and platforms
 
-14. Implement basic analytics dashboard with metrics relevant to Czech language learning
-    - Track user engagement metrics for different types of Czech exercises
-    - Monitor lesson completion rates and identify challenging areas for Russian speakers
-
-## Future Considerations
-
-15. Voice recognition for Czech pronunciation exercises, calibrated for Russian speakers
-16. Integration with Czech-Russian language exchange platforms
-17. AI-powered chatbot for conversational practice in Czech with Russian explanations
-18. Expand localization support for additional interface languages beyond Russian
+14. Integrate with popular Czech language proficiency tests
+    - Research official Czech language proficiency tests
+    - Develop practice modules aligned with these tests
 
 ## Completed Items
 
-- ~~Create basic user authentication system~~ (Completed)
-  - ~~Implement user registration~~
-  - ~~Implement user login~~
-  - ~~Set up JWT for authentication~~
-- ~~Set up basic user profile management~~ (Completed)
-  - ~~Allow users to update their profile information in Russian~~
-  - ~~Implement basic progress tracking functionality~~
+- ~~Implement core functionality and basic lesson structure~~ (Completed)
+- ~~Develop user authentication and profile management~~ (Completed)
+- ~~Create interactive exercises and progress tracking~~ (Completed)
+- ~~Implement basic gamification features~~ (Completed)
+- ~~Optimize initial performance and user experience~~ (Completed)
+- ~~Implement containerization with Docker~~ (Completed)
 
 ## Notes
 
-- The "False Friends" section has been added as a high priority item due to its importance for Russian speakers learning Czech.
-- The "Word of the Day" feature and pronunciation guide have been added to the medium priority section to enhance daily engagement and address specific needs of Russian speakers.
-- Offline mode functionality has been moved to low priority to focus on core online learning experiences first.
-- User testing with native Russian speakers remains crucial to ensure the UI and content are culturally appropriate and effective.
-- Consider creating a Russian version of the landing page (landing.html) to improve user acquisition from Russian-speaking markets.
-- As development progresses, continue to gather feedback on the effectiveness of teaching Czech to Russian speakers and adjust the approach accordingly.
-- Partnership with Czech language experts should be maintained to ensure content accuracy and relevance.
+- The addition of more complex A2 lessons and longer audition exercises are now top priorities to expand the app's content.
+- Fixing the learning streak and implementing achievements have been moved to high priority to enhance user engagement.
+- Voice recognition and customizable learning paths have been added as medium priority items to improve the learning experience.
+- The integration of ElevenLabs for audio tasks has been completed, so it's been removed from the backlog.
+- Consider conducting user testing specifically for the new A2 level content and audition exercises to ensure they meet learner needs.
+- As development progresses, continue to gather feedback on the effectiveness of the gamification elements and adjust as necessary.
+- Keep monitoring app performance and user feedback to identify any emerging issues or feature requests.
 
-This updated backlog reflects new features specifically designed for Russian speakers learning Czech, adjusted priorities based on user needs, and the completion of basic authentication and profile management features. The focus remains on creating a tailored, engaging learning experience for the target audience.
+This updated backlog reflects the current state of the project, with a focus on expanding content, fixing critical issues, and enhancing user engagement features. The priorities have been adjusted based on the recent developments and the TODO list provided in the README.md.

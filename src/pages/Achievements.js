@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Container,
     Typography,
@@ -10,7 +10,9 @@ import {
     Grid,
     Divider,
     Box,
-    LinearProgress
+    LinearProgress,
+    Snackbar,
+    Alert
 } from '@mui/material';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import LockIcon from '@mui/icons-material/Lock';
@@ -20,11 +22,34 @@ import Loading from '../components/Loading';
 import { useQuery } from 'react-query';
 
 const Achievements = () => {
+    const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
     const {
         data: achievements,
         isLoading,
-        error
-    } = useQuery('achievements', apiService.fetchUserAchievements);
+        error,
+        refetch
+    } = useQuery('achievements', apiService.fetchUserAchievements, {
+        onError: (error) => {
+            setSnackbar({
+                open: true,
+                message: 'Ошибка при загрузке достижений',
+                severity: 'error'
+            });
+        }
+    });
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            refetch();
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [refetch]);
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') return;
+        setSnackbar({ ...snackbar, open: false });
+    };
 
     if (isLoading) return <Loading />;
     if (error) return <Typography color="error">{error.message}</Typography>;
@@ -88,6 +113,16 @@ const Achievements = () => {
                     </Paper>
                 </Box>
             </Container>
+            <Snackbar
+                open={snackbar.open}
+                autoHideDuration={6000}
+                onClose={handleSnackbarClose}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+            >
+                <Alert onClose={handleSnackbarClose} severity={snackbar.severity}>
+                    {snackbar.message}
+                </Alert>
+            </Snackbar>
         </>
     );
 };

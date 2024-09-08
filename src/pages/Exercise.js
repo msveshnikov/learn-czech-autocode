@@ -9,7 +9,8 @@ import {
     TextField,
     Paper,
     Snackbar,
-    Alert
+    Alert,
+    LinearProgress
 } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
@@ -118,7 +119,7 @@ const Exercise = () => {
                         </RadioGroup>
                     </>
                 )}
-                <Box mt={2}>
+                <Box mt={2} display="flex" justifyContent="space-between">
                     <Button
                         variant="contained"
                         color="primary"
@@ -133,6 +134,11 @@ const Exercise = () => {
                 Время: {Math.floor(timeSpent / 60)}:{timeSpent % 60 < 10 ? '0' : ''}
                 {timeSpent % 60}
             </Typography>
+            <LinearProgress
+                variant="determinate"
+                value={(timeSpent / 60) * 100}
+                sx={{ mt: 1, mb: 2 }}
+            />
             <Snackbar
                 open={showFeedback}
                 autoHideDuration={3000}

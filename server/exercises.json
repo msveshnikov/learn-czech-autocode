@@ -1,200 +1,280 @@
 [
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'привет' на чешском?",
-        "answers": ["Ahoj", "Nashledanou", "Prosím", "Děkuji"],
-        "correctAnswer": "Ahoj",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Jak se ___?'",
-        "correctAnswer": "máš",
-        "difficulty": "medium",
-        "category": "grammar"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'пожалуйста' на чешском?",
-        "answers": ["Prosím", "Děkuji", "Ano", "Ne"],
-        "correctAnswer": "Prosím",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
-        "correctAnswer": "se",
-        "difficulty": "hard",
-        "category": "grammar"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное слово",
-        "answers": ["Dobrý", "Špatný", "Velký", "Malý"],
-        "correctAnswer": "Dobrý",
-        "audioUrl": "/audio/dobr.mp3",
-        "difficulty": "easy",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'спасибо' на чешском?",
-        "answers": ["Děkuji", "Prosím", "Ahoj", "Na shledanou"],
-        "correctAnswer": "Děkuji",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Kolik je ti ___?'",
-        "correctAnswer": "let",
-        "difficulty": "medium",
-        "category": "grammar"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное число",
-        "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
-        "correctAnswer": "Tři",
-        "audioUrl": "/audio/ti.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'да' на чешском?",
-        "answers": ["Ano", "Ne", "Možná", "Nevím"],
-        "correctAnswer": "Ano",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Jak se ___?' (Как вас зовут?)",
-        "correctAnswer": "jmenujete",
-        "difficulty": "medium",
-        "category": "grammar"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное приветствие",
-        "answers": ["Dobrý den", "Dobrou noc", "Na shledanou", "Ahoj"],
-        "correctAnswer": "Dobrý den",
-        "audioUrl": "/audio/dobr_den.mp3",
-        "difficulty": "easy",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'извините' на чешском?",
-        "answers": ["Promiňte", "Děkuji", "Prosím", "Ano"],
-        "correctAnswer": "Promiňte",
-        "difficulty": "medium",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
-        "correctAnswer": "jste",
-        "difficulty": "hard",
-        "category": "grammar"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
-        "answers": ["Dobře", "Špatně", "Ano", "Ne"],
-        "correctAnswer": "Dobře",
-        "audioUrl": "/audio/dobe.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'один' на чешском?",
-        "answers": ["Jedna", "Dva", "Tři", "Čtyři"],
-        "correctAnswer": "Jedna",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: '___ jsem student.' (Я студент)",
-        "correctAnswer": "Jsem",
-        "difficulty": "medium",
-        "category": "grammar"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное число",
-        "answers": ["Pět", "Šest", "Sedm", "Osm"],
-        "correctAnswer": "Sedm",
-        "audioUrl": "/audio/sedm.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'Я не понимаю' на чешском?",
-        "answers": ["Nerozumím", "Rozumím", "Mluvím česky", "Nevím"],
-        "correctAnswer": "Nerozumím",
-        "difficulty": "medium",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Oni ___ studenti.' (Они студенты)",
-        "correctAnswer": "jsou",
-        "difficulty": "hard",
-        "category": "grammar"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'мать' на чешском?",
-        "answers": ["Matka", "Otec", "Sestra", "Bratr"],
-        "correctAnswer": "Matka",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Moje _____ se jmenuje Jan.' (Мой отец зовут Ян)",
-        "correctAnswer": "otec",
-        "difficulty": "medium",
-        "category": "vocabulary"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное слово",
-        "answers": ["Matka", "Otec", "Babička", "Dědeček"],
-        "correctAnswer": "Dědeček",
-        "audioUrl": "/audio/ddeek.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    },
-    {
-        "type": "multipleChoice",
-        "question": "Как сказать 'хлеб' на чешском?",
-        "answers": ["Chléb", "Mléko", "Voda", "Káva"],
-        "correctAnswer": "Chléb",
-        "difficulty": "easy",
-        "category": "vocabulary"
-    },
-    {
-        "type": "fillInTheBlank",
-        "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
-        "correctAnswer": "pivo",
-        "difficulty": "medium",
-        "category": "vocabulary"
-    },
-    {
-        "type": "listeningComprehension",
-        "question": "Прослушайте и выберите правильное слово",
-        "answers": ["Chléb", "Mléko", "Káva", "Čaj"],
-        "correctAnswer": "Káva",
-        "audioUrl": "/audio/kva.mp3",
-        "difficulty": "medium",
-        "category": "pronunciation"
-    }
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'привет' на чешском?",
+    "answers": [
+      "Ahoj",
+      "Nashledanou",
+      "Prosím",
+      "Děkuji"
+    ],
+    "correctAnswer": "Ahoj",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Jak se ___?'",
+    "correctAnswer": "máš",
+    "difficulty": "medium",
+    "category": "grammar"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'пожалуйста' на чешском?",
+    "answers": [
+      "Prosím",
+      "Děkuji",
+      "Ano",
+      "Ne"
+    ],
+    "correctAnswer": "Prosím",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
+    "correctAnswer": "se",
+    "difficulty": "hard",
+    "category": "grammar"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное слово",
+    "answers": [
+      "Dobrý",
+      "Špatný",
+      "Velký",
+      "Malý"
+    ],
+    "correctAnswer": "Dobrý",
+    "audioUrl": "/audio/dobr.mp3",
+    "difficulty": "easy",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'спасибо' на чешском?",
+    "answers": [
+      "Děkuji",
+      "Prosím",
+      "Ahoj",
+      "Na shledanou"
+    ],
+    "correctAnswer": "Děkuji",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Kolik je ti ___?'",
+    "correctAnswer": "let",
+    "difficulty": "medium",
+    "category": "grammar"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное число",
+    "answers": [
+      "Jedna",
+      "Dva",
+      "Tři",
+      "Čtyři"
+    ],
+    "correctAnswer": "Tři",
+    "audioUrl": "/audio/ti.mp3",
+    "difficulty": "medium",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'да' на чешском?",
+    "answers": [
+      "Ano",
+      "Ne",
+      "Možná",
+      "Nevím"
+    ],
+    "correctAnswer": "Ano",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Jak se ___?' (Как вас зовут?)",
+    "correctAnswer": "jmenujete",
+    "difficulty": "medium",
+    "category": "grammar"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное приветствие",
+    "answers": [
+      "Dobrý den",
+      "Dobrou noc",
+      "Na shledanou",
+      "Ahoj"
+    ],
+    "correctAnswer": "Dobrý den",
+    "audioUrl": "/audio/dobr_den.mp3",
+    "difficulty": "easy",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'извините' на чешском?",
+    "answers": [
+      "Promiňte",
+      "Děkuji",
+      "Prosím",
+      "Ano"
+    ],
+    "correctAnswer": "Promiňte",
+    "difficulty": "medium",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
+    "correctAnswer": "jste",
+    "difficulty": "hard",
+    "category": "grammar"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильный ответ на вопрос 'Jak se máš?'",
+    "answers": [
+      "Dobře",
+      "Špatně",
+      "Ano",
+      "Ne"
+    ],
+    "correctAnswer": "Dobře",
+    "audioUrl": "/audio/dobe.mp3",
+    "difficulty": "medium",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'один' на чешском?",
+    "answers": [
+      "Jedna",
+      "Dva",
+      "Tři",
+      "Čtyři"
+    ],
+    "correctAnswer": "Jedna",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: '___ jsem student.' (Я студент)",
+    "correctAnswer": "Jsem",
+    "difficulty": "medium",
+    "category": "grammar"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное число",
+    "answers": [
+      "Pět",
+      "Šest",
+      "Sedm",
+      "Osm"
+    ],
+    "correctAnswer": "Sedm",
+    "audioUrl": "/audio/sedm.mp3",
+    "difficulty": "medium",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'Я не понимаю' на чешском?",
+    "answers": [
+      "Nerozumím",
+      "Rozumím",
+      "Mluvím česky",
+      "Nevím"
+    ],
+    "correctAnswer": "Nerozumím",
+    "difficulty": "medium",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Oni ___ studenti.' (Они студенты)",
+    "correctAnswer": "jsou",
+    "difficulty": "hard",
+    "category": "grammar"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'мать' на чешском?",
+    "answers": [
+      "Matka",
+      "Otec",
+      "Sestra",
+      "Bratr"
+    ],
+    "correctAnswer": "Matka",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Moje _____ se jmenuje Jan.' (Мой отец зовут Ян)",
+    "correctAnswer": "otec",
+    "difficulty": "medium",
+    "category": "vocabulary"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное слово",
+    "answers": [
+      "Matka",
+      "Otec",
+      "Babička",
+      "Dědeček"
+    ],
+    "correctAnswer": "Dědeček",
+    "audioUrl": "/audio/ddeek.mp3",
+    "difficulty": "medium",
+    "category": "pronunciation"
+  },
+  {
+    "type": "multipleChoice",
+    "question": "Как сказать 'хлеб' на чешском?",
+    "answers": [
+      "Chléb",
+      "Mléko",
+      "Voda",
+      "Káva"
+    ],
+    "correctAnswer": "Chléb",
+    "difficulty": "easy",
+    "category": "vocabulary"
+  },
+  {
+    "type": "fillInTheBlank",
+    "question": "Дополните предложение: 'Dám si jeden _____, prosím.' (Я бы хотел одно пиво, пожалуйста)",
+    "correctAnswer": "pivo",
+    "difficulty": "medium",
+    "category": "vocabulary"
+  },
+  {
+    "type": "listeningComprehension",
+    "question": "Прослушайте и выберите правильное слово",
+    "answers": [
+      "Chléb",
+      "Mléko",
+      "Káva",
+      "Čaj"
+    ],
+    "correctAnswer": "Káva",
+    "audioUrl": "/audio/kva.mp3",
+    "difficulty": "medium",
+    "category": "pronunciation"
+  }
 ]
