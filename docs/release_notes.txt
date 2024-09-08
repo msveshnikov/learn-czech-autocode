@@ -1,0 +1,15 @@
+Version 1.0.0 - Initial Release
+
+We're excited to launch the first version of Learn Czech from Russian! This release includes:
+
+• User authentication and profile management
+• Responsive design for all devices
+• Russian UI with localization support
+• Structured lessons covering vocabulary, grammar, and pronunciation
+• Interactive exercises (multiple choice, fill-in-the-blanks, listening comprehension)
+• Progress tracking and performance analytics
+• Gamification elements (streaks, achievements, leaderboards)
+• Spaced repetition algorithm for efficient learning
+• Smooth onboarding process for new users
+
+We hope you enjoy learning Czech with our app. Your feedback is valuable to us as we continue to improve and add new features. Happy learning!
