@@ -11,7 +11,7 @@ https://learn-czech.netlify.app/
 This project aims to create a language learning application similar to Duolingo,
 specifically designed for Russian speakers to learn Czech. The app provides an
 interactive and engaging platform for users to acquire Czech language skills
-through various exercises and lessons.
+through various exercises and lessons. Can be easily adapted for ither language pairs. All lessons and exercises are automatically generated.
 
 ## Features
 
@@ -71,6 +71,7 @@ through various exercises and lessons.
 -   Dark mode and theme customization options
 -   Push notifications for reminders and streak maintenance
 -   Implement PWA (Progressive Web App) capabilities
+-   Use ElevenLabs for audio tasks, store once to /server/audio and then dockerize
 
 ## Development Roadmap
 
