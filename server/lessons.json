@@ -125,7 +125,6 @@
                 "correctAnswer": "Dobrý den",
                 "category": "pronunciation"
             },
-
             {
                 "type": "fillInTheBlank",
                 "question": "Дополните предложение: 'Jmenuji ___ Petr.'",
@@ -289,7 +288,6 @@
                 "correctAnswer": "Nerozumím",
                 "category": "pronunciation"
             },
-
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное слово",
@@ -379,7 +377,6 @@
                 "correctAnswer": "Jste",
                 "category": "pronunciation"
             },
-
             {
                 "type": "fillInTheBlank",
                 "question": "Дополните предложение: 'Odkud ___?' (Откуда вы?)",
@@ -396,7 +393,6 @@
                 "difficulty": "medium",
                 "category": "pronunciation"
             },
-
             {
                 "type": "fillInTheBlank",
                 "question": "Дополните предложение: '___ jsem student.' (Я студент)",
@@ -489,7 +485,6 @@
                 "difficulty": "medium",
                 "category": "vocabulary"
             },
-
             {
                 "type": "listeningComprehension",
                 "question": "Прослушайте и выберите правильное слово",

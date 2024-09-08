@@ -40,9 +40,6 @@ const processLessonsAndExercises = async () => {
         const lessonsData = JSON.parse(
             await fs.readFile(path.join(__dirname, 'lessons.json'), 'utf-8')
         );
-        const exercisesData = JSON.parse(
-            await fs.readFile(path.join(__dirname, 'exercises.json'), 'utf-8')
-        );
 
         for (const lesson of lessonsData) {
             for (const exercise of lesson.exercises) {
@@ -50,17 +47,9 @@ const processLessonsAndExercises = async () => {
             }
         }
 
-        for (const exercise of exercisesData) {
-            await processExercise(exercise);
-        }
-
         await fs.writeFile(
             path.join(__dirname, 'lessons.json'),
             JSON.stringify(lessonsData, null, 2)
-        );
-        await fs.writeFile(
-            path.join(__dirname, 'exercises.json'),
-            JSON.stringify(exercisesData, null, 2)
         );
 
         console.log('Audio processing completed');
