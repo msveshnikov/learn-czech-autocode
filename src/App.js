@@ -24,6 +24,7 @@ const Progress = lazy(() => import('./pages/Progress'));
 const Achievements = lazy(() => import('./pages/Achievements'));
 const Leaderboard = lazy(() => import('./pages/Leaderboard'));
 const Exercise = lazy(() => import('./pages/Exercise'));
+const SpeakTeacher = lazy(() => import('./pages/SpeakTeacher'));
 
 const queryClient = new QueryClient();
 
@@ -150,6 +151,14 @@ function App() {
                                         element={
                                             <PrivateRoute>
                                                 <Leaderboard />
+                                            </PrivateRoute>
+                                        }
+                                    />
+                                    <Route
+                                        path="/speak-teacher"
+                                        element={
+                                            <PrivateRoute>
+                                                <SpeakTeacher />
                                             </PrivateRoute>
                                         }
                                     />

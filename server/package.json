@@ -1,6 +1,6 @@
 {
     "name": "czech-from-russian-backend",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "main": "server.js",
     "type": "module",
     "dependencies": {
@@ -11,14 +11,17 @@
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
         "helmet": "^7.1.0",
-        "morgan": "^1.10.0"
+        "morgan": "^1.10.0",
+        "@anthropic-ai/sdk": "^0.18.0"
     },
     "scripts": {
+       
         "dev": "nodemon server.js",
         "eleven": "node eleven.js"
     },
     "devDependencies": {
         "nodemon": "^3.1.4"
+       
     },
     "engines": {
         "node": ">=14.0.0"

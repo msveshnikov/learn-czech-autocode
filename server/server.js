@@ -12,6 +12,7 @@ import { fileURLToPath } from 'url';
 import User from './model/User.js';
 import Lesson from './model/Lesson.js';
 import Exercise from './model/Exercise.js';
+import { getTextClaude } from './claude.js';
 
 dotenv.config();
 
@@ -330,6 +331,20 @@ app.get('/check-daily-goal', authenticateToken, async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: 'Ошибка при проверке ежедневной цели',
+            error: error.message
+        });
+    }
+});
+
+app.post('/speak-to-teacher', authenticateToken, async (req, res) => {
+    try {
+        const { message } = req.body;
+        const prompt = `You are a Czech language teacher speaking to a Russian student. Respond to the following message in simple Czech: "${message}"`;
+        const response = await getTextClaude(prompt);
+        res.json({ response });
+    } catch (error) {
+        res.status(500).json({
+            message: 'Ошибка при общении с виртуальным учителем',
             error: error.message
         });
     }

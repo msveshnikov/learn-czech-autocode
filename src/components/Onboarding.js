@@ -102,18 +102,11 @@ const Onboarding = () => {
             case 2:
                 return (
                     <Typography>
-                        Наша платформа предлагает интерактивные уроки, упражнения и отслеживание
-                        прогресса.
-                    </Typography>
-                );
-            case 3:
-                return (
-                    <Typography>
                         Чешский язык - западнославянский язык. Вы обнаружите много схожестей с
                         русским!
                     </Typography>
                 );
-            case 4:
+            case 3:
                 return (
                     <>
                         <FormControl component="fieldset" fullWidth margin="normal">

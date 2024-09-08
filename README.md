@@ -8,10 +8,10 @@ https://learn-czech.netlify.app/
 
 ## Project Overview
 
-This project aims to create a language learning application similar to Duolingo,
-specifically designed for Russian speakers to learn Czech. The app provides an
-interactive and engaging platform for users to acquire Czech language skills
-through various exercises and lessons. Can be easily adapted for ither language pairs. All lessons and exercises are automatically generated.
+This project aims to create a language learning application similar to Duolingo, specifically
+designed for Russian speakers to learn Czech. The app provides an interactive and engaging platform
+for users to acquire Czech language skills through various exercises and lessons. Can be easily
+adapted for ither language pairs. All lessons and exercises are automatically generated.
 
 ## Features
 
@@ -19,8 +19,7 @@ through various exercises and lessons. Can be easily adapted for ither language 
 -   Mobile-first, responsive design
 -   Russian UI with localization support
 -   Structured lessons covering vocabulary, grammar, and pronunciation
--   Interactive exercises (multiple choice, fill-in-the-blanks, listening
-    comprehension)
+-   Interactive exercises (multiple choice, fill-in-the-blanks, listening comprehension)
 -   Progress tracking and performance analytics
 -   Gamification elements (streaks, achievements, leaderboards)
 -   Spaced repetition algorithm for efficient learning
@@ -39,8 +38,7 @@ through various exercises and lessons. Can be easily adapted for ither language 
 ## Design Considerations
 
 -   Implement a responsive design for various device sizes
--   Use a color scheme and typography that aligns with Czech and Russian
-    cultural elements
+-   Use a color scheme and typography that aligns with Czech and Russian cultural elements
 -   Optimize app performance and minimize battery usage
 -   Design a user-friendly onboarding process
 -   Utilize lazy loading for improved initial load times
@@ -95,8 +93,8 @@ through various exercises and lessons. Can be easily adapted for ither language 
 
 ## Contributing
 
-We welcome contributions to improve the Language App. Please read our
-contributing guidelines before submitting pull requests.
+We welcome contributions to improve the Language App. Please read our contributing guidelines before
+submitting pull requests.
 
 ## License
 
@@ -104,7 +102,6 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   Add longer audition type of exercise inside, where user listen for longer text and answer question about text
+-   Add longer audition type of exercise inside, where user listen for longer text and answer
+    question about text
 -   Add some achievements
--   Fix next exercise button goes nowhere
--   Add "speak to teacher" feature, using Haiku model, use simple Czech conversation mode (via prompt)

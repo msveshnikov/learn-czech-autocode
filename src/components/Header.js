@@ -11,13 +11,15 @@ import {
     useTheme,
     useMediaQuery,
     Box,
-    Avatar
+    Avatar,
+    Badge
 } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import ChatIcon from '@mui/icons-material/Chat';
 import apiService from '../services/apiService';
 import { AuthContext } from '../context/AuthContext';
 
@@ -28,6 +30,7 @@ const Header = ({ toggleTheme }) => {
     const isMobile = useMediaQuery(theme.breakpoints.down('md'));
     const navigate = useNavigate();
     const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
+    const [notifications, setNotifications] = useState([]);
 
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
@@ -37,8 +40,16 @@ const Header = ({ toggleTheme }) => {
         setAnchorEl(null);
     };
 
-    const handleNotificationMenu = (event) => {
+    const handleNotificationMenu = async (event) => {
         setNotificationAnchorEl(event.currentTarget);
+        if (isAuthenticated) {
+            try {
+                const fetchedNotifications = await apiService.getNotifications();
+                setNotifications(fetchedNotifications);
+            } catch (error) {
+                console.error('Failed to fetch notifications:', error);
+            }
+        }
     };
 
     const handleNotificationClose = () => {
@@ -105,15 +116,29 @@ const Header = ({ toggleTheme }) => {
                 {isAuthenticated && (
                     <>
                         <IconButton color="inherit" onClick={handleNotificationMenu}>
-                            <NotificationsIcon />
+                            <Badge badgeContent={notifications.length} color="secondary">
+                                <NotificationsIcon />
+                            </Badge>
                         </IconButton>
                         <Menu
                             anchorEl={notificationAnchorEl}
                             open={Boolean(notificationAnchorEl)}
                             onClose={handleNotificationClose}
                         >
-                            <MenuItem onClick={handleNotificationClose}>Уведомление</MenuItem>
+                            {notifications.map((notification) => (
+                                <MenuItem key={notification.id} onClick={handleNotificationClose}>
+                                    {notification.message}
+                                </MenuItem>
+                            ))}
                         </Menu>
+                        <IconButton
+                            color="inherit"
+                            component={RouterLink}
+                            to="/speak-teacher"
+                            sx={{ ml: 1 }}
+                        >
+                            <ChatIcon />
+                        </IconButton>
                         <IconButton
                             size="large"
                             aria-label="account of current user"

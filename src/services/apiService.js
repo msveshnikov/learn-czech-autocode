@@ -150,8 +150,17 @@ const apiService = {
     },
 
     checkDailyGoal: async () => {
-        const response = await axios.get(`${API_BASE_URL}/user`);
-        return response.data.checkDailyGoal();
+        const response = await axios.get(`${API_BASE_URL}/check-daily-goal`);
+        return response.data;
+    },
+
+    logout: async () => {
+        apiService.clearToken();
+    },
+
+    speakToTeacher: async (message) => {
+        const response = await axios.post(`${API_BASE_URL}/speak-to-teacher`, { message });
+        return response.data.response;
     }
 };
 

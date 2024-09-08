@@ -10,6 +10,7 @@ services:
             - MONGODB_URI=mongodb://mongodb:27017/learn_czech
             - JWT_SECRET=${JWT_SECRET}
             - ELEVEN_KEY=${ELEVEN_KEY}
+            - CLAUDE_KEY=${CLAUDE_KEY}
         restart: unless-stopped
         depends_on:
             - mongodb

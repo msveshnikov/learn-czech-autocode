@@ -484,15 +484,6 @@
                 "correctAnswer": "otec",
                 "difficulty": "medium",
                 "category": "vocabulary"
-            },
-            {
-                "type": "listeningComprehension",
-                "question": "Прослушайте и выберите правильное слово",
-                "answers": ["Matka", "Otec", "Babička", "Dědeček"],
-                "correctAnswer": "Dědeček",
-                "audioUrl": "/audio/ddeek.mp3",
-                "difficulty": "medium",
-                "category": "pronunciation"
             }
         ]
     },
