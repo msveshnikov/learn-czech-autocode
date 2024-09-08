@@ -161,6 +161,16 @@ const apiService = {
     speakToTeacher: async (message) => {
         const response = await axios.post(`${API_BASE_URL}/speak-to-teacher`, { message });
         return response.data.response;
+    },
+
+    submitVoiceExercise: async (exerciseId, audioBlob) => {
+        const formData = new FormData();
+        formData.append('audio', audioBlob, 'voice_exercise.wav');
+        formData.append('exerciseId', exerciseId);
+        const response = await axios.post(`${API_BASE_URL}/submit-voice-exercise`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        });
+        return response.data;
     }
 };
 

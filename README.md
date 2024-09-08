@@ -102,4 +102,4 @@ This project is licensed under the MIT License.
 
 # TODO
 
--   Add lesson topic - записать ребенка в школу
+-   when notification clicked, mark as read

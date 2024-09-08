@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import {
     AppBar,
@@ -32,6 +32,21 @@ const Header = ({ toggleTheme }) => {
     const { isAuthenticated, setIsAuthenticated, user } = useContext(AuthContext);
     const [notifications, setNotifications] = useState([]);
 
+    useEffect(() => {
+        if (isAuthenticated) {
+            fetchNotifications();
+        }
+    }, [isAuthenticated]);
+
+    const fetchNotifications = async () => {
+        try {
+            const fetchedNotifications = await apiService.getNotifications();
+            setNotifications(fetchedNotifications);
+        } catch (error) {
+            console.error('Failed to fetch notifications:', error);
+        }
+    };
+
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -40,20 +55,22 @@ const Header = ({ toggleTheme }) => {
         setAnchorEl(null);
     };
 
-    const handleNotificationMenu = async (event) => {
+    const handleNotificationMenu = (event) => {
         setNotificationAnchorEl(event.currentTarget);
-        if (isAuthenticated) {
-            try {
-                const fetchedNotifications = await apiService.getNotifications();
-                setNotifications(fetchedNotifications);
-            } catch (error) {
-                console.error('Failed to fetch notifications:', error);
-            }
-        }
     };
 
     const handleNotificationClose = () => {
         setNotificationAnchorEl(null);
+    };
+
+    const handleNotificationClick = async (notificationId) => {
+        try {
+            await apiService.markNotificationAsRead(notificationId);
+            fetchNotifications();
+        } catch (error) {
+            console.error('Failed to mark notification as read:', error);
+        }
+        handleNotificationClose();
     };
 
     const handleLogout = async () => {
@@ -126,7 +143,10 @@ const Header = ({ toggleTheme }) => {
                             onClose={handleNotificationClose}
                         >
                             {notifications.map((notification) => (
-                                <MenuItem key={notification.id} onClick={handleNotificationClose}>
+                                <MenuItem
+                                    key={notification._id}
+                                    onClick={() => handleNotificationClick(notification._id)}
+                                >
                                     {notification.message}
                                 </MenuItem>
                             ))}
